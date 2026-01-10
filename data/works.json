@@ -84,7 +84,9 @@
     "category": "Original",
     "description": "夏をテーマにした爽やかなイラスト。青と白を基調とした涼しげな配色です。",
     "nsfw": false,
-    "external_links": {}
+    "external_links": {
+      "pixiv": "https://mopslipper.github.io/mopslipper-Illustration-site/works/summer-girl-006.html"
+    }
   },
   {
     "id": 7,
