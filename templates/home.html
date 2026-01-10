@@ -6,7 +6,7 @@
 <!-- Hero Section -->
 <section class="hero">
     <div class="hero-image">
-        <img src="{{ config.hero_image }}" alt="{{ config.site_name }}">
+        <img src="{{ base_path }}{{ config.hero_image }}" alt="{{ config.site_name }}">
         <div class="hero-overlay"></div>
     </div>
     <div class="hero-content">
@@ -52,7 +52,7 @@
             <div class="work-card" data-nsfw="{{ work.nsfw|lower }}" data-tags="{{ work.tags|join(',') }}">
                 <a href="{{ base_path }}/works/{{ work.slug }}.html" class="work-link">
                     <div class="work-image">
-                        <img src="{{ work.thumbnail }}" alt="{{ work.title }}" loading="lazy">
+                        <img src="{{ base_path }}{{ work.thumbnail }}" alt="{{ work.title }}" loading="lazy">
                         {% if work.nsfw %}
                         <div class="nsfw-overlay">
                             <span class="nsfw-label">R-18</span>

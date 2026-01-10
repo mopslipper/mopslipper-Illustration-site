@@ -10,7 +10,7 @@
     <!-- OGP -->
     <meta property="og:title" content="{% block og_title %}{{ config.site_title }}{% endblock %}">
     <meta property="og:description" content="{% block og_description %}{{ config.site_description }}{% endblock %}">
-    <meta property="og:image" content="{% block og_image %}{{ config.site_url }}{{ config.hero_image }}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ config.site_url }}{{ base_path }}{{ config.hero_image }}{% endblock %}">
     <meta property="og:url" content="{{ config.site_url }}">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
@@ -53,7 +53,7 @@
                 <!-- PC ナビゲーション -->
                 <nav class="nav-desktop">
                     <ul class="nav-list">
-                        <li><a href="/">Home</a></li>
+                        <li><a href="{{ base_path }}/">Home</a></li>
                         <li><a href="{{ base_path }}/gallery.html">Gallery</a></li>
                         <li><a href="{{ base_path }}/commission.html">Commission</a></li>
                         <li><a href="{{ base_path }}/about.html">About</a></li>
@@ -99,7 +99,7 @@
     <!-- モバイルメニュー -->
     <nav class="nav-mobile" id="nav-mobile">
         <ul class="nav-mobile-list">
-            <li><a href="/">Home</a></li>
+            <li><a href="{{ base_path }}/">Home</a></li>
             <li><a href="{{ base_path }}/gallery.html">Gallery</a></li>
             <li><a href="{{ base_path }}/commission.html">Commission</a></li>
             <li><a href="{{ base_path }}/about.html">About</a></li>
