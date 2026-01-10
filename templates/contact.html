@@ -5,16 +5,17 @@
 {% block content %}
 <section class="page-header">
     <div class="container">
-        <h1 class="page-title">Contact</h1>
-        <p class="page-description">お問い合わせ</p>
+        <h1 class="page-title">Request</h1>
+        <p class="page-description">イラストリクエスト</p>
     </div>
 </section>
 
 <section class="section contact-section">
     <div class="container">
         <div class="contact-intro">
-            <p>ご依頼・ご質問などお気軽にお問い合わせください。</p>
-            <p>通常気が付いた時に返信いたします。</p>
+            <p>「こんなイラスト見てみたい！」というリクエストがあれば気軽にどうぞ！</p>
+            <p>無償で作って投稿します。お名前やメールアドレスは書かなくてもOKです！</p>
+            <p>※ 返信は気が付いた時にします。採用を保証するものではありませんのでご了承ください。</p>
         </div>
 
         <!-- お問い合わせフォーム -->
@@ -29,29 +30,28 @@
 
                 <div class="form-group">
                     <label for="email" class="form-label">
-                        メールアドレス <span class="required">*</span>
+                        メールアドレス <span class="optional">(任意)</span>
                     </label>
-                    <input type="email" id="email" name="email" class="form-input" placeholder="your@email.com" required>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="返信が欲しい場合のみ入力">
                 </div>
 
                 <div class="form-group">
                     <label for="subject" class="form-label">
-                        件名 <span class="required">*</span>
+                        カテゴリ <span class="required">*</span>
                     </label>
                     <select id="subject" name="subject" class="form-select" required>
                         <option value="">選択してください</option>
-                        <option value="依頼">依頼について</option>
-                        <option value="質問">質問・相談</option>
-                        <option value="お仕事">お仕事のご依頼</option>
+                        <option value="イラストリクエスト">イラストリクエスト</option>
+                        <option value="質問・感想">質問・感想</option>
                         <option value="その他">その他</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="message" class="form-label">
-                        お問い合わせ内容 <span class="required">*</span>
+                        リクエスト内容 <span class="required">*</span>
                     </label>
-                    <textarea id="message" name="message" class="form-textarea" rows="8" placeholder="お問い合わせ内容をご記入ください" required></textarea>
+                    <textarea id="message" name="message" class="form-textarea" rows="8" placeholder="例：猫耳の女の子、夏っぽい服装、笑顔で など" required></textarea>
                 </div>
 
                 <!-- ハニーポット（スパム対策） -->
@@ -64,15 +64,15 @@
                 </div>
 
                 <div class="form-note">
-                    <p>※ 送信いただいた情報は、お問い合わせ対応のみに使用いたします。</p>
-                    <p>※ <a href="{{ base_path }}/privacy.html">プライバシーポリシー</a>をご確認ください。</p>
+                    <p>※ リクエストは必ずしも採用されるとは限りません。</p>
+                    <p>※ 送信いただいた情報は、イラスト製作の参考とSNS投稿のみに使用します。</p>
                 </div>
             </form>
 
             <!-- 送信完了メッセージ -->
             <div id="form-success" class="form-message form-success" style="display: none;">
                 <h3>✓ 送信完了</h3>
-                <p>お問い合わせありがとうございます。<br>気が付いた時に返信いたします。</p>
+                <p>リクエストありがとうございます！<br>採用できた場合はX（Twitter）などで投稿します。</p>
             </div>
 
             <!-- エラーメッセージ -->
