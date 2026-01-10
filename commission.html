@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="可愛くて儚い世界を作る2次元イラスト製作者。オリジナル・版権イラスト、Live2D素材製作など承ります。">
+    <meta name="keywords" content="イラスト,イラストレーター,2次元,美少女,ゴシック,オリジナル,依頼,commission">
+    <meta name="author" content="mopslipper">
+    
+    <!-- OGP -->
+    <meta property="og:title" content="mopslipper - 2次元美少女イラスト製作者">
+    <meta property="og:description" content="可愛くて儚い世界を作る2次元イラスト製作者。オリジナル・版権イラスト、Live2D素材製作など承ります。">
+    <meta property="og:image" content="https://yoursite.com/static/img/helo-angel-asp1134-2016.webp">
+    <meta property="og:url" content="https://yoursite.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <title>Commission - mopslipper - 2次元美少女イラスト製作者</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+    
+</head>
+<body>
+    <!-- 成人向けコンテンツ警告モーダル -->
+    
+    <div id="nsfw-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⚠️ 年齢確認</h2>
+            </div>
+            <div class="modal-body">
+                <p>このサイトには成人向け（R-18）作品が含まれます。18歳未満の方は閲覧をご遠慮ください。</p>
+                <p>あなたは18歳以上ですか？</p>
+            </div>
+            <div class="modal-footer">
+                <button id="nsfw-yes" class="btn btn-primary">はい（18歳以上）</button>
+                <button id="nsfw-no" class="btn btn-secondary">いいえ（18歳未満）</button>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="/">mopslipper</a>
+                </div>
+                
+                <!-- PC ナビゲーション -->
+                <nav class="nav-desktop">
+                    <ul class="nav-list">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/gallery.html">Gallery</a></li>
+                        <li><a href="/commission.html">Commission</a></li>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- SNSアイコン -->
+                <div class="social-icons">
+                    
+                    <a href="https://twitter.com/yourname" target="_blank" rel="noopener" title="Twitter">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    
+                    
+                    <a href="https://www.pixiv.net/users/12345678" target="_blank" rel="noopener" title="Pixiv">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M4.935 0A4.924 4.924 0 0 0 0 4.935v14.13A4.924 4.924 0 0 0 4.935 24h14.13A4.924 4.924 0 0 0 24 19.065V4.935A4.924 4.924 0 0 0 19.065 0zm7.81 4.547c2.181 0 4.058.676 5.399 1.847a6.118 6.118 0 0 1 2.116 4.66c.005 1.854-.88 3.476-2.257 4.563-1.375 1.092-3.225 1.697-5.258 1.697H9.177v4.394c0 .272-.221.492-.493.492H6.427a.492.492 0 0 1-.492-.492V5.04c0-.272.22-.493.492-.493zm-.44 9.255h2.858c1.458 0 2.659-.417 3.376-1.153.726-.746 1.147-1.832 1.147-3.069 0-1.238-.421-2.323-1.147-3.07-.717-.735-1.918-1.152-3.376-1.152H9.177v8.444z"/>
+                        </svg>
+                    </a>
+                    
+                    
+                    <a href="https://yourname.booth.pm" target="_blank" rel="noopener" title="BOOTH">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm-1 4v12h2V6h-2z"/>
+                        </svg>
+                    </a>
+                    
+                </div>
+                
+                <!-- ハンバーガーメニュー（SP） -->
+                <button class="hamburger" id="hamburger" aria-label="メニュー">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- モバイルメニュー -->
+    <nav class="nav-mobile" id="nav-mobile">
+        <ul class="nav-mobile-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/gallery.html">Gallery</a></li>
+            <li><a href="/commission.html">Commission</a></li>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-mobile-social">
+            
+            <a href="https://twitter.com/yourname" target="_blank" rel="noopener">Twitter</a>
+            
+            
+            <a href="https://www.pixiv.net/users/12345678" target="_blank" rel="noopener">Pixiv</a>
+            
+            
+            <a href="https://yourname.booth.pm" target="_blank" rel="noopener">BOOTH</a>
+            
+        </div>
+    </nav>
+
+    <!-- メインコンテンツ -->
+    <main class="main">
+        
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Commission</h1>
+        <p class="page-description">ご依頼について</p>
+    </div>
+</section>
+
+<section class="section commission-section">
+    <div class="container">
+        <!-- 受付状況 -->
+        <div class="commission-status">
+            <div class="status-badge status-open">
+                
+                <span class="status-icon">✓</span> 受付中
+                
+            </div>
+            <h2>現在の受付状況</h2>
+            <p class="status-message">現在受付中（納期1〜2ヶ月）</p>
+            
+            <p class="status-note">次回更新予定: 2026-02-01</p>
+            
+        </div>
+
+        <!-- メニュー -->
+        <div class="commission-menu">
+            <h2 class="section-title">料金メニュー</h2>
+            <div class="menu-grid">
+                
+                <div class="menu-card">
+                    <div class="menu-header">
+                        <h3 class="menu-name">アイコン</h3>
+                        <p class="menu-name-en">Icon</p>
+                    </div>
+                    <div class="menu-price">¥5,000〜</div>
+                    <p class="menu-delivery">納期: 2週間〜</p>
+                    <p class="menu-description">SNS用アイコン。バストアップ、1キャラクター。</p>
+                    <ul class="menu-details">
+                        
+                        <li>サイズ: 1000×1000px</li>
+                        
+                        <li>背景: 単色またはシンプル</li>
+                        
+                        <li>表情差分: +¥2,000/枚</li>
+                        
+                        <li>商用利用: 要相談</li>
+                        
+                    </ul>
+                </div>
+                
+                <div class="menu-card">
+                    <div class="menu-header">
+                        <h3 class="menu-name">1枚絵</h3>
+                        <p class="menu-name-en">Full Illustration</p>
+                    </div>
+                    <div class="menu-price">¥20,000〜</div>
+                    <p class="menu-delivery">納期: 1〜2ヶ月</p>
+                    <p class="menu-description">全身イラスト。背景込み、構図から相談可能。</p>
+                    <ul class="menu-details">
+                        
+                        <li>サイズ: 3000×4000px程度</li>
+                        
+                        <li>背景: 込み（簡易〜複雑まで）</li>
+                        
+                        <li>キャラクター追加: +¥15,000/人</li>
+                        
+                        <li>差分: +¥5,000〜/枚</li>
+                        
+                    </ul>
+                </div>
+                
+                <div class="menu-card">
+                    <div class="menu-header">
+                        <h3 class="menu-name">立ち絵</h3>
+                        <p class="menu-name-en">Character Sheet</p>
+                    </div>
+                    <div class="menu-price">¥15,000〜</div>
+                    <p class="menu-delivery">納期: 3週間〜</p>
+                    <p class="menu-description">ゲーム・配信用立ち絵。差分対応可能。</p>
+                    <ul class="menu-details">
+                        
+                        <li>サイズ: 2000×3000px程度</li>
+                        
+                        <li>背景: 透過PNG</li>
+                        
+                        <li>表情差分: +¥3,000/枚</li>
+                        
+                        <li>ポーズ差分: +¥8,000/枚</li>
+                        
+                    </ul>
+                </div>
+                
+                <div class="menu-card">
+                    <div class="menu-header">
+                        <h3 class="menu-name">Live2Dモデル</h3>
+                        <p class="menu-name-en">Live2D Model</p>
+                    </div>
+                    <div class="menu-price">¥80,000〜</div>
+                    <p class="menu-delivery">納期: 2〜3ヶ月</p>
+                    <p class="menu-description">VTuber向けLive2Dモデル（イラスト＋モデリング）。</p>
+                    <ul class="menu-details">
+                        
+                        <li>パーツ分けイラスト制作</li>
+                        
+                        <li>基本モーション（瞬き、口パク等）</li>
+                        
+                        <li>表情パラメータ 3種</li>
+                        
+                        <li>納品形式: .cmo3 + PSD</li>
+                        
+                    </ul>
+                </div>
+                
+                <div class="menu-card">
+                    <div class="menu-header">
+                        <h3 class="menu-name">グッズ用イラスト</h3>
+                        <p class="menu-name-en">Goods Illustration</p>
+                    </div>
+                    <div class="menu-price">要相談</div>
+                    <p class="menu-delivery">納期: 要相談</p>
+                    <p class="menu-description">アクリルスタンド、缶バッジなどグッズ向けイラスト。</p>
+                    <ul class="menu-details">
+                        
+                        <li>用途に応じてサイズ調整</li>
+                        
+                        <li>入稿データ形式対応</li>
+                        
+                        <li>商用利用: 別途ライセンス料</li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+            <div class="menu-note">
+                <p>※ 上記は目安料金です。内容により変動する場合があります。</p>
+                <p>※ 商用利用の場合は別途ご相談ください。</p>
+            </div>
+        </div>
+
+        <!-- 依頼フロー -->
+        <div class="commission-flow">
+            <h2 class="section-title">ご依頼の流れ</h2>
+            <div class="flow-steps">
+                
+                <div class="flow-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">お問い合わせ・ヒアリング</h3>
+                        <p class="step-description">Contactフォームまたは各種SNSからご連絡ください。イメージ、用途、納期などをお伺いします。</p>
+                    </div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">お見積り・契約</h3>
+                        <p class="step-description">内容を確認後、正式なお見積りをお送りします。ご了承いただけましたら契約・着手金のお支払いをお願いします。</p>
+                    </div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">ラフ制作・確認</h3>
+                        <p class="step-description">構図やキャラクターのラフを作成し、ご確認いただきます。修正は2回まで無料です。</p>
+                    </div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title">線画・着色</h3>
+                        <p class="step-description">ラフをもとに線画・着色を進めます。途中経過もご報告します。</p>
+                    </div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3 class="step-title">仕上げ・納品</h3>
+                        <p class="step-description">最終調整後、高解像度データを納品します。残金のお支払い確認後、著作権の一部譲渡を行います。</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- OK/NG -->
+        <div class="commission-policy">
+            <h2 class="section-title">OK・NG内容</h2>
+            <div class="policy-grid">
+                <div class="policy-card policy-ok">
+                    <h3>✓ OK</h3>
+                    <ul>
+                        
+                        <li>オリジナルキャラクター</li>
+                        
+                        <li>版権キャラクター（二次創作ガイドライン準拠）</li>
+                        
+                        <li>VTuberモデル・配信用素材</li>
+                        
+                        <li>R-18（成人向け）</li>
+                        
+                        <li>男性キャラクター（実績は少なめです）</li>
+                        
+                    </ul>
+                </div>
+                <div class="policy-card policy-ng">
+                    <h3>✕ NG</h3>
+                    <ul>
+                        
+                        <li>政治・宗教・差別的な内容</li>
+                        
+                        <li>誹謗中傷・攻撃的な表現</li>
+                        
+                        <li>実在の人物（肖像権侵害）</li>
+                        
+                        <li>過度にグロテスクな表現</li>
+                        
+                        <li>AI学習用データとしての利用</li>
+                        
+                        <li>NFT・暗号資産関連での利用</li>
+                        
+                    </ul>
+                </div>
+            </div>
+            
+            
+            <div class="policy-notes">
+                <h3>注意事項</h3>
+                <ul>
+                    
+                    <li>著作権は作者に帰属します。依頼者様には使用権を許諾します。</li>
+                    
+                    <li>ポートフォリオ・SNSでの作品公開にご協力ください。</li>
+                    
+                    <li>商用利用の場合は別途ライセンス料が発生する場合があります。</li>
+                    
+                    <li>修正は各工程で2回まで無料。それ以降は追加料金が発生します。</li>
+                    
+                </ul>
+            </div>
+            
+        </div>
+
+        <!-- 支払い方法 -->
+        <div class="commission-payment">
+            <h2 class="section-title">お支払い方法</h2>
+            <div class="payment-info">
+                <div class="payment-methods">
+                    <h3>対応決済</h3>
+                    <ul>
+                        
+                        <li>銀行振込</li>
+                        
+                        <li>PayPal</li>
+                        
+                    </ul>
+                </div>
+                <div class="payment-schedule">
+                    <h3>お支払いタイミング</h3>
+                    <p>着手金50% → 納品後50%</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 依頼テンプレート -->
+        <div class="commission-template">
+            <h2 class="section-title">依頼テンプレート（コピーしてお使いください）</h2>
+            <p class="template-description">以下のテンプレートをコピーしてお問い合わせフォームまたはSkebからご連絡ください。</p>
+            <div class="template-box">
+                <pre id="template-text">【依頼内容】
+・依頼メニュー: （例: 1枚絵、アイコン等）
+・キャラクター: （例: オリジナル、版権名）
+・構図・ポーズ: 
+・表情・雰囲気: 
+・衣装・小物: 
+・背景: 
+・用途: （例: SNSアイコン、配信素材、個人利用等）
+・希望納期: 
+・その他要望: 
+・参考画像: （あれば）</pre>
+                <button class="btn btn-secondary" id="copy-template">コピーする</button>
+            </div>
+        </div>
+
+        <!-- お問い合わせ -->
+        <div class="commission-contact">
+            <h2 class="section-title">お問い合わせ</h2>
+            <p class="contact-description">ご依頼・ご質問は以下からお気軽にどうぞ。</p>
+            <div class="contact-buttons">
+                <a href="/contact.html" class="btn btn-primary">お問い合わせフォーム</a>
+                
+                <a href="https://twitter.com/yourname" target="_blank" rel="noopener" class="btn btn-outline">TwitterでDM</a>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p class="footer-text">転載・無断使用禁止｜Commission inquiries welcome</p>
+                    <p class="footer-copyright">&copy; 2026 mopslipper. All Rights Reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/privacy.html">Privacy Policy</a>
+                    <span class="separator">|</span>
+                    <a href="/contact.html">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/static/js/main.js"></script>
+    
+<script>
+// テンプレートコピー機能
+document.getElementById('copy-template')?.addEventListener('click', function() {
+    const text = document.getElementById('template-text').textContent;
+    navigator.clipboard.writeText(text).then(function() {
+        const btn = document.getElementById('copy-template');
+        const originalText = btn.textContent;
+        btn.textContent = 'コピーしました！';
+        btn.style.background = '#10b981';
+        setTimeout(function() {
+            btn.textContent = originalText;
+            btn.style.background = '';
+        }, 2000);
+    });
+});
+</script>
+
+</body>
+</html>

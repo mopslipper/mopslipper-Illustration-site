@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="可愛くて儚い世界を作る2次元イラスト製作者。オリジナル・版権イラスト、Live2D素材製作など承ります。">
+    <meta name="keywords" content="イラスト,イラストレーター,2次元,美少女,ゴシック,オリジナル,依頼,commission">
+    <meta name="author" content="mopslipper">
+    
+    <!-- OGP -->
+    <meta property="og:title" content="mopslipper - 2次元美少女イラスト製作者">
+    <meta property="og:description" content="可愛くて儚い世界を作る2次元イラスト製作者。オリジナル・版権イラスト、Live2D素材製作など承ります。">
+    <meta property="og:image" content="https://yoursite.com/static/img/helo-angel-asp1134-2016.webp">
+    <meta property="og:url" content="https://yoursite.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <title>Gallery - mopslipper - 2次元美少女イラスト製作者</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+    
+</head>
+<body>
+    <!-- 成人向けコンテンツ警告モーダル -->
+    
+    <div id="nsfw-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⚠️ 年齢確認</h2>
+            </div>
+            <div class="modal-body">
+                <p>このサイトには成人向け（R-18）作品が含まれます。18歳未満の方は閲覧をご遠慮ください。</p>
+                <p>あなたは18歳以上ですか？</p>
+            </div>
+            <div class="modal-footer">
+                <button id="nsfw-yes" class="btn btn-primary">はい（18歳以上）</button>
+                <button id="nsfw-no" class="btn btn-secondary">いいえ（18歳未満）</button>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="/">mopslipper</a>
+                </div>
+                
+                <!-- PC ナビゲーション -->
+                <nav class="nav-desktop">
+                    <ul class="nav-list">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/gallery.html">Gallery</a></li>
+                        <li><a href="/commission.html">Commission</a></li>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- SNSアイコン -->
+                <div class="social-icons">
+                    
+                    <a href="https://twitter.com/yourname" target="_blank" rel="noopener" title="Twitter">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    
+                    
+                    <a href="https://www.pixiv.net/users/12345678" target="_blank" rel="noopener" title="Pixiv">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M4.935 0A4.924 4.924 0 0 0 0 4.935v14.13A4.924 4.924 0 0 0 4.935 24h14.13A4.924 4.924 0 0 0 24 19.065V4.935A4.924 4.924 0 0 0 19.065 0zm7.81 4.547c2.181 0 4.058.676 5.399 1.847a6.118 6.118 0 0 1 2.116 4.66c.005 1.854-.88 3.476-2.257 4.563-1.375 1.092-3.225 1.697-5.258 1.697H9.177v4.394c0 .272-.221.492-.493.492H6.427a.492.492 0 0 1-.492-.492V5.04c0-.272.22-.493.492-.493zm-.44 9.255h2.858c1.458 0 2.659-.417 3.376-1.153.726-.746 1.147-1.832 1.147-3.069 0-1.238-.421-2.323-1.147-3.07-.717-.735-1.918-1.152-3.376-1.152H9.177v8.444z"/>
+                        </svg>
+                    </a>
+                    
+                    
+                    <a href="https://yourname.booth.pm" target="_blank" rel="noopener" title="BOOTH">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm-1 4v12h2V6h-2z"/>
+                        </svg>
+                    </a>
+                    
+                </div>
+                
+                <!-- ハンバーガーメニュー（SP） -->
+                <button class="hamburger" id="hamburger" aria-label="メニュー">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- モバイルメニュー -->
+    <nav class="nav-mobile" id="nav-mobile">
+        <ul class="nav-mobile-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/gallery.html">Gallery</a></li>
+            <li><a href="/commission.html">Commission</a></li>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-mobile-social">
+            
+            <a href="https://twitter.com/yourname" target="_blank" rel="noopener">Twitter</a>
+            
+            
+            <a href="https://www.pixiv.net/users/12345678" target="_blank" rel="noopener">Pixiv</a>
+            
+            
+            <a href="https://yourname.booth.pm" target="_blank" rel="noopener">BOOTH</a>
+            
+        </div>
+    </nav>
+
+    <!-- メインコンテンツ -->
+    <main class="main">
+        
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Gallery</h1>
+        <p class="page-description">作品一覧</p>
+    </div>
+</section>
+
+<section class="section gallery-section">
+    <div class="container">
+        <!-- フィルター -->
+        <div class="gallery-filters">
+            <div class="filter-group">
+                <label class="filter-label">カテゴリ:</label>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">すべて</button>
+                    
+                    <button class="filter-btn" data-filter="category" data-value="Fanart">Fanart</button>
+                    
+                    <button class="filter-btn" data-filter="category" data-value="Live2D">Live2D</button>
+                    
+                    <button class="filter-btn" data-filter="category" data-value="Original">Original</button>
+                    
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-label">タグ:</label>
+                <div class="filter-tags">
+                    
+                    <button class="tag-filter" data-tag="Live2D">Live2D</button>
+                    
+                    <button class="tag-filter" data-tag="R-18">R-18</button>
+                    
+                    <button class="tag-filter" data-tag="VTuber">VTuber</button>
+                    
+                    <button class="tag-filter" data-tag="かわいい">かわいい</button>
+                    
+                    <button class="tag-filter" data-tag="ウェディング">ウェディング</button>
+                    
+                    <button class="tag-filter" data-tag="オリジナル">オリジナル</button>
+                    
+                    <button class="tag-filter" data-tag="クリスマス">クリスマス</button>
+                    
+                    <button class="tag-filter" data-tag="サンタ">サンタ</button>
+                    
+                    <button class="tag-filter" data-tag="ドレス">ドレス</button>
+                    
+                    <button class="tag-filter" data-tag="ネコミミ">ネコミミ</button>
+                    
+                    <button class="tag-filter" data-tag="ハロウィン">ハロウィン</button>
+                    
+                    <button class="tag-filter" data-tag="ファンアート">ファンアート</button>
+                    
+                    <button class="tag-filter" data-tag="ファンタジー">ファンタジー</button>
+                    
+                    <button class="tag-filter" data-tag="二次創作">二次創作</button>
+                    
+                    <button class="tag-filter" data-tag="夏">夏</button>
+                    
+                    <button class="tag-filter" data-tag="夜">夜</button>
+                    
+                    <button class="tag-filter" data-tag="天使">天使</button>
+                    
+                    <button class="tag-filter" data-tag="星">星</button>
+                    
+                    <button class="tag-filter" data-tag="水着">水着</button>
+                    
+                    <button class="tag-filter" data-tag="版権">版権</button>
+                    
+                    <button class="tag-filter" data-tag="猫耳">猫耳</button>
+                    
+                    <button class="tag-filter" data-tag="白">白</button>
+                    
+                    <button class="tag-filter" data-tag="素材">素材</button>
+                    
+                    <button class="tag-filter" data-tag="紫">紫</button>
+                    
+                    <button class="tag-filter" data-tag="花">花</button>
+                    
+                    <button class="tag-filter" data-tag="赤">赤</button>
+                    
+                    <button class="tag-filter" data-tag="青">青</button>
+                    
+                    <button class="tag-filter" data-tag="魔女">魔女</button>
+                    
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-checkbox">
+                    <input type="checkbox" id="hide-nsfw" checked>
+                    <span>R-18作品を非表示</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- 作品グリッド -->
+        <div class="works-grid" id="works-grid">
+            
+            <div class="work-card" 
+                 data-nsfw="false" 
+                 data-category="Original"
+                 data-tags="オリジナル,猫耳,ネコミミ,かわいい"
+                 data-date="2026-01-10">
+                <a href="/works/cat-girl-001.html" class="work-link">
+                    <div class="work-image">
+                        <img src="/static/img/works/cat-girl-001.webp" alt="猫耳少女" loading="lazy">
+                        
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">猫耳少女</h3>
+                        <div class="work-tags">
+                            
+                            <span class="tag">オリジナル</span>
+                            
+                            <span class="tag">猫耳</span>
+                            
+                            <span class="tag">ネコミミ</span>
+                            
+                        </div>
+                        <p class="work-date">2026-01-10</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="work-card" 
+                 data-nsfw="false" 
+                 data-category="Original"
+                 data-tags="オリジナル,天使,ファンタジー,白"
+                 data-date="2026-01-08">
+                <a href="/works/angel-wings-002.html" class="work-link">
+                    <div class="work-image">
+                        <img src="/static/img/works/placeholder.svg" alt="天使の翼" loading="lazy">
+                        
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">天使の翼</h3>
+                        <div class="work-tags">
+                            
+                            <span class="tag">オリジナル</span>
+                            
+                            <span class="tag">天使</span>
+                            
+                            <span class="tag">ファンタジー</span>
+                            
+                        </div>
+                        <p class="work-date">2026-01-08</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="work-card" 
+                 data-nsfw="false" 
+                 data-category="Original"
+                 data-tags="オリジナル,魔女,ハロウィン,紫"
+                 data-date="2026-01-05">
+                <a href="/works/witch-halloween-003.html" class="work-link">
+                    <div class="work-image">
+                        <img src="/static/img/works/placeholder.svg" alt="ハロウィンの魔女" loading="lazy">
+                        
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">ハロウィンの魔女</h3>
+                        <div class="work-tags">
+                            
+                            <span class="tag">オリジナル</span>
+                            
+                            <span class="tag">魔女</span>
+                            
+                            <span class="tag">ハロウィン</span>
+                            
+                        </div>
+                        <p class="work-date">2026-01-05</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="work-card" 
+                 data-nsfw="false" 
+                 data-category="Fanart"
+                 data-tags="版権,ファンアート,二次創作"
+                 data-date="2026-01-03">
+                <a href="/works/fanart-character-004.html" class="work-link">
+                    <div class="work-image">
+                        <img src="/static/img/works/placeholder.svg" alt="版権キャラクター" loading="lazy">
+                        
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">版権キャラクター</h3>
+                        <div class="work-tags">
+                            
+                            <span class="tag">版権</span>
+                            
+                            <span class="tag">ファンアート</span>
+                            
+                            <span class="tag">二次創作</span>
+                            
+                        </div>
+                        <p class="work-date">2026-01-03</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="work-card" 
+                 data-nsfw="false" 
+                 data-category="Live2D"
+                 data-tags="Live2D,素材,オリジナル,VTuber"
+                 data-date="2026-01-01">
+                <a href="/works/live2d-model-005.html" class="work-link">
+                    <div class="work-image">
+                        <img src="/static/img/works/placeholder.svg" alt="Live2D立ち絵素材" loading="lazy">
+                        
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">Live2D立ち絵素材</h3>
+                        <div class="work-tags">
+                            
+                            <span class="tag">Live2D</span>
+                            
+                            <span class="tag">素材</span>
+                            
+                            <span class="tag">オリジナル</span>
+                            
+                        </div>
+                        <p class="work-date">2026-01-01</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="work-card" 
+                 data-nsfw="false" 
+                 data-category="Original"
+                 data-tags="オリジナル,夏,水着,青"
+                 data-date="2025-12-28">
+                <a href="/works/summer-girl-006.html" class="work-link">
+                    <div class="work-image">
+                        <img src="/static/img/works/placeholder.svg" alt="夏の少女" loading="lazy">
+                        
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">夏の少女</h3>
+                        <div class="work-tags">
+                            
+                            <span class="tag">オリジナル</span>
+                            
+                            <span class="tag">夏</span>
+                            
+                            <span class="tag">水着</span>
+                            
+                        </div>
+                        <p class="work-date">2025-12-28</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="work-card" 
+                 data-nsfw="false" 
+                 data-category="Original"
+                 data-tags="オリジナル,ドレス,夜,青,星"
+                 data-date="2025-12-25">
+                <a href="/works/night-dress-007.html" class="work-link">
+                    <div class="work-image">
+                        <img src="/static/img/works/placeholder.svg" alt="夜のドレス" loading="lazy">
+                        
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">夜のドレス</h3>
+                        <div class="work-tags">
+                            
+                            <span class="tag">オリジナル</span>
+                            
+                            <span class="tag">ドレス</span>
+                            
+                            <span class="tag">夜</span>
+                            
+                        </div>
+                        <p class="work-date">2025-12-25</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="work-card" 
+                 data-nsfw="false" 
+                 data-category="Original"
+                 data-tags="オリジナル,クリスマス,サンタ,赤"
+                 data-date="2025-12-24">
+                <a href="/works/christmas-santa-008.html" class="work-link">
+                    <div class="work-image">
+                        <img src="/static/img/works/placeholder.svg" alt="サンタガール" loading="lazy">
+                        
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">サンタガール</h3>
+                        <div class="work-tags">
+                            
+                            <span class="tag">オリジナル</span>
+                            
+                            <span class="tag">クリスマス</span>
+                            
+                            <span class="tag">サンタ</span>
+                            
+                        </div>
+                        <p class="work-date">2025-12-24</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="work-card" 
+                 data-nsfw="false" 
+                 data-category="Original"
+                 data-tags="オリジナル,ウェディング,ドレス,白,花"
+                 data-date="2025-12-20">
+                <a href="/works/wedding-dress-009.html" class="work-link">
+                    <div class="work-image">
+                        <img src="/static/img/works/placeholder.svg" alt="ウェディングドレス" loading="lazy">
+                        
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">ウェディングドレス</h3>
+                        <div class="work-tags">
+                            
+                            <span class="tag">オリジナル</span>
+                            
+                            <span class="tag">ウェディング</span>
+                            
+                            <span class="tag">ドレス</span>
+                            
+                        </div>
+                        <p class="work-date">2025-12-20</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="work-card" 
+                 data-nsfw="true" 
+                 data-category="Original"
+                 data-tags="オリジナル,R-18"
+                 data-date="2025-12-18">
+                <a href="/works/r18-sample-010.html" class="work-link">
+                    <div class="work-image">
+                        <img src="/static/img/works/placeholder.svg" alt="【R-18】サンプル作品" loading="lazy">
+                        
+                        <div class="nsfw-overlay">
+                            <span class="nsfw-label">R-18</span>
+                            <p class="nsfw-message">クリックして表示</p>
+                        </div>
+                        
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">【R-18】サンプル作品</h3>
+                        <div class="work-tags">
+                            
+                            <span class="tag">オリジナル</span>
+                            
+                            <span class="tag">R-18</span>
+                            
+                        </div>
+                        <p class="work-date">2025-12-18</p>
+                    </div>
+                </a>
+            </div>
+            
+        </div>
+
+        <!-- 結果が0件の場合 -->
+        <div id="no-results" class="no-results" style="display: none;">
+            <p>条件に一致する作品が見つかりませんでした。</p>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p class="footer-text">転載・無断使用禁止｜Commission inquiries welcome</p>
+                    <p class="footer-copyright">&copy; 2026 mopslipper. All Rights Reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/privacy.html">Privacy Policy</a>
+                    <span class="separator">|</span>
+                    <a href="/contact.html">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/static/js/main.js"></script>
+    
+<script src="/static/js/gallery.js"></script>
+
+</body>
+</html>
