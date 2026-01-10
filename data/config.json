@@ -4,17 +4,17 @@
   "site_description": "可愛くて儚い世界を作る2次元イラスト製作者。オリジナル・版権イラスト、Live2D素材製作など承ります。",
   "site_url": "https://yoursite.com",
   "hero_image": "/static/img/helo-angel-asp1134-2016.webp",
-  "hero_text": "可愛くて儚い世界を作ります",
-  "hero_subtext": "オリジナル・版権イラスト｜Live2D素材｜依頼受付中",
+  "hero_text": "可愛いイラストを作ります",
+  "hero_subtext": "オリジナル〇｜版権イラスト×｜Live2D素材×｜依頼受付×",
   "author": {
     "name": "mopslipper",
     "name_en": "mopslipper",
-    "bio": "フリルとゴシックをこよなく愛する2次元イラスト製作者。可愛くて儚い女の子を作るのが得意です。",
-    "bio_detail": "主にオリジナルキャラクターを中心に、版権作品のファンアートも制作しています。ゴシックロリータやフリル、レース、リボンなど装飾的なデザインが好きです。",
+    "bio": "2次元イラスト製作者。可愛くて儚い女の子を作るのが得意です。",
+    "bio_detail": "主にオリジナルキャラクターを中心に、版権作品のファンアートも制作していません。レース、リボンなど装飾的なデザインが好きです。",
     "tools": [
-      "CLIP STUDIO PAINT",
-      "Live2D Cubism",
-      "Adobe Photoshop"
+      "ConfyUI",
+      "VRAM 6GB",
+      "CLIP STUDIO PAINT"
     ],
     "skills": [
       "可愛い系",
