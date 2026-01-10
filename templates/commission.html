@@ -30,7 +30,8 @@
 
         <!-- メニュー -->
         <div class="commission-menu">
-            <h2 class="section-title">料金メニュー</h2>
+            <h2 class="section-title">料金メニュー（嘘）</h2>
+            <p class="menu-disclaimer" style="text-align: center; color: #ef4444; font-weight: bold; margin-bottom: 2rem;">※ 現在、有償依頼は受け付けておりません。参考までにどうぞ。</p>
             <div class="menu-grid">
                 {% for item in commission.menu %}
                 <div class="menu-card">
@@ -50,14 +51,15 @@
                 {% endfor %}
             </div>
             <div class="menu-note">
-                <p>※ 上記は目安料金です。内容により変動する場合があります。</p>
-                <p>※ 商用利用の場合は別途ご相談ください。</p>
+                <p style="color: #ef4444; font-weight: bold;">※ これは参考価格です。現在は有償依頼を受け付けておりません。</p>
+                <p>※ 無償のイラストリクエストは<a href="{{ base_path }}/contact.html" style="color: #3b82f6; text-decoration: underline;">Requestページ</a>からお気軽にどうぞ！</p>
             </div>
         </div>
 
         <!-- 依頼フロー -->
         <div class="commission-flow">
-            <h2 class="section-title">ご依頼の流れ</h2>
+            <h2 class="section-title">ご依頼の流れ（参考）</h2>
+            <p style="text-align: center; color: #94a3b8; margin-bottom: 1.5rem;">※ 有償依頼を再開する場合の流れです</p>
             <div class="flow-steps">
                 {% for step in commission.flow %}
                 <div class="flow-step">
@@ -107,7 +109,8 @@
 
         <!-- 支払い方法 -->
         <div class="commission-payment">
-            <h2 class="section-title">お支払い方法</h2>
+            <h2 class="section-title">お支払い方法（参考）</h2>
+            <p style="text-align: center; color: #94a3b8; margin-bottom: 1.5rem;">※ 現在は有償依頼を受け付けていないため使用していません</p>
             <div class="payment-info">
                 <div class="payment-methods">
                     <h3>対応決済</h3>
@@ -126,8 +129,8 @@
 
         <!-- 依頼テンプレート -->
         <div class="commission-template">
-            <h2 class="section-title">{{ commission.request_template.title }}</h2>
-            <p class="template-description">以下のテンプレートをコピーしてお問い合わせフォームまたはSkebからご連絡ください。</p>
+            <h2 class="section-title">{{ commission.request_template.title }}（参考）</h2>
+            <p class="template-description" style="color: #94a3b8;">※ 有償依頼用のテンプレートです。現在は無償リクエストのみ受付中。</p>
             <div class="template-box">
                 <pre id="template-text">{{ commission.request_template.template }}</pre>
                 <button class="btn btn-secondary" id="copy-template">コピーする</button>
@@ -137,7 +140,7 @@
         <!-- お問い合わせ -->
         <div class="commission-contact">
             <h2 class="section-title">お問い合わせ</h2>
-            <p class="contact-description">ご依頼・ご質問は以下からお気軽にどうぞ。</p>
+            <p class="contact-description">無償イラストリクエストは以下から！質問もお気軽にどうぞ。</p>
             <div class="contact-buttons">
                 <a href="{{ base_path }}/contact.html" class="btn btn-primary">お問い合わせフォーム</a>
                 {% if config.social_links.twitter %}
