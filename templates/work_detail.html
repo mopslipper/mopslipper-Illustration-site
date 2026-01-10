@@ -151,6 +151,61 @@
             </div>
         </div>
 
+        <!-- コメント欄 -->
+        <div class="work-comments-section">
+            <h2 class="section-title">Comments</h2>
+            <p class="comments-intro">この作品へのコメント・感想をお待ちしています！コメントが投稿されると作者に通知されます。</p>
+            
+            <div class="comment-form-wrapper">
+                <form action="{{ config.contact_form_action }}" method="POST" class="comment-form" id="comment-form">
+                    <!-- 作品情報（hidden） -->
+                    <input type="hidden" name="_subject" value="💬 【{{ work.title }}】へのコメント">
+                    <input type="hidden" name="作品タイトル" value="{{ work.title }}">
+                    <input type="hidden" name="作品URL" value="{{ config.site_url }}{{ base_path }}/works/{{ work.slug }}.html">
+                    
+                    <div class="form-group">
+                        <label for="comment-name" class="form-label">
+                            お名前 <span class="optional">(任意)</span>
+                        </label>
+                        <input type="text" id="comment-name" name="name" class="form-input" placeholder="匿名でもOK">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comment-message" class="form-label">
+                            コメント <span class="required">*</span>
+                        </label>
+                        <textarea id="comment-message" name="message" class="form-textarea" rows="4" placeholder="感想や応援メッセージなど" required></textarea>
+                    </div>
+
+                    <!-- ハニーポット（スパム対策） -->
+                    <div class="honeypot">
+                        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="comment-submit-btn">コメントを送信</button>
+                    </div>
+                </form>
+
+                <!-- 送信完了メッセージ -->
+                <div id="comment-success" class="form-message form-success" style="display: none;">
+                    <h3>✓ 送信完了</h3>
+                    <p>コメントありがとうございます！<br>作者に通知されました。</p>
+                </div>
+
+                <!-- エラーメッセージ -->
+                <div id="comment-error" class="form-message form-error" style="display: none;">
+                    <h3>✕ 送信エラー</h3>
+                    <p>送信に失敗しました。時間をおいて再度お試しください。</p>
+                </div>
+            </div>
+
+            <div class="comment-note">
+                <p>※ コメントは公開されません。作者のみに届きます。</p>
+                <p>※ 返信が必要な場合は<a href="{{ base_path }}/contact.html">Contactページ</a>からメールアドレスを記載してご連絡ください。</p>
+            </div>
+        </div>
+
         <!-- 関連作品 -->
         {% if related_works %}
         <div class="related-works">

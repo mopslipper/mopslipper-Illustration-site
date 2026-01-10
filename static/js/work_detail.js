@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initLightbox();
     initViewCount();
     initLikeButton();
+    initCommentForm();
 });
 
 // ===================================
@@ -172,4 +173,71 @@ function formatNumber(num) {
         return (num / 1000).toFixed(1) + 'k';
     }
     return num.toString();
+}
+
+// ===================================
+// コメントフォーム
+// ===================================
+function initCommentForm() {
+    const commentForm = document.getElementById('comment-form');
+    if (!commentForm) return;
+    
+    const submitBtn = document.getElementById('comment-submit-btn');
+    const successMsg = document.getElementById('comment-success');
+    const errorMsg = document.getElementById('comment-error');
+    
+    commentForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // ボタン無効化
+        submitBtn.disabled = true;
+        submitBtn.textContent = '送信中...';
+        
+        // メッセージをリセット
+        successMsg.style.display = 'none';
+        errorMsg.style.display = 'none';
+        
+        // FormData作成
+        const formData = new FormData(commentForm);
+        
+        // Fetch APIで送信
+        fetch(commentForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            return response.json().then(data => ({
+                status: response.status,
+                ok: response.ok,
+                data: data
+            }));
+        })
+        .then(result => {
+            if (result.ok) {
+                // 成功
+                commentForm.style.display = 'none';
+                successMsg.style.display = 'block';
+                commentForm.reset();
+                
+                // 5秒後にフォームを再表示
+                setTimeout(() => {
+                    commentForm.style.display = 'block';
+                    successMsg.style.display = 'none';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'コメントを送信';
+                }, 5000);
+            } else {
+                throw new Error(result.data.error || '送信エラー');
+            }
+        })
+        .catch(error => {
+            console.error('送信エラー:', error);
+            errorMsg.style.display = 'block';
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'コメントを送信';
+        });
+    });
 }

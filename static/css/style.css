@@ -1037,6 +1037,90 @@ a:hover {
     line-height: 1.8;
 }
 
+/* ===================================
+   コメント欄
+   =================================== */
+.work-comments-section {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.comments-intro {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.comment-form-wrapper {
+    max-width: 600px;
+}
+
+.comment-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.comment-form .form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.comment-form .form-input,
+.comment-form .form-textarea {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: var(--font-base);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.comment-form .form-input:focus,
+.comment-form .form-textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.1);
+}
+
+.comment-form .form-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.comment-form .optional {
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: 0.875rem;
+}
+
+.comment-form .required {
+    color: var(--accent-primary);
+}
+
+.comment-note {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.comment-note p {
+    margin-bottom: 0.5rem;
+}
+
+.comment-note a {
+    color: var(--accent-primary);
+    text-decoration: underline;
+}
+
 .related-works {
     margin-top: 4rem;
 }
