@@ -105,13 +105,12 @@
 
 {% block extra_js %}
 <script>
-// フォーム送信処理（Formspree使用の場合）
+// フォーム送信処理（デバッグ強化版）
 document.getElementById('contact-form')?.addEventListener('submit', function(e) {
     e.preventDefault();
     
     const form = e.target;
     const submitBtn = document.getElementById('submit-btn');
-    const formWrapper = document.querySelector('.contact-form-wrapper');
     const successMsg = document.getElementById('form-success');
     const errorMsg = document.getElementById('form-error');
     
@@ -119,8 +118,13 @@ document.getElementById('contact-form')?.addEventListener('submit', function(e) 
     submitBtn.disabled = true;
     submitBtn.textContent = '送信中...';
     
+    // エラーメッセージを非表示
+    errorMsg.style.display = 'none';
+    
     // FormData作成
     const formData = new FormData(form);
+    
+    console.log('送信先:', form.action); // デバッグ用
     
     // Fetch APIで送信
     fetch(form.action, {
@@ -131,18 +135,33 @@ document.getElementById('contact-form')?.addEventListener('submit', function(e) 
         }
     })
     .then(response => {
-        if (response.ok) {
+        console.log('レスポンスステータス:', response.status); // デバッグ用
+        return response.json().then(data => ({
+            status: response.status,
+            ok: response.ok,
+            data: data
+        }));
+    })
+    .then(result => {
+        console.log('レスポンス内容:', result); // デバッグ用
+        
+        if (result.ok) {
             // 成功
             form.style.display = 'none';
             successMsg.style.display = 'block';
             form.reset();
         } else {
-            // エラー
-            throw new Error('送信エラー');
+            // Formspreeのエラーメッセージを表示
+            throw new Error(result.data.error || '送信エラー');
         }
     })
     .catch(error => {
+        console.error('送信エラー:', error); // デバッグ用
+        
         // エラー表示
+        errorMsg.querySelector('p').textContent = 
+            '送信に失敗しました: ' + error.message + 
+            '\nブラウザのコンソール(F12)を確認してください。';
         errorMsg.style.display = 'block';
         submitBtn.disabled = false;
         submitBtn.textContent = '送信する';
