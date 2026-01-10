@@ -31,12 +31,25 @@
                     </div>
                     {% endif %}
                     
+                    {% if work.image_path.endswith(('.mp4', '.mov', '.webm')) %}
+                    <video src="{{ base_path }}{{ work.image_path }}" 
+                           class="work-image {% if work.nsfw %}nsfw-blur{% endif %}"
+                           id="work-image"
+                           controls
+                           loop
+                           muted
+                           playsinline
+                           poster="{{ base_path }}{{ work.thumbnail }}">
+                        お使いのブラウザは動画再生に対応していません。
+                    </video>
+                    {% else %}
                     <img src="{{ base_path }}{{ work.image_path }}" 
                          alt="{{ work.title }}" 
                          class="work-image {% if work.nsfw %}nsfw-blur{% endif %}"
                          id="work-image">
+                    {% endif %}
                     
-                    <button class="lightbox-btn" id="lightbox-btn" title="拡大表示">
+                    <button class="lightbox-btn" id="lightbox-btn" title="拡大表示" style="{% if work.image_path.endswith(('.mp4', '.mov', '.webm')) %}display:none;{% endif %}">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
                         </svg>

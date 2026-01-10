@@ -135,7 +135,20 @@
   },
   {
     "id": 10,
-    "slug": "r18-sample-010",
+    "slug": "swimsuit-zooming-010",
+    "title": "水着ズームイン",
+    "date": "2026-01-10",
+    "image_path": "/static/img/works/swimsuit-zooming.mp4",
+    "thumbnail": "/static/img/works/swimsuit-zooming-thumb.jpg",
+    "tags": ["オリジナル", "水着", "動画", "アニメーション"],
+    "category": "Animation",
+    "description": "水着を着た美少女がズームで迫ってくるアニメーション動画です。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 11,
+    "slug": "r18-sample-011",
     "title": "【R-18】サンプル作品",
     "date": "2025-12-18",
     "image_path": "/static/img/works/placeholder.svg",
