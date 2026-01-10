@@ -18,7 +18,7 @@
     <title>{% block title %}{{ config.site_title }}{% endblock %}</title>
     
     <!-- CSS -->
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="{{ base_path }}/static/css/style.css">
     
     {% block extra_css %}{% endblock %}
 </head>
@@ -54,10 +54,10 @@
                 <nav class="nav-desktop">
                     <ul class="nav-list">
                         <li><a href="/">Home</a></li>
-                        <li><a href="/gallery.html">Gallery</a></li>
-                        <li><a href="/commission.html">Commission</a></li>
-                        <li><a href="/about.html">About</a></li>
-                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="{{ base_path }}/gallery.html">Gallery</a></li>
+                        <li><a href="{{ base_path }}/commission.html">Commission</a></li>
+                        <li><a href="{{ base_path }}/about.html">About</a></li>
+                        <li><a href="{{ base_path }}/contact.html">Contact</a></li>
                     </ul>
                 </nav>
                 
@@ -100,10 +100,10 @@
     <nav class="nav-mobile" id="nav-mobile">
         <ul class="nav-mobile-list">
             <li><a href="/">Home</a></li>
-            <li><a href="/gallery.html">Gallery</a></li>
-            <li><a href="/commission.html">Commission</a></li>
-            <li><a href="/about.html">About</a></li>
-            <li><a href="/contact.html">Contact</a></li>
+            <li><a href="{{ base_path }}/gallery.html">Gallery</a></li>
+            <li><a href="{{ base_path }}/commission.html">Commission</a></li>
+            <li><a href="{{ base_path }}/about.html">About</a></li>
+            <li><a href="{{ base_path }}/contact.html">Contact</a></li>
         </ul>
         <div class="nav-mobile-social">
             {% if config.social_links.twitter %}
@@ -132,16 +132,16 @@
                     <p class="footer-copyright">&copy; {{ config.copyright_year }} {{ config.author.name }}. All Rights Reserved.</p>
                 </div>
                 <div class="footer-links">
-                    <a href="/privacy.html">Privacy Policy</a>
+                    <a href="{{ base_path }}/privacy.html">Privacy Policy</a>
                     <span class="separator">|</span>
-                    <a href="/contact.html">Contact</a>
+                    <a href="{{ base_path }}/contact.html">Contact</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- JavaScript -->
-    <script src="/static/js/main.js"></script>
+    <script src="{{ base_path }}/static/js/main.js"></script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>

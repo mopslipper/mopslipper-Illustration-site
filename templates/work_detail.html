@@ -12,7 +12,7 @@
         <div class="breadcrumb">
             <a href="/">Home</a>
             <span class="separator">/</span>
-            <a href="/gallery.html">Gallery</a>
+            <a href="{{ base_path }}/gallery.html">Gallery</a>
             <span class="separator">/</span>
             <span>{{ work.title }}</span>
         </div>
@@ -128,7 +128,7 @@
             <div class="works-grid">
                 {% for related in related_works %}
                 <div class="work-card" data-nsfw="{{ related.nsfw|lower }}">
-                    <a href="/works/{{ related.slug }}.html" class="work-link">
+                    <a href="{{ base_path }}/works/{{ related.slug }}.html" class="work-link">
                         <div class="work-image">
                             <img src="{{ related.thumbnail }}" alt="{{ related.title }}" loading="lazy">
                             {% if related.nsfw %}
@@ -162,5 +162,5 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="/static/js/work_detail.js"></script>
+<script src="{{ base_path }}/static/js/work_detail.js"></script>
 {% endblock %}

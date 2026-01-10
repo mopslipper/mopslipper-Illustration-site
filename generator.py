@@ -20,17 +20,17 @@ class SiteGenerator:
         self.static_dir = self.root / "static"
         self.dist_dir = self.root / "dist"
         
+        # データ保持用
+        self.works = []
+        self.commission = {}
+        self.config = {}
+        
         # Jinja2環境設定
         self.env = Environment(
             loader=FileSystemLoader(str(self.template_dir)),
             autoescape=True
         )
         self.env.globals['now'] = datetime.now()
-        
-        # データ保持用
-        self.works = []
-        self.commission = {}
-        self.config = {}
     
     def load_data(self):
         """データファイルを読み込み"""
@@ -38,6 +38,9 @@ class SiteGenerator:
         
         with open(self.data_dir / "config.json", "r", encoding="utf-8") as f:
             self.config = json.load(f)
+        
+        # Jinja2にbase_pathを渡す
+        self.env.globals['base_path'] = self.config.get('base_path', '')
         
         with open(self.data_dir / "works.json", "r", encoding="utf-8") as f:
             self.works = json.load(f)

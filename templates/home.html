@@ -13,8 +13,8 @@
         <h1 class="hero-title">{{ config.hero_text }}</h1>
         <p class="hero-subtitle">{{ config.hero_subtext }}</p>
         <div class="hero-buttons">
-            <a href="/gallery.html" class="btn btn-primary">Gallery</a>
-            <a href="/commission.html" class="btn btn-secondary">Commission</a>
+            <a href="{{ base_path }}/gallery.html" class="btn btn-primary">Gallery</a>
+            <a href="{{ base_path }}/commission.html" class="btn btn-secondary">Commission</a>
         </div>
     </div>
 </section>
@@ -33,7 +33,7 @@
             <div class="status-content">
                 <h3>依頼状況</h3>
                 <p>{{ commission_status.message }}</p>
-                <a href="/commission.html" class="btn btn-outline">詳細を見る →</a>
+                <a href="{{ base_path }}/commission.html" class="btn btn-outline">詳細を見る →</a>
             </div>
         </div>
     </div>
@@ -44,13 +44,13 @@
     <div class="container">
         <div class="section-header">
             <h2 class="section-title">Recent Works</h2>
-            <a href="/gallery.html" class="section-link">すべて見る →</a>
+            <a href="{{ base_path }}/gallery.html" class="section-link">すべて見る →</a>
         </div>
         
         <div class="works-grid">
             {% for work in recent_works %}
             <div class="work-card" data-nsfw="{{ work.nsfw|lower }}" data-tags="{{ work.tags|join(',') }}">
-                <a href="/works/{{ work.slug }}.html" class="work-link">
+                <a href="{{ base_path }}/works/{{ work.slug }}.html" class="work-link">
                     <div class="work-image">
                         <img src="{{ work.thumbnail }}" alt="{{ work.title }}" loading="lazy">
                         {% if work.nsfw %}
