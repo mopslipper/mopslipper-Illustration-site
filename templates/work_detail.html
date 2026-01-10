@@ -160,7 +160,7 @@
                 <div class="work-card" data-nsfw="{{ related.nsfw|lower }}">
                     <a href="{{ base_path }}/works/{{ related.slug }}.html" class="work-link">
                         <div class="work-image">
-                            <img src="{{ related.thumbnail }}" alt="{{ related.title }}" loading="lazy">
+                            <img src="{{ base_path }}{{ related.thumbnail }}" alt="{{ related.title }}" loading="lazy">
                             {% if related.nsfw %}
                             <div class="nsfw-overlay">
                                 <span class="nsfw-label">R-18</span>
