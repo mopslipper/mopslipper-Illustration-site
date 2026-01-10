@@ -1,7 +1,7 @@
 {
   "status": {
-    "open": false,
-    "message": "現在は受け付けておりません",
+    "open": true,
+    "message": "無償受付中",
     "next_update": "2026-02-01"
   },
   "menu": [
