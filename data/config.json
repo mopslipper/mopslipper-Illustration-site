@@ -1,11 +1,11 @@
 {
   "site_name": "mopslipper",
   "site_title": "mopslipper - 2次元美少女イラスト製作者",
-  "site_description": "可愛くて儚い世界を作る2次元イラスト製作者。オリジナル・版権イラスト、Live2D素材製作など承ります。",
+  "site_description": "可愛い2次元イラスト製作者。オリジナル・版権イラスト、Live2D素材製作など承りません。",
   "site_url": "https://yoursite.com",
   "hero_image": "/static/img/helo-angel-asp1134-2016.webp",
   "hero_text": "可愛いイラストを作ります",
-  "hero_subtext": "オリジナル〇｜版権イラスト×｜Live2D素材×｜依頼受付×",
+  "hero_subtext": "オリジナル〇｜版権イラスト×｜Live2D素材×｜依頼受付〇",
   "author": {
     "name": "mopslipper",
     "name_en": "mopslipper",
@@ -23,7 +23,7 @@
       "フリル・レース",
       "Live2D素材"
     ],
-    "experience": "イラスト製作歴 5年｜Live2D素材製作歴 2年"
+    "experience": "イラスト製作歴 3年｜Live2D素材製作歴 0年"
   },
   "social_links": {
     "twitter": "https://x.com/facet_boy",
@@ -34,7 +34,7 @@
   },
   "contact_form_action": "https://formspree.io/f/xnjjazjr",
   "nsfw_warning": true,
-  "nsfw_text": "このサイトには成人向け（R-18）作品が含まれます。18歳未満の方は閲覧をご遠慮ください。",
+  "nsfw_text": "このサイトには成人向け（R-18）作品が含まれません。18歳未満の方は閲覧をご遠慮しないでください。",
   "footer_text": "転載・無断使用禁止｜Commission inquiries welcome",
   "copyright_year": 2026,
   "google_analytics": "",
