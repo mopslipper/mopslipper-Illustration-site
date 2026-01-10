@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}Commission - {{ config.site_title }}{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Commission</h1>
+        <p class="page-description">ご依頼について</p>
+    </div>
+</section>
+
+<section class="section commission-section">
+    <div class="container">
+        <!-- 受付状況 -->
+        <div class="commission-status">
+            <div class="status-badge {% if commission.status.open %}status-open{% else %}status-closed{% endif %}">
+                {% if commission.status.open %}
+                <span class="status-icon">✓</span> 受付中
+                {% else %}
+                <span class="status-icon">✕</span> 停止中
+                {% endif %}
+            </div>
+            <h2>現在の受付状況</h2>
+            <p class="status-message">{{ commission.status.message }}</p>
+            {% if commission.status.next_update %}
+            <p class="status-note">次回更新予定: {{ commission.status.next_update }}</p>
+            {% endif %}
+        </div>
+
+        <!-- メニュー -->
+        <div class="commission-menu">
+            <h2 class="section-title">料金メニュー</h2>
+            <div class="menu-grid">
+                {% for item in commission.menu %}
+                <div class="menu-card">
+                    <div class="menu-header">
+                        <h3 class="menu-name">{{ item.name }}</h3>
+                        <p class="menu-name-en">{{ item.name_en }}</p>
+                    </div>
+                    <div class="menu-price">{{ item.price }}</div>
+                    <p class="menu-delivery">納期: {{ item.delivery }}</p>
+                    <p class="menu-description">{{ item.description }}</p>
+                    <ul class="menu-details">
+                        {% for detail in item.details %}
+                        <li>{{ detail }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="menu-note">
+                <p>※ 上記は目安料金です。内容により変動する場合があります。</p>
+                <p>※ 商用利用の場合は別途ご相談ください。</p>
+            </div>
+        </div>
+
+        <!-- 依頼フロー -->
+        <div class="commission-flow">
+            <h2 class="section-title">ご依頼の流れ</h2>
+            <div class="flow-steps">
+                {% for step in commission.flow %}
+                <div class="flow-step">
+                    <div class="step-number">{{ step.step }}</div>
+                    <div class="step-content">
+                        <h3 class="step-title">{{ step.title }}</h3>
+                        <p class="step-description">{{ step.description }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- OK/NG -->
+        <div class="commission-policy">
+            <h2 class="section-title">OK・NG内容</h2>
+            <div class="policy-grid">
+                <div class="policy-card policy-ok">
+                    <h3>✓ OK</h3>
+                    <ul>
+                        {% for item in commission.policy.ok %}
+                        <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="policy-card policy-ng">
+                    <h3>✕ NG</h3>
+                    <ul>
+                        {% for item in commission.policy.ng %}
+                        <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            
+            {% if commission.policy.notes %}
+            <div class="policy-notes">
+                <h3>注意事項</h3>
+                <ul>
+                    {% for note in commission.policy.notes %}
+                    <li>{{ note }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- 支払い方法 -->
+        <div class="commission-payment">
+            <h2 class="section-title">お支払い方法</h2>
+            <div class="payment-info">
+                <div class="payment-methods">
+                    <h3>対応決済</h3>
+                    <ul>
+                        {% for method in commission.payment.methods %}
+                        <li>{{ method }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="payment-schedule">
+                    <h3>お支払いタイミング</h3>
+                    <p>{{ commission.payment.schedule }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 依頼テンプレート -->
+        <div class="commission-template">
+            <h2 class="section-title">{{ commission.request_template.title }}</h2>
+            <p class="template-description">以下のテンプレートをコピーしてお問い合わせフォームまたはSkebからご連絡ください。</p>
+            <div class="template-box">
+                <pre id="template-text">{{ commission.request_template.template }}</pre>
+                <button class="btn btn-secondary" id="copy-template">コピーする</button>
+            </div>
+        </div>
+
+        <!-- お問い合わせ -->
+        <div class="commission-contact">
+            <h2 class="section-title">お問い合わせ</h2>
+            <p class="contact-description">ご依頼・ご質問は以下からお気軽にどうぞ。</p>
+            <div class="contact-buttons">
+                <a href="/contact.html" class="btn btn-primary">お問い合わせフォーム</a>
+                {% if config.social_links.twitter %}
+                <a href="{{ config.social_links.twitter }}" target="_blank" rel="noopener" class="btn btn-outline">TwitterでDM</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// テンプレートコピー機能
+document.getElementById('copy-template')?.addEventListener('click', function() {
+    const text = document.getElementById('template-text').textContent;
+    navigator.clipboard.writeText(text).then(function() {
+        const btn = document.getElementById('copy-template');
+        const originalText = btn.textContent;
+        btn.textContent = 'コピーしました！';
+        btn.style.background = '#10b981';
+        setTimeout(function() {
+            btn.textContent = originalText;
+            btn.style.background = '';
+        }, 2000);
+    });
+});
+</script>
+{% endblock %}

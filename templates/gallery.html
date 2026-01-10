@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Gallery - {{ config.site_title }}{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Gallery</h1>
+        <p class="page-description">作品一覧</p>
+    </div>
+</section>
+
+<section class="section gallery-section">
+    <div class="container">
+        <!-- フィルター -->
+        <div class="gallery-filters">
+            <div class="filter-group">
+                <label class="filter-label">カテゴリ:</label>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">すべて</button>
+                    {% for category in categories %}
+                    <button class="filter-btn" data-filter="category" data-value="{{ category }}">{{ category }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-label">タグ:</label>
+                <div class="filter-tags">
+                    {% for tag in tags %}
+                    <button class="tag-filter" data-tag="{{ tag }}">{{ tag }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-checkbox">
+                    <input type="checkbox" id="hide-nsfw" checked>
+                    <span>R-18作品を非表示</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- 作品グリッド -->
+        <div class="works-grid" id="works-grid">
+            {% for work in works %}
+            <div class="work-card" 
+                 data-nsfw="{{ work.nsfw|lower }}" 
+                 data-category="{{ work.category }}"
+                 data-tags="{{ work.tags|join(',') }}"
+                 data-date="{{ work.date }}">
+                <a href="/works/{{ work.slug }}.html" class="work-link">
+                    <div class="work-image">
+                        <img src="{{ work.thumbnail }}" alt="{{ work.title }}" loading="lazy">
+                        {% if work.nsfw %}
+                        <div class="nsfw-overlay">
+                            <span class="nsfw-label">R-18</span>
+                            <p class="nsfw-message">クリックして表示</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">{{ work.title }}</h3>
+                        <div class="work-tags">
+                            {% for tag in work.tags[:3] %}
+                            <span class="tag">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                        <p class="work-date">{{ work.date }}</p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- 結果が0件の場合 -->
+        <div id="no-results" class="no-results" style="display: none;">
+            <p>条件に一致する作品が見つかりませんでした。</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/gallery.js"></script>
+{% endblock %}

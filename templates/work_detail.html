@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block title %}{{ work.title }} - {{ config.site_title }}{% endblock %}
+{% block meta_description %}{{ work.description }}{% endblock %}
+{% block og_title %}{{ work.title }} - {{ config.site_name }}{% endblock %}
+{% block og_description %}{{ work.description }}{% endblock %}
+{% block og_image %}{{ config.site_url }}{{ work.image_path }}{% endblock %}
+
+{% block content %}
+<section class="work-detail-section">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="/">Home</a>
+            <span class="separator">/</span>
+            <a href="/gallery.html">Gallery</a>
+            <span class="separator">/</span>
+            <span>{{ work.title }}</span>
+        </div>
+
+        <div class="work-detail">
+            <div class="work-detail-main">
+                <!-- 作品画像 -->
+                <div class="work-detail-image">
+                    {% if work.nsfw %}
+                    <div class="nsfw-warning" id="nsfw-warning">
+                        <div class="nsfw-warning-content">
+                            <h3>⚠️ R-18作品</h3>
+                            <p>この作品は成人向けコンテンツです。<br>18歳未満の方は閲覧をご遠慮ください。</p>
+                            <button id="show-nsfw" class="btn btn-primary">18歳以上です（表示する）</button>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <img src="{{ work.image_path }}" 
+                         alt="{{ work.title }}" 
+                         class="work-image {% if work.nsfw %}nsfw-blur{% endif %}"
+                         id="work-image">
+                    
+                    <button class="lightbox-btn" id="lightbox-btn" title="拡大表示">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="work-detail-sidebar">
+                <!-- 作品情報 -->
+                <div class="work-detail-info">
+                    <h1 class="work-detail-title">{{ work.title }}</h1>
+                    
+                    <div class="work-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">公開日:</span>
+                            <span class="meta-value">{{ work.date }}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">カテゴリ:</span>
+                            <span class="meta-value">{{ work.category }}</span>
+                        </div>
+                    </div>
+
+                    <div class="work-tags">
+                        {% for tag in work.tags %}
+                        <span class="tag">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+
+                    {% if work.description %}
+                    <p class="work-description">{{ work.description }}</p>
+                    {% endif %}
+
+                    <!-- 外部リンク -->
+                    {% if work.external_links %}
+                    <div class="work-external-links">
+                        <h3 class="subsection-title">他サイトで見る</h3>
+                        <div class="external-links-list">
+                            {% if work.external_links.pixiv %}
+                            <a href="{{ work.external_links.pixiv }}" target="_blank" rel="noopener" class="external-link">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M4.935 0A4.924 4.924 0 0 0 0 4.935v14.13A4.924 4.924 0 0 0 4.935 24h14.13A4.924 4.924 0 0 0 24 19.065V4.935A4.924 4.924 0 0 0 19.065 0zm7.81 4.547c2.181 0 4.058.676 5.399 1.847a6.118 6.118 0 0 1 2.116 4.66c.005 1.854-.88 3.476-2.257 4.563-1.375 1.092-3.225 1.697-5.258 1.697H9.177v4.394c0 .272-.221.492-.493.492H6.427a.492.492 0 0 1-.492-.492V5.04c0-.272.22-.493.492-.493zm-.44 9.255h2.858c1.458 0 2.659-.417 3.376-1.153.726-.746 1.147-1.832 1.147-3.069 0-1.238-.421-2.323-1.147-3.07-.717-.735-1.918-1.152-3.376-1.152H9.177v8.444z"/>
+                                </svg>
+                                Pixiv
+                            </a>
+                            {% endif %}
+                            {% if work.external_links.twitter %}
+                            <a href="{{ work.external_links.twitter }}" target="_blank" rel="noopener" class="external-link">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                </svg>
+                                Twitter
+                            </a>
+                            {% endif %}
+                            {% if work.external_links.booth %}
+                            <a href="{{ work.external_links.booth }}" target="_blank" rel="noopener" class="external-link">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm-1 4v12h2V6h-2z"/>
+                                </svg>
+                                BOOTH
+                            </a>
+                            {% endif %}
+                            {% if work.external_links.fanbox %}
+                            <a href="{{ work.external_links.fanbox }}" target="_blank" rel="noopener" class="external-link">
+                                FANBOX
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- 利用規約 -->
+                    <div class="work-terms">
+                        <h3 class="subsection-title">利用について</h3>
+                        <p class="terms-text">
+                            この作品の著作権は{{ config.author.name }}に帰属します。<br>
+                            無断転載・無断使用は固くお断りします。<br>
+                            共有する場合は元ツイートのRT、またはこのページのURLをご利用ください。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 関連作品 -->
+        {% if related_works %}
+        <div class="related-works">
+            <h2 class="section-title">Related Works</h2>
+            <div class="works-grid">
+                {% for related in related_works %}
+                <div class="work-card" data-nsfw="{{ related.nsfw|lower }}">
+                    <a href="/works/{{ related.slug }}.html" class="work-link">
+                        <div class="work-image">
+                            <img src="{{ related.thumbnail }}" alt="{{ related.title }}" loading="lazy">
+                            {% if related.nsfw %}
+                            <div class="nsfw-overlay">
+                                <span class="nsfw-label">R-18</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="work-info">
+                            <h3 class="work-title">{{ related.title }}</h3>
+                            <div class="work-tags">
+                                {% for tag in related.tags[:2] %}
+                                <span class="tag">{{ tag }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- ライトボックス -->
+<div id="lightbox" class="lightbox" style="display: none;">
+    <button class="lightbox-close" id="lightbox-close">&times;</button>
+    <img src="" alt="" id="lightbox-image">
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/work_detail.js"></script>
+{% endblock %}

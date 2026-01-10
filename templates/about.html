@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}About - {{ config.site_title }}{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">About</h1>
+        <p class="page-description">プロフィール</p>
+    </div>
+</section>
+
+<section class="section about-section">
+    <div class="container">
+        <div class="about-content">
+            <!-- プロフィール画像 -->
+            <div class="about-image">
+                <img src="{{ config.hero_image }}" alt="{{ config.author.name }}">
+            </div>
+
+            <!-- プロフィール情報 -->
+            <div class="about-info">
+                <h2 class="about-name">{{ config.author.name }}</h2>
+                <p class="about-name-en">{{ config.author.name_en }}</p>
+                
+                <div class="about-bio">
+                    <p>{{ config.author.bio }}</p>
+                    <p>{{ config.author.bio_detail }}</p>
+                </div>
+
+                {% if config.author.experience %}
+                <div class="about-experience">
+                    <p>{{ config.author.experience }}</p>
+                </div>
+                {% endif %}
+
+                <!-- SNSリンク -->
+                <div class="about-social">
+                    {% if config.social_links.twitter %}
+                    <a href="{{ config.social_links.twitter }}" target="_blank" rel="noopener" class="social-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                        Twitter
+                    </a>
+                    {% endif %}
+                    {% if config.social_links.pixiv %}
+                    <a href="{{ config.social_links.pixiv }}" target="_blank" rel="noopener" class="social-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M4.935 0A4.924 4.924 0 0 0 0 4.935v14.13A4.924 4.924 0 0 0 4.935 24h14.13A4.924 4.924 0 0 0 24 19.065V4.935A4.924 4.924 0 0 0 19.065 0zm7.81 4.547c2.181 0 4.058.676 5.399 1.847a6.118 6.118 0 0 1 2.116 4.66c.005 1.854-.88 3.476-2.257 4.563-1.375 1.092-3.225 1.697-5.258 1.697H9.177v4.394c0 .272-.221.492-.493.492H6.427a.492.492 0 0 1-.492-.492V5.04c0-.272.22-.493.492-.493zm-.44 9.255h2.858c1.458 0 2.659-.417 3.376-1.153.726-.746 1.147-1.832 1.147-3.069 0-1.238-.421-2.323-1.147-3.07-.717-.735-1.918-1.152-3.376-1.152H9.177v8.444z"/>
+                        </svg>
+                        Pixiv
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- スキル -->
+        <div class="about-skills">
+            <h2 class="section-title">得意なこと</h2>
+            <div class="skills-grid">
+                {% for skill in config.author.skills %}
+                <div class="skill-tag">{{ skill }}</div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- 使用ツール -->
+        <div class="about-tools">
+            <h2 class="section-title">使用ツール</h2>
+            <ul class="tools-list">
+                {% for tool in config.author.tools %}
+                <li>{{ tool }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- リンク -->
+        <div class="about-links">
+            <h2 class="section-title">Links</h2>
+            <div class="links-grid">
+                {% if config.social_links.booth %}
+                <a href="{{ config.social_links.booth }}" target="_blank" rel="noopener" class="link-card">
+                    <div class="link-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm-1 4v12h2V6h-2z"/>
+                        </svg>
+                    </div>
+                    <div class="link-info">
+                        <h3>BOOTH</h3>
+                        <p>グッズ・素材販売</p>
+                    </div>
+                </a>
+                {% endif %}
+                
+                {% if config.social_links.fanbox %}
+                <a href="{{ config.social_links.fanbox }}" target="_blank" rel="noopener" class="link-card">
+                    <div class="link-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L2 7v10l10 5 10-5V7l-10-5zm0 2.18L19.82 8 12 11.82 4.18 8 12 4.18zM4 9.5l7 3.5v7l-7-3.5v-7zm9 11v-7l7-3.5v7l-7 3.5z"/>
+                        </svg>
+                    </div>
+                    <div class="link-info">
+                        <h3>FANBOX</h3>
+                        <p>支援・限定作品</p>
+                    </div>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

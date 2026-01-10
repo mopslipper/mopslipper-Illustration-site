@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}{{ config.site_title }}{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-image">
+        <img src="{{ config.hero_image }}" alt="{{ config.site_name }}">
+        <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+        <h1 class="hero-title">{{ config.hero_text }}</h1>
+        <p class="hero-subtitle">{{ config.hero_subtext }}</p>
+        <div class="hero-buttons">
+            <a href="/gallery.html" class="btn btn-primary">Gallery</a>
+            <a href="/commission.html" class="btn btn-secondary">Commission</a>
+        </div>
+    </div>
+</section>
+
+<!-- Commission Status -->
+<section class="section commission-status-section">
+    <div class="container">
+        <div class="commission-status-card">
+            <div class="status-badge {% if commission_status.open %}status-open{% else %}status-closed{% endif %}">
+                {% if commission_status.open %}
+                <span class="status-icon">✓</span> 受付中
+                {% else %}
+                <span class="status-icon">✕</span> 停止中
+                {% endif %}
+            </div>
+            <div class="status-content">
+                <h3>依頼状況</h3>
+                <p>{{ commission_status.message }}</p>
+                <a href="/commission.html" class="btn btn-outline">詳細を見る →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Recent Works -->
+<section class="section recent-works-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Recent Works</h2>
+            <a href="/gallery.html" class="section-link">すべて見る →</a>
+        </div>
+        
+        <div class="works-grid">
+            {% for work in recent_works %}
+            <div class="work-card" data-nsfw="{{ work.nsfw|lower }}" data-tags="{{ work.tags|join(',') }}">
+                <a href="/works/{{ work.slug }}.html" class="work-link">
+                    <div class="work-image">
+                        <img src="{{ work.thumbnail }}" alt="{{ work.title }}" loading="lazy">
+                        {% if work.nsfw %}
+                        <div class="nsfw-overlay">
+                            <span class="nsfw-label">R-18</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">{{ work.title }}</h3>
+                        <div class="work-tags">
+                            {% for tag in work.tags[:3] %}
+                            <span class="tag">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                        <p class="work-date">{{ work.date }}</p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Links Section -->
+<section class="section links-section">
+    <div class="container">
+        <h2 class="section-title">Links</h2>
+        <div class="links-grid">
+            {% if config.social_links.twitter %}
+            <a href="{{ config.social_links.twitter }}" target="_blank" rel="noopener" class="link-card">
+                <div class="link-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </div>
+                <div class="link-info">
+                    <h3>Twitter</h3>
+                    <p>{{ config.social_links.twitter_handle }}</p>
+                </div>
+            </a>
+            {% endif %}
+            
+            {% if config.social_links.pixiv %}
+            <a href="{{ config.social_links.pixiv }}" target="_blank" rel="noopener" class="link-card">
+                <div class="link-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M4.935 0A4.924 4.924 0 0 0 0 4.935v14.13A4.924 4.924 0 0 0 4.935 24h14.13A4.924 4.924 0 0 0 24 19.065V4.935A4.924 4.924 0 0 0 19.065 0zm7.81 4.547c2.181 0 4.058.676 5.399 1.847a6.118 6.118 0 0 1 2.116 4.66c.005 1.854-.88 3.476-2.257 4.563-1.375 1.092-3.225 1.697-5.258 1.697H9.177v4.394c0 .272-.221.492-.493.492H6.427a.492.492 0 0 1-.492-.492V5.04c0-.272.22-.493.492-.493zm-.44 9.255h2.858c1.458 0 2.659-.417 3.376-1.153.726-.746 1.147-1.832 1.147-3.069 0-1.238-.421-2.323-1.147-3.07-.717-.735-1.918-1.152-3.376-1.152H9.177v8.444z"/>
+                    </svg>
+                </div>
+                <div class="link-info">
+                    <h3>Pixiv</h3>
+                    <p>作品を見る</p>
+                </div>
+            </a>
+            {% endif %}
+            
+            {% if config.social_links.booth %}
+            <a href="{{ config.social_links.booth }}" target="_blank" rel="noopener" class="link-card">
+                <div class="link-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm-1 4v12h2V6h-2z"/>
+                    </svg>
+                </div>
+                <div class="link-info">
+                    <h3>BOOTH</h3>
+                    <p>グッズ・素材販売</p>
+                </div>
+            </a>
+            {% endif %}
+            
+            {% if config.social_links.fanbox %}
+            <a href="{{ config.social_links.fanbox }}" target="_blank" rel="noopener" class="link-card">
+                <div class="link-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L2 7v10l10 5 10-5V7l-10-5zm0 2.18L19.82 8 12 11.82 4.18 8 12 4.18zM4 9.5l7 3.5v7l-7-3.5v-7zm9 11v-7l7-3.5v7l-7 3.5z"/>
+                    </svg>
+                </div>
+                <div class="link-info">
+                    <h3>FANBOX</h3>
+                    <p>支援・限定作品</p>
+                </div>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

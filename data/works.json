@@ -1,0 +1,147 @@
+[
+  {
+    "id": 1,
+    "slug": "cat-girl-001",
+    "title": "猫耳少女",
+    "date": "2026-01-10",
+    "image_path": "/static/img/works/cat-girl-001.webp",
+    "thumbnail": "/static/img/works/cat-girl-001.webp",
+    "tags": ["オリジナル", "猫耳", "ネコミミ", "かわいい"],
+    "category": "Original",
+    "description": "ふわふわの猫耳としっぽが特徴的な可愛らしい少女。柔らかな毛並みの質感表現と、いたずらっぽい表情にこだわりました。",
+    "nsfw": false,
+    "external_links": {
+      "pixiv": "https://www.pixiv.net/artworks/123456789",
+      "twitter": "https://twitter.com/yourname/status/1234567890"
+    }
+  },
+  {
+    "id": 2,
+    "slug": "angel-wings-002",
+    "title": "天使の翼",
+    "date": "2026-01-08",
+    "image_path": "/static/img/works/placeholder.svg",
+    "thumbnail": "/static/img/works/placeholder.svg",
+    "tags": ["オリジナル", "天使", "ファンタジー", "白"],
+    "category": "Original",
+    "description": "白い翼を持つ天使のような少女。柔らかな光の表現と透明感のある雰囲気を目指しました。",
+    "nsfw": false,
+    "external_links": {
+      "pixiv": "https://www.pixiv.net/artworks/123456788"
+    }
+  },
+  {
+    "id": 3,
+    "slug": "witch-halloween-003",
+    "title": "ハロウィンの魔女",
+    "date": "2026-01-05",
+    "image_path": "/static/img/works/placeholder.svg",
+    "thumbnail": "/static/img/works/placeholder.svg",
+    "tags": ["オリジナル", "魔女", "ハロウィン", "紫"],
+    "category": "Original",
+    "description": "ハロウィンをテーマにした魔女っ子イラスト。紫とオレンジの配色で季節感を出しました。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 4,
+    "slug": "fanart-character-004",
+    "title": "版権キャラクター",
+    "date": "2026-01-03",
+    "image_path": "/static/img/works/placeholder.svg",
+    "thumbnail": "/static/img/works/placeholder.svg",
+    "tags": ["版権", "ファンアート", "二次創作"],
+    "category": "Fanart",
+    "description": "某作品のキャラクターファンアート。原作の雰囲気を大切にしつつ、自分なりの解釈を加えました。",
+    "nsfw": false,
+    "external_links": {
+      "pixiv": "https://www.pixiv.net/artworks/123456786"
+    }
+  },
+  {
+    "id": 5,
+    "slug": "live2d-model-005",
+    "title": "Live2D立ち絵素材",
+    "date": "2026-01-01",
+    "image_path": "/static/img/works/placeholder.svg",
+    "thumbnail": "/static/img/works/placeholder.svg",
+    "tags": ["Live2D", "素材", "オリジナル", "VTuber"],
+    "category": "Live2D",
+    "description": "VTuber向けLive2D素材の立ち絵。瞬き、口パク、揺れものなど基本的な動きに対応しています。",
+    "nsfw": false,
+    "external_links": {
+      "booth": "https://yourname.booth.pm/items/1234567"
+    }
+  },
+  {
+    "id": 6,
+    "slug": "summer-girl-006",
+    "title": "夏の少女",
+    "date": "2025-12-28",
+    "image_path": "/static/img/works/placeholder.svg",
+    "thumbnail": "/static/img/works/placeholder.svg",
+    "tags": ["オリジナル", "夏", "水着", "青"],
+    "category": "Original",
+    "description": "夏をテーマにした爽やかなイラスト。青と白を基調とした涼しげな配色です。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 7,
+    "slug": "night-dress-007",
+    "title": "夜のドレス",
+    "date": "2025-12-25",
+    "image_path": "/static/img/works/placeholder.svg",
+    "thumbnail": "/static/img/works/placeholder.svg",
+    "tags": ["オリジナル", "ドレス", "夜", "青", "星"],
+    "category": "Original",
+    "description": "星空をモチーフにした深い青のドレス。夜の静けさと神秘的な雰囲気を表現しました。",
+    "nsfw": false,
+    "external_links": {
+      "pixiv": "https://www.pixiv.net/artworks/123456785"
+    }
+  },
+  {
+    "id": 8,
+    "slug": "christmas-santa-008",
+    "title": "サンタガール",
+    "date": "2025-12-24",
+    "image_path": "/static/img/works/placeholder.svg",
+    "thumbnail": "/static/img/works/placeholder.svg",
+    "tags": ["オリジナル", "クリスマス", "サンタ", "赤"],
+    "category": "Original",
+    "description": "クリスマスのサンタ衣装を着た少女。赤と白のクラシックな配色でまとめました。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 9,
+    "slug": "wedding-dress-009",
+    "title": "ウェディングドレス",
+    "date": "2025-12-20",
+    "image_path": "/static/img/works/placeholder.svg",
+    "thumbnail": "/static/img/works/placeholder.svg",
+    "tags": ["オリジナル", "ウェディング", "ドレス", "白", "花"],
+    "category": "Original",
+    "description": "純白のウェディングドレス。レースやフリルなど、ブライダルならではの装飾を細かく描き込みました。",
+    "nsfw": false,
+    "external_links": {
+      "pixiv": "https://www.pixiv.net/artworks/123456784"
+    }
+  },
+  {
+    "id": 10,
+    "slug": "r18-sample-010",
+    "title": "【R-18】サンプル作品",
+    "date": "2025-12-18",
+    "image_path": "/static/img/works/placeholder.svg",
+    "thumbnail": "/static/img/works/placeholder.svg",
+    "tags": ["オリジナル", "R-18"],
+    "category": "Original",
+    "description": "成人向け作品のサンプルです。18歳未満の方は閲覧をご遠慮ください。",
+    "nsfw": true,
+    "external_links": {
+      "fanbox": "https://yourname.fanbox.cc/posts/1234567"
+    }
+  }
+]

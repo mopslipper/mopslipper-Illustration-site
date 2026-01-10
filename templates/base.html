@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block meta_description %}{{ config.site_description }}{% endblock %}">
+    <meta name="keywords" content="{{ config.meta_keywords }}">
+    <meta name="author" content="{{ config.author.name }}">
+    
+    <!-- OGP -->
+    <meta property="og:title" content="{% block og_title %}{{ config.site_title }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ config.site_description }}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ config.site_url }}{{ config.hero_image }}{% endblock %}">
+    <meta property="og:url" content="{{ config.site_url }}">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <title>{% block title %}{{ config.site_title }}{% endblock %}</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- 成人向けコンテンツ警告モーダル -->
+    {% if config.nsfw_warning %}
+    <div id="nsfw-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⚠️ 年齢確認</h2>
+            </div>
+            <div class="modal-body">
+                <p>{{ config.nsfw_text }}</p>
+                <p>あなたは18歳以上ですか？</p>
+            </div>
+            <div class="modal-footer">
+                <button id="nsfw-yes" class="btn btn-primary">はい（18歳以上）</button>
+                <button id="nsfw-no" class="btn btn-secondary">いいえ（18歳未満）</button>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="/">{{ config.site_name }}</a>
+                </div>
+                
+                <!-- PC ナビゲーション -->
+                <nav class="nav-desktop">
+                    <ul class="nav-list">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/gallery.html">Gallery</a></li>
+                        <li><a href="/commission.html">Commission</a></li>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- SNSアイコン -->
+                <div class="social-icons">
+                    {% if config.social_links.twitter %}
+                    <a href="{{ config.social_links.twitter }}" target="_blank" rel="noopener" title="Twitter">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    {% endif %}
+                    {% if config.social_links.pixiv %}
+                    <a href="{{ config.social_links.pixiv }}" target="_blank" rel="noopener" title="Pixiv">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M4.935 0A4.924 4.924 0 0 0 0 4.935v14.13A4.924 4.924 0 0 0 4.935 24h14.13A4.924 4.924 0 0 0 24 19.065V4.935A4.924 4.924 0 0 0 19.065 0zm7.81 4.547c2.181 0 4.058.676 5.399 1.847a6.118 6.118 0 0 1 2.116 4.66c.005 1.854-.88 3.476-2.257 4.563-1.375 1.092-3.225 1.697-5.258 1.697H9.177v4.394c0 .272-.221.492-.493.492H6.427a.492.492 0 0 1-.492-.492V5.04c0-.272.22-.493.492-.493zm-.44 9.255h2.858c1.458 0 2.659-.417 3.376-1.153.726-.746 1.147-1.832 1.147-3.069 0-1.238-.421-2.323-1.147-3.07-.717-.735-1.918-1.152-3.376-1.152H9.177v8.444z"/>
+                        </svg>
+                    </a>
+                    {% endif %}
+                    {% if config.social_links.booth %}
+                    <a href="{{ config.social_links.booth }}" target="_blank" rel="noopener" title="BOOTH">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm-1 4v12h2V6h-2z"/>
+                        </svg>
+                    </a>
+                    {% endif %}
+                </div>
+                
+                <!-- ハンバーガーメニュー（SP） -->
+                <button class="hamburger" id="hamburger" aria-label="メニュー">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- モバイルメニュー -->
+    <nav class="nav-mobile" id="nav-mobile">
+        <ul class="nav-mobile-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/gallery.html">Gallery</a></li>
+            <li><a href="/commission.html">Commission</a></li>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-mobile-social">
+            {% if config.social_links.twitter %}
+            <a href="{{ config.social_links.twitter }}" target="_blank" rel="noopener">Twitter</a>
+            {% endif %}
+            {% if config.social_links.pixiv %}
+            <a href="{{ config.social_links.pixiv }}" target="_blank" rel="noopener">Pixiv</a>
+            {% endif %}
+            {% if config.social_links.booth %}
+            <a href="{{ config.social_links.booth }}" target="_blank" rel="noopener">BOOTH</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- メインコンテンツ -->
+    <main class="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p class="footer-text">{{ config.footer_text }}</p>
+                    <p class="footer-copyright">&copy; {{ config.copyright_year }} {{ config.author.name }}. All Rights Reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/privacy.html">Privacy Policy</a>
+                    <span class="separator">|</span>
+                    <a href="/contact.html">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/static/js/main.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
