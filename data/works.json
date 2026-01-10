@@ -11,8 +11,8 @@
     "description": "ふわふわの猫耳としっぽが特徴的な可愛らしい少女。柔らかな毛並みの質感表現と、いたずらっぽい表情にこだわりました。",
     "nsfw": false,
     "external_links": {
-      "pixiv": "https://www.pixiv.net/artworks/123456789",
-      "twitter": "https://twitter.com/yourname/status/1234567890"
+      "pixiv": "https://www.pixiv.net",
+      "twitter": "https://x.com/facet_boy/status/2009588025265975357"
     }
   },
   {
@@ -27,7 +27,7 @@
     "description": "白い翼を持つ天使のような少女。柔らかな光の表現と透明感のある雰囲気を目指しました。",
     "nsfw": false,
     "external_links": {
-      "pixiv": "https://www.pixiv.net/artworks/123456788"
+      "pixiv": "https://www.pixiv.net"
     }
   },
   {
@@ -55,7 +55,7 @@
     "description": "某作品のキャラクターファンアート。原作の雰囲気を大切にしつつ、自分なりの解釈を加えました。",
     "nsfw": false,
     "external_links": {
-      "pixiv": "https://www.pixiv.net/artworks/123456786"
+      "pixiv": "https://www.pixiv.net"
     }
   },
   {
@@ -70,7 +70,7 @@
     "description": "VTuber向けLive2D素材の立ち絵。瞬き、口パク、揺れものなど基本的な動きに対応しています。",
     "nsfw": false,
     "external_links": {
-      "booth": "https://yourname.booth.pm/items/1234567"
+      "booth": "https://www.pixiv.net"
     }
   },
   {
@@ -98,7 +98,7 @@
     "description": "星空をモチーフにした深い青のドレス。夜の静けさと神秘的な雰囲気を表現しました。",
     "nsfw": false,
     "external_links": {
-      "pixiv": "https://www.pixiv.net/artworks/123456785"
+      "pixiv": "https://www.pixiv.net"
     }
   },
   {
@@ -126,7 +126,7 @@
     "description": "純白のウェディングドレス。レースやフリルなど、ブライダルならではの装飾を細かく描き込みました。",
     "nsfw": false,
     "external_links": {
-      "pixiv": "https://www.pixiv.net/artworks/123456784"
+      "pixiv": "https://www.pixiv.net"
     }
   },
   {
@@ -141,7 +141,7 @@
     "description": "成人向け作品のサンプルです。18歳未満の方は閲覧をご遠慮ください。",
     "nsfw": true,
     "external_links": {
-      "fanbox": "https://yourname.fanbox.cc/posts/1234567"
+      "fanbox": "https://yourname.fanbox.cc"
     }
   }
 ]
