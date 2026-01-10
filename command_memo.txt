@@ -1,0 +1,8 @@
+code templates/contact.html           
+python generator.py     
+git add .
+git commit -m "about等を更新"
+git push
+
+Formspree
+R**0****@
