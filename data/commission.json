@@ -1,7 +1,7 @@
 {
   "status": {
-    "open": true,
-    "message": "現在受付中（納期1〜2ヶ月）",
+    "open": false,
+    "message": "現在は受け付けておりません",
     "next_update": "2026-02-01"
   },
   "menu": [
