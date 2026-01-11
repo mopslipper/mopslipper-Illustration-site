@@ -1,4 +1,7 @@
-{% extends "base.html" %}
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+content = '''{% extends "base.html" %}
 
 {% block title %}{{ config.site_title }}{% endblock %}
 
@@ -34,6 +37,35 @@
                 <h3>依頼状況</h3>
                 <p>{{ commission_status.message }}</p>
                 <a href="{{ base_path }}/commission.html" class="btn btn-outline">詳細を見る →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Statistics Dashboard -->
+<section class="section stats-dashboard-section">
+    <div class="container">
+        <h2 class="section-title">統計情報</h2>
+        <div class="stats-grid" id="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-value" id="total-works">0</div>
+                <div class="stat-label">総作品数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">👁️</div>
+                <div class="stat-value" id="total-views">0</div>
+                <div class="stat-label">総閲覧数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">❤️</div>
+                <div class="stat-value" id="total-likes">0</div>
+                <div class="stat-label">総いいね数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📁</div>
+                <div class="stat-value" id="total-categories">0</div>
+                <div class="stat-label">カテゴリ数</div>
             </div>
         </div>
     </div>
@@ -143,3 +175,9 @@
 {% block extra_js %}
 <script src="{{ base_path }}/static/js/stats.js"></script>
 {% endblock %}
+'''
+
+with open('templates/home.html', 'w', encoding='utf-8') as f:
+    f.write(content)
+
+print('✅ home.html を完全に再生成しました！')
