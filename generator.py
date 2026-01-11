@@ -174,6 +174,25 @@ class SiteGenerator:
         
         (self.dist_dir / "contact.html").write_text(html, encoding="utf-8")
     
+    def generate_keyshare(self):
+        """パスワード保護された特別コンテンツページ生成"""
+        template = self.env.get_template("keyshare.html")
+        
+        # keyshare フォルダ内の PNG ファイル数をカウント
+        keyshare_dir = self.static_dir / "img" / "keyshare"
+        if keyshare_dir.exists():
+            png_files = sorted(keyshare_dir.glob("*.png"))
+            total_images = len(png_files)
+        else:
+            total_images = 0
+        
+        html = template.render(
+            config=self.config,
+            total_images=total_images
+        )
+        
+        (self.dist_dir / "keyshare.html").write_text(html, encoding="utf-8")
+    
     def generate_privacy(self):
         """プライバシーポリシーページ生成"""
         template = self.env.get_template("privacy.html")
@@ -218,6 +237,9 @@ class SiteGenerator:
         
         print("  ✓ Contact (contact.html)")
         self.generate_contact()
+        
+        print("  ✓ Key Share (keyshare.html)")
+        self.generate_keyshare()
         
         print("  ✓ Privacy (privacy.html)")
         self.generate_privacy()
