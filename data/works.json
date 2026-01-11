@@ -18,14 +18,15 @@
   {
     "id": 2,
     "slug": "angel-wings-002",
-    "title": "天使の翼",
+    "title": "おばけ天使",
     "date": "2026-01-08",
-    "image_path": "/static/img/works/placeholder.svg",
-    "thumbnail": "/static/img/works/placeholder.svg",
+    "image_path": "/static/img/works/angel-wings-002.webp",
+    "thumbnail": "/static/img/works/angel-wings-002.jpg",
     "tags": ["オリジナル", "天使", "ファンタジー", "白"],
     "category": "Original",
-    "description": "白い翼を持つ天使のような少女。柔らかな光の表現と透明感のある雰囲気を目指しました。",
+    "description": "恥ずかしがりやのお化け天使ちゃん。普段は見つかることはありません。",
     "nsfw": false,
+    "sensitive": true,
     "external_links": {
       "pixiv": "https://www.pixiv.net"
     }
@@ -143,7 +144,7 @@
     "thumbnail": "/static/img/works/swimsuit-zooming-thumb.jpg",
     "tags": ["オリジナル", "水着", "動画", "アニメーション"],
     "category": "Animation",
-    "description": "水着を着た美少女がズームで迫ってくるアニメーション動画です。",
+    "description": "水着を着た美少女のズーム。Grok Imagineで作成。",
     "nsfw": false,
     "sensitive": true,
     "external_links": {}
