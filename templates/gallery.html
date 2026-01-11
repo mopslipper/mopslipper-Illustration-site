@@ -35,8 +35,15 @@
             
             <div class="filter-group">
                 <label class="filter-checkbox">
-                    <input type="checkbox" id="hide-nsfw" checked>
-                    <span>R-18作品を非表示</span>
+                    <input type="checkbox" id="show-r18">
+                    <span>R-18作品のみ表示</span>
+                </label>
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-checkbox">
+                    <input type="checkbox" id="show-r15">
+                    <span>R-15作品のみ表示</span>
                 </label>
             </div>
         </div>
@@ -46,6 +53,7 @@
             {% for work in works %}
             <div class="work-card" 
                  data-nsfw="{{ work.nsfw|lower }}" 
+                 data-sensitive="{{ work.sensitive|default(false)|lower }}" 
                  data-category="{{ work.category }}"
                  data-tags="{{ work.tags|join(',') }}"
                  data-date="{{ work.date }}">
