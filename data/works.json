@@ -47,8 +47,8 @@
   {
     "id": 4,
     "slug": "fanart-character-004",
-    "title": "版権キャラクター",
-    "date": "2026-01-03",
+    "title": "版権キャラクター(仮)",
+    "date": "2025-01-01",
     "image_path": "/static/img/works/placeholder.svg",
     "thumbnail": "/static/img/works/placeholder.svg",
     "tags": ["版権", "ファンアート", "二次創作"],
@@ -62,8 +62,8 @@
   {
     "id": 5,
     "slug": "live2d-model-005",
-    "title": "Live2D立ち絵素材",
-    "date": "2026-01-01",
+    "title": "Live2D立ち絵素材(仮)",
+    "date": "2025-01-01",
     "image_path": "/static/img/works/placeholder.svg",
     "thumbnail": "/static/img/works/placeholder.svg",
     "tags": ["Live2D", "素材", "オリジナル", "VTuber"],
