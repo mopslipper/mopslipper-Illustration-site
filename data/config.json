@@ -1,7 +1,7 @@
 {
   "site_name": "mopslipper",
   "site_title": "mopslipper - Portfolio of Illustrations",
-  "site_description": "mopslipperのポートフォリオ。生成AI（ConfyUI）を使用したオリジナルイラスト作品を公開しています。",
+  "site_description": "mopslipperのポートフォリオ。生成AIを使用したオリジナルイラスト作品を公開しています。",
   "site_url": "https://mopslipper.github.io",
   "hero_image": "/static/img/helo-angel-asp1134-2016.jpg",
   "hero_text": "可愛いイラスト作ります",
@@ -9,8 +9,8 @@
   "author": {
     "name": "mopslipper",
     "name_en": "mopslipper",
-    "bio": "生成AI（ConfyUI）を使用した2次元イラスト製作者。可愛くて儚い女の子を作るのが得意です。",
-    "bio_detail": "生成AI（ConfyUI）を活用し、主にオリジナルキャラクターを中心に制作しています。レース、リボンなど装飾的なデザインが好きです。",
+    "bio": "生成AIを使用した2次元イラスト製作者。可愛くて儚い女の子を作るのが得意です。",
+    "bio_detail": "生成AIを活用し、主にオリジナルキャラクターを中心に制作しています。レース、リボンなど装飾的なデザインが好きです。",
     "tools": [
       "ConfyUI",
       "VRAM 6GB",
