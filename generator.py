@@ -178,11 +178,11 @@ class SiteGenerator:
         """パスワード保護された特別コンテンツページ生成"""
         template = self.env.get_template("cliantshare.html")
         
-        # cliantshare_encrypted フォルダ内の .enc ファイル数をカウント
-        cliantshare_dir = self.static_dir / "img" / "cliantshare_encrypted"
+        # cliantshare フォルダ内の PNG ファイル数をカウント
+        cliantshare_dir = self.static_dir / "img" / "cliantshare"
         if cliantshare_dir.exists():
-            enc_files = sorted(cliantshare_dir.glob("*.enc"))
-            total_images = len(enc_files)
+            png_files = sorted(cliantshare_dir.glob("*.png"))
+            total_images = len(png_files)
         else:
             total_images = 0
         

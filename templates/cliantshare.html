@@ -384,7 +384,7 @@
 <script>
     // 設定
     const PASSWORD = 'Viskorin_temp';
-    const IMAGE_DIR = '{{ base_path }}/static/img/cliantshare_encrypted/';
+    const IMAGE_DIR = '{{ base_path }}/static/img/cliantshare/';
     const TOTAL_IMAGES = {{ total_images }};
     
     // 状態管理
@@ -440,7 +440,7 @@
             thumbnail.dataset.index = i - 1;
             
             const img = document.createElement('img');
-            img.src = IMAGE_DIR + String(i).padStart(2, '0') + '.enc';
+            img.src = IMAGE_DIR + String(i).padStart(2, '0') + '.png';
             img.alt = `Image ${i}`;
             
             thumbnail.appendChild(img);
@@ -455,7 +455,7 @@
         
         currentIndex = index;
         const imageNum = String(index + 1).padStart(2, '0');
-        currentImage.src = IMAGE_DIR + imageNum + '.enc';
+        currentImage.src = IMAGE_DIR + imageNum + '.png';
         imageCounter.textContent = `${index + 1} / ${TOTAL_IMAGES}`;
         
         // サムネイルのアクティブ状態更新
@@ -494,7 +494,7 @@
     // 現在の画像をダウンロード
     downloadCurrentBtn.addEventListener('click', () => {
         const imageNum = String(currentIndex + 1).padStart(2, '0');
-        downloadImage(IMAGE_DIR + imageNum + '.enc', imageNum + '.enc');
+        downloadImage(IMAGE_DIR + imageNum + '.png', imageNum + '.png');
     });
     
     // 一括ダウンロード
@@ -503,8 +503,8 @@
         
         for (let i = 1; i <= TOTAL_IMAGES; i++) {
             const imageNum = String(i).padStart(2, '0');
-            const url = IMAGE_DIR + imageNum + '.enc';
-            const filename = imageNum + '.enc';
+            const url = IMAGE_DIR + imageNum + '.png';
+            const filename = imageNum + '.png';
             
             await downloadImage(url, filename);
             
@@ -553,3 +553,4 @@
     });
 </script>
 {% endblock %}
+
