@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initViewCount();
     initLikeButton();
     initCommentForm();
+    initShareButtons();
 });
 
 // ===================================
@@ -240,4 +241,63 @@ function initCommentForm() {
             submitBtn.textContent = 'コメントを送信';
         });
     });
+}
+
+// ===================================
+// シェアボタン
+// ===================================
+function initShareButtons() {
+    const shareTwitterBtn = document.getElementById('share-twitter');
+    const shareFacebookBtn = document.getElementById('share-facebook');
+    const shareCopyBtn = document.getElementById('share-copy');
+    const copyNotification = document.getElementById('copy-notification');
+
+    if (!shareTwitterBtn && !shareFacebookBtn && !shareCopyBtn) return;
+
+    const currentUrl = window.location.href;
+    const pageTitle = document.querySelector('.work-detail-title')?.textContent || document.title;
+
+    // Xでシェア
+    if (shareTwitterBtn) {
+        shareTwitterBtn.addEventListener('click', function() {
+            const text = encodeURIComponent(pageTitle);
+            const url = encodeURIComponent(currentUrl);
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+            window.open(twitterUrl, '_blank', 'width=600,height=400');
+        });
+    }
+
+    // Facebookでシェア
+    if (shareFacebookBtn) {
+        shareFacebookBtn.addEventListener('click', function() {
+            const url = encodeURIComponent(currentUrl);
+            const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            window.open(facebookUrl, '_blank', 'width=600,height=400');
+        });
+    }
+
+    // URLをコピー
+    if (shareCopyBtn) {
+        shareCopyBtn.addEventListener('click', function() {
+            navigator.clipboard.writeText(currentUrl).then(function() {
+                // コピー成功通知を表示
+                if (copyNotification) {
+                    copyNotification.style.display = 'block';
+                    setTimeout(() => {
+                        copyNotification.style.display = 'none';
+                    }, 2000);
+                }
+                
+                // ボタンのテキストを一時的に変更
+                const originalText = shareCopyBtn.innerHTML;
+                shareCopyBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> コピー完了';
+                setTimeout(() => {
+                    shareCopyBtn.innerHTML = originalText;
+                }, 2000);
+            }).catch(function(err) {
+                console.error('コピーエラー:', err);
+                alert('URLのコピーに失敗しました');
+            });
+        });
+    }
 }

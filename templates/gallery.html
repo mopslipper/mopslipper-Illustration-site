@@ -12,6 +12,27 @@
 
 <section class="section gallery-section">
     <div class="container">
+        <!-- 検索バー -->
+        <div class="search-section">
+            <div class="search-box">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input type="text" id="search-input" class="search-input" placeholder="作品タイトル、タグ、説明文で検索...">
+                <button id="clear-search" class="clear-search" style="display: none;">✕</button>
+            </div>
+            <div id="search-results-count" class="search-results-count"></div>
+        </div>
+
+        <!-- タグクラウド -->
+        <div class="tag-cloud-section">
+            <h3 class="tag-cloud-title">人気タグ</h3>
+            <div id="tag-cloud" class="tag-cloud">
+                <!-- JavaScriptで動的生成 -->
+            </div>
+        </div>
+
         <!-- フィルター -->
         <div class="gallery-filters">
             <div class="filter-group">

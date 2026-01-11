@@ -1,9 +1,11 @@
 // ===================================
-// ギャラリーページのフィルター機能
+// ギャラリーページのフィルター・検索・タグクラウド機能
 // ===================================
 
 document.addEventListener('DOMContentLoaded', function() {
     initGalleryFilters();
+    initSearchFunction();
+    initTagCloud();
 });
 
 function initGalleryFilters() {
@@ -20,11 +22,17 @@ function initGalleryFilters() {
     let activeTags = new Set();
     let showR18Only = false;
     let showR15Only = false;
+    let searchQuery = '';
+
+    // 検索クエリを設定する関数（他の関数から呼び出し可能）
+    window.setSearchQuery = function(query) {
+        searchQuery = query.toLowerCase();
+        applyFilters();
+    };
 
     // カテゴリフィルタ
     filterBtns.forEach(btn => {
         btn.addEventListener('click', function() {
-            // アクティブ状態を更新
             filterBtns.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
 
@@ -92,35 +100,33 @@ function initGalleryFilters() {
 
             // R-18/R-15フィルタ
             if (showR18Only) {
-                // R-18作品のみ表示
-                if (!isNSFW) {
-                    show = false;
-                }
+                if (!isNSFW) show = false;
             } else if (showR15Only) {
-                // R-15作品のみ表示
-                if (!isSensitive) {
-                    show = false;
-                }
+                if (!isSensitive) show = false;
             } else {
-                // デフォルト：R-18非表示、R-15と通常作品を表示
-                if (isNSFW) {
-                    show = false;
-                }
+                if (isNSFW) show = false;
             }
 
             // カテゴリフィルタ
             if (show && activeCategory !== 'all') {
                 const workCategory = work.dataset.category;
-                if (workCategory !== activeCategory) {
-                    show = false;
-                }
+                if (workCategory !== activeCategory) show = false;
             }
 
             // タグフィルタ
             if (show && activeTags.size > 0) {
                 const workTags = work.dataset.tags ? work.dataset.tags.split(',') : [];
                 const hasTag = Array.from(activeTags).some(tag => workTags.includes(tag));
-                if (!hasTag) {
+                if (!hasTag) show = false;
+            }
+
+            // 検索フィルタ
+            if (show && searchQuery) {
+                const title = work.querySelector('.work-title')?.textContent.toLowerCase() || '';
+                const tags = work.dataset.tags?.toLowerCase() || '';
+                const category = work.dataset.category?.toLowerCase() || '';
+                
+                if (!title.includes(searchQuery) && !tags.includes(searchQuery) && !category.includes(searchQuery)) {
                     show = false;
                 }
             }
@@ -134,8 +140,142 @@ function initGalleryFilters() {
         if (noResults) {
             noResults.style.display = visibleCount === 0 ? 'block' : 'none';
         }
+
+        // 検索結果数を表示
+        updateSearchResultsCount(visibleCount);
     }
 
     // 初期フィルタ適用
     applyFilters();
+
+    function updateSearchResultsCount(count) {
+        const resultsCount = document.getElementById('search-results-count');
+        if (resultsCount) {
+            if (searchQuery) {
+                resultsCount.textContent = `${count}件の作品が見つかりました`;
+                resultsCount.style.display = 'block';
+            } else {
+                resultsCount.style.display = 'none';
+            }
+        }
+    }
+}
+
+// ===================================
+// 検索機能
+// ===================================
+function initSearchFunction() {
+    const searchInput = document.getElementById('search-input');
+    const clearBtn = document.getElementById('clear-search');
+
+    if (!searchInput) return;
+
+    let searchTimeout;
+
+    // リアルタイム検索
+    searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        
+        const query = this.value.trim();
+        
+        if (clearBtn) {
+            clearBtn.style.display = query ? 'block' : 'none';
+        }
+
+        searchTimeout = setTimeout(() => {
+            if (window.setSearchQuery) {
+                window.setSearchQuery(query);
+            }
+        }, 300);
+    });
+
+    // クリアボタン
+    if (clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            this.style.display = 'none';
+            if (window.setSearchQuery) {
+                window.setSearchQuery('');
+            }
+            searchInput.focus();
+        });
+    }
+
+    // Enterキーで検索
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            clearTimeout(searchTimeout);
+            if (window.setSearchQuery) {
+                window.setSearchQuery(this.value.trim());
+            }
+        }
+    });
+}
+
+// ===================================
+// タグクラウド機能
+// ===================================
+function initTagCloud() {
+    const tagCloudContainer = document.getElementById('tag-cloud');
+    const worksGrid = document.getElementById('works-grid');
+
+    if (!tagCloudContainer || !worksGrid) return;
+
+    // 全作品からタグを集計
+    const tagCount = {};
+    const works = worksGrid.querySelectorAll('.work-card');
+
+    works.forEach(work => {
+        const tags = work.dataset.tags ? work.dataset.tags.split(',') : [];
+        tags.forEach(tag => {
+            tag = tag.trim();
+            if (tag) {
+                tagCount[tag] = (tagCount[tag] || 0) + 1;
+            }
+        });
+    });
+
+    // タグを出現回数順にソート
+    const sortedTags = Object.entries(tagCount)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 20);
+
+    if (sortedTags.length === 0) {
+        tagCloudContainer.innerHTML = '<p class="tag-cloud-empty">タグがありません</p>';
+        return;
+    }
+
+    // タグサイズを計算
+    const maxCount = Math.max(...sortedTags.map(([, count]) => count));
+    const minCount = Math.min(...sortedTags.map(([, count]) => count));
+
+    sortedTags.forEach(([tag, count]) => {
+        const size = minCount === maxCount 
+            ? 3 
+            : Math.floor(((count - minCount) / (maxCount - minCount)) * 4) + 1;
+
+        const tagElement = document.createElement('button');
+        tagElement.className = `tag-cloud-item tag-size-${size}`;
+        tagElement.textContent = `${tag} (${count})`;
+        tagElement.dataset.tag = tag;
+        tagElement.dataset.count = count;
+
+        // クリック時に検索
+        tagElement.addEventListener('click', function() {
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) {
+                searchInput.value = tag;
+                if (window.setSearchQuery) {
+                    window.setSearchQuery(tag);
+                }
+                const clearBtn = document.getElementById('clear-search');
+                if (clearBtn) {
+                    clearBtn.style.display = 'block';
+                }
+                searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+
+        tagCloudContainer.appendChild(tagElement);
+    });
 }

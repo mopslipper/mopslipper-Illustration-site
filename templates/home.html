@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+﻿{% extends "base.html" %}
 
 {% block title %}{{ config.site_title }}{% endblock %}
 
@@ -25,26 +25,26 @@
         <div class="commission-status-card">
             <div class="status-badge {% if commission_status.open %}status-open{% else %}status-closed{% endif %}">
                 {% if commission_status.open %}
-                <span class="status-icon">✓</span> 受付中
+                <span class="status-icon">笨・/span> 蜿嶺ｻ倅ｸｭ
                 {% else %}
-                <span class="status-icon">✕</span> 停止中
+                <span class="status-icon">笨・/span> 蛛懈ｭ｢荳ｭ
                 {% endif %}
             </div>
             <div class="status-content">
-                <h3>依頼状況</h3>
+                <h3>萓晞ｼ迥ｶ豕・/h3>
                 <p>{{ commission_status.message }}</p>
-                <a href="{{ base_path }}/commission.html" class="btn btn-outline">詳細を見る →</a>
+                <a href="{{ base_path }}/commission.html" class="btn btn-outline">隧ｳ邏ｰ繧定ｦ九ｋ 竊・/a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Recent Works -->
+<!-- Statistics Dashboard -->`n<section class="section stats-dashboard-section">`n    <div class="container">`n        <h2 class="section-title">統計情報</h2>`n        <div class="stats-grid" id="stats-grid">`n            <div class="stat-card">`n                <div class="stat-icon"></div>`n                <div class="stat-value" id="total-works">0</div>`n                <div class="stat-label">総作品数</div>`n            </div>`n            <div class="stat-card">`n                <div class="stat-icon"></div>`n                <div class="stat-value" id="total-views">0</div>`n                <div class="stat-label">総閲覧数</div>`n            </div>`n            <div class="stat-card">`n                <div class="stat-icon"></div>`n                <div class="stat-value" id="total-likes">0</div>`n                <div class="stat-label">総いいね数</div>`n            </div>`n            <div class="stat-card">`n                <div class="stat-icon"></div>`n                <div class="stat-value" id="total-categories">0</div>`n                <div class="stat-label">カテゴリ数</div>`n            </div>`n        </div>`n    </div>`n</section>`n`n<!-- Recent Works -->
 <section class="section recent-works-section">
     <div class="container">
         <div class="section-header">
             <h2 class="section-title">Recent Works</h2>
-            <a href="{{ base_path }}/gallery.html" class="section-link">すべて見る →</a>
+            <a href="{{ base_path }}/gallery.html" class="section-link">縺吶∋縺ｦ隕九ｋ 竊・/a>
         </div>
         
         <div class="works-grid">
@@ -103,7 +103,7 @@
                 </div>
                 <div class="link-info">
                     <h3>Pixiv</h3>
-                    <p>作品を見る</p>
+                    <p>菴懷刀繧定ｦ九ｋ</p>
                 </div>
             </a>
             {% endif %}
@@ -117,7 +117,7 @@
                 </div>
                 <div class="link-info">
                     <h3>BOOTH</h3>
-                    <p>グッズ・素材販売</p>
+                    <p>繧ｰ繝・ぜ繝ｻ邏譚占ｲｩ螢ｲ</p>
                 </div>
             </a>
             {% endif %}
@@ -131,11 +131,13 @@
                 </div>
                 <div class="link-info">
                     <h3>FANBOX</h3>
-                    <p>支援・限定作品</p>
+                    <p>謾ｯ謠ｴ繝ｻ髯仙ｮ壻ｽ懷刀</p>
                 </div>
             </a>
             {% endif %}
         </div>
     </div>
 </section>
-{% endblock %}
+{% endblock %}`n`n{% block extra_js %}`n<script src="{{ base_path }}/static/js/stats.js"></script>`n{% endblock %}
+
+
