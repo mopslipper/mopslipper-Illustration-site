@@ -122,14 +122,14 @@
   },
   {
     "id": 9,
-    "slug": "wedding-dress-009",
-    "title": "ウェディングドレス",
+    "slug": "oversized-vamp-009",
+    "title": "ブカブカ服ヴァンパイア",
     "date": "2025-12-20",
-    "image_path": "/static/img/works/placeholder.svg",
-    "thumbnail": "/static/img/works/placeholder.svg",
-    "tags": ["オリジナル", "ウェディング", "ドレス", "白", "花"],
+    "image_path": "/static/img/works/oversized-vamp-009.webp",
+    "thumbnail": "/static/img/works/oversized-vamp-009.jpg",
+    "tags": ["オリジナル", "ヴァンパイア", "ブカブカ服"],
     "category": "Original",
-    "description": "純白のウェディングドレス。レースやフリルなど、ブライダルならではの装飾を細かく描き込みました。",
+    "description": "ブカブカの服を着たヴァンパイアの少女。独特の雰囲気を持っています。",
     "nsfw": false,
     "external_links": {
       "pixiv": "https://www.pixiv.net"
