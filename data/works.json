@@ -84,6 +84,7 @@
     "category": "Original",
     "description": "夏をテーマにした爽やかなイラスト。青と白を基調とした涼しげな配色です。",
     "nsfw": false,
+    "sensitive": true,
     "external_links": {
       "pixiv": "https://www.pixiv.net/artworks/139755634"
     }
