@@ -1,4 +1,4 @@
-﻿{% extends "base.html" %}
+{% extends "base.html" %}
 
 {% block title %}{{ config.site_title }}{% endblock %}
 
@@ -25,15 +25,15 @@
         <div class="commission-status-card">
             <div class="status-badge {% if commission_status.open %}status-open{% else %}status-closed{% endif %}">
                 {% if commission_status.open %}
-                <span class="status-icon">笨・/span> 受付中
+                <span class="status-icon">●</span> 受付中
                 {% else %}
-                <span class="status-icon">笨・/span> 締切中
+                <span class="status-icon">●</span> 締切中
                 {% endif %}
             </div>
             <div class="status-content">
-                <h3>萓晞ｼ迥ｶ豕・/h3>
+                <h3>依頼状況</h3>
                 <p>{{ commission_status.message }}</p>
-                <a href="{{ base_path }}/commission.html" class="btn btn-outline">詳細を見る 竊・/a>
+                <a href="{{ base_path }}/commission.html" class="btn btn-outline">詳細を見る →</a>
             </div>
         </div>
     </div>
@@ -44,7 +44,7 @@
     <div class="container">
         <h2 class="section-title">統計情報</h2>
         <div class="stats-grid" id="stats-grid">
-            <div class="stat-card">→<
+            <div class="stat-card">
                 <div class="stat-icon">📊</div>
                 <div class="stat-value" id="total-works">0</div>
                 <div class="stat-label">総作品数</div>
@@ -73,7 +73,7 @@
     <div class="container">
         <div class="section-header">
             <h2 class="section-title">Recent Works</h2>
-            <a href="{{ base_path }}/gallery.html" class="section-link">すべて見る 竊・/a>
+            <a href="{{ base_path }}/gallery.html" class="section-link">すべて見る →</a>
         </div>
         
         <div class="works-grid">
@@ -146,7 +146,7 @@
                 </div>
                 <div class="link-info">
                     <h3>BOOTH</h3>
-                    <p>繧ｰ繝・ぜ繝ｻ邏譚占ｲｩ螢ｲ</p>
+                    <p>グッズ・関連商品</p>
                 </div>
             </a>
             {% endif %}
@@ -167,6 +167,8 @@
         </div>
     </div>
 </section>
-{% endblock %}`n`n{% block extra_js %}`n<script src="{{ base_path }}/static/js/stats.js"></script>`n{% endblock %}
+{% endblock %}
 
-
+{% block extra_js %}
+<script src="{{ base_path }}/static/js/stats.js"></script>
+{% endblock %}
