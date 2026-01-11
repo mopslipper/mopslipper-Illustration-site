@@ -191,5 +191,31 @@
     "description": "冬服ではしゃぐガール。Grok Imagineで作成。",
     "nsfw": false,
     "external_links": {}
+  },
+  {
+    "id": 14,
+    "slug": "akemashiteomedetou-014",
+    "title": "あけましておめでとう",
+    "date": "2026-01-11",
+    "image_path": "/static/img/works/014-akemashiteomedetou.jpg",
+    "thumbnail": "/static/img/works/014-akemashiteomedetou.jpg",
+    "tags": ["オリジナル", "正月", "新年", "着物"],
+    "category": "Original",
+    "description": "新年のご挨拶イラスト。着物姿の少女が新年をお祝いします。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 15,
+    "slug": "manga-ohayo-015",
+    "title": "おはようマンガ",
+    "date": "2026-01-11",
+    "image_path": "/static/img/works/015-manga-ohayo.webp",
+    "thumbnail": "/static/img/works/015-manga-ohayo.jpg",
+    "tags": ["オリジナル", "マンガ", "日常", "おはよう"],
+    "category": "Manga",
+    "description": "朝の日常を描いたマンガ作品。元気なおはようの一コマです。",
+    "nsfw": false,
+    "external_links": {}
   }
 ]
