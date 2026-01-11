@@ -1,6 +1,6 @@
 ﻿{% extends "base.html" %}
 
-{% block title %}Key Share - {{ config.site_title }}{% endblock %}
+{% block title %}Cliant Share - {{ config.site_title }}{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -11,8 +11,7 @@
         justify-content: center;
         padding: 2rem 1rem;
     }
-    
-    /* パスワード入力画面 */
+
     .password-container {
         max-width: 400px;
         width: 100%;
@@ -22,21 +21,21 @@
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         text-align: center;
     }
-    
+
     .password-container h2 {
         margin-bottom: 1rem;
         color: var(--text-primary);
     }
-    
+
     .password-container p {
         margin-bottom: 2rem;
         color: var(--text-secondary);
     }
-    
+
     .password-input-group {
         margin-bottom: 1.5rem;
     }
-    
+
     .password-input-group input {
         width: 100%;
         padding: 0.75rem 1rem;
@@ -47,35 +46,34 @@
         color: var(--text-primary);
         transition: border-color 0.3s;
     }
-    
+
     .password-input-group input:focus {
         outline: none;
         border-color: var(--accent-primary);
     }
-    
+
     .password-error {
         display: none;
         color: #ff4444;
         margin-top: 1rem;
         font-size: 0.9rem;
     }
-    
+
     .password-error.show {
         display: block;
     }
-    
-    /* 画像ビューア */
+
     .viewer-container {
         display: none;
         max-width: 1200px;
         width: 100%;
         margin: 0 auto;
     }
-    
+
     .viewer-container.active {
         display: block;
     }
-    
+
     .viewer-header {
         display: flex;
         justify-content: space-between;
@@ -84,25 +82,25 @@
         flex-wrap: wrap;
         gap: 1rem;
     }
-    
+
     .viewer-info {
         display: flex;
         align-items: center;
         gap: 1rem;
     }
-    
+
     .image-counter {
         font-size: 1.1rem;
         color: var(--text-primary);
         font-weight: 600;
     }
-    
+
     .viewer-actions {
         display: flex;
         gap: 0.75rem;
         flex-wrap: wrap;
     }
-    
+
     .viewer-btn {
         padding: 0.5rem 1rem;
         font-size: 0.9rem;
@@ -114,27 +112,26 @@
         align-items: center;
         gap: 0.5rem;
     }
-    
+
     .btn-download {
         background: var(--accent-primary);
         color: white;
     }
-    
+
     .btn-download:hover {
         background: var(--accent-secondary);
         transform: translateY(-2px);
     }
-    
+
     .btn-logout {
         background: #666;
         color: white;
     }
-    
+
     .btn-logout:hover {
         background: #555;
     }
-    
-    /* 画像表示エリア */
+
     .image-viewer {
         position: relative;
         background: var(--bg-secondary);
@@ -142,7 +139,7 @@
         overflow: hidden;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
-    
+
     .image-display {
         position: relative;
         width: 100%;
@@ -152,7 +149,7 @@
         justify-content: center;
         background: #000;
     }
-    
+
     .image-display img {
         max-width: 100%;
         max-height: 80vh;
@@ -160,8 +157,7 @@
         height: auto;
         display: block;
     }
-    
-    /* ナビゲーションボタン */
+
     .nav-btn {
         position: absolute;
         top: 50%;
@@ -180,30 +176,29 @@
         transition: all 0.3s;
         z-index: 10;
     }
-    
+
     .nav-btn:hover {
         background: rgba(0, 0, 0, 0.9);
         transform: translateY(-50%) scale(1.1);
     }
-    
+
     .nav-btn:disabled {
         opacity: 0.3;
         cursor: not-allowed;
     }
-    
+
     .nav-btn:disabled:hover {
         transform: translateY(-50%) scale(1);
     }
-    
+
     .nav-btn.prev {
         left: 20px;
     }
-    
+
     .nav-btn.next {
         right: 20px;
     }
-    
-    /* サムネイル一覧 */
+
     .thumbnail-strip {
         display: flex;
         gap: 0.5rem;
@@ -211,7 +206,7 @@
         overflow-x: auto;
         background: var(--bg-tertiary);
     }
-    
+
     .thumbnail {
         flex-shrink: 0;
         width: 80px;
@@ -222,50 +217,22 @@
         border: 3px solid transparent;
         transition: all 0.3s;
     }
-    
+
     .thumbnail:hover {
         border-color: var(--accent-primary);
         transform: scale(1.05);
     }
-    
+
     .thumbnail.active {
         border-color: var(--accent-primary);
     }
-    
+
     .thumbnail img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
-    
-    /* レスポンシブ */
-    @media (max-width: 768px) {
-        .viewer-header {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        
-        .nav-btn {
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
-        }
-        
-        .nav-btn.prev {
-            left: 10px;
-        }
-        
-        .nav-btn.next {
-            right: 10px;
-        }
-        
-        .thumbnail {
-            width: 60px;
-            height: 60px;
-        }
-    }
-    
-    /* ダウンロード進捗 */
+
     .download-progress {
         display: none;
         margin-top: 1rem;
@@ -273,11 +240,11 @@
         background: var(--bg-secondary);
         border-radius: 8px;
     }
-    
+
     .download-progress.show {
         display: block;
     }
-    
+
     .progress-bar {
         width: 100%;
         height: 24px;
@@ -286,7 +253,7 @@
         overflow: hidden;
         margin-top: 0.5rem;
     }
-    
+
     .progress-fill {
         height: 100%;
         background: var(--accent-primary);
@@ -298,44 +265,68 @@
         font-size: 0.8rem;
         font-weight: 600;
     }
+
+    @media (max-width: 768px) {
+        .viewer-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .nav-btn {
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+        }
+
+        .nav-btn.prev {
+            left: 10px;
+        }
+
+        .nav-btn.next {
+            right: 10px;
+        }
+
+        .thumbnail {
+            width: 60px;
+            height: 60px;
+        }
+    }
 </style>
 {% endblock %}
 
 {% block content %}
 <section class="keyshare-page">
-    <!-- パスワード入力画面 -->
     <div class="password-container" id="password-screen">
         <h2>🔒 限定コンテンツ</h2>
         <p>パスワードを入力してください</p>
-        
+
         <form id="password-form">
             <div class="password-input-group">
-                <input 
-                    type="password" 
-                    id="password-input" 
+                <input
+                    type="password"
+                    id="password-input"
                     placeholder="パスワード"
                     autocomplete="off"
                 >
             </div>
-            
+
             <button type="submit" class="btn btn-primary">
                 ログイン
             </button>
-            
+
             <p class="password-error" id="password-error">
                 ❌ パスワードが正しくありません
             </p>
         </form>
     </div>
-    
-    <!-- 画像ビューア -->
+
     <div class="viewer-container" id="viewer-screen">
         <div class="viewer-header">
             <div class="viewer-info">
                 <h2>限定イラスト</h2>
                 <span class="image-counter" id="image-counter">1 / 1</span>
             </div>
-            
+
             <div class="viewer-actions">
                 <button class="viewer-btn btn-download" id="download-current">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -354,12 +345,12 @@
                 </button>
             </div>
         </div>
-        
+
         <div class="image-viewer">
             <div class="image-display" id="image-display">
                 <img id="current-image" src="" alt="Image">
             </div>
-            
+
             <button class="nav-btn prev" id="prev-btn">
                 ‹
             </button>
@@ -367,11 +358,10 @@
                 ›
             </button>
         </div>
-        
+
         <div class="thumbnail-strip" id="thumbnail-strip">
-            <!-- サムネイルはJSで生成 -->
         </div>
-        
+
         <div class="download-progress" id="download-progress">
             <p id="progress-text">ダウンロード中...</p>
             <div class="progress-bar">
@@ -382,16 +372,14 @@
 </section>
 
 <script>
-    // 設定
     const PASSWORD = 'Viskorin_temp';
-    const IMAGE_DIR = '{{ base_path }}/static/img/cliantshare/';
+    const IMAGE_DIR = '{{ base_path }}/static/img/cliantshare_encrypted/';
     const TOTAL_IMAGES = {{ total_images }};
-    
-    // 状態管理
+
     let currentIndex = 0;
     let isAuthenticated = false;
-    
-    // DOM要素
+    let decryptedImages = [];
+
     const passwordScreen = document.getElementById('password-screen');
     const viewerScreen = document.getElementById('viewer-screen');
     const passwordForm = document.getElementById('password-form');
@@ -408,141 +396,163 @@
     const downloadProgress = document.getElementById('download-progress');
     const progressFill = document.getElementById('progress-fill');
     const progressText = document.getElementById('progress-text');
-    
-    // パスワード認証
-    passwordForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+
+    // XOR復号化関数
+    function xorDecrypt(encryptedData, password) {
+        const keyBytes = new TextEncoder().encode(password);
+        const decrypted = new Uint8Array(encryptedData.length);
         
+        for (let i = 0; i < encryptedData.length; i++) {
+            decrypted[i] = encryptedData[i] ^ keyBytes[i % keyBytes.length];
+        }
+        
+        return decrypted;
+    }
+
+    // 暗号化画像をfetchして復号化
+    async function loadAndDecryptImage(index) {
+        const imageNum = String(index + 1).padStart(2, '0');
+        const url = IMAGE_DIR + imageNum + '.enc';
+        
+        try {
+            const response = await fetch(url);
+            const encryptedData = await response.arrayBuffer();
+            const decryptedData = xorDecrypt(new Uint8Array(encryptedData), PASSWORD);
+            const blob = new Blob([decryptedData], { type: 'image/png' });
+            const objectUrl = URL.createObjectURL(blob);
+            
+            return objectUrl;
+        } catch (error) {
+            console.error('画像の読み込みに失敗:', error);
+            return null;
+        }
+    }
+
+    // パスワード認証
+    passwordForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
         if (passwordInput.value === PASSWORD) {
             isAuthenticated = true;
             passwordScreen.style.display = 'none';
             viewerScreen.classList.add('active');
-            initViewer();
             passwordError.classList.remove('show');
+            
+            await initViewer();
         } else {
             passwordError.classList.add('show');
             passwordInput.value = '';
             passwordInput.focus();
         }
     });
-    
+
     // ビューア初期化
-    function initViewer() {
+    async function initViewer() {
+        // すべての画像を復号化してキャッシュ
+        progressText.textContent = '画像を読み込み中...';
+        downloadProgress.classList.add('show');
+        
+        for (let i = 0; i < TOTAL_IMAGES; i++) {
+            const objectUrl = await loadAndDecryptImage(i);
+            decryptedImages.push(objectUrl);
+            
+            const progress = Math.round(((i + 1) / TOTAL_IMAGES) * 100);
+            progressFill.style.width = progress + '%';
+            progressFill.textContent = progress + '%';
+            progressText.textContent = `画像を読み込み中... (${i + 1}/${TOTAL_IMAGES})`;
+        }
+        
+        downloadProgress.classList.remove('show');
+        progressFill.style.width = '0%';
+        
         generateThumbnails();
         showImage(0);
     }
-    
+
     // サムネイル生成
     function generateThumbnails() {
-        for (let i = 1; i <= TOTAL_IMAGES; i++) {
+        for (let i = 0; i < TOTAL_IMAGES; i++) {
             const thumbnail = document.createElement('div');
             thumbnail.className = 'thumbnail';
-            thumbnail.dataset.index = i - 1;
-            
+            thumbnail.dataset.index = i;
+
             const img = document.createElement('img');
-            img.src = IMAGE_DIR + String(i).padStart(2, '0') + '.png';
-            img.alt = `Image ${i}`;
-            
+            img.src = decryptedImages[i];
+            img.alt = `Image ${i + 1}`;
+
             thumbnail.appendChild(img);
-            thumbnail.addEventListener('click', () => showImage(i - 1));
+            thumbnail.addEventListener('click', () => showImage(i));
             thumbnailStrip.appendChild(thumbnail);
         }
     }
-    
+
     // 画像表示
     function showImage(index) {
         if (index < 0 || index >= TOTAL_IMAGES) return;
-        
+
         currentIndex = index;
-        const imageNum = String(index + 1).padStart(2, '0');
-        currentImage.src = IMAGE_DIR + imageNum + '.png';
+        currentImage.src = decryptedImages[index];
         imageCounter.textContent = `${index + 1} / ${TOTAL_IMAGES}`;
-        
-        // サムネイルのアクティブ状態更新
+
         document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
             thumb.classList.toggle('active', i === index);
         });
-        
-        // ボタンの有効/無効
+
         prevBtn.disabled = index === 0;
         nextBtn.disabled = index === TOTAL_IMAGES - 1;
-        
-        // サムネイルストリップをスクロール
+
         const activeThumbnail = thumbnailStrip.children[index];
         if (activeThumbnail) {
             activeThumbnail.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         }
     }
-    
-    // 前へ
+
     prevBtn.addEventListener('click', () => showImage(currentIndex - 1));
-    
-    // 次へ
     nextBtn.addEventListener('click', () => showImage(currentIndex + 1));
-    
-    // キーボードナビゲーション
+
     document.addEventListener('keydown', (e) => {
         if (!isAuthenticated) return;
-        
-        if (e.key === 'ArrowLeft') {
-            showImage(currentIndex - 1);
-        } else if (e.key === 'ArrowRight') {
-            showImage(currentIndex + 1);
-        }
+        if (e.key === 'ArrowLeft') showImage(currentIndex - 1);
+        else if (e.key === 'ArrowRight') showImage(currentIndex + 1);
     });
-    
+
     // 現在の画像をダウンロード
     downloadCurrentBtn.addEventListener('click', () => {
-        const imageNum = String(currentIndex + 1).padStart(2, '0');
-        downloadImage(IMAGE_DIR + imageNum + '.png', imageNum + '.png');
+        const link = document.createElement('a');
+        link.href = decryptedImages[currentIndex];
+        link.download = `image_${String(currentIndex + 1).padStart(2, '0')}.png`;
+        link.click();
     });
-    
+
     // 一括ダウンロード
     downloadAllBtn.addEventListener('click', async () => {
-        downloadProgress.classList.add('show');
+        if (!confirm(`${TOTAL_IMAGES}枚の画像をダウンロードしますか？`)) return;
         
-        for (let i = 1; i <= TOTAL_IMAGES; i++) {
-            const imageNum = String(i).padStart(2, '0');
-            const url = IMAGE_DIR + imageNum + '.png';
-            const filename = imageNum + '.png';
-            
-            await downloadImage(url, filename);
-            
-            const progress = Math.round((i / TOTAL_IMAGES) * 100);
+        downloadProgress.classList.add('show');
+        downloadAllBtn.disabled = true;
+
+        for (let i = 0; i < TOTAL_IMAGES; i++) {
+            const link = document.createElement('a');
+            link.href = decryptedImages[i];
+            link.download = `image_${String(i + 1).padStart(2, '0')}.png`;
+            link.click();
+
+            const progress = Math.round(((i + 1) / TOTAL_IMAGES) * 100);
             progressFill.style.width = progress + '%';
             progressFill.textContent = progress + '%';
-            progressText.textContent = `ダウンロード中... (${i}/${TOTAL_IMAGES})`;
-            
-            // 少し待機（ブラウザのダウンロード制限対策）
+            progressText.textContent = `ダウンロード中... (${i + 1}/${TOTAL_IMAGES})`;
+
             await new Promise(resolve => setTimeout(resolve, 500));
         }
-        
+
         progressText.textContent = '✓ ダウンロード完了！';
         setTimeout(() => {
             downloadProgress.classList.remove('show');
             progressFill.style.width = '0%';
+            downloadAllBtn.disabled = false;
         }, 2000);
     });
-    
-    // 画像ダウンロード関数
-    async function downloadImage(url, filename) {
-        try {
-            const response = await fetch(url);
-            const blob = await response.blob();
-            const blobUrl = URL.createObjectURL(blob);
-            
-            const a = document.createElement('a');
-            a.href = blobUrl;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(blobUrl);
-        } catch (error) {
-            console.error('Download failed:', error);
-        }
-    }
-    
+
     // ログアウト
     logoutBtn.addEventListener('click', () => {
         isAuthenticated = false;
@@ -550,6 +560,11 @@
         passwordScreen.style.display = 'flex';
         passwordInput.value = '';
         currentIndex = 0;
+        
+        // 復号化済み画像のメモリ解放
+        decryptedImages.forEach(url => URL.revokeObjectURL(url));
+        decryptedImages = [];
+        thumbnailStrip.innerHTML = '';
     });
 </script>
 {% endblock %}

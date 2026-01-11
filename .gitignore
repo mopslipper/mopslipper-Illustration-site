@@ -39,3 +39,7 @@ Thumbs.db
 *.bak
 optimize_image.py
 
+
+# 暗号化前の元画像（GitHubにアップロードしない）
+static/img/cliantshare/
+static/img/works/cliant share/
