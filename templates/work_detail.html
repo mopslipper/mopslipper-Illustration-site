@@ -4,7 +4,7 @@
 {% block meta_description %}{{ work.description }}{% endblock %}
 {% block og_title %}{{ work.title }} - {{ config.site_name }}{% endblock %}
 {% block og_description %}{{ work.description }}{% endblock %}
-{% block og_image %}{{ config.site_url }}{{ base_path }}{{ work.thumbnail }}{% endblock %}
+{% block og_image %}{% if work.nsfw %}{{ config.site_url }}{{ base_path }}/static/img/works/placeholder.svg{% else %}{{ config.site_url }}{{ base_path }}{{ work.thumbnail }}{% endif %}{% endblock %}
 {% block og_url %}{{ config.site_url }}{{ base_path }}/works/{{ work.slug }}.html{% endblock %}
 {% block og_type %}article{% endblock %}
 
@@ -13,7 +13,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ work.title }} - {{ config.site_name }}">
 <meta name="twitter:description" content="{{ work.description }}">
-<meta name="twitter:image" content="{{ config.site_url }}{{ base_path }}{{ work.thumbnail }}">
+<meta name="twitter:image" content="{% if work.nsfw %}{{ config.site_url }}{{ base_path }}/static/img/works/placeholder.svg{% else %}{{ config.site_url }}{{ base_path }}{{ work.thumbnail }}{% endif %}">
 {% if config.social_links.twitter %}
 <meta name="twitter:site" content="@{{ config.social_links.twitter_handle }}">
 <meta name="twitter:creator" content="@{{ config.social_links.twitter_handle }}">
