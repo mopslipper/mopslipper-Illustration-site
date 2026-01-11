@@ -163,5 +163,33 @@
     "external_links": {
       "fanbox": "https://yourname.fanbox.cc"
     }
+  },
+    {
+    "id": 12,
+    "slug": "wariza-neko-012",
+    "title": "座りネコ",
+    "date": "2026-01-03",
+    "image_path": "/static/img/works/wariza-neko-012.webp",
+    "thumbnail": "/static/img/works/wariza-neko-012.jpg",
+    "tags": ["オリジナル", "ネコ", "座りポーズ"],
+    "category": "Original",
+    "description": "座りポーズのネコガール。kawaii。",
+    "nsfw": false,
+    "external_links": {
+      "pixiv": "https://www.pixiv.net"
+    }
+  },
+    {
+    "id": 13,
+    "slug": "fuyufuku-api-013",
+    "title": "冬服アピガール",
+    "date": "2025-12-20",
+    "image_path": "/static/img/works/fuyufuku-api-013.mp4",
+    "thumbnail": "/static/img/works/fuyufuku-api-013-thumb.jpg",
+    "tags": ["オリジナル", "冬服", "動画", "アニメーション"],
+    "category": "Animation",
+    "description": "冬服ではしゃぐガール。Grok Imagineで作成。",
+    "nsfw": false,
+    "external_links": {}
   }
 ]
