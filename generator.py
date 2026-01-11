@@ -175,20 +175,27 @@ class SiteGenerator:
         (self.dist_dir / "contact.html").write_text(html, encoding="utf-8")
     
     def generate_cliantshare(self):
-        """パスワード保護された特別コンテンツページ生成"""
+        """パスワード保護された特別コンテンツページ生成（複数ディレクトリ対応）"""
         template = self.env.get_template("cliantshare.html")
         
-        # cliantshare_encrypted フォルダ内の .enc ファイル数をカウント
-        cliantshare_dir = self.static_dir / "img" / "cliantshare_encrypted"
-        if cliantshare_dir.exists():
-            enc_files = sorted(cliantshare_dir.glob("*.enc"))
-            total_images = len(enc_files)
-        else:
-            total_images = 0
+        # cliantshare_encrypted フォルダ内のディレクトリ情報を取得
+        cliantshare_base = self.static_dir / "img" / "cliantshare_encrypted"
+        directories = []
+        
+        if cliantshare_base.exists():
+            for subdir in sorted(cliantshare_base.iterdir()):
+                if subdir.is_dir():
+                    enc_files = sorted(subdir.glob("*.enc"))
+                    if enc_files:
+                        directories.append({
+                            'name': subdir.name,
+                            'display_name': subdir.name.replace('_', ' ').title(),
+                            'count': len(enc_files)
+                        })
         
         html = template.render(
             config=self.config,
-            total_images=total_images
+            directories=directories
         )
         
         (self.dist_dir / "cliantshare.html").write_text(html, encoding="utf-8")

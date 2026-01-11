@@ -4,17 +4,14 @@
 
 {% block extra_css %}
 <style>
-    .keyshare-page {
+    .cliantshare-page {
         min-height: 80vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         padding: 2rem 1rem;
     }
 
     .password-container {
         max-width: 400px;
-        width: 100%;
+        margin: 0 auto;
         background: var(--bg-secondary);
         padding: 3rem 2rem;
         border-radius: 12px;
@@ -63,10 +60,65 @@
         display: block;
     }
 
+    /* ディレクトリ選択画面 */
+    .directory-selector {
+        display: none;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .directory-selector.active {
+        display: block;
+    }
+
+    .directory-selector h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: var(--text-primary);
+    }
+
+    .directory-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .directory-card {
+        background: var(--card-bg);
+        padding: 2rem;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-align: center;
+        border: 2px solid transparent;
+    }
+
+    .directory-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent-primary);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .directory-card h3 {
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+    }
+
+    .directory-card .count {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    .logout-btn-top {
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    /* 画像ビューア */
     .viewer-container {
         display: none;
         max-width: 1200px;
-        width: 100%;
         margin: 0 auto;
     }
 
@@ -87,6 +139,20 @@
         display: flex;
         align-items: center;
         gap: 1rem;
+    }
+
+    .back-btn {
+        padding: 0.5rem 1rem;
+        background: #666;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .back-btn:hover {
+        background: #555;
     }
 
     .image-counter {
@@ -119,22 +185,12 @@
     }
 
     .btn-download:hover {
-        background: var(--accent-secondary);
-        transform: translateY(-2px);
-    }
-
-    .btn-logout {
-        background: #666;
-        color: white;
-    }
-
-    .btn-logout:hover {
-        background: #555;
+        opacity: 0.9;
     }
 
     .image-viewer {
         position: relative;
-        background: var(--bg-secondary);
+        background: var(--card-bg);
         border-radius: 12px;
         overflow: hidden;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -204,7 +260,7 @@
         gap: 0.5rem;
         padding: 1rem;
         overflow-x: auto;
-        background: var(--bg-tertiary);
+        background: var(--bg-secondary);
     }
 
     .thumbnail {
@@ -237,7 +293,7 @@
         display: none;
         margin-top: 1rem;
         padding: 1rem;
-        background: var(--bg-secondary);
+        background: var(--card-bg);
         border-radius: 8px;
     }
 
@@ -248,7 +304,7 @@
     .progress-bar {
         width: 100%;
         height: 24px;
-        background: var(--bg-tertiary);
+        background: var(--bg-secondary);
         border-radius: 12px;
         overflow: hidden;
         margin-top: 0.5rem;
@@ -300,6 +356,10 @@
     }
 
     @media (max-width: 768px) {
+        .directory-grid {
+            grid-template-columns: 1fr;
+        }
+
         .viewer-header {
             flex-direction: column;
             align-items: flex-start;
@@ -328,7 +388,8 @@
 {% endblock %}
 
 {% block content %}
-<section class="keyshare-page">
+<section class="cliantshare-page">
+    <!-- パスワード入力画面 -->
     <div class="password-container" id="password-screen">
         <h2>🔒 限定コンテンツ</h2>
         <p>パスワードを入力してください</p>
@@ -353,10 +414,30 @@
         </form>
     </div>
 
+    <!-- ディレクトリ選択画面 -->
+    <div class="directory-selector" id="directory-screen">
+        <h2>📁 コンテンツを選択</h2>
+        
+        <div class="directory-grid">
+            {% for dir in directories %}
+            <div class="directory-card" data-directory="{{ dir.name }}">
+                <h3>{{ dir.display_name }}</h3>
+                <p class="count">{{ dir.count }} 枚</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="logout-btn-top">
+            <button class="btn btn-secondary" id="logout-btn-top">ログアウト</button>
+        </div>
+    </div>
+
+    <!-- 画像ビューア -->
     <div class="viewer-container" id="viewer-screen">
         <div class="viewer-header">
             <div class="viewer-info">
-                <h2>限定イラスト</h2>
+                <button class="back-btn" id="back-btn">← 戻る</button>
+                <h2 id="current-directory-name"></h2>
                 <span class="image-counter" id="image-counter">1 / 1</span>
             </div>
 
@@ -372,9 +453,6 @@
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
                     </svg>
                     一括保存
-                </button>
-                <button class="viewer-btn btn-logout" id="logout-btn">
-                    ログアウト
                 </button>
             </div>
         </div>
@@ -410,19 +488,21 @@
 </div>
 
 <script>
-    // パスワード難読化（複数層の変換）
+    // パスワード難読化
     const _0x4a2b = ['86','105','115','107','111','114','105','110','95','116','101','109','112'];
     const _0x1c5e = (h) => String.fromCharCode(...h.map(x => parseInt(x)));
     const _k = () => _0x1c5e(_0x4a2b);
     
-    const IMAGE_DIR = '{{ base_path }}/static/img/cliantshare_encrypted/';
-    const TOTAL_IMAGES = {{ total_images }};
+    const BASE_DIR = '{{ base_path }}/static/img/cliantshare_encrypted/';
+    const DIRECTORIES = {{ directories | tojson }};
 
-    let currentIndex = 0;
     let isAuthenticated = false;
+    let currentDirectory = null;
+    let currentIndex = 0;
     let decryptedImages = [];
 
     const passwordScreen = document.getElementById('password-screen');
+    const directoryScreen = document.getElementById('directory-screen');
     const viewerScreen = document.getElementById('viewer-screen');
     const passwordForm = document.getElementById('password-form');
     const passwordInput = document.getElementById('password-input');
@@ -434,13 +514,16 @@
     const nextBtn = document.getElementById('next-btn');
     const downloadCurrentBtn = document.getElementById('download-current');
     const downloadAllBtn = document.getElementById('download-all');
-    const logoutBtn = document.getElementById('logout-btn');
+    const backBtn = document.getElementById('back-btn');
+    const logoutBtnTop = document.getElementById('logout-btn-top');
     const downloadProgress = document.getElementById('download-progress');
     const progressFill = document.getElementById('progress-fill');
     const progressText = document.getElementById('progress-text');
     const loadingScreen = document.getElementById('loading-screen');
     const loadingText = document.getElementById('loading-text');
+    const currentDirectoryName = document.getElementById('current-directory-name');
 
+    // XOR復号化
     function xorDecrypt(encryptedData, password) {
         const keyBytes = new TextEncoder().encode(password);
         const decrypted = new Uint8Array(encryptedData.length);
@@ -452,12 +535,15 @@
         return decrypted;
     }
 
-    async function loadAndDecryptImage(index) {
+    // 暗号化画像を読み込んで復号化
+    async function loadAndDecryptImage(directory, index) {
         const imageNum = String(index + 1).padStart(2, '0');
-        const url = IMAGE_DIR + imageNum + '.enc';
+        const url = BASE_DIR + directory + '/' + imageNum + '.enc';
         
         try {
             const response = await fetch(url);
+            if (!response.ok) return null;
+            
             const encryptedData = await response.arrayBuffer();
             const decryptedData = xorDecrypt(new Uint8Array(encryptedData), _k());
             const blob = new Blob([decryptedData], { type: 'image/png' });
@@ -470,19 +556,14 @@
         }
     }
 
-    passwordForm.addEventListener('submit', async (e) => {
+    // パスワード認証
+    passwordForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
         if (passwordInput.value === _k()) {
             isAuthenticated = true;
             passwordScreen.style.display = 'none';
-            loadingScreen.classList.add('show');
-            
-            await decryptAllImages();
-            
-            loadingScreen.classList.remove('show');
-            viewerScreen.classList.add('active');
-            initViewer();
+            directoryScreen.classList.add('active');
             passwordError.classList.remove('show');
         } else {
             passwordError.classList.add('show');
@@ -491,21 +572,52 @@
         }
     });
 
-    async function decryptAllImages() {
-        for (let i = 0; i < TOTAL_IMAGES; i++) {
-            loadingText.textContent = `画像を読み込み中... (${i + 1}/${TOTAL_IMAGES})`;
-            const imageUrl = await loadAndDecryptImage(i);
-            decryptedImages.push(imageUrl);
+    // ディレクトリ選択
+    document.querySelectorAll('.directory-card').forEach(card => {
+        card.addEventListener('click', async () => {
+            const directory = card.dataset.directory;
+            const dirInfo = DIRECTORIES.find(d => d.name === directory);
+            
+            if (dirInfo) {
+                await openDirectory(directory, dirInfo);
+            }
+        });
+    });
+
+    // ディレクトリを開く
+    async function openDirectory(directory, dirInfo) {
+        currentDirectory = directory;
+        currentDirectoryName.textContent = dirInfo.display_name;
+        
+        directoryScreen.classList.remove('active');
+        loadingScreen.classList.add('show');
+        
+        // 全画像を復号化
+        decryptedImages = [];
+        for (let i = 0; i < dirInfo.count; i++) {
+            loadingText.textContent = `画像を読み込み中... (${i + 1}/${dirInfo.count})`;
+            const imageUrl = await loadAndDecryptImage(directory, i);
+            if (imageUrl) {
+                decryptedImages.push(imageUrl);
+            }
         }
+        
+        loadingScreen.classList.remove('show');
+        viewerScreen.classList.add('active');
+        
+        initViewer();
     }
 
+    // ビューア初期化
     function initViewer() {
+        thumbnailStrip.innerHTML = '';
         generateThumbnails();
         showImage(0);
     }
 
+    // サムネイル生成
     function generateThumbnails() {
-        for (let i = 0; i < TOTAL_IMAGES; i++) {
+        for (let i = 0; i < decryptedImages.length; i++) {
             const thumbnail = document.createElement('div');
             thumbnail.className = 'thumbnail';
             thumbnail.dataset.index = i;
@@ -520,19 +632,20 @@
         }
     }
 
+    // 画像表示
     function showImage(index) {
-        if (index < 0 || index >= TOTAL_IMAGES) return;
+        if (index < 0 || index >= decryptedImages.length) return;
         
         currentIndex = index;
         currentImage.src = decryptedImages[index];
-        imageCounter.textContent = `${index + 1} / ${TOTAL_IMAGES}`;
+        imageCounter.textContent = `${index + 1} / ${decryptedImages.length}`;
         
         document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
             thumb.classList.toggle('active', i === index);
         });
         
         prevBtn.disabled = index === 0;
-        nextBtn.disabled = index === TOTAL_IMAGES - 1;
+        nextBtn.disabled = index === decryptedImages.length - 1;
         
         const activeThumbnail = thumbnailStrip.children[index];
         if (activeThumbnail) {
@@ -540,11 +653,12 @@
         }
     }
 
+    // ナビゲーション
     prevBtn.addEventListener('click', () => showImage(currentIndex - 1));
     nextBtn.addEventListener('click', () => showImage(currentIndex + 1));
 
     document.addEventListener('keydown', (e) => {
-        if (!isAuthenticated) return;
+        if (!viewerScreen.classList.contains('active')) return;
         
         if (e.key === 'ArrowLeft') {
             showImage(currentIndex - 1);
@@ -553,6 +667,7 @@
         }
     });
 
+    // ダウンロード
     downloadCurrentBtn.addEventListener('click', () => {
         const imageNum = String(currentIndex + 1).padStart(2, '0');
         downloadImage(decryptedImages[currentIndex], imageNum + '.png');
@@ -561,14 +676,14 @@
     downloadAllBtn.addEventListener('click', async () => {
         downloadProgress.classList.add('show');
         
-        for (let i = 0; i < TOTAL_IMAGES; i++) {
+        for (let i = 0; i < decryptedImages.length; i++) {
             const imageNum = String(i + 1).padStart(2, '0');
             downloadImage(decryptedImages[i], imageNum + '.png');
             
-            const progress = Math.round(((i + 1) / TOTAL_IMAGES) * 100);
+            const progress = Math.round(((i + 1) / decryptedImages.length) * 100);
             progressFill.style.width = progress + '%';
             progressFill.textContent = progress + '%';
-            progressText.textContent = `ダウンロード中... (${i + 1}/${TOTAL_IMAGES})`;
+            progressText.textContent = `ダウンロード中... (${i + 1}/${decryptedImages.length})`;
             
             await new Promise(resolve => setTimeout(resolve, 500));
         }
@@ -589,16 +704,24 @@
         document.body.removeChild(a);
     }
 
-    logoutBtn.addEventListener('click', () => {
-        isAuthenticated = false;
+    // 戻るボタン
+    backBtn.addEventListener('click', () => {
         viewerScreen.classList.remove('active');
-        passwordScreen.style.display = 'flex';
-        passwordInput.value = '';
-        currentIndex = 0;
+        directoryScreen.classList.add('active');
         
+        // メモリ解放
         decryptedImages.forEach(url => URL.revokeObjectURL(url));
         decryptedImages = [];
         thumbnailStrip.innerHTML = '';
+        currentDirectory = null;
+    });
+
+    // ログアウト
+    logoutBtnTop.addEventListener('click', () => {
+        isAuthenticated = false;
+        directoryScreen.classList.remove('active');
+        passwordScreen.style.display = 'flex';
+        passwordInput.value = '';
     });
 </script>
 {% endblock %}
