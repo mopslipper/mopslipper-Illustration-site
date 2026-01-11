@@ -192,6 +192,11 @@ class SiteGenerator:
         )
         
         (self.dist_dir / "cliantshare.html").write_text(html, encoding="utf-8")
+        
+        # 旧keyshare.htmlからのリダイレクトページも生成
+        redirect_template = self.env.get_template("keyshare_redirect.html")
+        redirect_html = redirect_template.render(config=self.config)
+        (self.dist_dir / "keyshare.html").write_text(redirect_html, encoding="utf-8")
     
     def generate_privacy(self):
         """プライバシーポリシーページ生成"""
