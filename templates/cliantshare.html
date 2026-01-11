@@ -413,11 +413,7 @@
     // パスワード難読化（複数層の変換）
     const _0x4a2b = ['86','105','115','107','111','114','105','110','95','116','101','109','112'];
     const _0x1c5e = (h) => String.fromCharCode(...h.map(x => parseInt(x)));
-    const _k = () => {
-        const p1 = _0x1c5e(_0x4a2b);
-        const p2 = atob('VmlzS29yaW5fdGVtcA=='.split('').reverse().join(''));
-        return [p1,p2].find((x,i) => i === 0);
-    };
+    const _k = () => _0x1c5e(_0x4a2b);
     
     const IMAGE_DIR = '{{ base_path }}/static/img/cliantshare_encrypted/';
     const TOTAL_IMAGES = {{ total_images }};
