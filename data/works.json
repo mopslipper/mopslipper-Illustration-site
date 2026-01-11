@@ -26,7 +26,7 @@
     "category": "Original",
     "description": "恥ずかしがりやのお化け天使ちゃん。普段は見つかることはありません。",
     "nsfw": false,
-    "sensitive": true,
+    "sensitive": false,
     "external_links": {
       "pixiv": "https://www.pixiv.net"
     }
