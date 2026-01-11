@@ -6,7 +6,12 @@
     "date": "2026-01-10",
     "image_path": "/static/img/works/cat-girl-001.webp",
     "thumbnail": "/static/img/works/cat-girl-001.jpg",
-    "tags": ["オリジナル", "猫耳", "ネコミミ", "かわいい"],
+    "tags": [
+      "オリジナル",
+      "猫耳",
+      "ネコミミ",
+      "かわいい"
+    ],
     "category": "Original",
     "description": "ふわふわの猫耳としっぽが特徴的な可愛らしい少女。柔らかな毛並みの質感表現と、いたずらっぽい表情にこだわりました。",
     "nsfw": false,
@@ -22,7 +27,12 @@
     "date": "2026-01-08",
     "image_path": "/static/img/works/angel-wings-002.webp",
     "thumbnail": "/static/img/works/angel-wings-002.jpg",
-    "tags": ["オリジナル", "天使", "ファンタジー", "白"],
+    "tags": [
+      "オリジナル",
+      "天使",
+      "ファンタジー",
+      "白"
+    ],
     "category": "Original",
     "description": "恥ずかしがりやのお化け天使ちゃん。普段は見つかることはありません。",
     "nsfw": false,
@@ -38,7 +48,11 @@
     "date": "2026-01-05",
     "image_path": "/static/img/works/blonde-hair-003.webp",
     "thumbnail": "/static/img/works/blonde-hair-003.jpg",
-    "tags": ["オリジナル", "金髪", "制服"],
+    "tags": [
+      "オリジナル",
+      "金髪",
+      "制服"
+    ],
     "category": "Original",
     "description": "金髪ちゃんです。ちょっと強そうなのは見た目だけ。",
     "nsfw": false,
@@ -51,7 +65,11 @@
     "date": "2025-01-01",
     "image_path": "/static/img/works/placeholder.svg",
     "thumbnail": "/static/img/works/placeholder.svg",
-    "tags": ["版権", "ファンアート", "二次創作"],
+    "tags": [
+      "版権",
+      "ファンアート",
+      "二次創作"
+    ],
     "category": "Fanart",
     "description": "某作品のキャラクターファンアート。原作の雰囲気を大切にしつつ、自分なりの解釈を加えました。",
     "nsfw": false,
@@ -66,7 +84,12 @@
     "date": "2025-01-01",
     "image_path": "/static/img/works/placeholder.svg",
     "thumbnail": "/static/img/works/placeholder.svg",
-    "tags": ["Live2D", "素材", "オリジナル", "VTuber"],
+    "tags": [
+      "Live2D",
+      "素材",
+      "オリジナル",
+      "VTuber"
+    ],
     "category": "Live2D",
     "description": "VTuber向けLive2D素材の立ち絵。瞬き、口パク、揺れものなど基本的な動きに対応しています。",
     "nsfw": false,
@@ -81,7 +104,12 @@
     "date": "2025-12-28",
     "image_path": "/static/img/works/summer-girl-006.webp",
     "thumbnail": "/static/img/works/summer-girl-006.jpg",
-    "tags": ["オリジナル", "夏", "水着", "青"],
+    "tags": [
+      "オリジナル",
+      "夏",
+      "水着",
+      "青"
+    ],
     "category": "Original",
     "description": "夏をテーマにした爽やかなイラスト。青と白を基調とした涼しげな配色です。",
     "nsfw": false,
@@ -97,7 +125,11 @@
     "date": "2025-12-25",
     "image_path": "/static/img/works/chingpao-dress-007.webp",
     "thumbnail": "/static/img/works/chingpao-dress-007.jpg",
-    "tags": ["オリジナル", "チャイナドレス", "ドヤ顔"],
+    "tags": [
+      "オリジナル",
+      "チャイナドレス",
+      "ドヤ顔"
+    ],
     "category": "Original",
     "description": "どや顔が可愛いチャイナ服娘。昔の絵柄です。",
     "nsfw": false,
@@ -112,7 +144,12 @@
     "date": "2025-12-24",
     "image_path": "/static/img/works/christmas-santa-008.webp",
     "thumbnail": "/static/img/works/christmas-santa-008.jpg",
-    "tags": ["オリジナル", "クリスマス", "サンタ", "赤"],
+    "tags": [
+      "オリジナル",
+      "クリスマス",
+      "サンタ",
+      "赤"
+    ],
     "category": "Original",
     "description": "クリスマスのサンタ衣装を着た少女。赤と白のクラシックな配色でまとめました。",
     "nsfw": false,
@@ -127,7 +164,11 @@
     "date": "2025-12-20",
     "image_path": "/static/img/works/oversized-vamp-009.webp",
     "thumbnail": "/static/img/works/oversized-vamp-009.jpg",
-    "tags": ["オリジナル", "ヴァンパイア", "ブカブカ服"],
+    "tags": [
+      "オリジナル",
+      "ヴァンパイア",
+      "ブカブカ服"
+    ],
     "category": "Original",
     "description": "ブカブカの服を着たヴァンパイアの少女。独特の雰囲気を持っています。",
     "nsfw": false,
@@ -142,7 +183,12 @@
     "date": "2026-01-10",
     "image_path": "/static/img/works/swimsuit-zooming.mp4",
     "thumbnail": "/static/img/works/swimsuit-zooming-thumb.jpg",
-    "tags": ["オリジナル", "水着", "動画", "アニメーション"],
+    "tags": [
+      "オリジナル",
+      "水着",
+      "動画",
+      "アニメーション"
+    ],
     "category": "Animation",
     "description": "水着を着た美少女のズーム。Grok Imagineで作成。",
     "nsfw": false,
@@ -156,7 +202,10 @@
     "date": "2025-12-18",
     "image_path": "/static/img/works/placeholder.svg",
     "thumbnail": "/static/img/works/placeholder.svg",
-    "tags": ["オリジナル", "R-18"],
+    "tags": [
+      "オリジナル",
+      "R-18"
+    ],
     "category": "Original",
     "description": "成人向け作品のサンプルです。18歳未満の方は閲覧をご遠慮ください。",
     "nsfw": true,
@@ -164,14 +213,18 @@
       "fanbox": "https://yourname.fanbox.cc"
     }
   },
-    {
+  {
     "id": 12,
     "slug": "wariza-neko-012",
     "title": "座りネコ",
     "date": "2026-01-03",
     "image_path": "/static/img/works/wariza-neko-012.webp",
     "thumbnail": "/static/img/works/wariza-neko-012.jpg",
-    "tags": ["オリジナル", "ネコ", "座りポーズ"],
+    "tags": [
+      "オリジナル",
+      "ネコ",
+      "座りポーズ"
+    ],
     "category": "Original",
     "description": "座りポーズのネコガール。kawaii。",
     "nsfw": false,
@@ -179,14 +232,19 @@
       "pixiv": "https://www.pixiv.net"
     }
   },
-    {
+  {
     "id": 13,
     "slug": "fuyufuku-api-013",
     "title": "冬服アピガール",
     "date": "2025-12-20",
     "image_path": "/static/img/works/fuyufuku-api-013.mp4",
     "thumbnail": "/static/img/works/fuyufuku-api-013-thumb.jpg",
-    "tags": ["オリジナル", "冬服", "動画", "アニメーション"],
+    "tags": [
+      "オリジナル",
+      "冬服",
+      "動画",
+      "アニメーション"
+    ],
     "category": "Animation",
     "description": "冬服ではしゃぐガール。Grok Imagineで作成。",
     "nsfw": false,
@@ -199,7 +257,12 @@
     "date": "2026-01-01",
     "image_path": "/static/img/works/014-akemashiteomedetou.jpg",
     "thumbnail": "/static/img/works/014-akemashiteomedetou.jpg",
-    "tags": ["オリジナル", "正月", "新年", "着物"],
+    "tags": [
+      "オリジナル",
+      "正月",
+      "新年",
+      "着物"
+    ],
     "category": "Original",
     "description": "新年のご挨拶イラスト。着物姿の少女が新年をお祝いします。",
     "nsfw": false,
@@ -212,7 +275,12 @@
     "date": "2025-12-01",
     "image_path": "/static/img/works/015-manga-ohayo.webp",
     "thumbnail": "/static/img/works/015-manga-ohayo.jpg",
-    "tags": ["オリジナル", "マンガ", "日常", "おはよう"],
+    "tags": [
+      "オリジナル",
+      "マンガ",
+      "日常",
+      "おはよう"
+    ],
     "category": "Manga",
     "description": "朝の日常を描いたマンガ作品。元気なおはようの一コマです。",
     "nsfw": false,
@@ -225,9 +293,14 @@
     "date": "2025-11-01",
     "image_path": "/static/img/works/016-kitsune-kick.webp",
     "thumbnail": "/static/img/works/016-kitsune-kick.jpg",
-    "tags": ["オリジナル"],
+    "tags": [
+      "オリジナル",
+      "きつね",
+      "獣耳",
+      "アクション"
+    ],
     "category": "Original",
-    "description": "",
+    "description": "元気いっぱいのきつね耳少女！軽やかなキックポーズで魅せる躍動感あふれる一枚です。ふわふわの尻尾がとってもキュート♪",
     "nsfw": false,
     "sensitive": true,
     "external_links": {}
@@ -239,9 +312,14 @@
     "date": "2025-11-01",
     "image_path": "/static/img/works/017-bikini-girl.webp",
     "thumbnail": "/static/img/works/017-bikini-girl.jpg",
-    "tags": ["オリジナル"],
+    "tags": [
+      "オリジナル",
+      "水着",
+      "ビキニ",
+      "夏"
+    ],
     "category": "Original",
-    "description": "",
+    "description": "夏の日差しが似合う元気な女の子。爽やかなビキニ姿で夏の思い出を彩ります。",
     "nsfw": false,
     "sensitive": true,
     "external_links": {}
@@ -253,9 +331,14 @@
     "date": "2025-11-01",
     "image_path": "/static/img/works/018-snake-pajamas.webp",
     "thumbnail": "/static/img/works/018-snake-pajamas.jpg",
-    "tags": ["オリジナル"],
+    "tags": [
+      "オリジナル",
+      "パジャマ",
+      "ヘビ",
+      "着ぐるみ"
+    ],
     "category": "Original",
-    "description": "",
+    "description": "もこもこヘビさんパジャマを着たリラックスモード。とぼけた表情がたまらなく愛らしい一枚です。",
     "nsfw": false,
     "external_links": {}
   },
@@ -266,9 +349,13 @@
     "date": "2025-11-01",
     "image_path": "/static/img/works/019-shy-on_back.webp",
     "thumbnail": "/static/img/works/019-shy-on_back.jpg",
-    "tags": ["オリジナル"],
+    "tags": [
+      "オリジナル",
+      "恥ずかしがり屋",
+      "かわいい"
+    ],
     "category": "Original",
-    "description": "",
+    "description": "ちょっぴり恥ずかしがり屋な女の子。照れた表情と仕草がとってもキュートです",
     "nsfw": false,
     "sensitive": true,
     "external_links": {}
@@ -280,9 +367,14 @@
     "date": "2025-11-01",
     "image_path": "/static/img/works/020-kigurumi-neko.webp",
     "thumbnail": "/static/img/works/020-kigurumi-neko.jpg",
-    "tags": ["オリジナル"],
+    "tags": [
+      "オリジナル",
+      "猫",
+      "着ぐるみ",
+      "もふもふ"
+    ],
     "category": "Original",
-    "description": "",
+    "description": "ふわふわネコ着ぐるみに包まれた女の子。もこもこ素材のぬくもりと可愛さが詰まった癒やし系イラストです。",
     "nsfw": false,
     "external_links": {}
   },
@@ -293,9 +385,14 @@
     "date": "2025-11-01",
     "image_path": "/static/img/works/021-sailor-angel.webp",
     "thumbnail": "/static/img/works/021-sailor-angel.jpg",
-    "tags": ["オリジナル"],
+    "tags": [
+      "オリジナル",
+      "天使",
+      "セーラー服",
+      "ファンタジー"
+    ],
     "category": "Original",
-    "description": "",
+    "description": "セーラー服を着た清楚な天使ちゃん。純白の羽と制服の組み合わせが新鮮で、神聖な雰囲気を纏っています。",
     "nsfw": false,
     "external_links": {}
   },
@@ -306,9 +403,14 @@
     "date": "2025-11-01",
     "image_path": "/static/img/works/022-hoodie-neko-bikini.webp",
     "thumbnail": "/static/img/works/022-hoodie-neko-bikini.jpg",
-    "tags": ["オリジナル"],
+    "tags": [
+      "オリジナル",
+      "猫耳",
+      "フーディー",
+      "水着"
+    ],
     "category": "Original",
-    "description": "",
+    "description": "ネコ耳フーディーとビキニのギャップがキュート！カジュアルさとセクシーさを両立した魅力的なコーディネートです。",
     "nsfw": false,
     "sensitive": true,
     "external_links": {}
@@ -320,9 +422,14 @@
     "date": "2025-11-01",
     "image_path": "/static/img/works/023-blonde-swimsuit-bikini.webp",
     "thumbnail": "/static/img/works/023-blonde-swimsuit-bikini.jpg",
-    "tags": ["オリジナル"],
+    "tags": [
+      "オリジナル",
+      "金髪",
+      "ビキニ",
+      "水着"
+    ],
     "category": "Original",
-    "description": "",
+    "description": "輝く金髪が眩しい水着美少女。明るい笑顔とスタイリッシュなビキニで夏のビーチを彩ります。",
     "nsfw": false,
     "sensitive": true,
     "external_links": {}
@@ -334,9 +441,14 @@
     "date": "2025-11-01",
     "image_path": "/static/img/works/024-debil-cat-kawaii.webp",
     "thumbnail": "/static/img/works/024-debil-cat-kawaii.jpg",
-    "tags": ["オリジナル"],
+    "tags": [
+      "オリジナル",
+      "悪魔",
+      "猫耳",
+      "ハロウィン"
+    ],
     "category": "Original",
-    "description": "",
+    "description": "小悪魔な猫耳ちゃん。ツノとしっぽがチャームポイントのいたずら好きなデビル系女の子です",
     "nsfw": false,
     "external_links": {}
   },
@@ -347,9 +459,14 @@
     "date": "2025-11-01",
     "image_path": "/static/img/works/025-halloween-witch-girl.webp",
     "thumbnail": "/static/img/works/025-halloween-witch-girl.jpg",
-    "tags": ["オリジナル"],
+    "tags": [
+      "オリジナル",
+      "魔女",
+      "ハロウィン",
+      "かぼちゃ"
+    ],
     "category": "Original",
-    "description": "",
+    "description": "ハロウィンの夜に現れる可愛い魔女っ子。とんがり帽子とほうきがトレードマークの愛らしいウィッチです。",
     "nsfw": false,
     "external_links": {}
   }
