@@ -271,7 +271,9 @@
                         <div class="filter-buttons">
                             <button class="filter-btn active" data-filter="all">すべて</button>
                             {% for category in categories %}
-                            <button class="filter-btn" data-filter="category" data-value="{{ category }}">{{ category }}</button>
+                            <button class="filter-btn" data-filter="category" data-value="{{ category }}">
+                                {{ category }}{% if category == 'Fanart' or category == 'Live2D' %} <span style="color: var(--text-secondary); font-size: 0.85em;">(準備中)</span>{% endif %}
+                            </button>
                             {% endfor %}
                         </div>
                     </div>
@@ -303,7 +305,7 @@
                     <div class="sidebar-section-content">
                         <label class="filter-checkbox">
                             <input type="checkbox" id="show-r18">
-                            <span>R-18作品のみ</span>
+                            <span>R-18作品のみ(予定なし)</span>
                         </label>
                         <label class="filter-checkbox">
                             <input type="checkbox" id="show-r15">
