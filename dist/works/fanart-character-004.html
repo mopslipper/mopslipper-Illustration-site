@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="某作品のキャラクターファンアート。原作の雰囲気を大切にしつつ、自分なりの解釈を加えました。">
+    <meta name="keywords" content="イラスト,イラストレーター,2次元,美少女,ゴシック,オリジナル,依頼,commission">
+    <meta name="author" content="mopslipper">
+    
+    <!-- OGP -->
+    <meta property="og:title" content="版権キャラクター(仮) - mopslipper">
+    <meta property="og:description" content="某作品のキャラクターファンアート。原作の雰囲気を大切にしつつ、自分なりの解釈を加えました。">
+    <meta property="og:image" content="https://mopslipper.github.io/mopslipper-Illustration-site/static/img/works/placeholder.svg">
+    <meta property="og:url" content="https://mopslipper.github.io/mopslipper-Illustration-site/works/fanart-character-004.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="mopslipper">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="mopslipper - Portfolio of Illustrations">
+    <meta name="twitter:description" content="mopslipperのポートフォリオ。生成AIを使用したオリジナルイラスト作品を公開しています。">
+    <meta name="twitter:image" content="https://mopslipper.github.io/mopslipper-Illustration-site/static/img/helo-angel-asp1134-2016.jpg">
+    
+    <meta name="twitter:site" content="@@facet_boy">
+    
+    
+    
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="版権キャラクター(仮) - mopslipper">
+<meta name="twitter:description" content="某作品のキャラクターファンアート。原作の雰囲気を大切にしつつ、自分なりの解釈を加えました。">
+<meta name="twitter:image" content="https://mopslipper.github.io/mopslipper-Illustration-site/static/img/works/placeholder.svg">
+
+<meta name="twitter:site" content="@@facet_boy">
+<meta name="twitter:creator" content="@@facet_boy">
+
+
+    
+    <title>版権キャラクター(仮) - mopslipper - Portfolio of Illustrations</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/mopslipper-Illustration-site/static/css/style.css">
+    
+    
+<style>
+    .additional-images {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+        overflow-x: auto;
+        padding: 10px 0;
+    }
+
+    .additional-images .thumbnail {
+        flex-shrink: 0;
+        width: 100px;
+        height: 100px;
+        border-radius: 8px;
+        overflow: hidden;
+        cursor: pointer;
+        border: 3px solid transparent;
+        transition: all 0.3s ease;
+        opacity: 0.6;
+    }
+
+    .additional-images .thumbnail:hover {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    .additional-images .thumbnail.active {
+        border-color: var(--accent-primary);
+        opacity: 1;
+    }
+
+    .additional-images .thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    @media (max-width: 768px) {
+        .additional-images .thumbnail {
+            width: 80px;
+            height: 80px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 成人向けコンテンツ警告モーダル -->
+    
+    <div id="nsfw-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⚠️ 年齢確認</h2>
+            </div>
+            <div class="modal-body">
+                <p>このサイトには成人向け（R-18）作品が含まれません。18歳未満の方は閲覧をご遠慮しないでください。</p>
+                <p>あなたは18歳以上ですか？</p>
+            </div>
+            <div class="modal-footer">
+                <button id="nsfw-yes" class="btn btn-primary">はい（18歳以上）</button>
+                <button id="nsfw-no" class="btn btn-secondary">いいえ（18歳未満）</button>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="/mopslipper-Illustration-site/">mopslipper</a>
+                </div>
+                
+                <!-- PC ナビゲーション -->
+                <nav class="nav-desktop">
+                    <ul class="nav-list">
+                        <li><a href="/mopslipper-Illustration-site/">Home</a></li>
+                        <li><a href="/mopslipper-Illustration-site/gallery.html">Gallery</a></li>
+                        <li><a href="/mopslipper-Illustration-site/commission.html">Commission</a></li>
+                        <li><a href="/mopslipper-Illustration-site/about.html">About</a></li>
+                        <li><a href="/mopslipper-Illustration-site/contact.html">Contact</a></li>
+                        <li><a href="/mopslipper-Illustration-site/cliantshare.html">Cliant Share</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- SNSアイコン -->
+                <div class="social-icons">
+                    
+                    <a href="https://x.com/facet_boy" target="_blank" rel="noopener" title="Twitter">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    
+                    
+                    <a href="https://www.pixiv.net/users/122921797" target="_blank" rel="noopener" title="Pixiv">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M4.935 0A4.924 4.924 0 0 0 0 4.935v14.13A4.924 4.924 0 0 0 4.935 24h14.13A4.924 4.924 0 0 0 24 19.065V4.935A4.924 4.924 0 0 0 19.065 0zm7.81 4.547c2.181 0 4.058.676 5.399 1.847a6.118 6.118 0 0 1 2.116 4.66c.005 1.854-.88 3.476-2.257 4.563-1.375 1.092-3.225 1.697-5.258 1.697H9.177v4.394c0 .272-.221.492-.493.492H6.427a.492.492 0 0 1-.492-.492V5.04c0-.272.22-.493.492-.493zm-.44 9.255h2.858c1.458 0 2.659-.417 3.376-1.153.726-.746 1.147-1.832 1.147-3.069 0-1.238-.421-2.323-1.147-3.07-.717-.735-1.918-1.152-3.376-1.152H9.177v8.444z"/>
+                        </svg>
+                    </a>
+                    
+                    
+                    <a href="https://yourname.booth.pm" target="_blank" rel="noopener" title="BOOTH">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm-1 4v12h2V6h-2z"/>
+                        </svg>
+                    </a>
+                    
+                </div>
+                
+                <!-- ハンバーガーメニュー（SP） -->
+                <button class="hamburger" id="hamburger" aria-label="メニュー">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- モバイルメニュー -->
+    <nav class="nav-mobile" id="nav-mobile">
+        <ul class="nav-mobile-list">
+            <li><a href="/mopslipper-Illustration-site/">Home</a></li>
+            <li><a href="/mopslipper-Illustration-site/gallery.html">Gallery</a></li>
+            <li><a href="/mopslipper-Illustration-site/commission.html">Commission</a></li>
+            <li><a href="/mopslipper-Illustration-site/about.html">About</a></li>
+            <li><a href="/mopslipper-Illustration-site/contact.html">Contact</a></li>
+            <li><a href="/mopslipper-Illustration-site/cliantshare.html">Cliant Share</a></li>
+        </ul>
+        <div class="nav-mobile-social">
+            
+            <a href="https://x.com/facet_boy" target="_blank" rel="noopener">Twitter</a>
+            
+            
+            <a href="https://www.pixiv.net/users/122921797" target="_blank" rel="noopener">Pixiv</a>
+            
+            
+            <a href="https://yourname.booth.pm" target="_blank" rel="noopener">BOOTH (未定)</a>
+            
+        </div>
+    </nav>
+
+    <!-- メインコンテンツ -->
+    <main class="main">
+        
+<section class="work-detail-section">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="/mopslipper-Illustration-site/">Home</a>
+            <span class="separator">/</span>
+            <a href="/mopslipper-Illustration-site/gallery.html">Gallery</a>
+            <span class="separator">/</span>
+            <span>版権キャラクター(仮)</span>
+        </div>
+
+        <div class="work-detail">
+            <div class="work-detail-main">
+                <!-- 作品画像 -->
+                <div class="work-detail-image">
+                    
+                    
+                    
+                    <img src="/mopslipper-Illustration-site/static/img/works/placeholder.svg" 
+                         alt="版権キャラクター(仮)" 
+                         class="work-image "
+                         id="work-image">
+                    
+                    
+                    
+                    
+                    <button class="lightbox-btn" id="lightbox-btn" title="拡大表示" style="">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="work-detail-sidebar">
+                <!-- 作品情報 -->
+                <div class="work-detail-info">
+                    <h1 class="work-detail-title">版権キャラクター(仮)</h1>
+                    
+                    <!-- 表示回数・いいね -->
+                    <div class="work-stats">
+                        <div class="stat-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            <span id="view-count" data-work-id="fanart-character-004">0</span>
+                        </div>
+                        <button class="like-btn" id="like-btn" data-work-id="fanart-character-004" title="いいね">
+                            <svg class="heart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                            <span id="like-count">0</span>
+                        </button>
+                    </div>
+                    
+                    <div class="work-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">公開日:</span>
+                            <span class="meta-value">2025-01-01</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">カテゴリ:</span>
+                            <span class="meta-value">Fanart</span>
+                        </div>
+                    </div>
+
+                    <div class="work-tags">
+                        
+                        <span class="tag">版権</span>
+                        
+                        <span class="tag">ファンアート</span>
+                        
+                        <span class="tag">二次創作</span>
+                        
+                    </div>
+
+                    
+                    <p class="work-description">某作品のキャラクターファンアート。原作の雰囲気を大切にしつつ、自分なりの解釈を加えました。</p>
+                    
+
+                    <!-- シェアボタン -->
+                    <div class="work-share-section">
+                        <h3 class="subsection-title">シェア</h3>
+                        <div class="share-buttons">
+                            <button class="share-btn share-twitter" id="share-twitter" title="Xでシェア">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                </svg>
+                                X
+                            </button>
+                            <button class="share-btn share-facebook" id="share-facebook" title="Facebookでシェア">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                </svg>
+                                Facebook
+                            </button>
+                            <button class="share-btn share-copy" id="share-copy" title="URLをコピー">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                                コピー
+                            </button>
+                        </div>
+                        <div id="copy-notification" class="copy-notification" style="display: none;">URLをコピーしました！</div>
+                    </div>
+
+                    <!-- 外部リンク -->
+                    
+                    <div class="work-external-links">
+                        <h3 class="subsection-title">他サイトで見る</h3>
+                        <div class="external-links-list">
+                            
+                            <a href="https://www.pixiv.net" target="_blank" rel="noopener" class="external-link">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M4.935 0A4.924 4.924 0 0 0 0 4.935v14.13A4.924 4.924 0 0 0 4.935 24h14.13A4.924 4.924 0 0 0 24 19.065V4.935A4.924 4.924 0 0 0 19.065 0zm7.81 4.547c2.181 0 4.058.676 5.399 1.847a6.118 6.118 0 0 1 2.116 4.66c.005 1.854-.88 3.476-2.257 4.563-1.375 1.092-3.225 1.697-5.258 1.697H9.177v4.394c0 .272-.221.492-.493.492H6.427a.492.492 0 0 1-.492-.492V5.04c0-.272.22-.493.492-.493zm-.44 9.255h2.858c1.458 0 2.659-.417 3.376-1.153.726-.746 1.147-1.832 1.147-3.069 0-1.238-.421-2.323-1.147-3.07-.717-.735-1.918-1.152-3.376-1.152H9.177v8.444z"/>
+                                </svg>
+                                Pixiv
+                            </a>
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    
+
+                    <!-- 利用規約 -->
+                    <div class="work-terms">
+                        <h3 class="subsection-title">利用について</h3>
+                        <p class="terms-text">
+                            この作品の著作権はmopslipperに帰属します。<br>
+                            無断転載・無断使用は固くお断りします。<br>
+                            共有する場合は元ツイートのRT、またはこのページのURLをご利用ください。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- コメント欄 -->
+        <div class="work-comments-section">
+            <h2 class="section-title">Comments</h2>
+            <p class="comments-intro">この作品へのコメント・感想をお待ちしています！コメントが投稿されると作者に通知されます。</p>
+            
+            <div class="comment-form-wrapper">
+                <form action="https://formspree.io/f/xnjjazjr" method="POST" class="comment-form" id="comment-form">
+                    <!-- 作品情報（hidden） -->
+                    <input type="hidden" name="_subject" value="💬 【版権キャラクター(仮)】へのコメント">
+                    <input type="hidden" name="作品タイトル" value="版権キャラクター(仮)">
+                    <input type="hidden" name="作品URL" value="https://mopslipper.github.io/mopslipper-Illustration-site/works/fanart-character-004.html">
+                    
+                    <div class="form-group">
+                        <label for="comment-name" class="form-label">
+                            お名前 <span class="optional">(任意)</span>
+                        </label>
+                        <input type="text" id="comment-name" name="name" class="form-input" placeholder="匿名でもOK">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comment-message" class="form-label">
+                            コメント <span class="required">*</span>
+                        </label>
+                        <textarea id="comment-message" name="message" class="form-textarea" rows="4" placeholder="感想や応援メッセージなど" required></textarea>
+                    </div>
+
+                    <!-- ハニーポット（スパム対策） -->
+                    <div class="honeypot">
+                        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="comment-submit-btn">コメントを送信</button>
+                    </div>
+                </form>
+
+                <!-- 送信完了メッセージ -->
+                <div id="comment-success" class="form-message form-success" style="display: none;">
+                    <h3>✓ 送信完了</h3>
+                    <p>コメントありがとうございます！<br>作者に通知されました。</p>
+                </div>
+
+                <!-- エラーメッセージ -->
+                <div id="comment-error" class="form-message form-error" style="display: none;">
+                    <h3>✕ 送信エラー</h3>
+                    <p>送信に失敗しました。時間をおいて再度お試しください。</p>
+                </div>
+            </div>
+
+            <div class="comment-note">
+                <p>※ コメントは公開されません。作者のみに届きます。</p>
+                <p>※ 返信が必要な場合は<a href="/mopslipper-Illustration-site/contact.html">Contactページ</a>からメールアドレスを記載してご連絡ください。</p>
+            </div>
+        </div>
+
+        <!-- 関連作品 -->
+        
+    </div>
+</section>
+
+<!-- ライトボックス -->
+<div id="lightbox" class="lightbox" style="display: none;">
+    <button class="lightbox-close" id="lightbox-close">&times;</button>
+    <img src="" alt="" id="lightbox-image">
+</div>
+
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p class="footer-text">転載・無断使用禁止｜Commission inquiries welcome</p>
+                    <p class="footer-copyright">&copy; 2026 mopslipper. All Rights Reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/mopslipper-Illustration-site/privacy.html">Privacy Policy</a>
+                    <span class="separator">|</span>
+                    <a href="/mopslipper-Illustration-site/contact.html">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/mopslipper-Illustration-site/static/js/main.js"></script>
+    <script src="/mopslipper-Illustration-site/static/js/lightbox.js"></script>
+    
+<script src="/mopslipper-Illustration-site/static/js/work_detail.js"></script>
+
+</body>
+</html>
