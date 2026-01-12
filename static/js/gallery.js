@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initSearchFunction();
     initTagCloud();
     initSidebarToggle();
+    initPagination();
 });
 
 // サイドバーの折りたたみ機能
@@ -39,6 +40,13 @@ function initGalleryFilters() {
     let showR18Only = false;
     let showR15Only = false;
     let searchQuery = '';
+
+    // ページネーション用の状態を保持
+    window.galleryState = {
+        allWorks: [],
+        currentPage: 1,
+        itemsPerPage: 30
+    };
 
     // 検索クエリを設定する関数（他の関数から呼び出し可能）
     window.setSearchQuery = function(query) {
@@ -106,7 +114,7 @@ function initGalleryFilters() {
     // フィルタ適用
     function applyFilters() {
         const works = worksGrid.querySelectorAll('.work-card');
-        let visibleCount = 0;
+        let visibleWorks = [];
 
         works.forEach(work => {
             let show = true;
@@ -147,18 +155,25 @@ function initGalleryFilters() {
                 }
             }
 
-            // 表示/非表示
-            work.style.display = show ? 'block' : 'none';
-            if (show) visibleCount++;
+            if (show) {
+                visibleWorks.push(work);
+            }
         });
+
+        // グローバルステートに保存
+        window.galleryState.allWorks = visibleWorks;
+        window.galleryState.currentPage = 1;
+
+        // ページネーションを更新
+        updatePagination();
 
         // 結果が0件の場合のメッセージ
         if (noResults) {
-            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+            noResults.style.display = visibleWorks.length === 0 ? 'block' : 'none';
         }
 
         // 検索結果数を表示
-        updateSearchResultsCount(visibleCount);
+        updateSearchResultsCount(visibleWorks.length);
     }
 
     // 初期フィルタ適用
@@ -293,5 +308,158 @@ function initTagCloud() {
         });
 
         tagCloudContainer.appendChild(tagElement);
+    });
+}
+
+// ===================================
+// ページネーション機能
+// ===================================
+function initPagination() {
+    const pagination = document.getElementById('pagination');
+    const prevBtn = document.getElementById('prev-page');
+    const nextBtn = document.getElementById('next-page');
+    const pageNumbers = document.getElementById('page-numbers');
+
+    if (!pagination || !prevBtn || !nextBtn || !pageNumbers) return;
+
+    // ページネーションを更新
+    window.updatePagination = function() {
+        const state = window.galleryState;
+        const totalWorks = state.allWorks.length;
+        const totalPages = Math.ceil(totalWorks / state.itemsPerPage);
+
+        // 30件以下なら非表示
+        if (totalWorks <= state.itemsPerPage) {
+            pagination.style.display = 'none';
+            showAllWorks();
+            return;
+        }
+
+        pagination.style.display = 'flex';
+
+        // ページ番号を生成
+        pageNumbers.innerHTML = '';
+        const maxVisiblePages = 5;
+        let startPage = Math.max(1, state.currentPage - Math.floor(maxVisiblePages / 2));
+        let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+        if (endPage - startPage < maxVisiblePages - 1) {
+            startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+
+        // 最初のページ
+        if (startPage > 1) {
+            addPageButton(1);
+            if (startPage > 2) {
+                const ellipsis = document.createElement('span');
+                ellipsis.textContent = '...';
+                ellipsis.className = 'page-ellipsis';
+                ellipsis.style.padding = '0 0.5rem';
+                ellipsis.style.color = 'var(--text-secondary)';
+                pageNumbers.appendChild(ellipsis);
+            }
+        }
+
+        // ページ番号
+        for (let i = startPage; i <= endPage; i++) {
+            addPageButton(i);
+        }
+
+        // 最後のページ
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                const ellipsis = document.createElement('span');
+                ellipsis.textContent = '...';
+                ellipsis.className = 'page-ellipsis';
+                ellipsis.style.padding = '0 0.5rem';
+                ellipsis.style.color = 'var(--text-secondary)';
+                pageNumbers.appendChild(ellipsis);
+            }
+            addPageButton(totalPages);
+        }
+
+        // ボタンの状態を更新
+        prevBtn.disabled = state.currentPage === 1;
+        nextBtn.disabled = state.currentPage === totalPages;
+
+        // 現在のページの作品を表示
+        displayCurrentPage();
+    };
+
+    function addPageButton(pageNum) {
+        const btn = document.createElement('button');
+        btn.className = 'page-number';
+        btn.textContent = pageNum;
+        if (pageNum === window.galleryState.currentPage) {
+            btn.classList.add('active');
+        }
+        btn.addEventListener('click', () => {
+            window.galleryState.currentPage = pageNum;
+            window.updatePagination();
+            scrollToTop();
+        });
+        pageNumbers.appendChild(btn);
+    }
+
+    function displayCurrentPage() {
+        const state = window.galleryState;
+        const worksGrid = document.getElementById('works-grid');
+        const allWorkCards = worksGrid.querySelectorAll('.work-card');
+
+        // すべての作品を非表示
+        allWorkCards.forEach(work => {
+            work.style.display = 'none';
+        });
+
+        // 現在のページの作品のみ表示
+        const startIndex = (state.currentPage - 1) * state.itemsPerPage;
+        const endIndex = startIndex + state.itemsPerPage;
+        const worksToShow = state.allWorks.slice(startIndex, endIndex);
+
+        worksToShow.forEach(work => {
+            work.style.display = 'block';
+        });
+    }
+
+    function showAllWorks() {
+        const state = window.galleryState;
+        const worksGrid = document.getElementById('works-grid');
+        const allWorkCards = worksGrid.querySelectorAll('.work-card');
+
+        // すべての作品を非表示
+        allWorkCards.forEach(work => {
+            work.style.display = 'none';
+        });
+
+        // フィルタされた作品のみ表示
+        state.allWorks.forEach(work => {
+            work.style.display = 'block';
+        });
+    }
+
+    function scrollToTop() {
+        const galleryMain = document.querySelector('.gallery-main');
+        if (galleryMain) {
+            galleryMain.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    // 前へボタン
+    prevBtn.addEventListener('click', () => {
+        if (window.galleryState.currentPage > 1) {
+            window.galleryState.currentPage--;
+            window.updatePagination();
+            scrollToTop();
+        }
+    });
+
+    // 次へボタン
+    nextBtn.addEventListener('click', () => {
+        const totalPages = Math.ceil(window.galleryState.allWorks.length / window.galleryState.itemsPerPage);
+        if (window.galleryState.currentPage < totalPages) {
+            window.galleryState.currentPage++;
+            window.updatePagination();
+            scrollToTop();
+        }
     });
 }

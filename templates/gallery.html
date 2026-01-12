@@ -28,7 +28,7 @@
         background: var(--card-bg);
         border-radius: 12px;
         padding: 1.5rem;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
     }
 
     .sidebar-section-title {
@@ -145,6 +145,73 @@
         width: 18px;
         height: 18px;
         cursor: pointer;
+    }
+
+    .pagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 2rem;
+        padding: 1rem 0;
+    }
+
+    .pagination-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border: 2px solid var(--border-color);
+        background: var(--bg-secondary);
+        border-radius: 8px;
+        color: var(--text-primary);
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .pagination-btn:hover:not(:disabled) {
+        background: var(--accent-primary);
+        border-color: var(--accent-primary);
+        color: white;
+    }
+
+    .pagination-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+
+    .page-numbers {
+        display: flex;
+        gap: 0.25rem;
+    }
+
+    .page-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 40px;
+        height: 40px;
+        padding: 0 0.75rem;
+        border: 2px solid var(--border-color);
+        background: var(--bg-secondary);
+        border-radius: 8px;
+        color: var(--text-primary);
+        cursor: pointer;
+        transition: all 0.3s;
+        font-size: 0.9rem;
+    }
+
+    .page-number:hover {
+        background: var(--bg-tertiary);
+        border-color: var(--accent-primary);
+    }
+
+    .page-number.active {
+        background: var(--accent-primary);
+        border-color: var(--accent-primary);
+        color: white;
+        font-weight: 600;
     }
 
     @media (max-width: 1024px) {
@@ -290,6 +357,21 @@
                 <!-- 結果が0件の場合 -->
                 <div id="no-results" class="no-results" style="display: none;">
                     <p>条件に一致する作品が見つかりませんでした。</p>
+                </div>
+
+                <!-- ページネーション -->
+                <div id="pagination" class="pagination" style="display: none;">
+                    <button id="prev-page" class="pagination-btn" disabled>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <div id="page-numbers" class="page-numbers"></div>
+                    <button id="next-page" class="pagination-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
                 </div>
             </main>
         </div>
