@@ -45,7 +45,6 @@ function initGalleryFilters() {
     window.setSearchQuery = function(query) {
         searchQuery = query.toLowerCase();
         applyFilters();
-        scrollToGalleryTop();
     };
 
     // カテゴリフィルタ
@@ -299,7 +298,7 @@ function initTagCloud() {
                 if (clearBtn) {
                     clearBtn.style.display = 'block';
                 }
-                scrollToGalleryTop();
+                searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         });
 
@@ -443,13 +442,6 @@ function initPagination() {
     }
 
     function scrollToTop() {
-        const galleryMain = document.querySelector('.gallery-main');
-        if (galleryMain) {
-            galleryMain.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    }
-
-    function scrollToGalleryTop() {
         const galleryMain = document.querySelector('.gallery-main');
         if (galleryMain) {
             galleryMain.scrollIntoView({ behavior: 'smooth', block: 'start' });
