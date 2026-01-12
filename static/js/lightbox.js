@@ -209,8 +209,8 @@ class Lightbox {
             });
         }
 
-        // ギャラリー機能がある場合
-        const galleryThumbnails = document.querySelectorAll('.gallery-thumbnail');
+        // ギャラリー機能がある場合（additional_images）
+        const galleryThumbnails = document.querySelectorAll('.additional-images .thumbnail');
         galleryThumbnails.forEach((thumb, index) => {
             thumb.addEventListener('click', () => {
                 this.collectImages();
@@ -284,16 +284,19 @@ class Lightbox {
             });
 
             // additional_imagesがある場合
-            const galleryImages = document.querySelectorAll('.gallery-thumbnail img');
-            galleryImages.forEach(img => {
-                this.images.push({
-                    src: img.src,
-                    title: title,
-                    date: date,
-                    category: category,
-                    tags: tags,
-                    description: description
-                });
+            const additionalThumbnails = document.querySelectorAll('.additional-images .thumbnail');
+            additionalThumbnails.forEach(thumb => {
+                const img = thumb.querySelector('img');
+                if (img) {
+                    this.images.push({
+                        src: img.src,
+                        title: title,
+                        date: date,
+                        category: category,
+                        tags: tags,
+                        description: description
+                    });
+                }
             });
         }
     }
