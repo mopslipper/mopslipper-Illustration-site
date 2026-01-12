@@ -274,30 +274,34 @@ class Lightbox {
             const tagsElements = document.querySelectorAll('.work-detail-tags .tag');
             const tags = Array.from(tagsElements).map(tag => tag.textContent);
             
-            this.images.push({
-                src: workDetailImage.src,
-                title: title,
-                date: date,
-                category: category,
-                tags: tags,
-                description: description
-            });
-
-            // additional_imagesがある場合
+            // additional_imagesがある場合は全サムネイルから収集
             const additionalThumbnails = document.querySelectorAll('.additional-images .thumbnail');
-            additionalThumbnails.forEach(thumb => {
-                const img = thumb.querySelector('img');
-                if (img) {
-                    this.images.push({
-                        src: img.src,
-                        title: title,
-                        date: date,
-                        category: category,
-                        tags: tags,
-                        description: description
-                    });
-                }
-            });
+            if (additionalThumbnails.length > 0) {
+                // サムネイルから全画像を収集（メイン画像+追加画像）
+                additionalThumbnails.forEach(thumb => {
+                    const img = thumb.querySelector('img');
+                    if (img) {
+                        this.images.push({
+                            src: img.src,
+                            title: title,
+                            date: date,
+                            category: category,
+                            tags: tags,
+                            description: description
+                        });
+                    }
+                });
+            } else {
+                // サムネイルがない場合はメイン画像のみ
+                this.images.push({
+                    src: workDetailImage.src,
+                    title: title,
+                    date: date,
+                    category: category,
+                    tags: tags,
+                    description: description
+                });
+            }
         }
     }
 
