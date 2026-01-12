@@ -681,7 +681,8 @@ a:hover {
     align-items: center;
     gap: 0.5rem;
     font-size: 0.95rem;
-    white-space: nowrap;
+    flex-wrap: wrap;
+    word-break: keep-all;
 }
 
 .status-open {
@@ -2029,6 +2030,20 @@ a:hover {
     
     .stat-value {
         font-size: 2rem;
+    }
+    
+    .commission-status-card {
+        flex-wrap: wrap;
+        padding: 1rem;
+    }
+    
+    .status-badge {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .status-title {
+        font-size: 1rem;
     }
 }
 

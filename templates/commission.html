@@ -25,7 +25,7 @@
             <h2>現在の受付状況</h2>
             <div class="status-badge {% if commission.status.open %}status-open{% else %}status-closed{% endif %}">
                 {% if commission.status.open %}
-                <span class="status-icon">✓</span> 無償受付中(そのため採用とクオリティは約束されません)
+                <span class="status-icon">✓</span> 無償受付中（保証なし）
                 {% else %}
                 <span class="status-icon">✕</span> 停止中
                 {% endif %}
