@@ -638,21 +638,30 @@ a:hover {
 .commission-status-card {
     background: var(--bg-tertiary);
     border-radius: 12px;
-    padding: 1.25rem;
+    padding: 1.25rem 1.5rem;
     display: flex;
     align-items: center;
-    gap: 1.25rem;
-    flex-wrap: wrap;
+    gap: 1.5rem;
+    flex-wrap: nowrap;
+}
+
+.status-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    white-space: nowrap;
 }
 
 .status-badge {
     padding: 0.5rem 1rem;
     border-radius: 6px;
-    font-weight: 700;
+    font-weight: 600;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    flex-grow: 1;
 }
 
 .status-open {
@@ -669,17 +678,18 @@ a:hover {
     font-size: 1.25rem;
 }
 
-.status-content {
-    flex: 1;
-}
-
-.status-content h3 {
-    margin-bottom: 0.5rem;
-}
-
 /* ===================================
    Links Grid
    =================================== */
+.links-grid {
+    background: #10b981;
+    color: white;
+}
+
+.status-closed {
+    background: #ef4444;
+    color: white;
+}
 .links-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
