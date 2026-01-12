@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initLikeButton();
     initCommentForm();
     initShareButtons();
+    initImageGallery();
 });
 
 // ===================================
@@ -300,4 +301,28 @@ function initShareButtons() {
             });
         });
     }
+}
+
+// ===================================
+// 画像ギャラリー（複数画像の切り替え）
+// ===================================
+function initImageGallery() {
+    const thumbnails = document.querySelectorAll('.additional-images .thumbnail');
+    const workImage = document.getElementById('work-image');
+    
+    if (!thumbnails.length || !workImage) return;
+    
+    thumbnails.forEach(function(thumbnail) {
+        thumbnail.addEventListener('click', function() {
+            const newImageSrc = thumbnail.getAttribute('data-image');
+            
+            // アクティブ状態を切り替え
+            thumbnails.forEach(t => t.classList.remove('active'));
+            thumbnail.classList.add('active');
+            
+            // メイン画像を切り替え
+            workImage.src = newImageSrc;
+            workImage.alt = thumbnail.querySelector('img').alt;
+        });
+    });
 }

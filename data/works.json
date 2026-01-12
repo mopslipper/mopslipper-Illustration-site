@@ -469,5 +469,27 @@
     "description": "ハロウィンの夜に現れる可愛い魔女っ子。とんがり帽子とほうきがトレードマークの愛らしいウィッチです。",
     "nsfw": false,
     "external_links": {}
+  },
+  {
+    "id": 26,
+    "slug": "chibi-collection-026",
+    "title": "ちびキャラコレクション",
+    "date": "2026-01-12",
+    "image_path": "/static/img/works/026-chibi1.webp",
+    "thumbnail": "/static/img/works/026-chibi1.jpg",
+    "additional_images": [
+      "/static/img/works/026-chibi2.webp",
+      "/static/img/works/026-chibi3.webp"
+    ],
+    "tags": [
+      "オリジナル",
+      "ちびキャラ",
+      "SD",
+      "可愛い"
+    ],
+    "category": "Original",
+    "description": "ちびキャライラスト集。デフォルメされた可愛らしいスタイルで描いた3枚のイラストです。",
+    "nsfw": false,
+    "external_links": {}
   }
 ]

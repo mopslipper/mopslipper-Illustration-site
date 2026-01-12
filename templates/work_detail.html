@@ -20,6 +20,54 @@
 {% endif %}
 {% endblock %}
 
+{% block extra_css %}
+<style>
+    .additional-images {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+        overflow-x: auto;
+        padding: 10px 0;
+    }
+
+    .additional-images .thumbnail {
+        flex-shrink: 0;
+        width: 100px;
+        height: 100px;
+        border-radius: 8px;
+        overflow: hidden;
+        cursor: pointer;
+        border: 3px solid transparent;
+        transition: all 0.3s ease;
+        opacity: 0.6;
+    }
+
+    .additional-images .thumbnail:hover {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    .additional-images .thumbnail.active {
+        border-color: var(--accent-primary);
+        opacity: 1;
+    }
+
+    .additional-images .thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    @media (max-width: 768px) {
+        .additional-images .thumbnail {
+            width: 80px;
+            height: 80px;
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <section class="work-detail-section">
     <div class="container">
@@ -61,6 +109,20 @@
                          alt="{{ work.title }}" 
                          class="work-image {% if work.nsfw %}nsfw-blur{% endif %}"
                          id="work-image">
+                    {% endif %}
+                    
+                    {% if work.additional_images %}
+                    <!-- 追加画像のサムネイル -->
+                    <div class="additional-images">
+                        <div class="thumbnail active" data-image="{{ base_path }}{{ work.image_path }}">
+                            <img src="{{ base_path }}{{ work.image_path }}" alt="画像1">
+                        </div>
+                        {% for img_path in work.additional_images %}
+                        <div class="thumbnail" data-image="{{ base_path }}{{ img_path }}">
+                            <img src="{{ base_path }}{{ img_path }}" alt="画像{{ loop.index + 1 }}">
+                        </div>
+                        {% endfor %}
+                    </div>
                     {% endif %}
                     
                     <button class="lightbox-btn" id="lightbox-btn" title="拡大表示" style="{% if work.image_path.endswith(('.mp4', '.mov', '.webm')) %}display:none;{% endif %}">
