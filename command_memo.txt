@@ -1,8 +1,32 @@
-code templates/contact.html           
+code templates/contact.html      
+code data/works.json
+     
 python generator.py     
 git add .
-git commit -m "about等を更新"
+git commit -m "更新"
 git push
 
 Formspree
 R**0****@
+
+https://mopslipper.github.io/mopslipper-Illustration-site
+https://mopslipper.github.io/mopslipper-Illustration-site?v=2
+
+
+https://mopslipper.github.io/mopslipper-Illustration-site/works/summer-girl-006.html
+https://mopslipper.github.io/mopslipper-Illustration-site/works/summer-girl-006.html?v=2
+
+https://mopslipper.github.io/mopslipper-Illustration-site/works/r18-sample-011.html
+https://mopslipper.github.io/mopslipper-Illustration-site/works/r18-sample-011.html?v=2
+
+
+https://mopslipper.github.io/mopslipper-Illustration-site/works/swimsuit-zooming-010.html
+https://mopslipper.github.io/mopslipper-Illustration-site/works/swimsuit-zooming-010.html?v=2
+
+cd "C:\Users\shiki\OneDrive\デスクトップ\my_python\illustration_site\static\img\works"; ffmpeg -i angel-wings-002.webp angel-wings-002.jpg
+
+
+  README.mdを読んで、このプロジェクトの構造を理解してください。
+これは2Dイラスト作家向けポートフォリオサイトで、Python+Jinja2で静的サイトを生成しています。
+特に重要なのは、Cliant Share（限定コンテンツ）機能で、複数ディレクトリに分けた暗号化画像を
+パスワード認証後にブラウザで復号化して表示する仕組みです。
