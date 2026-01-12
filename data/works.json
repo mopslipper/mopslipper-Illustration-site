@@ -514,5 +514,23 @@
     "description": "金髪ちびキャライラスト集。元気いっぱいの表情とポーズが特徴の3枚のイラストです。",
     "nsfw": false,
     "external_links": {}
+  },
+  {
+    "id": 28,
+    "slug": "blonde-zoom-kururin-028",
+    "title": "ブロンドズームくるりん",
+    "date": "2026-01-12",
+    "image_path": "/static/img/works/028-blonde_zoom_kururin.mp4",
+    "thumbnail": "/static/img/works/028-blonde_zoom_kururin-thumb.png",
+    "tags": [
+      "オリジナル",
+      "金髪",
+      "動画",
+      "アニメーション"
+    ],
+    "category": "Animation",
+    "description": "金髪美少女のズームアニメーション。くるりと回転する躍動感あふれる動画作品です。",
+    "nsfw": false,
+    "external_links": {}
   }
 ]
