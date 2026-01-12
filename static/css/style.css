@@ -367,20 +367,20 @@ a:hover {
 
 .page-header {
     background: var(--bg-secondary);
-    padding: 1rem 0;
+    padding: 0.5rem 0;
     text-align: center;
     border-bottom: 1px solid var(--border-color);
 }
 
 .page-title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.15rem;
 }
 
 .page-description {
     color: var(--text-secondary);
-    font-size: 1.1rem;
+    font-size: 0.9rem;
 }
 
 /* ===================================
