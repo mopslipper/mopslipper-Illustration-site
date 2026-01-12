@@ -349,6 +349,12 @@ class Lightbox {
 
     updateImageTransform(image) {
         image.style.transform = `translate(${this.panX}px, ${this.panY}px) scale(2)`;
+    }
+
+    showImage() {
+        const lightbox = this.lightboxElement;
+        const image = lightbox.querySelector('.lightbox-image');
+        const video = lightbox.querySelector('.lightbox-video');
         const loading = lightbox.querySelector('.lightbox-loading');
         const title = lightbox.querySelector('.lightbox-title');
         const category = lightbox.querySelector('.lightbox-category');
