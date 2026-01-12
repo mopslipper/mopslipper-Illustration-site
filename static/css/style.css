@@ -2059,6 +2059,13 @@ a:hover {
     transition: transform 0.3s ease;
 }
 
+.lightbox-video {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    background: #000;
+}
+
 .lightbox-image.zoomed {
     cursor: zoom-out;
     transform: scale(2);

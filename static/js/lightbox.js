@@ -39,6 +39,7 @@ class Lightbox {
                         <div class="lightbox-image-container">
                             <div class="lightbox-loading"></div>
                             <img src="" alt="" class="lightbox-image">
+                            <video src="" class="lightbox-video" controls style="display: none;"></video>
                         </div>
                         <div class="lightbox-zoom-hint">クリックでズーム</div>
                     </div>
@@ -96,10 +97,13 @@ class Lightbox {
             this.next();
         });
 
-        // 画像クリックでズーム
+        // 画像クリックでズーム（動画の場合は無効）
         image.addEventListener('click', (e) => {
             e.stopPropagation();
-            this.toggleZoom();
+            const currentImage = this.images[this.currentIndex];
+            if (currentImage && !currentImage.isVideo) {
+                this.toggleZoom();
+            }
         });
 
         // キーボード操作
@@ -179,24 +183,41 @@ class Lightbox {
         const workCards = document.querySelectorAll('.work-card');
         workCards.forEach(card => {
             const img = card.querySelector('.work-image img');
-            const link = card.querySelector('.work-link');
             const title = card.querySelector('.work-title')?.textContent || '';
             const date = card.querySelector('.work-date')?.textContent || '';
             const category = card.dataset.category || '';
             const tags = card.dataset.tags ? card.dataset.tags.split(',') : [];
+            const description = card.dataset.description || '';
+            const isVideo = card.dataset.isVideo === 'true';
+            const videoPath = card.dataset.videoPath || '';
             const isVisible = card.style.display !== 'none';
             
-            if (img && isVisible && !link.href.includes('.mp4') && !link.href.includes('.mov') && !link.href.includes('.webm')) {
-                // サムネイルの代わりに元画像を使用（.jpgを.webpに変換）
-                const imageSrc = img.src.replace('.jpg', '.webp');
-                this.images.push({
-                    src: imageSrc,
-                    title: title,
-                    date: date,
-                    category: category,
-                    tags: tags,
-                    description: '' // ギャラリーからは取得できない
-                });
+            if (img && isVisible) {
+                if (isVideo) {
+                    // 動画作品
+                    this.images.push({
+                        src: img.src, // サムネイル
+                        videoSrc: videoPath,
+                        isVideo: true,
+                        title: title,
+                        date: date,
+                        category: category,
+                        tags: tags,
+                        description: description
+                    });
+                } else {
+                    // 静止画作品（サムネイルの代わりに元画像を使用）
+                    const imageSrc = img.src.replace('.jpg', '.webp');
+                    this.images.push({
+                        src: imageSrc,
+                        isVideo: false,
+                        title: title,
+                        date: date,
+                        category: category,
+                        tags: tags,
+                        description: description
+                    });
+                }
             }
         });
 
@@ -278,6 +299,7 @@ class Lightbox {
     showImage() {
         const lightbox = this.lightboxElement;
         const image = lightbox.querySelector('.lightbox-image');
+        const video = lightbox.querySelector('.lightbox-video');
         const loading = lightbox.querySelector('.lightbox-loading');
         const title = lightbox.querySelector('.lightbox-title');
         const category = lightbox.querySelector('.lightbox-category');
@@ -286,6 +308,7 @@ class Lightbox {
         const description = lightbox.querySelector('.lightbox-description');
         const prevBtn = lightbox.querySelector('.lightbox-prev');
         const nextBtn = lightbox.querySelector('.lightbox-next');
+        const zoomHint = lightbox.querySelector('.lightbox-zoom-hint');
 
         if (this.images.length === 0) return;
 
@@ -293,18 +316,35 @@ class Lightbox {
 
         // ローディング表示
         loading.style.display = 'block';
-        image.style.opacity = '0';
 
-        // 画像を読み込む
-        const img = new Image();
-        img.onload = () => {
-            image.src = currentImage.src;
-            image.alt = currentImage.title;
-            image.classList.remove('zoomed');
-            image.style.opacity = '1';
+        if (currentImage.isVideo) {
+            // 動画の場合
+            image.style.display = 'none';
+            video.style.display = 'block';
+            video.src = currentImage.videoSrc;
+            video.style.maxWidth = '100%';
+            video.style.maxHeight = '100%';
+            video.style.objectFit = 'contain';
             loading.style.display = 'none';
-        };
-        img.src = currentImage.src;
+            zoomHint.style.display = 'none';
+        } else {
+            // 画像の場合
+            video.style.display = 'none';
+            image.style.display = 'block';
+            image.style.opacity = '0';
+            zoomHint.style.display = 'block';
+
+            // 画像を読み込む
+            const img = new Image();
+            img.onload = () => {
+                image.src = currentImage.src;
+                image.alt = currentImage.title;
+                image.classList.remove('zoomed');
+                image.style.opacity = '1';
+                loading.style.display = 'none';
+            };
+            img.src = currentImage.src;
+        }
 
         // タイトル
         title.textContent = currentImage.title;
