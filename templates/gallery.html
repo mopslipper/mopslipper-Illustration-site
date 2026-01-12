@@ -2,6 +2,165 @@
 
 {% block title %}Gallery - {{ config.site_title }}{% endblock %}
 
+{% block extra_css %}
+<style>
+    .gallery-layout {
+        display: flex;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .gallery-sidebar {
+        flex-shrink: 0;
+        width: 280px;
+        position: sticky;
+        top: 100px;
+        height: fit-content;
+        max-height: calc(100vh - 120px);
+        overflow-y: auto;
+    }
+
+    .sidebar-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .sidebar-section-title {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .sidebar-section-title svg {
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar-section-title.collapsed svg {
+        transform: rotate(-90deg);
+    }
+
+    .sidebar-section-content {
+        max-height: 500px;
+        overflow: hidden;
+        transition: max-height 0.3s ease, opacity 0.3s ease;
+        opacity: 1;
+    }
+
+    .sidebar-section-content.collapsed {
+        max-height: 0;
+        opacity: 0;
+    }
+
+    .compact-search {
+        margin-bottom: 0;
+    }
+
+    .compact-search .search-box {
+        margin-bottom: 0;
+    }
+
+    .filter-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .filter-btn {
+        width: 100%;
+        text-align: left;
+        padding: 0.5rem 1rem;
+        background: var(--bg-secondary);
+        border: 2px solid transparent;
+        border-radius: 8px;
+        color: var(--text-primary);
+        cursor: pointer;
+        transition: all 0.3s;
+        font-size: 0.9rem;
+    }
+
+    .filter-btn:hover {
+        background: var(--bg-primary);
+        border-color: var(--accent-primary);
+    }
+
+    .filter-btn.active {
+        background: var(--accent-primary);
+        color: white;
+        border-color: var(--accent-primary);
+    }
+
+    .compact-tag-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .compact-tag-cloud .tag {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .gallery-main {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .gallery-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+    }
+
+    .results-info {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+    }
+
+    .filter-checkbox {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        margin-bottom: 0.75rem;
+        color: var(--text-primary);
+        font-size: 0.9rem;
+    }
+
+    .filter-checkbox input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+    }
+
+    @media (max-width: 1024px) {
+        .gallery-layout {
+            flex-direction: column;
+        }
+
+        .gallery-sidebar {
+            width: 100%;
+            position: static;
+            max-height: none;
+        }
+
+        .sidebar-section {
+            margin-bottom: 1rem;
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <section class="page-header">
     <div class="container">
@@ -12,106 +171,128 @@
 
 <section class="section gallery-section">
     <div class="container">
-        <!-- 検索バー -->
-        <div class="search-section">
-            <div class="search-box">
-                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.35-4.35"></path>
-                </svg>
-                <input type="text" id="search-input" class="search-input" placeholder="作品タイトル、タグ、説明文で検索...">
-                <button id="clear-search" class="clear-search" style="display: none;">✕</button>
-            </div>
-            <div id="search-results-count" class="search-results-count"></div>
-        </div>
-
-        <!-- タグクラウド -->
-        <div class="tag-cloud-section">
-            <h3 class="tag-cloud-title">人気タグ</h3>
-            <div id="tag-cloud" class="tag-cloud">
-                <!-- JavaScriptで動的生成 -->
-            </div>
-        </div>
-
-        <!-- フィルター -->
-        <div class="gallery-filters">
-            <div class="filter-group">
-                <label class="filter-label">カテゴリ:</label>
-                <div class="filter-buttons">
-                    <button class="filter-btn active" data-filter="all">すべて</button>
-                    {% for category in categories %}
-                    <button class="filter-btn" data-filter="category" data-value="{{ category }}">{{ category }}</button>
-                    {% endfor %}
-                </div>
-            </div>
-            
-            <div class="filter-group">
-                <label class="filter-label">タグ:</label>
-                <div class="filter-tags">
-                    {% for tag in tags %}
-                    <button class="tag-filter" data-tag="{{ tag }}">{{ tag }}</button>
-                    {% endfor %}
-                </div>
-            </div>
-            
-            <div class="filter-group">
-                <label class="filter-checkbox">
-                    <input type="checkbox" id="show-r18">
-                    <span>R-18作品のみ表示</span>
-                </label>
-            </div>
-            
-            <div class="filter-group">
-                <label class="filter-checkbox">
-                    <input type="checkbox" id="show-r15">
-                    <span>R-15作品のみ表示</span>
-                </label>
-            </div>
-        </div>
-
-        <!-- 作品グリッド -->
-        <div class="works-grid" id="works-grid">
-            {% for work in works %}
-            <div class="work-card" 
-                 data-nsfw="{{ work.nsfw|lower }}" 
-                 data-sensitive="{{ work.sensitive|default(false)|lower }}" 
-                 data-category="{{ work.category }}"
-                 data-tags="{{ work.tags|join(',') }}"
-                 data-date="{{ work.date }}">
-                <a href="{{ base_path }}/works/{{ work.slug }}.html" class="work-link">
-                    <div class="work-image">
-                        <img src="{{ base_path }}{{ work.thumbnail }}" alt="{{ work.title }}" loading="lazy">
-                        {% if work.image_path.endswith(('.mp4', '.mov', '.webm')) %}
-                        <div class="video-indicator">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="white" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));">
-                                <path d="M8 5v14l11-7z"/>
+        <div class="gallery-layout">
+            <!-- サイドバー -->
+            <aside class="gallery-sidebar">
+                <!-- 検索 -->
+                <div class="sidebar-section">
+                    <div class="compact-search">
+                        <div class="search-box">
+                            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
                             </svg>
+                            <input type="text" id="search-input" class="search-input" placeholder="作品を検索...">
+                            <button id="clear-search" class="clear-search" style="display: none;">✕</button>
                         </div>
-                        {% endif %}
-                        {% if work.nsfw %}
-                        <div class="nsfw-overlay">
-                            <span class="nsfw-label">R-18</span>
-                            <p class="nsfw-message">クリックして表示</p>
-                        </div>
-                        {% endif %}
                     </div>
-                    <div class="work-info">
-                        <h3 class="work-title">{{ work.title }}</h3>
-                        <div class="work-tags">
-                            {% for tag in work.tags[:3] %}
-                            <span class="tag">{{ tag }}</span>
+                </div>
+
+                <!-- カテゴリ -->
+                <div class="sidebar-section">
+                    <h3 class="sidebar-section-title">
+                        カテゴリ
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </h3>
+                    <div class="sidebar-section-content">
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-filter="all">すべて</button>
+                            {% for category in categories %}
+                            <button class="filter-btn" data-filter="category" data-value="{{ category }}">{{ category }}</button>
                             {% endfor %}
                         </div>
-                        <p class="work-date">{{ work.date }}</p>
                     </div>
-                </a>
-            </div>
-            {% endfor %}
-        </div>
+                </div>
 
-        <!-- 結果が0件の場合 -->
-        <div id="no-results" class="no-results" style="display: none;">
-            <p>条件に一致する作品が見つかりませんでした。</p>
+                <!-- 人気タグ -->
+                <div class="sidebar-section">
+                    <h3 class="sidebar-section-title" id="tag-cloud-toggle">
+                        人気タグ
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </h3>
+                    <div class="sidebar-section-content" id="tag-cloud-content">
+                        <div id="tag-cloud" class="compact-tag-cloud">
+                            <!-- JavaScriptで動的生成 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- フィルター -->
+                <div class="sidebar-section">
+                    <h3 class="sidebar-section-title">
+                        フィルター
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </h3>
+                    <div class="sidebar-section-content">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="show-r18">
+                            <span>R-18作品のみ</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="show-r15">
+                            <span>R-15作品のみ</span>
+                        </label>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- メインコンテンツ -->
+            <main class="gallery-main">
+                <div class="gallery-header">
+                    <div class="results-info" id="search-results-count"></div>
+                </div>
+
+                <!-- 作品グリッド -->
+                <div class="works-grid" id="works-grid">
+                    {% for work in works %}
+                    <div class="work-card" 
+                         data-nsfw="{{ work.nsfw|lower }}" 
+                         data-sensitive="{{ work.sensitive|default(false)|lower }}" 
+                         data-category="{{ work.category }}"
+                         data-tags="{{ work.tags|join(',') }}"
+                         data-date="{{ work.date }}">
+                        <a href="{{ base_path }}/works/{{ work.slug }}.html" class="work-link">
+                            <div class="work-image">
+                                <img src="{{ base_path }}{{ work.thumbnail }}" alt="{{ work.title }}" loading="lazy">
+                                {% if work.image_path.endswith(('.mp4', '.mov', '.webm')) %}
+                                <div class="video-indicator">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="white" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                                {% endif %}
+                                {% if work.nsfw %}
+                                <div class="nsfw-overlay">
+                                    <span class="nsfw-label">R-18</span>
+                                    <p class="nsfw-message">クリックして表示</p>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="work-info">
+                                <h3 class="work-title">{{ work.title }}</h3>
+                                <div class="work-tags">
+                                    {% for tag in work.tags[:3] %}
+                                    <span class="tag">{{ tag }}</span>
+                                    {% endfor %}
+                                </div>
+                                <p class="work-date">{{ work.date }}</p>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- 結果が0件の場合 -->
+                <div id="no-results" class="no-results" style="display: none;">
+                    <p>条件に一致する作品が見つかりませんでした。</p>
+                </div>
+            </main>
         </div>
     </div>
 </section>

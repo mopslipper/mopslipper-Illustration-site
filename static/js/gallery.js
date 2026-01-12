@@ -6,7 +6,23 @@ document.addEventListener('DOMContentLoaded', function() {
     initGalleryFilters();
     initSearchFunction();
     initTagCloud();
+    initSidebarToggle();
 });
+
+// サイドバーの折りたたみ機能
+function initSidebarToggle() {
+    const sectionTitles = document.querySelectorAll('.sidebar-section-title');
+    
+    sectionTitles.forEach(title => {
+        title.addEventListener('click', function() {
+            const content = this.nextElementSibling;
+            
+            // トグル
+            this.classList.toggle('collapsed');
+            content.classList.toggle('collapsed');
+        });
+    });
+}
 
 function initGalleryFilters() {
     const worksGrid = document.getElementById('works-grid');
