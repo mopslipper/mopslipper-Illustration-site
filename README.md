@@ -20,15 +20,15 @@ Python + Jinja2による静的サイトジェネレーター / GitHub Pages対�
 illustration_site/
 ├── data/                           # JSONデータ
 │   ├── config.json                # サイト全体の設定
-│   ├── works.json                 # 作品データ（25件）
+│   ├── works.json                 # 作品データ（28件）
 │   └── commission.json            # 依頼受付情報
 │
 ├── templates/                      # Jinja2テンプレート
-│   ├── base.html                  # ベーステンプレート
+│   ├── base.html                  # ベーステンプレート（lightbox.js追加）
 │   ├── index.html                 # ホームページ
-│   ├── gallery.html               # ギャラリー一覧
+│   ├── gallery.html               # ギャラリー一覧（ページネーション対応）
 │   ├── work_detail.html           # 作品詳細ページ
-│   ├── cliantshare.html           # 🔒限定コンテンツ（複数ディレクトリ対応）
+│   ├── cliantshare.html           # 🔒限定コンテンツ（削除済み・プロジェクト完了）
 │   ├── commission.html            # 依頼情報
 │   ├── about.html                 # Aboutページ
 │   ├── contact.html               # コンタクトフォーム
@@ -36,79 +36,127 @@ illustration_site/
 │
 ├── static/                         # 静的ファイル
 │   ├── css/
-│   │   └── style.css
+│   │   └── style.css             # ライトボックススタイル含む
 │   ├── js/
 │   │   ├── main.js
-│   │   ├── gallery.js
-│   │   └── work_detail.js
+│   │   ├── gallery.js            # フィルター・検索・ページネーション
+│   │   ├── work_detail.js
+│   │   └── lightbox.js           # 🆕 画像ビューア機能
 │   └── img/
-│       ├── works/                 # 公開作品画像
-│       ├── cliantshare/           # 🚫限定コンテンツ（ローカルのみ・.gitignore）
-│       │   ├── 1st_base/         # 46枚のPNG画像
-│       │   ├── 2nd_miku-inspired/
-│       │   └── 3rd/
-│       └── cliantshare_encrypted/ # ✅暗号化済み限定コンテンツ（GitHub公開）
-│           └── 1st_base/         # 01.enc ~ 46.enc
+│       └── works/                # 公開作品画像（28件）
+│           ├── cat-girl-001.webp
+│           ├── 028-blonde_zoom_kururin.mp4
+│           └── ... (26件の画像・動画)
 │
 ├── dist/                          # ビルド出力先（GitHub Pagesデプロイ）
 │
 ├── generator.py                   # メインビルドスクリプト
 ├── encrypt_images_multi.py        # 🔒画像暗号化スクリプト（複数ディレクトリ対応）
 ├── encrypt_images.py              # 旧：単一ディレクトリ暗号化（非推奨）
-├── img_converter.py               # WebP変換ツール
+├── create_thumbnail.py            # 動画サムネイル生成（OpenCV使用）
+├── encrypt_images_multi.py        # 🔒画像暗号化スクリプト（プロジェクト完了
 └── README.md                      # このファイル
 ```
 
 ---
+🎨 主要機能
 
-## 🔒 Cliant Share（限定コンテンツ）システム
+### 1. ギャラリーシステム
+- **レスポンシブグリッド**: モバイル2列、PC3列表示
+- **フィルタリング**: カテゴリ（Original, Animation, Manga, Fanart, Live2D）
+- **検索機能**: タイトル・タグ・説明文から検索
+- **ページネーション**: 30件以上の作品に対応（現在28件）
+- **R-18フィルター**: 成人向けコンテンツ表示制御（予定なし表示）
 
-### 概要
-- パスワード保護された画像閲覧システム
-- **複数ディレクトリ対応**：ディレクトリごとに画像グループを管理
-- クライアントサイド暗号化・復号化により、GitHubリポジトリ経由でも画像を保護
+### 2. ライトボックス（画像ビューア）
+**最新の2カラムレイアウト**: 左側に画像、右側に詳細情報
 
-### 技術仕様
+#### 機能一覧
+- ✅ **全画面表示**: サムネイルクリックで開く
+- ✅ **ズーム機能**: 画像クリックで2倍ズームON/OFF
+- ✅ **キーボード操作**:
+  - `←` / `→`: 前後の作品に移動
+  - `Esc`: ライトボックスを閉じる
+  - `Space`: ズームON/OFF
+- ✅ **作品情報表示**:
+  - タイトル（1.4rem、太字）
+  - カテゴリ・投稿日（バッジ表示）
+  - タグ一覧（ピンク色バッジ）
+  - 作品説明文
+- ✅ **レスポンシブ対応**: モバイルでは縦並び（上：画像、下：情報）
 
-#### 1. 暗号化方式
-- **アルゴリズム**: XOR暗号化
-- **パスワード**: `Viskorin_temp`
-- **ファイル形式**: `.enc`（暗号化されたPNGデータ）
+#### 技術仕様
+- **ファイル**: `static/js/lightbox.js` (354行)
+- **クラス設計**: ES6 Class構文
+- **データ収集**: `collectImages()` - DOM解析でメタデータ取得
+- **表示制御**: `showImage()` - 動的HTML生成
+- **状態管理**: インデックスベースのナビゲーション
 
-#### 2. パスワード難読化
-JavaScriptにパスワードを埋め込む際、以下の手法で難読化：
-```javascript
-// ASCIIコード配列として分割
-const _0x4a2b = ['86','105','115','107','111','114','105','110','95','116','101','109','112'];
-// 動的に再構成
-const _0x1c5e = (h) => String.fromCharCode(...h.map(x => parseInt(x)));
-const _k = () => _0x1c5e(_0x4a2b);  // 'Viskorin_temp' を返す
-```
+### 3. 動画作品対応
+- **対応形式**: `.mp4`, `.mov`, `.webm`
+- **サムネイル生成**: `create_thumbnail.py`（OpenCV使用）
+- **実装例**: 作品#10, #13, #28
+- **注意**: ライトボックスでは静止画のみ表示
 
-**注意**: これはあくまで「見つけにくくする」ための難読化で、完全な秘匿ではありません。静的サイトの性質上、決定的なセキュリティは実現不可能です。
+### 4. マルチイメージギャラリー
+- **データ構造**: `additional_images` 配列で複数画像を管理
+- **実装例**: 作品#26（ちびキャラ3枚）、作品#27（金髪ちびキャラ3枚）
+- **表示**: 作品詳細ページでサムネイルクリックで切替
 
-#### 3. フロー
-```
-[パスワード入力] → [認証成功] → [ディレクトリ選択] → [画像復号化] → [ビューア表示]
-```
-
-1. **パスワード認証**: ユーザーがパスワードを入力
-2. **ディレクトリ選択**: 複数のディレクトリカードから選択
-3. **画像復号化**: 選択されたディレクトリの`.enc`ファイルを取得し、JavaScriptで復号化
-4. **表示**: Blob URLとして画像を表示（ダウンロード可能）
-
----
-
-## 🚀 使い方
-
-### 1. 初回セットアップ
-
-```bash
-# 依存関係インストール
-pip install jinja2
+### 5. 準備中表示システム
+- **BOOTH/FANBOX** opencv-python
 
 # 動作確認
 python generator.py
+```
+
+### 2. 作品を追加する
+
+#### 静止画作品
+1. `data/works.json` に作品情報を追加
+   ```json
+   {
+     "id": 29,
+     "slug": "new-work-029",
+     "title": "新作タイトル",
+     "date": "2026-01-15",
+     "image_path": "/static/img/works/029-new-work.webp",
+     "thumbnail": "/static/img/works/029-new-work.jpg",
+     "tags": ["オリジナル", "タグ1", "タグ2"],
+     "category": "Original",
+     "description": "作品説明文",
+     "nsfw": false,
+     "external_links": {}
+   }
+   ```
+2. 画像を `static/img/works/` に配置
+3. `python generator.py` でビルド
+
+#### 動画作品
+1. 動画ファイル（.mp4）を `static/img/works/` に配置
+2. サムネイル生成:
+   ```bash
+   python create_thumbnail.py
+   # 入力: static/img/works/029-animation.mp4
+   # 出力: static/img/works/029-animation-thumb.png
+   ```
+3. `data/works.json` に追加（`image_path`に動画、`thumbnail`にPNG）
+4. `python generator.py` でビルド
+
+#### マルチイメージ作品（複数画像）
+```json
+{
+  "id": 30,
+  "slug": "collection-030",
+  "title": "イラスト集",
+  "image_path": "/static/img/works/030-img1.webp",
+  "thumbnail": "/static/img/works/030-img1.jpg",
+  "additional_images": [
+    "/static/img/works/030-img2.webp",
+    "/static/img/works/030-img3.webp"
+  ],
+  "tags": ["オリジナル", "コレクション"]
+}
 ```
 
 ### 2. 作品を追加する
@@ -132,11 +180,12 @@ python encrypt_images_multi.py
 
 # 4. サイトをビルド
 python generator.py
-
-# 5. 動作確認（ローカル）
-# dist/cliantshare.html をブラウザで開いてテスト
-
-# 6. デプロイ
+（フィルター・検索・ページネーション）
+- `dist/works/*.html` - 作品詳細ページ（28件）
+- `dist/commission.html` - 依頼情報
+- `dist/about.html` - Aboutページ
+- `dist/contact.html` - コンタクトフォーム
+- `dist/privacy.html` - プライバシーポリシーデプロイ
 git add .
 git commit -m "Add new cliantshare collection"
 git push origin main
@@ -217,26 +266,37 @@ dist/
 ---
 
 ## 🛠️ トラブルシューティング
+ライトボックスが動作しない
 
-### Cliant Shareで画像が表示されない
-
-1. **パスワードを確認**
-   - 現在のパスワード: `Viskorin_temp`
-   - `encrypt_images_multi.py` と `templates/cliantshare.html` の `_0x4a2b` が一致しているか
-
-2. **暗号化ファイルを確認**
-   ```bash
-   ls static/img/cliantshare_encrypted/1st_base/
-   # 01.enc, 02.enc... が存在するか
+1. **JavaScript読み込み確認**
+   ```html
+   <!-- base.html に存在するか確認 -->
+   <script src="{{ base_path }}/static/js/lightbox.js"></script>
    ```
 
-3. **ブラウザの開発者ツールでエラー確認**
+2. **ブラウザコンソールでエラー確認**
    - F12 → Console タブ
-   - `Failed to load image` などのエラーがないか
+   - `Uncaught ReferenceError` などのエラー
 
-4. **再暗号化**
-   ```bash
-   python encrypt_images_multi.py
+3. **動画作品の除外確認**
+   - ライトボックスは静止画のみ対応
+   - `.mp4`, `.mov`, `.webm` は自動除外
+
+### ページネーションが表示されない
+
+- 30件未満の場合は自動で非表示
+- 現在28件のため、あと2件追加すると表示されます
+
+### レスポンシブグリッドが崩れる
+
+1. **キャッシュクリア**: Ctrl + Shift + R（強制再読み込み）
+2. **CSS確認**:
+   ```css
+   /* style.css */
+   .works-grid { grid-template-columns: repeat(2, 1fr); } /* モバイル */
+   @media (min-width: 768px) {
+     .works-grid { grid-template-columns: repeat(3, 1fr); } /* PC */
+   }es_multi.py
    python generator.py
    ```
 
@@ -246,16 +306,20 @@ dist/
 - VS Codeで右下の文字コード表示をクリック → "UTF-8" を選択
 
 ### Twitter Cardが表示されない
+🎯 今後の拡張案
 
-- WebP形式は非対応 → JPG/PNG画像を使用
-- `twitter_card_image` に絶対URL（`/mopslipper-Illustration-site/static/img/...`）を指定
+### 実装推奨機能
+1. **ソート機能**: 新着順・古い順・人気順
+2. **カラーパレット検索**: 色ベースのフィルタリング
+3. **作品シリーズ**: 関連作品のグループ化
+4. **ダウンロード統計**: 作品ごとの閲覧数
+5. **おすすめ作品**: 類似作品の表示
+6. **AIチャットボット**: 作品に関する問い合わせ対応
 
-### GitHub Pagesで404エラー
-
-- `data/config.json` の `base_path` が正しいか確認
-- リポジトリ名と一致させる: `/mopslipper-Illustration-site`
-
----
+### 技術的改善
+- **画像遅延読み込み**: Intersection Observer API
+- **プログレッシブ画像**: 低解像度→高解像度
+- **Service Worker**: オフライン対応
 
 ## 🔐 セキュリティに関する注意
 
@@ -277,18 +341,66 @@ dist/
 - **GitHub**: [mopslipper](https://github.com/mopslipper)
 - **Email**: Formspreeフォーム（ID: xnjjazjr）
 
----
+---2
+- ✅ ライトボックスを**2カラムレイアウト**に変更（左：画像、右：詳細情報）
+- ✅ 著作権表示を削除（ユーザー要望）
+- ✅ モバイルでは縦並びレイアウトに自動切替
 
-## 📅 更新履歴
+### 2026-01-12（ライトボックス機能強化）
+- ✅ **詳細情報表示**: タイトル、カテゴリ、投稿日、タグ、説明文
+- ✅ 画像カウンター（"1 / 28"）を削除
+- ✅ 著作権表示を追加（後に削除）
 
-### 2026-01-11
+### 2026-01-12（ライトボックス実装）
+- ✅ **ライトボックス機能**を実装
+  - 全画面画像ビューア
+  - ズーム機能（2倍）
+  - キーボードナビゲーション（←→Esc Space）
+  - 前後ボタン
+  - ローディングアニメーション
+
+### 2026-01-11（ギャラリー改善）
+- ✅ **ページネーション**システム実装（30件以上対応）
+- ✅ ギャラリーサイドバー間隔を縮小（1rem→0.5rem）
+- ✅ R-18フィルターに"(予定なし)"表示
+- ✅ 検索・タグクラウド機能の初期化順序を修正
+
+### 2026-01-11（コンテンツ整理）
+- ✅ Fanart・Live2Dカテゴリに"(準備中)"表示
+- ✅ **Cliant Share完了**: 暗号化画像75件を削除（GitHub・ローカル）
+- ✅ Aboutページに"Cliant Share"リンク追加
+
+これは2Dイラスト作家向けポートフォリオサイトで、Python+Jinja2で静的サイトを生成し、
+GitHub Pagesでホスティングしています。
+
+主要な実装済み機能：
+1. ギャラリーシステム（フィルター・検索・ページネーション）
+2. ライトボックス（2カラムレイアウト: 左画像・右詳細情報）
+3. 動画作品対応（サムネイル自動生成）
+4. マルチイメージギャラリー（1作品に複数画像）
+5. レスポンシブデザイン（モバイル2列・PC3列）
+
+Cliant Share（暗号化画像配信）プロジェクトは完了し、全ファイル削除済み。
+現在28作品を公開中
+- ✅ サムネイルのタグ表示を削除
+- ✅ **レスポンシブグリッド修正**: モバイル2列、PC3列
+
+### 2026-01-10（作品追加）
+- ✅ **作品#28追加**: ブロンドズームくるりん（動画・MP4）
+- ✅ 動画サムネイル自動生成（OpenCV）
+
+### 2026-01-11（Cliant Share開発）
 - ✅ Cliant Shareを**複数ディレクトリ対応**に変更
 - ✅ `encrypt_images_multi.py` を作成（複数ディレクトリを自動処理）
 - ✅ ディレクトリ選択UIを追加（カード形式）
 - ✅ パスワード難読化を修正（シンプルな実装に変更）
 
-### 2026-01-10
+### 2026-01-10（Cliant Share初版）
 - ✅ Cliant Share機能を追加（単一ディレクトリ対応）
+- ✅ XOR暗号化による画像保護
+- ✅ パスワード認証システム
+
+### 2024-12-25（初回リリース）re機能を追加（単一ディレクトリ対応）
 - ✅ XOR暗号化による画像保護
 - ✅ パスワード認証システム
 
