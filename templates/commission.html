@@ -22,14 +22,14 @@
     <div class="container">
         <!-- 受付状況 -->
         <div class="commission-status">
+            <h2>現在の受付状況</h2>
             <div class="status-badge {% if commission.status.open %}status-open{% else %}status-closed{% endif %}">
                 {% if commission.status.open %}
-                <span class="status-icon">✓</span> 受付中
+                <span class="status-icon">✓</span> 無償受付中(そのため採用とクオリティは約束されません)
                 {% else %}
                 <span class="status-icon">✕</span> 停止中
                 {% endif %}
             </div>
-            <h2>現在の受付状況</h2>
             <p class="status-message">{{ commission.status.message }}</p>
             {% if commission.status.next_update %}
             <p class="status-note">次回更新予定: {{ commission.status.next_update }}</p>
