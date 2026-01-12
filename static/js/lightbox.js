@@ -35,9 +35,24 @@ class Lightbox {
                         </svg>
                     </button>
                     
-                    <div class="lightbox-image-container">
-                        <div class="lightbox-loading"></div>
-                        <img src="" alt="" class="lightbox-image">
+                    <div class="lightbox-image-side">
+                        <div class="lightbox-image-container">
+                            <div class="lightbox-loading"></div>
+                            <img src="" alt="" class="lightbox-image">
+                        </div>
+                        <div class="lightbox-zoom-hint">クリックでズーム</div>
+                    </div>
+                    
+                    <div class="lightbox-info-side">
+                        <div class="lightbox-info">
+                            <div class="lightbox-title"></div>
+                            <div class="lightbox-meta">
+                                <span class="lightbox-category"></span>
+                                <span class="lightbox-date"></span>
+                            </div>
+                            <div class="lightbox-tags"></div>
+                            <div class="lightbox-description"></div>
+                        </div>
                     </div>
                     
                     <button class="lightbox-nav lightbox-next" aria-label="次の画像">
@@ -45,21 +60,6 @@ class Lightbox {
                             <polyline points="9 18 15 12 9 6"></polyline>
                         </svg>
                     </button>
-                    
-                    <div class="lightbox-info">
-                        <div class="lightbox-title"></div>
-                        <div class="lightbox-meta">
-                            <span class="lightbox-category"></span>
-                            <span class="lightbox-date"></span>
-                        </div>
-                        <div class="lightbox-tags"></div>
-                        <div class="lightbox-description"></div>
-                        <div class="lightbox-copyright">
-                            ※ 作品の無断転載・二次使用は禁止です。ご使用の際は必ず事前にご連絡ください。
-                        </div>
-                    </div>
-                    
-                    <div class="lightbox-zoom-hint">クリックでズーム</div>
                 </div>
             </div>
         `;
