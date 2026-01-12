@@ -30,7 +30,6 @@
                 <span class="status-icon">✕</span> 停止中
                 {% endif %}
             </div>
-            <p class="status-message">{{ commission.status.message }}</p>
             {% if commission.status.next_update %}
             <p class="status-note">次回更新予定: {{ commission.status.next_update }}</p>
             {% endif %}
