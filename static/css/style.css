@@ -2066,7 +2066,8 @@ a:hover {
     max-height: 100%;
     object-fit: contain;
     cursor: zoom-in;
-    transition: transform 0.3s ease;
+    transition: none;
+    user-select: none;
 }
 
 .lightbox-video {
@@ -2077,8 +2078,7 @@ a:hover {
 }
 
 .lightbox-image.zoomed {
-    cursor: zoom-out;
-    transform: scale(2);
+    cursor: grab;
 }
 
 .lightbox-close {

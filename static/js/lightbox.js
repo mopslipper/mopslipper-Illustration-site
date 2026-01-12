@@ -9,6 +9,11 @@ class Lightbox {
         this.images = [];
         this.isZoomed = false;
         this.lightboxElement = null;
+        this.panX = 0;
+        this.panY = 0;
+        this.isDragging = false;
+        this.dragStartX = 0;
+        this.dragStartY = 0;
         this.init();
     }
 
@@ -103,6 +108,44 @@ class Lightbox {
             const currentImage = this.images[this.currentIndex];
             if (currentImage && !currentImage.isVideo) {
                 this.toggleZoom();
+            }
+        });
+
+        // ズーム時のドラッグ操作
+        image.addEventListener('mousedown', (e) => {
+            if (this.isZoomed) {
+                e.preventDefault();
+                this.isDragging = true;
+                this.dragStartX = e.clientX - this.panX;
+                this.dragStartY = e.clientY - this.panY;
+                image.style.cursor = 'grabbing';
+            }
+        });
+
+        image.addEventListener('mousemove', (e) => {
+            if (this.isDragging && this.isZoomed) {
+                e.preventDefault();
+                this.panX = e.clientX - this.dragStartX;
+                this.panY = e.clientY - this.dragStartY;
+                this.updateImageTransform(image);
+            }
+        });
+
+        image.addEventListener('mouseup', () => {
+            if (this.isDragging) {
+                this.isDragging = false;
+                if (this.isZoomed) {
+                    image.style.cursor = 'grab';
+                }
+            }
+        });
+
+        image.addEventListener('mouseleave', () => {
+            if (this.isDragging) {
+                this.isDragging = false;
+                if (this.isZoomed) {
+                    image.style.cursor = 'grab';
+                }
             }
         });
 
@@ -291,15 +334,21 @@ class Lightbox {
         
         if (this.isZoomed) {
             image.classList.add('zoomed');
+            image.style.cursor = 'grab';
+            this.panX = 0;
+            this.panY = 0;
+            this.updateImageTransform(image);
         } else {
             image.classList.remove('zoomed');
+            image.style.cursor = 'zoom-in';
+            this.panX = 0;
+            this.panY = 0;
+            image.style.transform = '';
         }
     }
 
-    showImage() {
-        const lightbox = this.lightboxElement;
-        const image = lightbox.querySelector('.lightbox-image');
-        const video = lightbox.querySelector('.lightbox-video');
+    updateImageTransform(image) {
+        image.style.transform = `translate(${this.panX}px, ${this.panY}px) scale(2)`;
         const loading = lightbox.querySelector('.lightbox-loading');
         const title = lightbox.querySelector('.lightbox-title');
         const category = lightbox.querySelector('.lightbox-category');
@@ -313,6 +362,13 @@ class Lightbox {
         if (this.images.length === 0) return;
 
         const currentImage = this.images[this.currentIndex];
+
+        // パンとズームをリセット
+        this.panX = 0;
+        this.panY = 0;
+        this.isZoomed = false;
+        image.style.transform = '';
+        image.style.cursor = 'zoom-in';
 
         // ローディング表示
         loading.style.display = 'block';
