@@ -58,6 +58,7 @@ class Lightbox {
                             </div>
                             <div class="lightbox-tags"></div>
                             <div class="lightbox-description"></div>
+                            <div class="lightbox-thumbnails"></div>
                         </div>
                     </div>
                     
@@ -455,6 +456,36 @@ class Lightbox {
             description.style.display = 'block';
         } else {
             description.style.display = 'none';
+        }
+
+        // サムネイル表示（複数画像がある場合）
+        const thumbnailsContainer = lightbox.querySelector('.lightbox-thumbnails');
+        thumbnailsContainer.innerHTML = '';
+        if (this.images.length > 1) {
+            thumbnailsContainer.style.display = 'block';
+            this.images.forEach((img, index) => {
+                if (!img.isVideo) {
+                    const thumbDiv = document.createElement('div');
+                    thumbDiv.className = 'lightbox-thumbnail';
+                    if (index === this.currentIndex) {
+                        thumbDiv.classList.add('active');
+                    }
+                    
+                    const thumbImg = document.createElement('img');
+                    thumbImg.src = img.src;
+                    thumbImg.alt = `${img.title} - 画像${index + 1}`;
+                    
+                    thumbDiv.appendChild(thumbImg);
+                    thumbDiv.addEventListener('click', () => {
+                        this.currentIndex = index;
+                        this.showImage();
+                    });
+                    
+                    thumbnailsContainer.appendChild(thumbDiv);
+                }
+            });
+        } else {
+            thumbnailsContainer.style.display = 'none';
         }
 
         // ナビゲーションボタンの状態

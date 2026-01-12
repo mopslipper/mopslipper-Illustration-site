@@ -2246,6 +2246,43 @@ a:hover {
     color: var(--text-primary);
 }
 
+.lightbox-thumbnails {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.lightbox-thumbnail {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all 0.3s ease;
+    opacity: 0.6;
+}
+
+.lightbox-thumbnail:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.lightbox-thumbnail.active {
+    border-color: var(--accent-primary);
+    opacity: 1;
+}
+
+.lightbox-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
 .lightbox-zoom-hint {
     position: absolute;
     top: 1rem;
