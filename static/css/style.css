@@ -661,7 +661,6 @@ a:hover {
     gap: 0.5rem;
     font-size: 0.95rem;
     white-space: nowrap;
-    flex-grow: 1;
 }
 
 .status-open {
@@ -681,7 +680,7 @@ a:hover {
 /* ===================================
    Links Grid
    =================================== */
-.links-grid {
+.status-open {
     background: #10b981;
     color: white;
 }
@@ -690,6 +689,7 @@ a:hover {
     background: #ef4444;
     color: white;
 }
+
 .links-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
