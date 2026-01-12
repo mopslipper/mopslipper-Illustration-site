@@ -214,6 +214,7 @@ class Lightbox {
             
             // サムネイルのクリック
             galleryThumbnails.forEach((thumb, index) => {
+                thumb.style.cursor = 'pointer';
                 thumb.addEventListener('click', (e) => {
                     e.preventDefault();
                     this.images = []; // 画像配列をリセット
