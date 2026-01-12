@@ -26,7 +26,7 @@
             <h3 class="status-title">依頼状況</h3>
             <div class="status-badge {% if commission_status.open %}status-open{% else %}status-closed{% endif %}">
                 {% if commission_status.open %}
-                <span class="status-icon">●</span> {{ commission_status.message }}
+                <span class="status-icon">✓</span> 無償受付中(そのため採用とクオリティは約束されません)
                 {% else %}
                 <span class="status-icon">●</span> 締切中
                 {% endif %}
