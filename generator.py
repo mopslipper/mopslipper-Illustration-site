@@ -190,7 +190,8 @@ class SiteGenerator:
                         directories.append({
                             'name': subdir.name,
                             'display_name': subdir.name.replace('_', ' ').title(),
-                            'count': len(enc_files)
+                            'count': len(enc_files),
+                            'files': [f.name for f in enc_files]
                         })
         
         html = template.render(
