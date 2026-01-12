@@ -199,24 +199,39 @@ class Lightbox {
             }
         });
 
-        // 作品詳細ページの画像
+        // 作品詳細ページの画像とサムネイルのクリックイベント
         const workDetailImage = document.querySelector('.work-detail-image img');
+        const galleryThumbnails = document.querySelectorAll('.additional-images .thumbnail');
+        
         if (workDetailImage && !workDetailImage.src.includes('.mp4')) {
+            // メイン画像のクリック
             workDetailImage.style.cursor = 'pointer';
             workDetailImage.addEventListener('click', () => {
+                this.images = []; // 画像配列をリセット
                 this.collectImages();
                 this.open(0);
             });
-        }
-
-        // ギャラリー機能がある場合（additional_images）
-        const galleryThumbnails = document.querySelectorAll('.additional-images .thumbnail');
-        galleryThumbnails.forEach((thumb, index) => {
-            thumb.addEventListener('click', () => {
-                this.collectImages();
-                this.open(index);
+            
+            // サムネイルのクリック
+            galleryThumbnails.forEach((thumb, index) => {
+                thumb.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.images = []; // 画像配列をリセット
+                    this.collectImages();
+                    this.open(index);
+                    
+                    // アクティブなサムネイルを更新
+                    galleryThumbnails.forEach(t => t.classList.remove('active'));
+                    thumb.classList.add('active');
+                    
+                    // メイン画像も更新
+                    const img = thumb.querySelector('img');
+                    if (img && workDetailImage) {
+                        workDetailImage.src = img.src;
+                    }
+                });
             });
-        });
+        }
     }
 
     collectImages() {
