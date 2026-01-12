@@ -48,7 +48,15 @@ class Lightbox {
                     
                     <div class="lightbox-info">
                         <div class="lightbox-title"></div>
-                        <div class="lightbox-counter"></div>
+                        <div class="lightbox-meta">
+                            <span class="lightbox-category"></span>
+                            <span class="lightbox-date"></span>
+                        </div>
+                        <div class="lightbox-tags"></div>
+                        <div class="lightbox-description"></div>
+                        <div class="lightbox-copyright">
+                            ※ 作品の無断転載・二次使用は禁止です。ご使用の際は必ず事前にご連絡ください。
+                        </div>
                     </div>
                     
                     <div class="lightbox-zoom-hint">クリックでズーム</div>
@@ -173,6 +181,9 @@ class Lightbox {
             const img = card.querySelector('.work-image img');
             const link = card.querySelector('.work-link');
             const title = card.querySelector('.work-title')?.textContent || '';
+            const date = card.querySelector('.work-date')?.textContent || '';
+            const category = card.dataset.category || '';
+            const tags = card.dataset.tags ? card.dataset.tags.split(',') : [];
             const isVisible = card.style.display !== 'none';
             
             if (img && isVisible && !link.href.includes('.mp4') && !link.href.includes('.mov') && !link.href.includes('.webm')) {
@@ -180,7 +191,11 @@ class Lightbox {
                 const imageSrc = img.src.replace('.jpg', '.webp');
                 this.images.push({
                     src: imageSrc,
-                    title: title
+                    title: title,
+                    date: date,
+                    category: category,
+                    tags: tags,
+                    description: '' // ギャラリーからは取得できない
                 });
             }
         });
@@ -189,9 +204,19 @@ class Lightbox {
         const workDetailImage = document.querySelector('.work-detail-image img');
         if (workDetailImage && this.images.length === 0) {
             const title = document.querySelector('.work-detail-title')?.textContent || '';
+            const date = document.querySelector('.work-detail-date')?.textContent || '';
+            const category = document.querySelector('.work-detail-category')?.textContent || '';
+            const description = document.querySelector('.work-detail-description')?.textContent || '';
+            const tagsElements = document.querySelectorAll('.work-detail-tags .tag');
+            const tags = Array.from(tagsElements).map(tag => tag.textContent);
+            
             this.images.push({
                 src: workDetailImage.src,
-                title: title
+                title: title,
+                date: date,
+                category: category,
+                tags: tags,
+                description: description
             });
 
             // additional_imagesがある場合
@@ -199,7 +224,11 @@ class Lightbox {
             galleryImages.forEach(img => {
                 this.images.push({
                     src: img.src,
-                    title: title
+                    title: title,
+                    date: date,
+                    category: category,
+                    tags: tags,
+                    description: description
                 });
             });
         }
@@ -251,7 +280,10 @@ class Lightbox {
         const image = lightbox.querySelector('.lightbox-image');
         const loading = lightbox.querySelector('.lightbox-loading');
         const title = lightbox.querySelector('.lightbox-title');
-        const counter = lightbox.querySelector('.lightbox-counter');
+        const category = lightbox.querySelector('.lightbox-category');
+        const date = lightbox.querySelector('.lightbox-date');
+        const tagsContainer = lightbox.querySelector('.lightbox-tags');
+        const description = lightbox.querySelector('.lightbox-description');
         const prevBtn = lightbox.querySelector('.lightbox-prev');
         const nextBtn = lightbox.querySelector('.lightbox-next');
 
@@ -274,9 +306,31 @@ class Lightbox {
         };
         img.src = currentImage.src;
 
-        // タイトルとカウンター
+        // タイトル
         title.textContent = currentImage.title;
-        counter.textContent = `${this.currentIndex + 1} / ${this.images.length}`;
+
+        // カテゴリと日付
+        category.textContent = currentImage.category;
+        date.textContent = currentImage.date;
+
+        // タグ
+        tagsContainer.innerHTML = '';
+        if (currentImage.tags && currentImage.tags.length > 0) {
+            currentImage.tags.forEach(tag => {
+                const tagElement = document.createElement('span');
+                tagElement.className = 'tag';
+                tagElement.textContent = tag;
+                tagsContainer.appendChild(tagElement);
+            });
+        }
+
+        // 説明
+        if (currentImage.description) {
+            description.textContent = currentImage.description;
+            description.style.display = 'block';
+        } else {
+            description.style.display = 'none';
+        }
 
         // ナビゲーションボタンの状態
         if (this.currentIndex === 0) {

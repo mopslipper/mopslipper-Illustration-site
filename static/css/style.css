@@ -2122,19 +2122,74 @@ a:hover {
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    padding: 1rem 2rem;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 1.5rem 2rem;
     border-radius: 12px;
     border: 1px solid var(--border-color);
-    max-width: 90%;
-    text-align: center;
+    max-width: 800px;
+    width: 90%;
+    max-height: 40vh;
+    overflow-y: auto;
 }
 
 .lightbox-title {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     color: var(--text-primary);
+}
+
+.lightbox-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.lightbox-category {
+    padding: 0.25rem 0.75rem;
+    background: var(--bg-tertiary);
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.lightbox-date {
+    padding: 0.25rem 0.75rem;
+    background: var(--bg-tertiary);
+    border-radius: 4px;
+}
+
+.lightbox-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.lightbox-tags .tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--accent-primary);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.lightbox-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.lightbox-copyright {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-align: center;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-color);
 }
 
 .lightbox-counter {
@@ -2201,10 +2256,25 @@ a:hover {
 
     .lightbox-info {
         bottom: 1rem;
-        padding: 0.75rem 1.5rem;
+        padding: 1rem 1.5rem;
+        max-width: 95%;
+        max-height: 50vh;
     }
 
     .lightbox-title {
-        font-size: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .lightbox-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .lightbox-description {
+        font-size: 0.9rem;
+    }
+
+    .lightbox-tags .tag {
+        font-size: 0.8rem;
     }
 }
