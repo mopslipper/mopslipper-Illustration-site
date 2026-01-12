@@ -3,11 +3,11 @@
 // ===================================
 
 document.addEventListener('DOMContentLoaded', function() {
+    initPagination(); // 先にページネーションを初期化
     initGalleryFilters();
     initSearchFunction();
     initTagCloud();
     initSidebarToggle();
-    initPagination();
 });
 
 // サイドバーの折りたたみ機能
@@ -40,13 +40,6 @@ function initGalleryFilters() {
     let showR18Only = false;
     let showR15Only = false;
     let searchQuery = '';
-
-    // ページネーション用の状態を保持
-    window.galleryState = {
-        allWorks: [],
-        currentPage: 1,
-        itemsPerPage: 30
-    };
 
     // 検索クエリを設定する関数（他の関数から呼び出し可能）
     window.setSearchQuery = function(query) {
@@ -165,7 +158,9 @@ function initGalleryFilters() {
         window.galleryState.currentPage = 1;
 
         // ページネーションを更新
-        updatePagination();
+        if (window.updatePagination) {
+            window.updatePagination();
+        }
 
         // 結果が0件の場合のメッセージ
         if (noResults) {
@@ -315,6 +310,15 @@ function initTagCloud() {
 // ページネーション機能
 // ===================================
 function initPagination() {
+    // ページネーション用の状態を初期化
+    if (!window.galleryState) {
+        window.galleryState = {
+            allWorks: [],
+            currentPage: 1,
+            itemsPerPage: 30
+        };
+    }
+
     const pagination = document.getElementById('pagination');
     const prevBtn = document.getElementById('prev-page');
     const nextBtn = document.getElementById('next-page');
