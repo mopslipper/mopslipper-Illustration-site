@@ -180,26 +180,27 @@ class Lightbox {
     }
 
     setupGalleryImages() {
-        // 繧ｮ繝｣繝ｩ繝ｪ繝ｼ繝壹・繧ｸ縺ｮ逕ｻ蜒・
-        const workCards = document.querySelectorAll('.work-card');
-        workCards.forEach((card, index) => {
-            const img = card.querySelector('.work-image img');
-            const link = card.querySelector('.work-link');
-            const title = card.querySelector('.work-title')?.textContent || '';
-            
-            if (img && !link.href.includes('.mp4') && !link.href.includes('.mov') && !link.href.includes('.webm')) {
-                // 蜍慕判莉･螟悶・蝣ｴ蜷医・縺ｿ繝ｩ繧､繝医・繝・け繧ｹ繧呈怏蜉ｹ蛹・
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
+        // イベントデリゲーションを使用して、動的に生成される要素にも対応
+        document.addEventListener('click', (e) => {
+            // data-lightbox-trigger属性を持つリンクがクリックされた場合
+            const link = e.target.closest('.work-link[data-lightbox-trigger]');
+            if (link) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // クリックされたwork-cardを取得
+                const card = link.closest('.work-card');
+                if (card) {
+                    const title = card.querySelector('.work-title')?.textContent || '';
+                    
                     this.collectImages();
                     const imageIndex = this.images.findIndex(imgData => imgData.title === title);
                     if (imageIndex !== -1) {
                         this.open(imageIndex);
                     }
-                });
+                }
             }
-        });
-
+        }, true);
         // 菴懷刀隧ｳ邏ｰ繝壹・繧ｸ縺ｮ逕ｻ蜒上→繧ｵ繝繝阪う繝ｫ縺ｮ繧ｯ繝ｪ繝・け繧､繝吶Φ繝・
         const workDetailImage = document.querySelector('.work-detail-image img');
         const galleryThumbnails = document.querySelectorAll('.additional-images .thumbnail');
