@@ -1,0 +1,18 @@
+﻿setupGalleryImages() {
+        // 繧ｮ繝｣繝ｩ繝ｪ繝ｼ繝壹・繧ｸ縺ｮ逕ｻ蜒・
+        const workCards = document.querySelectorAll('.work-card');
+        workCards.forEach((card, index) => {
+            const img = card.querySelector('.work-image img');
+            const link = card.querySelector('.work-link');
+            const title = card.querySelector('.work-title')?.textContent || '';
+            
+            if (img && !link.href.includes('.mp4') && !link.href.includes('.mov') && !link.href.includes('.webm')) {
+                // 蜍慕判莉･螟悶・蝣ｴ蜷医・縺ｿ繝ｩ繧､繝医・繝・け繧ｹ繧呈怏蜉ｹ蛹・
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.collectImages();
+                    const imageIndex = this.images.findIndex(imgData => imgData.title === title);
+                    if (imageIndex !== -1) {
+                        this.open(imageIndex);
+                    }
+                }

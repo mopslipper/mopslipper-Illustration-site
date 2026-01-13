@@ -5,6 +5,7 @@ Python + Jinja2 でHTMLを生成
 
 import json
 import shutil
+import sys
 from pathlib import Path
 from datetime import datetime
 from jinja2 import Environment, FileSystemLoader
@@ -12,14 +13,15 @@ from jinja2 import Environment, FileSystemLoader
 
 class SiteGenerator:
     """静的サイトを生成するメインクラス"""
-    
-    def __init__(self):
+
+    def __init__(self, local_mode=False):
         self.root = Path(__file__).parent
         self.data_dir = self.root / "data"
         self.template_dir = self.root / "templates"
         self.static_dir = self.root / "static"
         self.dist_dir = self.root / "dist"
-        
+        self.local_mode = local_mode
+
         # データ保持用
         self.works = []
         self.commission = {}
@@ -31,6 +33,17 @@ class SiteGenerator:
             autoescape=True
         )
         self.env.globals['now'] = datetime.now()
+        
+        # パス生成用の関数を追加
+        def url(path):
+            """パスを生成（ローカルモードでは相対パス、本番では base_path付き）"""
+            if self.local_mode:
+                return f".{path}"
+            else:
+                base = self.config.get('base_path', '')
+                return f"{base}{path}"
+        
+        self.env.globals['url'] = url
     
     def load_data(self):
         """データファイルを読み込み"""
@@ -39,18 +52,21 @@ class SiteGenerator:
         with open(self.data_dir / "config.json", "r", encoding="utf-8") as f:
             self.config = json.load(f)
         
-        # Jinja2にbase_pathを渡す
-        self.env.globals['base_path'] = self.config.get('base_path', '')
+        # Jinja2にbase_pathを渡す（ローカルモードでは "."）
+        if self.local_mode:
+            self.env.globals['base_path'] = '.'
+        else:
+            self.env.globals['base_path'] = self.config.get('base_path', '')
         
         with open(self.data_dir / "works.json", "r", encoding="utf-8") as f:
             self.works = json.load(f)
-        
+
         with open(self.data_dir / "commission.json", "r", encoding="utf-8") as f:
             self.commission = json.load(f)
-        
+
         print(f"  ✓ 作品: {len(self.works)}件")
         print(f"  ✓ 依頼状況: {'受付中' if self.commission.get('status', {}).get('open') else '停止中'}")
-    
+
     def get_tags(self):
         """全作品からタグを抽出"""
         tags = set()
@@ -136,6 +152,11 @@ class SiteGenerator:
         works_dir = self.dist_dir / "works"
         works_dir.mkdir(exist_ok=True)
         
+        # 作品詳細ページは1階層深いため、base_pathを調整
+        original_base_path = self.env.globals.get('base_path', '')
+        if self.local_mode:
+            self.env.globals['base_path'] = '..'  # 1階層上に戻る
+        
         for work in self.works:
             related_works = self.get_related_works(work, limit=6)
             
@@ -146,6 +167,9 @@ class SiteGenerator:
             )
             
             (works_dir / f"{work['slug']}.html").write_text(html, encoding="utf-8")
+        
+        # base_pathを元に戻す
+        self.env.globals['base_path'] = original_base_path
     
     def generate_commission(self):
         """依頼ページ生成"""
@@ -268,7 +292,13 @@ class SiteGenerator:
 
 def main():
     """メイン処理"""
-    generator = SiteGenerator()
+    # コマンドライン引数で --local が指定されたらローカルモードで実行
+    local_mode = '--local' in sys.argv
+    
+    if local_mode:
+        print("🏠 ローカルモードでビルド中...\n")
+    
+    generator = SiteGenerator(local_mode=local_mode)
     generator.build()
 
 

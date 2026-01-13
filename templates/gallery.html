@@ -342,7 +342,7 @@
                          data-description="{{ work.description }}"
                          data-is-video="{{ 'true' if work.image_path.endswith(('.mp4', '.mov', '.webm')) else 'false' }}"
                          data-video-path="{{ base_path }}{{ work.image_path if work.image_path.endswith(('.mp4', '.mov', '.webm')) else '' }}">
-                        <a href="{{ base_path }}/works/{{ work.slug }}.html" class="work-link">
+                          <a href="{{ base_path }}/works/{{ work.slug }}.html" class="work-link">
                             <div class="work-image">
                                 <img src="{{ base_path }}{{ work.thumbnail }}" alt="{{ work.title }}" loading="lazy">
                                 {% if work.image_path.endswith(('.mp4', '.mov', '.webm')) %}
