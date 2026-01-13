@@ -475,3 +475,22 @@ function initPagination() {
         }
     });
 }
+
+// ===================================
+// フィルタ状態の保存と作品リンク処理
+// ===================================
+document.addEventListener('DOMContentLoaded', function() {
+    // 作品リンクにクリックイベントを追加
+    document.addEventListener('click', function(e) {
+        const workLink = e.target.closest('.work-link');
+        if (workLink) {
+            // 現在表示されている作品のslugリストを作成
+            const visibleWorks = window.galleryState?.allWorks || [];
+            const workSlugs = visibleWorks.map(work => work.dataset.slug);
+            
+            // localStorageに保存
+            localStorage.setItem('galleryFilteredWorks', JSON.stringify(workSlugs));
+            localStorage.setItem('galleryFilterTimestamp', Date.now().toString());
+        }
+    });
+});

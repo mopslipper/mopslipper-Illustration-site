@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initCommentForm();
     initShareButtons();
     initImageGallery();
+    updateFilteredNavigation();
 });
 
 // ===================================
@@ -325,4 +326,146 @@ function initImageGallery() {
             workImage.alt = thumbnail.querySelector('img').alt;
         });
     });
+}
+
+// ===================================
+// フィルタされた作品リストに基づくナビゲーション更新
+// ===================================
+document.addEventListener('DOMContentLoaded', function() {
+    updateFilteredNavigation();
+});
+
+function updateFilteredNavigation() {
+    // localStorageからフィルタされた作品リストを取得
+    const filteredWorksJson = localStorage.getItem('galleryFilteredWorks');
+    const timestamp = localStorage.getItem('galleryFilterTimestamp');
+    
+    // 5分以内のデータのみ使用（古いデータは無視）
+    const fiveMinutes = 5 * 60 * 1000;
+    if (!filteredWorksJson || !timestamp || (Date.now() - parseInt(timestamp)) > fiveMinutes) {
+        return; // デフォルトのナビゲーションを使用
+    }
+    
+    try {
+        const filteredWorks = JSON.parse(filteredWorksJson);
+        const currentSlug = getCurrentWorkSlug();
+        
+        if (!currentSlug || filteredWorks.length === 0) return;
+        
+        // 現在の作品の位置を見つける
+        const currentIndex = filteredWorks.indexOf(currentSlug);
+        if (currentIndex === -1) return; // 現在の作品がフィルタリストにない場合はデフォルトを使用
+        
+        // 前後の作品を取得
+        const prevSlug = currentIndex > 0 ? filteredWorks[currentIndex - 1] : null;
+        const nextSlug = currentIndex < filteredWorks.length - 1 ? filteredWorks[currentIndex + 1] : null;
+        
+        // ナビゲーションボタンを更新
+        updateNavButton('.nav-btn.prev', prevSlug);
+        updateNavButton('.nav-btn.next', nextSlug);
+        
+    } catch (e) {
+        console.error('Failed to parse filtered works:', e);
+    }
+}
+
+function getCurrentWorkSlug() {
+    // URLから現在の作品のslugを取得
+    const pathParts = window.location.pathname.split('/');
+    const filename = pathParts[pathParts.length - 1];
+    return filename.replace('.html', '');
+}
+
+function updateNavButton(selector, slug) {
+    const navBtn = document.querySelector(selector);
+    if (!navBtn) return;
+    
+    if (slug) {
+        // slugがある場合、リンクを更新
+        const basePath = getBasePath();
+        const newHref = `${basePath}/works/${slug}.html`;
+        
+        if (navBtn.tagName === 'A') {
+            navBtn.href = newHref;
+        } else {
+            // disabledのdivをaタグに変換
+            const newLink = document.createElement('a');
+            newLink.href = newHref;
+            newLink.className = navBtn.className.replace('disabled', '').trim();
+            newLink.innerHTML = navBtn.innerHTML;
+            navBtn.parentNode.replaceChild(newLink, navBtn);
+        }
+    } else {
+        // slugがない場合、disabledに変更
+        if (navBtn.tagName === 'A') {
+            const newDiv = document.createElement('div');
+            newDiv.className = navBtn.className + ' disabled';
+            newDiv.innerHTML = navBtn.innerHTML;
+            // タイトルを「なし」に変更
+            const titleSpan = newDiv.querySelector('.nav-btn-title');
+            if (titleSpan) titleSpan.textContent = 'なし';
+            navBtn.parentNode.replaceChild(newDiv, navBtn);
+        }
+    }
+}
+
+function getBasePath() {
+    // base_pathを取得（相対パスの場合は..、絶対パスの場合はconfig値）
+    const pathParts = window.location.pathname.split('/');
+    // worksフォルダから1階層上に戻る
+    return '..';
+}
+
+// ===================================
+// フィルタリングされた作品リストに基づくナビゲーション更新
+// ===================================
+function updateFilteredNavigation() {
+    // localStorageからフィルタリングされた作品リストを取得
+    const filterDataStr = localStorage.getItem('galleryFilteredWorks');
+    
+    if (!filterDataStr) {
+        // フィルタデータがない場合は何もしない（デフォルトのナビゲーションを使用）
+        return;
+    }
+    
+    try {
+        const filterData = JSON.parse(filterDataStr);
+        
+        // 5分以上経過している場合は無効
+        const fiveMinutes = 5 * 60 * 1000;
+        if (Date.now() - filterData.timestamp > fiveMinutes) {
+            localStorage.removeItem('galleryFilteredWorks');
+            return;
+        }
+        
+        const filteredSlugs = filterData.slugs;
+        if (!filteredSlugs || filteredSlugs.length === 0) return;
+        
+        // 現在の作品のslugを取得
+        const workSection = document.querySelector('.work-detail-section');
+        if (!workSection) return;
+        
+        const currentSlug = workSection.getAttribute('data-current-slug');
+        if (!currentSlug) return;
+        
+        // 現在の作品のインデックスを取得
+        const currentIndex = filteredSlugs.indexOf(currentSlug);
+        
+        if (currentIndex === -1) {
+            // 現在の作品がフィルタリストにない場合は何もしない
+            return;
+        }
+        
+        // 前後の作品のslugを取得
+        const prevSlug = currentIndex > 0 ? filteredSlugs[currentIndex - 1] : null;
+        const nextSlug = currentIndex < filteredSlugs.length - 1 ? filteredSlugs[currentIndex + 1] : null;
+        
+        // ナビゲーションボタンを更新
+        updateNavigationButton('.nav-btn.prev', prevSlug);
+        updateNavigationButton('.nav-btn.next', nextSlug);
+        
+    } catch (e) {
+        console.error('フィルタデータの解析に失敗:', e);
+        localStorage.removeItem('galleryFilteredWorks');
+    }
 }

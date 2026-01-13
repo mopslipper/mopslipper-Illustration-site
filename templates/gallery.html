@@ -334,6 +334,7 @@
                 <div class="works-grid" id="works-grid">
                     {% for work in works %}
                     <div class="work-card" 
+                         data-slug="{{ work.slug }}"
                          data-nsfw="{{ work.nsfw|lower }}" 
                          data-sensitive="{{ work.sensitive|default(false)|lower }}" 
                          data-category="{{ work.category }}"
