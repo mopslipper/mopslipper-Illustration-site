@@ -329,54 +329,9 @@ function initImageGallery() {
 }
 
 // ===================================
-// フィルタされた作品リストに基づくナビゲーション更新
+// ナビゲーションボタンの更新
 // ===================================
-document.addEventListener('DOMContentLoaded', function() {
-    updateFilteredNavigation();
-});
-
-function updateFilteredNavigation() {
-    // localStorageからフィルタされた作品リストを取得
-    const filteredWorksJson = localStorage.getItem('galleryFilteredWorks');
-    const timestamp = localStorage.getItem('galleryFilterTimestamp');
-    
-    // 5分以内のデータのみ使用（古いデータは無視）
-    const fiveMinutes = 5 * 60 * 1000;
-    if (!filteredWorksJson || !timestamp || (Date.now() - parseInt(timestamp)) > fiveMinutes) {
-        return; // デフォルトのナビゲーションを使用
-    }
-    
-    try {
-        const filteredWorks = JSON.parse(filteredWorksJson);
-        const currentSlug = getCurrentWorkSlug();
-        
-        if (!currentSlug || filteredWorks.length === 0) return;
-        
-        // 現在の作品の位置を見つける
-        const currentIndex = filteredWorks.indexOf(currentSlug);
-        if (currentIndex === -1) return; // 現在の作品がフィルタリストにない場合はデフォルトを使用
-        
-        // 前後の作品を取得
-        const prevSlug = currentIndex > 0 ? filteredWorks[currentIndex - 1] : null;
-        const nextSlug = currentIndex < filteredWorks.length - 1 ? filteredWorks[currentIndex + 1] : null;
-        
-        // ナビゲーションボタンを更新
-        updateNavButton('.nav-btn.prev', prevSlug);
-        updateNavButton('.nav-btn.next', nextSlug);
-        
-    } catch (e) {
-        console.error('Failed to parse filtered works:', e);
-    }
-}
-
-function getCurrentWorkSlug() {
-    // URLから現在の作品のslugを取得
-    const pathParts = window.location.pathname.split('/');
-    const filename = pathParts[pathParts.length - 1];
-    return filename.replace('.html', '');
-}
-
-function updateNavButton(selector, slug) {
+function updateNavigationButton(selector, slug) {
     const navBtn = document.querySelector(selector);
     if (!navBtn) return;
     
@@ -401,9 +356,6 @@ function updateNavButton(selector, slug) {
             const newDiv = document.createElement('div');
             newDiv.className = navBtn.className + ' disabled';
             newDiv.innerHTML = navBtn.innerHTML;
-            // タイトルを「なし」に変更
-            const titleSpan = newDiv.querySelector('.nav-btn-title');
-            if (titleSpan) titleSpan.textContent = 'なし';
             navBtn.parentNode.replaceChild(newDiv, navBtn);
         }
     }

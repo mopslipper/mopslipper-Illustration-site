@@ -486,11 +486,16 @@ document.addEventListener('DOMContentLoaded', function() {
         if (workLink) {
             // 現在表示されている作品のslugリストを作成
             const visibleWorks = window.galleryState?.allWorks || [];
-            const workSlugs = visibleWorks.map(work => work.dataset.slug);
+            const workSlugs = visibleWorks
+                .map(work => work.getAttribute('data-slug'))
+                .filter(slug => slug); // nullを除外
             
-            // localStorageに保存
-            localStorage.setItem('galleryFilteredWorks', JSON.stringify(workSlugs));
-            localStorage.setItem('galleryFilterTimestamp', Date.now().toString());
+            // localStorageに保存（5分間有効）
+            const filterData = {
+                slugs: workSlugs,
+                timestamp: Date.now()
+            };
+            localStorage.setItem('galleryFilteredWorks', JSON.stringify(filterData));
         }
     });
 });
