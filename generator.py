@@ -157,13 +157,22 @@ class SiteGenerator:
         if self.local_mode:
             self.env.globals['base_path'] = '..'  # 1階層上に戻る
         
-        for work in self.works:
+        # 日付順にソート
+        sorted_works = sorted(self.works, key=lambda x: x["date"], reverse=True)
+        
+        for idx, work in enumerate(sorted_works):
             related_works = self.get_related_works(work, limit=6)
+            
+            # 前後の作品を取得
+            prev_work = sorted_works[idx - 1] if idx > 0 else None
+            next_work = sorted_works[idx + 1] if idx < len(sorted_works) - 1 else None
             
             html = template.render(
                 config=self.config,
                 work=work,
-                related_works=related_works
+                related_works=related_works,
+                prev_work=prev_work,
+                next_work=next_work
             )
             
             (works_dir / f"{work['slug']}.html").write_text(html, encoding="utf-8")
