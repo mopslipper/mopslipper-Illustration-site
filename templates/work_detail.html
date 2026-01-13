@@ -81,12 +81,6 @@
         align-items: flex-end;
     }
 
-    .nav-btn-label {
-        font-size: 0.75rem;
-        color: var(--text-secondary);
-        margin-bottom: 0.25rem;
-    }
-
     .nav-btn-title {
         font-size: 0.9rem;
         font-weight: 500;
@@ -109,10 +103,6 @@
         .nav-btn-title {
             font-size: 0.8rem;
             max-width: 100px;
-        }
-
-        .nav-btn-label {
-            font-size: 0.7rem;
         }
     }
 
@@ -181,7 +171,6 @@
                     <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
                 <div class="nav-btn-content">
-                    <span class="nav-btn-label">前の作品</span>
                     <span class="nav-btn-title">{{ prev_work.title }}</span>
                 </div>
             </a>
@@ -191,7 +180,6 @@
                     <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
                 <div class="nav-btn-content">
-                    <span class="nav-btn-label">前の作品</span>
                     <span class="nav-btn-title">なし</span>
                 </div>
             </div>
@@ -200,7 +188,6 @@
             {% if next_work %}
             <a href="{{ base_path }}/works/{{ next_work.slug }}.html" class="nav-btn next">
                 <div class="nav-btn-content">
-                    <span class="nav-btn-label">次の作品</span>
                     <span class="nav-btn-title">{{ next_work.title }}</span>
                 </div>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -210,7 +197,6 @@
             {% else %}
             <div class="nav-btn next disabled">
                 <div class="nav-btn-content">
-                    <span class="nav-btn-label">次の作品</span>
                     <span class="nav-btn-title">なし</span>
                 </div>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
