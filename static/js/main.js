@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initHamburgerMenu();
     initNSFWModal();
     initNSFWFilter();
+    initWorkLinkTracking();
 });
 
 // ===================================
@@ -96,6 +97,35 @@ function initNSFWFilter() {
             work.style.display = 'none';
         });
     }
+}
+
+// ===================================
+// 作品リンククリック時のフィルタリング状態保存
+// ===================================
+function initWorkLinkTracking() {
+    const workLinks = document.querySelectorAll('.work-link');
+    
+    workLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // 表示されている作品のslugを収集
+            const visibleWorkCards = Array.from(document.querySelectorAll('.work-card'))
+                .filter(card => {
+                    const styles = window.getComputedStyle(card);
+                    return styles.display !== 'none';
+                });
+            
+            const workSlugs = visibleWorkCards
+                .map(card => card.getAttribute('data-slug'))
+                .filter(slug => slug); // nullを除外
+            
+            // localStorageに保存（5分間有効）
+            const filterData = {
+                slugs: workSlugs,
+                timestamp: Date.now()
+            };
+            localStorage.setItem('galleryFilteredWorks', JSON.stringify(filterData));
+        });
+    });
 }
 
 // ===================================
