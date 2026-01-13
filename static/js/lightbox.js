@@ -1,6 +1,6 @@
-// ===================================
-// ライトボックス機能
-// 画像の全画面表示、ズーム、ナビゲーション
+﻿// ===================================
+// 繝ｩ繧､繝医・繝・け繧ｹ讖溯・
+// 逕ｻ蜒上・蜈ｨ逕ｻ髱｢陦ｨ遉ｺ縲√ぜ繝ｼ繝縲√リ繝薙ご繝ｼ繧ｷ繝ｧ繝ｳ
 // ===================================
 
 class Lightbox {
@@ -18,13 +18,13 @@ class Lightbox {
     }
 
     init() {
-        // ライトボックスHTMLを作成
+        // 繝ｩ繧､繝医・繝・け繧ｹHTML繧剃ｽ懈・
         this.createLightboxHTML();
         
-        // イベントリスナーを設定
+        // 繧､繝吶Φ繝医Μ繧ｹ繝翫・繧定ｨｭ螳・
         this.setupEventListeners();
         
-        // ギャラリーの画像をクリック可能にする
+        // 繧ｮ繝｣繝ｩ繝ｪ繝ｼ縺ｮ逕ｻ蜒上ｒ繧ｯ繝ｪ繝・け蜿ｯ閭ｽ縺ｫ縺吶ｋ
         this.setupGalleryImages();
     }
 
@@ -32,9 +32,9 @@ class Lightbox {
         const lightboxHTML = `
             <div id="lightbox" class="lightbox">
                 <div class="lightbox-content">
-                    <button class="lightbox-close" aria-label="閉じる">×</button>
+                    <button class="lightbox-close" aria-label="髢峨§繧・>ﾃ・/button>
                     
-                    <button class="lightbox-nav lightbox-prev" aria-label="前の画像">
+                    <button class="lightbox-nav lightbox-prev" aria-label="蜑阪・逕ｻ蜒・>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
                             <polyline points="15 18 9 12 15 6"></polyline>
                         </svg>
@@ -46,7 +46,7 @@ class Lightbox {
                             <img src="" alt="" class="lightbox-image">
                             <video src="" class="lightbox-video" controls style="display: none;"></video>
                         </div>
-                        <div class="lightbox-zoom-hint">クリックでズーム</div>
+                        <div class="lightbox-zoom-hint">繧ｯ繝ｪ繝・け縺ｧ繧ｺ繝ｼ繝</div>
                     </div>
                     
                     <div class="lightbox-info-side">
@@ -62,7 +62,7 @@ class Lightbox {
                         </div>
                     </div>
                     
-                    <button class="lightbox-nav lightbox-next" aria-label="次の画像">
+                    <button class="lightbox-nav lightbox-next" aria-label="谺｡縺ｮ逕ｻ蜒・>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
                             <polyline points="9 18 15 12 9 6"></polyline>
                         </svg>
@@ -82,17 +82,17 @@ class Lightbox {
         const nextBtn = lightbox.querySelector('.lightbox-next');
         const image = lightbox.querySelector('.lightbox-image');
 
-        // 閉じるボタン
+        // 髢峨§繧九・繧ｿ繝ｳ
         closeBtn.addEventListener('click', () => this.close());
 
-        // 背景クリックで閉じる
+        // 閭梧勹繧ｯ繝ｪ繝・け縺ｧ髢峨§繧・
         lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
                 this.close();
             }
         });
 
-        // ナビゲーションボタン
+        // 繝翫ン繧ｲ繝ｼ繧ｷ繝ｧ繝ｳ繝懊ち繝ｳ
         prevBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             this.prev();
@@ -103,7 +103,7 @@ class Lightbox {
             this.next();
         });
 
-        // 画像クリックでズーム（動画の場合は無効）
+        // 逕ｻ蜒上け繝ｪ繝・け縺ｧ繧ｺ繝ｼ繝・亥虚逕ｻ縺ｮ蝣ｴ蜷医・辟｡蜉ｹ・・
         image.addEventListener('click', (e) => {
             e.stopPropagation();
             const currentImage = this.images[this.currentIndex];
@@ -112,7 +112,7 @@ class Lightbox {
             }
         });
 
-        // ズーム時のドラッグ操作
+        // 繧ｺ繝ｼ繝譎ゅ・繝峨Λ繝・げ謫堺ｽ・
         image.addEventListener('mousedown', (e) => {
             if (this.isZoomed) {
                 e.preventDefault();
@@ -150,7 +150,7 @@ class Lightbox {
             }
         });
 
-        // キーボード操作
+        // 繧ｭ繝ｼ繝懊・繝画桃菴・
         document.addEventListener('keydown', (e) => {
             if (!lightbox.classList.contains('active')) return;
 
@@ -171,7 +171,7 @@ class Lightbox {
             }
         });
 
-        // ズームヒントの表示
+        // 繧ｺ繝ｼ繝繝偵Φ繝医・陦ｨ遉ｺ
         image.addEventListener('mouseenter', () => {
             const hint = lightbox.querySelector('.lightbox-zoom-hint');
             hint.classList.add('show');
@@ -180,7 +180,7 @@ class Lightbox {
     }
 
     setupGalleryImages() {
-        // ギャラリーページの画像
+        // 繧ｮ繝｣繝ｩ繝ｪ繝ｼ繝壹・繧ｸ縺ｮ逕ｻ蜒・
         const workCards = document.querySelectorAll('.work-card');
         workCards.forEach((card, index) => {
             const img = card.querySelector('.work-image img');
@@ -188,7 +188,7 @@ class Lightbox {
             const title = card.querySelector('.work-title')?.textContent || '';
             
             if (img && !link.href.includes('.mp4') && !link.href.includes('.mov') && !link.href.includes('.webm')) {
-                // 動画以外の場合のみライトボックスを有効化
+                // 蜍慕判莉･螟悶・蝣ｴ蜷医・縺ｿ繝ｩ繧､繝医・繝・け繧ｹ繧呈怏蜉ｹ蛹・
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     this.collectImages();
@@ -200,33 +200,33 @@ class Lightbox {
             }
         });
 
-        // 作品詳細ページの画像とサムネイルのクリックイベント
+        // 菴懷刀隧ｳ邏ｰ繝壹・繧ｸ縺ｮ逕ｻ蜒上→繧ｵ繝繝阪う繝ｫ縺ｮ繧ｯ繝ｪ繝・け繧､繝吶Φ繝・
         const workDetailImage = document.querySelector('.work-detail-image img');
         const galleryThumbnails = document.querySelectorAll('.additional-images .thumbnail');
         
         if (workDetailImage && !workDetailImage.src.includes('.mp4')) {
-            // メイン画像のクリック
+            // 繝｡繧､繝ｳ逕ｻ蜒上・繧ｯ繝ｪ繝・け
             workDetailImage.style.cursor = 'pointer';
             workDetailImage.addEventListener('click', () => {
-                this.images = []; // 画像配列をリセット
+                this.images = []; // 逕ｻ蜒城・蛻励ｒ繝ｪ繧ｻ繝・ヨ
                 this.collectImages();
                 this.open(0);
             });
             
-            // サムネイルのクリック
+            // 繧ｵ繝繝阪う繝ｫ縺ｮ繧ｯ繝ｪ繝・け
             galleryThumbnails.forEach((thumb, index) => {
                 thumb.style.cursor = 'pointer';
                 thumb.addEventListener('click', (e) => {
                     e.preventDefault();
-                    this.images = []; // 画像配列をリセット
+                    this.images = []; // 逕ｻ蜒城・蛻励ｒ繝ｪ繧ｻ繝・ヨ
                     this.collectImages();
                     this.open(index);
                     
-                    // アクティブなサムネイルを更新
+                    // 繧｢繧ｯ繝・ぅ繝悶↑繧ｵ繝繝阪う繝ｫ繧呈峩譁ｰ
                     galleryThumbnails.forEach(t => t.classList.remove('active'));
                     thumb.classList.add('active');
                     
-                    // メイン画像も更新
+                    // 繝｡繧､繝ｳ逕ｻ蜒上ｂ譖ｴ譁ｰ
                     const img = thumb.querySelector('img');
                     if (img && workDetailImage) {
                         workDetailImage.src = img.src;
@@ -239,7 +239,7 @@ class Lightbox {
     collectImages() {
         this.images = [];
         
-        // ギャラリーページから収集
+        // 繧ｮ繝｣繝ｩ繝ｪ繝ｼ繝壹・繧ｸ縺九ｉ蜿朱寔
         const workCards = document.querySelectorAll('.work-card');
         workCards.forEach(card => {
             const img = card.querySelector('.work-image img');
@@ -254,9 +254,9 @@ class Lightbox {
             
             if (img && isVisible) {
                 if (isVideo) {
-                    // 動画作品
+                    // 蜍慕判菴懷刀
                     this.images.push({
-                        src: img.src, // サムネイル
+                        src: img.src, // 繧ｵ繝繝阪う繝ｫ
                         videoSrc: videoPath,
                         isVideo: true,
                         title: title,
@@ -266,8 +266,8 @@ class Lightbox {
                         description: description
                     });
                 } else {
-                    // 静止画作品（サムネイルの代わりに元画像を使用）
-                    const imageSrc = img.src.replace('.jpg', '.webp');
+                    // 髱呎ｭ｢逕ｻ菴懷刀・医し繝繝阪う繝ｫ縺ｮ莉｣繧上ｊ縺ｫ蜈・判蜒上ｒ菴ｿ逕ｨ・・
+                    const imageSrc = img.src;
                     this.images.push({
                         src: imageSrc,
                         isVideo: false,
@@ -281,7 +281,7 @@ class Lightbox {
             }
         });
 
-        // 作品詳細ページの場合
+        // 菴懷刀隧ｳ邏ｰ繝壹・繧ｸ縺ｮ蝣ｴ蜷・
         const workDetailImage = document.querySelector('.work-detail-image img');
         if (workDetailImage && this.images.length === 0) {
             const title = document.querySelector('.work-detail-title')?.textContent || '';
@@ -291,10 +291,10 @@ class Lightbox {
             const tagsElements = document.querySelectorAll('.work-detail-tags .tag');
             const tags = Array.from(tagsElements).map(tag => tag.textContent);
             
-            // additional_imagesがある場合は全サムネイルから収集
+            // additional_images縺後≠繧句ｴ蜷医・蜈ｨ繧ｵ繝繝阪う繝ｫ縺九ｉ蜿朱寔
             const additionalThumbnails = document.querySelectorAll('.additional-images .thumbnail');
             if (additionalThumbnails.length > 0) {
-                // サムネイルから全画像を収集（メイン画像+追加画像）
+                // 繧ｵ繝繝阪う繝ｫ縺九ｉ蜈ｨ逕ｻ蜒上ｒ蜿朱寔・医Γ繧､繝ｳ逕ｻ蜒・霑ｽ蜉逕ｻ蜒擾ｼ・
                 additionalThumbnails.forEach(thumb => {
                     const img = thumb.querySelector('img');
                     if (img) {
@@ -309,7 +309,7 @@ class Lightbox {
                     }
                 });
             } else {
-                // サムネイルがない場合はメイン画像のみ
+                // 繧ｵ繝繝阪う繝ｫ縺後↑縺・ｴ蜷医・繝｡繧､繝ｳ逕ｻ蜒上・縺ｿ
                 this.images.push({
                     src: workDetailImage.src,
                     title: title,
@@ -393,18 +393,18 @@ class Lightbox {
 
         const currentImage = this.images[this.currentIndex];
 
-        // パンとズームをリセット
+        // 繝代Φ縺ｨ繧ｺ繝ｼ繝繧偵Μ繧ｻ繝・ヨ
         this.panX = 0;
         this.panY = 0;
         this.isZoomed = false;
         image.style.transform = '';
         image.style.cursor = 'zoom-in';
 
-        // ローディング表示
+        // 繝ｭ繝ｼ繝・ぅ繝ｳ繧ｰ陦ｨ遉ｺ
         loading.style.display = 'block';
 
         if (currentImage.isVideo) {
-            // 動画の場合
+            // 蜍慕判縺ｮ蝣ｴ蜷・
             image.style.display = 'none';
             video.style.display = 'block';
             video.src = currentImage.videoSrc;
@@ -414,13 +414,13 @@ class Lightbox {
             loading.style.display = 'none';
             zoomHint.style.display = 'none';
         } else {
-            // 画像の場合
+            // 逕ｻ蜒上・蝣ｴ蜷・
             video.style.display = 'none';
             image.style.display = 'block';
             image.style.opacity = '0';
             zoomHint.style.display = 'block';
 
-            // 画像を読み込む
+            // 逕ｻ蜒上ｒ隱ｭ縺ｿ霎ｼ繧
             const img = new Image();
             img.onload = () => {
                 image.src = currentImage.src;
@@ -432,14 +432,14 @@ class Lightbox {
             img.src = currentImage.src;
         }
 
-        // タイトル
+        // 繧ｿ繧､繝医Ν
         title.textContent = currentImage.title;
 
-        // カテゴリと日付
+        // 繧ｫ繝・ざ繝ｪ縺ｨ譌･莉・
         category.textContent = currentImage.category;
         date.textContent = currentImage.date;
 
-        // タグ
+        // 繧ｿ繧ｰ
         tagsContainer.innerHTML = '';
         if (currentImage.tags && currentImage.tags.length > 0) {
             currentImage.tags.forEach(tag => {
@@ -450,7 +450,7 @@ class Lightbox {
             });
         }
 
-        // 説明
+        // 隱ｬ譏・
         if (currentImage.description) {
             description.textContent = currentImage.description;
             description.style.display = 'block';
@@ -458,13 +458,13 @@ class Lightbox {
             description.style.display = 'none';
         }
 
-        // サムネイル表示（複数画像がある場合）
+        // 繧ｵ繝繝阪う繝ｫ陦ｨ遉ｺ・郁､・焚逕ｻ蜒上′縺ゅｋ蝣ｴ蜷茨ｼ・
         const thumbnailsContainer = lightbox.querySelector('.lightbox-thumbnails');
         thumbnailsContainer.innerHTML = '';
         if (this.images.length > 1) {
             thumbnailsContainer.style.display = 'block';
             this.images.forEach((img, index) => {
-                if (!img.isVideo) {
+                if (true) {
                     const thumbDiv = document.createElement('div');
                     thumbDiv.className = 'lightbox-thumbnail';
                     if (index === this.currentIndex) {
@@ -473,7 +473,7 @@ class Lightbox {
                     
                     const thumbImg = document.createElement('img');
                     thumbImg.src = img.src;
-                    thumbImg.alt = `${img.title} - 画像${index + 1}`;
+                    thumbImg.alt = `${img.title} - 逕ｻ蜒・{index + 1}`;
                     
                     thumbDiv.appendChild(thumbImg);
                     thumbDiv.addEventListener('click', () => {
@@ -488,7 +488,7 @@ class Lightbox {
             thumbnailsContainer.style.display = 'none';
         }
 
-        // ナビゲーションボタンの状態
+        // 繝翫ン繧ｲ繝ｼ繧ｷ繝ｧ繝ｳ繝懊ち繝ｳ縺ｮ迥ｶ諷・
         if (this.currentIndex === 0) {
             prevBtn.classList.add('disabled');
         } else {
@@ -503,7 +503,7 @@ class Lightbox {
     }
 }
 
-// ページ読み込み時にライトボックスを初期化
+// 繝壹・繧ｸ隱ｭ縺ｿ霎ｼ縺ｿ譎ゅ↓繝ｩ繧､繝医・繝・け繧ｹ繧貞・譛溷喧
 document.addEventListener('DOMContentLoaded', () => {
     new Lightbox();
 });
