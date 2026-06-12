@@ -97,6 +97,12 @@ const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
                       />
                     </a>
                   ))}
+                  {allImages.length > 1 && (
+                    <>
+                      <button class="img-nav img-nav-prev" id="img-prev" aria-label="前の画像" type="button">‹</button>
+                      <button class="img-nav img-nav-next" id="img-next" aria-label="次の画像" type="button">›</button>
+                    </>
+                  )}
                 </div>
                 {allImages.length > 1 && (
                   <div class="thumb-strip" id="thumb-strip">
@@ -206,13 +212,21 @@ const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
   // 追加画像の切替
   const mainImages = [...document.querySelectorAll<HTMLElement>('.main-image')];
   const thumbBtns = [...document.querySelectorAll<HTMLElement>('.thumb-btn')];
+  let currentIndex = 0;
   const show = (index: number) => {
+    currentIndex = index;
     mainImages.forEach((el, i) => el.classList.toggle('active', i === index));
     thumbBtns.forEach((el, i) => el.classList.toggle('active', i === index));
   };
   thumbBtns.forEach((btn) =>
     btn.addEventListener('click', () => show(Number(btn.dataset.index ?? 0))),
   );
+
+  // 左右矢印で画像切替 (クリック/タップ)
+  const step = (dir: number) =>
+    show((currentIndex + dir + mainImages.length) % mainImages.length);
+  document.getElementById('img-prev')?.addEventListener('click', () => step(-1));
+  document.getElementById('img-next')?.addEventListener('click', () => step(1));
 
   // NSFW 表示解除
   document.getElementById('nsfw-show')?.addEventListener('click', () => {
@@ -306,6 +320,43 @@ const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
 
   .main-media {
     width: 100%;
+  }
+
+  .main-image-wrap {
+    position: relative;
+  }
+
+  .img-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 2.6rem;
+    height: 2.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    font-size: 1.7rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.15s;
+    padding: 0 0 0.2rem;
+  }
+
+  .img-nav:hover {
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .img-nav-prev {
+    left: 0.6rem;
+  }
+
+  .img-nav-next {
+    right: 0.6rem;
   }
 
   .main-image {
