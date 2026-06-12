@@ -40,7 +40,7 @@
     "likes": 0
   },
   "11": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "12": {
@@ -212,7 +212,7 @@
     "likes": 0
   },
   "54": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "55": {
@@ -240,7 +240,7 @@
     "likes": 0
   },
   "61": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "62": {
@@ -264,11 +264,11 @@
     "likes": 0
   },
   "67": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "68": {
-    "views": 0,
+    "views": 2,
     "likes": 0
   },
   "69": {
@@ -364,7 +364,7 @@
     "likes": 0
   },
   "92": {
-    "views": 0,
+    "views": 2,
     "likes": 0
   },
   "93": {
@@ -372,7 +372,7 @@
     "likes": 0
   },
   "95": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "96": {
@@ -380,7 +380,7 @@
     "likes": 0
   },
   "97": {
-    "views": 0,
+    "views": 2,
     "likes": 0
   },
   "98": {
@@ -388,31 +388,31 @@
     "likes": 0
   },
   "99": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "100": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "101": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "102": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "103": {
-    "views": 0,
+    "views": 3,
     "likes": 0
   },
   "104": {
-    "views": 0,
-    "likes": 0
+    "views": 6,
+    "likes": 2
   },
   "105": {
-    "views": 2,
-    "likes": 1
+    "views": 14,
+    "likes": 2
   }
 }
