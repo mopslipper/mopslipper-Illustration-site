@@ -2,16 +2,26 @@
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import WorkCard from '../components/WorkCard.astro';
-import { siteConfig, commission, works, resolveRootImage, url } from '../lib/data';
+import { siteConfig, commission, works, heroImages, resolveRootImage, url } from '../lib/data';
 
-const hero = resolveRootImage(siteConfig.hero_image);
+// static/img/hero/ の画像（ファイル名順）を優先。空なら config.json の hero_image 1枚にフォールバック
+const fallbackHero = resolveRootImage(siteConfig.hero_image);
+const stripImages = heroImages.length > 0 ? heroImages : fallbackHero ? [fallbackHero] : [];
 const recentWorks = works.filter((w) => !w.nsfw).slice(0, 6);
 const social = siteConfig.social_links;
 ---
 
 <Layout activeNav="home">
   <section class="hero">
-    {hero && <Image src={hero} alt="" class="hero-bg" widths={[800, 1400]} format="webp" />}
+    {
+      stripImages.length > 0 && (
+        <div class="hero-strip" data-count={stripImages.length}>
+          {stripImages.map((img) => (
+            <Image src={img} alt="" class="hero-strip-img" widths={[480, 800]} format="webp" />
+          ))}
+        </div>
+      )
+    }
     <div class="hero-content">
       <h1>{siteConfig.hero_text}</h1>
       <p>{siteConfig.hero_subtext}</p>
@@ -79,13 +89,26 @@ const social = siteConfig.social_links;
     text-align: center;
   }
 
-  .hero :global(.hero-bg) {
+  .hero-strip {
     position: absolute;
     inset: 0;
+    display: flex;
+  }
+
+  .hero :global(.hero-strip-img) {
+    flex: 1 1 0;
+    min-width: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center 30%;
+  }
+
+  /* モバイルでは帯が細切れになるため先頭2枚のみ表示 */
+  @media (max-width: 600px) {
+    .hero :global(.hero-strip-img:nth-child(n + 3)) {
+      display: none;
+    }
   }
 
   .hero::after {

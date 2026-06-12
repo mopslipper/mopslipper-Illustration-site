@@ -36,6 +36,19 @@ const rootImages = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true },
 );
 
+const heroImageGlob = import.meta.glob<{ default: ImageMetadata }>(
+  '../../../static/img/hero/*.{webp,jpg,jpeg,png}',
+  { eager: true },
+);
+
+/**
+ * ヒーロー帯画像。static/img/hero/ に置いた画像をファイル名昇順で返す。
+ * 画像を追加/リネーム/削除するだけでトップのヒーローが更新される。
+ */
+export const heroImages: ImageMetadata[] = Object.entries(heroImageGlob)
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([, mod]) => mod.default);
+
 const workVideos = import.meta.glob<{ default: string }>(
   '../../../static/img/works/*.{mp4,mov,webm}',
   { eager: true, query: '?url', import: 'default' },
