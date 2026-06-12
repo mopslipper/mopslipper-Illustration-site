@@ -1,0 +1,272 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { commission, siteConfig, url } from '../lib/data';
+
+const { status, menu, flow, policy } = commission;
+const payment = (commission as Record<string, any>).payment;
+const requestTemplate = (commission as Record<string, any>).request_template;
+const social = siteConfig.social_links;
+---
+
+<Layout title="Commission" activeNav="commission">
+  <section class="section container">
+    <h1 class="section-title">Commission</h1>
+
+    <div class="status-card">
+      {
+        status.open ? (
+          <span class="badge">✓ {status.message}（保証なし）</span>
+        ) : (
+          <span class="badge closed">✕ 停止中</span>
+        )
+      }
+      {status.next_update && <span class="muted">次回更新: {status.next_update}</span>}
+    </div>
+
+    <h2 class="sub-title">料金メニュー（参考）</h2>
+    <div class="notice">
+      ※ これは架空の料金表です！「本気で作ってほしい！」という方が現れたら、そのとき考えます☺️<br />
+      無償のイラストリクエストは<a href={url('/contact.html')}>Requestページ</a>からお気軽にどうぞ！
+    </div>
+
+    <div class="menu-grid">
+      {
+        menu.map((item) => (
+          <div class="menu-card">
+            <h3>{item.name} <span class="muted en">{item.name_en}</span></h3>
+            <p class="price">{item.price}</p>
+            <p class="muted">納期: {item.delivery}</p>
+            <p>{item.description}</p>
+            <ul>
+              {item.details.map((d) => (
+                <li>{d}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <h2 class="sub-title">ご依頼の流れ</h2>
+    <ol class="flow-list">
+      {
+        flow.map((f) => (
+          <li>
+            <span class="step-num">{f.step}</span>
+            <div>
+              <strong>{f.title}</strong>
+              <p class="muted">{f.description}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+
+    {
+      policy && (
+        <>
+          <h2 class="sub-title">OK・NG内容</h2>
+          <div class="policy-grid">
+            <div class="policy-card ok">
+              <h3>✓ OK</h3>
+              <ul>{(policy.ok ?? []).map((item) => <li>{item}</li>)}</ul>
+              <p class="muted">
+                ※ R-18（成人向け）内容は無償リクエストでは受け付けておりません。ご了承ください。
+              </p>
+            </div>
+            <div class="policy-card ng">
+              <h3>✕ NG</h3>
+              <ul>{(policy.ng ?? []).map((item) => <li>{item}</li>)}</ul>
+            </div>
+          </div>
+          {(policy.notes ?? []).length > 0 && (
+            <div class="notice">
+              <ul>{(policy.notes ?? []).map((note) => <li>{note}</li>)}</ul>
+            </div>
+          )}
+        </>
+      )
+    }
+
+    {
+      payment && (
+        <>
+          <h2 class="sub-title">お支払い方法（参考）</h2>
+          <div class="notice">
+            <p class="muted">※ 現在は有償依頼を受け付けていないため使用していません</p>
+            <p>対応決済: {(payment.methods ?? []).join(' / ')}</p>
+            <p>スケジュール: {payment.schedule}</p>
+          </div>
+        </>
+      )
+    }
+
+    {
+      requestTemplate && (
+        <>
+          <h2 class="sub-title">{requestTemplate.title}</h2>
+          <pre class="template" id="request-template">{requestTemplate.template}</pre>
+          <p>
+            <button class="btn btn-outline" id="copy-template">コピーする</button>
+          </p>
+        </>
+      )
+    }
+
+    <div class="contact-cta">
+      <p>無償イラストリクエストは以下から！質問もお気軽にどうぞ。</p>
+      <div class="row">
+        <a class="btn btn-primary" href={url('/contact.html')}>お問い合わせフォーム</a>
+        {social.twitter && <a class="btn btn-outline" href={social.twitter} target="_blank" rel="noopener">TwitterでDM</a>}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  document.getElementById('copy-template')?.addEventListener('click', async (e) => {
+    const text = document.getElementById('request-template')?.textContent ?? '';
+    await navigator.clipboard.writeText(text);
+    (e.currentTarget as HTMLButtonElement).textContent = '✓ コピーしました';
+  });
+</script>
+
+<style>
+  .status-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    padding: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .badge.closed {
+    background: var(--text-muted);
+  }
+
+  .sub-title {
+    color: var(--primary-deep);
+    font-size: 1.25rem;
+    margin: 2.2rem 0 0.8rem;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 1rem;
+  }
+
+  .menu-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    padding: 1.2rem;
+    font-size: 0.92rem;
+  }
+
+  .menu-card h3 {
+    color: var(--primary-deep);
+  }
+
+  .menu-card .en {
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+
+  .menu-card .price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .menu-card ul {
+    padding-left: 1.2rem;
+    margin-top: 0.5rem;
+  }
+
+  .flow-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .flow-list li {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    padding: 1rem;
+  }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--accent-2));
+    color: #fff;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .policy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .policy-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    padding: 1.2rem;
+  }
+
+  .policy-card ul {
+    padding-left: 1.2rem;
+  }
+
+  .policy-card.ok h3 {
+    color: #2eaf6e;
+  }
+
+  .policy-card.ng h3 {
+    color: var(--danger);
+  }
+
+  .template {
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.1rem;
+    white-space: pre-wrap;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+  }
+
+  .contact-cta {
+    margin-top: 2.5rem;
+    text-align: center;
+    background: var(--bg-accent);
+    border-radius: var(--radius-lg);
+    padding: 2rem 1rem;
+    font-weight: 700;
+  }
+
+  .contact-cta .row {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+</style>

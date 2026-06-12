@@ -1,0 +1,334 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { readdirSync, existsSync, statSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
+
+// ビルド時に public/cliantshare/ を走査して案件ディレクトリ一覧を生成
+const shareDir = resolve(fileURLToPath(new URL('../../public/cliantshare', import.meta.url)));
+
+interface ShareDirectory {
+  name: string;
+  display_name: string;
+  count: number;
+  files: string[];
+}
+
+const directories: ShareDirectory[] = [];
+let hasVerify = false;
+
+if (existsSync(shareDir)) {
+  hasVerify = existsSync(resolve(shareDir, 'verify.enc'));
+  for (const entry of readdirSync(shareDir).sort()) {
+    const full = resolve(shareDir, entry);
+    if (!statSync(full).isDirectory()) continue;
+    const files = readdirSync(full)
+      .filter((f) => f.endsWith('.enc'))
+      .sort();
+    if (files.length > 0) {
+      directories.push({
+        name: entry,
+        display_name: entry.replace(/[-_]/g, ' '),
+        count: files.length,
+        files,
+      });
+    }
+  }
+}
+
+const available = hasVerify && directories.length > 0;
+---
+
+<Layout title="Cliant Share">
+  <section class="section container">
+    <h1 class="section-title">Cliant Share</h1>
+
+    {
+      !available ? (
+        <div class="notice text-center">
+          <p>現在共有中のコンテンツはありません。</p>
+        </div>
+      ) : (
+        <>
+          <div class="password-card" id="password-screen">
+            <h2>🔒 限定コンテンツ</h2>
+            <p class="muted">パスワードを入力してください</p>
+            <form id="password-form">
+              <div class="form-group">
+                <input type="password" id="password-input" placeholder="パスワード" autocomplete="off" />
+              </div>
+              <button type="submit" class="btn btn-primary">ログイン</button>
+              <p class="error" id="password-error" hidden>❌ パスワードが正しくありません</p>
+            </form>
+          </div>
+
+          <div class="directory-screen" id="directory-screen" hidden>
+            <h2 class="text-center">📁 コンテンツを選択</h2>
+            <div class="directory-grid">
+              {directories.map((dir) => (
+                <button class="directory-card" data-directory={dir.name}>
+                  <h3>{dir.display_name}</h3>
+                  <p class="muted">{dir.count} 枚</p>
+                </button>
+              ))}
+            </div>
+            <p class="text-center">
+              <button class="btn btn-outline" id="logout-btn">ログアウト</button>
+            </p>
+          </div>
+
+          <div class="viewer-screen" id="viewer-screen" hidden>
+            <div class="viewer-header">
+              <div class="viewer-info">
+                <button class="btn btn-outline" id="back-btn">← 戻る</button>
+                <h2 id="current-directory-name"></h2>
+                <span class="counter" id="image-counter">1 / 1</span>
+              </div>
+              <div class="viewer-actions">
+                <button class="btn btn-primary" id="download-current">⬇ 現在の画像</button>
+                <button class="btn btn-primary" id="download-all">⬇ 一括保存</button>
+              </div>
+            </div>
+
+            <div class="image-viewer">
+              <div class="image-display">
+                <img id="current-image" src="" alt="" />
+              </div>
+              <button class="nav-btn prev" id="prev-btn" aria-label="前へ">‹</button>
+              <button class="nav-btn next" id="next-btn" aria-label="次へ">›</button>
+            </div>
+
+            <div class="thumbnail-strip" id="thumbnail-strip"></div>
+
+            <div class="notice" id="download-progress" hidden>
+              <p id="progress-text">ダウンロード中…</p>
+            </div>
+          </div>
+
+          <div class="loading-screen" id="loading-screen" hidden>
+            <div class="spinner"></div>
+            <p id="loading-text">画像を読み込み中…</p>
+          </div>
+        </>
+      )
+    }
+  </section>
+</Layout>
+
+{available && <script id="cliantshare-data" type="application/json" set:html={JSON.stringify(directories)} />}
+
+{available && (
+  <script>
+    import { initCliantShare } from '../scripts/cliantshare';
+    initCliantShare();
+  </script>
+)}
+
+<style>
+  .password-card {
+    max-width: 400px;
+    margin: 0 auto;
+    background: var(--bg-card);
+    padding: 2.5rem 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    text-align: center;
+  }
+
+  .password-card h2 {
+    color: var(--primary-deep);
+    margin-bottom: 0.5rem;
+  }
+
+  .password-card .form-group {
+    margin: 1.2rem 0;
+  }
+
+  .error {
+    color: var(--danger);
+    font-weight: 700;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .directory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 1.2rem;
+    margin: 1.6rem 0;
+  }
+
+  .directory-card {
+    background: var(--bg-card);
+    border: 2px solid transparent;
+    padding: 1.8rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    cursor: pointer;
+    text-align: center;
+    font-family: var(--font-body);
+    transition: all 0.2s;
+  }
+
+  .directory-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .directory-card h3 {
+    color: var(--primary-deep);
+    margin-bottom: 0.3rem;
+  }
+
+  .viewer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.2rem;
+  }
+
+  .viewer-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .viewer-info h2 {
+    color: var(--primary-deep);
+    font-size: 1.2rem;
+  }
+
+  .counter {
+    font-weight: 700;
+  }
+
+  .viewer-actions {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .image-viewer {
+    position: relative;
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .image-display {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2b2127;
+  }
+
+  .image-display img {
+    max-width: 100%;
+    max-height: 78vh;
+    width: auto;
+    height: auto;
+  }
+
+  .nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 105, 180, 0.85);
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 5;
+  }
+
+  .nav-btn:hover:not(:disabled) {
+    background: var(--primary-deep);
+  }
+
+  .nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .nav-btn.prev {
+    left: 14px;
+  }
+
+  .nav-btn.next {
+    right: 14px;
+  }
+
+  .thumbnail-strip {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.8rem;
+    overflow-x: auto;
+    background: var(--bg-accent);
+    border-radius: 0 0 var(--radius) var(--radius);
+  }
+
+  .thumbnail-strip :global(button) {
+    flex-shrink: 0;
+    width: 72px;
+    height: 72px;
+    padding: 0;
+    border: 3px solid transparent;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    cursor: pointer;
+    background: none;
+  }
+
+  .thumbnail-strip :global(button.active) {
+    border-color: var(--primary);
+  }
+
+  .thumbnail-strip :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .loading-screen {
+    position: fixed;
+    inset: 0;
+    background: rgba(74, 58, 68, 0.85);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .loading-screen[hidden] {
+    display: none;
+  }
+
+  .spinner {
+    width: 48px;
+    height: 48px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>

@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { siteConfig, url } from '../lib/data';
+
+const author = siteConfig.author.name;
+---
+
+<Layout title="Privacy Policy">
+  <section class="section container narrow">
+    <h1 class="section-title">Privacy Policy</h1>
+
+    <div class="policy">
+      <h2>1. 個人情報の取り扱いについて</h2>
+      <p>
+        当サイト（{siteConfig.site_name}）は、訪問者のプライバシーを尊重し、個人情報の保護に努めます。
+      </p>
+
+      <h2>2. 収集する情報</h2>
+      <p>お問い合わせフォームより、以下の情報を収集する場合があります。</p>
+      <ul>
+        <li>お名前（任意）</li>
+        <li>メールアドレス（任意）</li>
+        <li>お問い合わせ内容</li>
+      </ul>
+
+      <h2>3. 利用目的</h2>
+      <p>収集した情報は、お問い合わせへの返信、内容の確認・連絡のためにのみ利用します。</p>
+
+      <h2>4. 第三者への提供</h2>
+      <p>ご本人の同意がある場合、または法令に基づく場合を除き、第三者へ提供することはありません。</p>
+
+      <h2>5. Cookie の使用</h2>
+      <p>
+        当サイトでは、表示設定の保存（年齢確認の回答など）のためにブラウザのローカルストレージを使用しています。個人を特定する情報は含まれません。
+      </p>
+
+      <h2>6. 外部サービスへのリンク</h2>
+      <p>
+        当サイトからリンクされた外部サイトにおける個人情報の取り扱いについては、各サイトのプライバシーポリシーをご確認ください。お問い合わせフォームの送信には
+        Formspree を利用しています。
+      </p>
+
+      <h2>7. 免責事項</h2>
+      <p>
+        当サイトのコンテンツについて、可能な限り正確な情報を掲載するよう努めていますが、正確性や安全性を保証するものではありません。
+      </p>
+
+      <h2>8. 著作権</h2>
+      <p>
+        当サイトに掲載されているすべてのコンテンツ（イラスト、文章等）の著作権は{author}に帰属します。無断転載・無断使用を固く禁じます。
+      </p>
+
+      <h2>9. プライバシーポリシーの変更</h2>
+      <p>本ポリシーの内容は、必要に応じて予告なく変更されることがあります。</p>
+
+      <h2>10. お問い合わせ</h2>
+      <p>
+        本ポリシーに関するお問い合わせは<a href={url('/contact.html')}>お問い合わせフォーム</a>からお願いします。
+      </p>
+
+      <p class="muted" style="margin-top:2rem;">
+        制定日: {siteConfig.copyright_year}年1月1日<br />
+        {author}
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .narrow {
+    max-width: 720px;
+  }
+
+  .policy h2 {
+    color: var(--primary-deep);
+    font-size: 1.1rem;
+    margin: 1.6rem 0 0.4rem;
+  }
+
+  .policy ul {
+    padding-left: 1.4rem;
+  }
+</style>

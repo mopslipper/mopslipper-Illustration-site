@@ -1,0 +1,137 @@
+---
+import { siteConfig, url } from '../lib/data';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  activeNav?: string;
+}
+
+const {
+  title,
+  description = siteConfig.site_description,
+  ogImage,
+  activeNav = '',
+} = Astro.props;
+
+const pageTitle = title ? `${title} - ${siteConfig.site_title}` : siteConfig.site_title;
+
+const navItems = [
+  { label: 'Home', href: url('/'), key: 'home' },
+  { label: 'Gallery', href: url('/gallery.html'), key: 'gallery' },
+  { label: 'Commission', href: url('/commission.html'), key: 'commission' },
+  { label: 'About', href: url('/about.html'), key: 'about' },
+  { label: 'Contact', href: url('/contact.html'), key: 'contact' },
+  { label: 'Cliant Share', href: url('/cliantshare.html'), key: 'cliantshare' },
+];
+
+const social = siteConfig.social_links;
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={siteConfig.meta_keywords} />
+    <meta name="author" content={siteConfig.author.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="inner">
+        <a class="brand" href={url('/')}
+          >{siteConfig.site_name}</a
+        >
+        <button class="nav-toggle" id="nav-toggle" aria-label="メニュー">☰</button>
+        <nav class="site-nav" id="site-nav">
+          <ul>
+            {
+              navItems.map((item) => (
+                <li>
+                  <a href={item.href} class={item.key === activeNav ? 'active' : ''}>
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="social">
+        {social.twitter && <a href={social.twitter} target="_blank" rel="noopener">X (Twitter)</a>}
+        {social.pixiv && <a href={social.pixiv} target="_blank" rel="noopener">Pixiv</a>}
+      </div>
+      <p>{siteConfig.footer_text}</p>
+      <p>&copy; {siteConfig.copyright_year} {siteConfig.author.name}. All Rights Reserved.</p>
+      <p>
+        <a href={url('/privacy.html')}>Privacy Policy</a> | <a href={url('/contact.html')}>Contact</a>
+      </p>
+    </footer>
+
+    {
+      siteConfig.nsfw_warning && (
+        <div class="modal-backdrop" id="nsfw-gate" hidden>
+          <div class="modal" role="dialog" aria-modal="true" aria-labelledby="nsfw-gate-title">
+            <h2 id="nsfw-gate-title">⚠️ 年齢確認</h2>
+            <p>{siteConfig.nsfw_text}</p>
+            <p>あなたは15歳以上ですか？</p>
+            <p class="muted">※ どちらを選んでもサイトの閲覧は可能です</p>
+            <div class="actions">
+              <button class="btn btn-primary" id="nsfw-yes">
+                はい（15歳以上）
+              </button>
+              <button class="btn btn-outline" id="nsfw-no">
+                いいえ（15歳未満）
+              </button>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    <script>
+      // モバイルナビ
+      const toggle = document.getElementById('nav-toggle');
+      const nav = document.getElementById('site-nav');
+      toggle?.addEventListener('click', () => nav?.classList.toggle('open'));
+
+      // NSFW 年齢確認ゲート（初回のみ表示）
+      const gate = document.getElementById('nsfw-gate');
+      const KEY = 'mopslipper_age_confirmed_v1';
+      if (gate && !localStorage.getItem(KEY)) {
+        gate.hidden = false;
+      }
+      const close = (isAdult: boolean) => {
+        localStorage.setItem(KEY, isAdult ? 'adult' : 'minor');
+        if (gate) gate.hidden = true;
+        document.dispatchEvent(new CustomEvent('agegate:changed'));
+      };
+      document.getElementById('nsfw-yes')?.addEventListener('click', () => close(true));
+      document.getElementById('nsfw-no')?.addEventListener('click', () => close(false));
+    </script>
+  </body>
+</html>

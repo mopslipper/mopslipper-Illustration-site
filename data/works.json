@@ -1,0 +1,2078 @@
+[
+  {
+    "id": 1,
+    "slug": "cat-girl-001",
+    "title": "猫耳少女",
+    "date": "2026-01-10",
+    "image_path": "/static/img/works/001-cat-girl.webp",
+    "thumbnail": "/static/img/works/001-cat-girl.jpg",
+    "tags": [
+      "オリジナル",
+      "ネコミミ",
+      "かわいい"
+    ],
+    "request_tags": [
+      "猫耳",
+      "ふわふわ",
+      "あざとかわいい",
+      "パステル"
+    ],
+    "category": "Original",
+    "description": "ふわふわの猫耳としっぽが特徴的な可愛らしい少女。柔らかな毛並みの質感表現と、いたずらっぽい表情にこだわりました。",
+    "nsfw": false,
+    "external_links": {
+      "pixiv": "https://www.pixiv.net",
+      "twitter": "https://x.com/facet_boy/status/2009588025265975357"
+    }
+  },
+  {
+    "id": 2,
+    "slug": "002-angel-wings",
+    "title": "おばけ天使",
+    "date": "2026-01-08",
+    "image_path": "/static/img/works/002-angel-wings.webp",
+    "thumbnail": "/static/img/works/002-angel-wings.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "天使",
+      "ファンタジー",
+      "白",
+      "オバケ"
+    ],
+    "description": "恥ずかしがりやのお化け天使ちゃん。普段は見つかることはありません。",
+    "nsfw": false,
+    "external_links": {
+      "pixiv": "https://www.pixiv.net"
+    }
+  },
+  {
+    "id": 3,
+    "slug": "blonde-hair-003",
+    "title": "金髪ちゃん",
+    "date": "2026-01-05",
+    "image_path": "/static/img/works/003-blonde-hair.webp",
+    "thumbnail": "/static/img/works/003-blonde-hair.jpg",
+    "tags": [
+      "オリジナル",
+      "金髪",
+      "制服"
+    ],
+    "category": "Original",
+    "description": "金髪ちゃんです。ちょっと強そうなのは見た目だけ。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 4,
+    "slug": "fanart-character-004",
+    "title": "版権キャラクター(仮)",
+    "date": "2025-01-01",
+    "image_path": "/static/img/works/placeholder.svg",
+    "thumbnail": "/static/img/works/placeholder.svg",
+    "tags": [
+      "版権",
+      "ファンアート",
+      "二次創作"
+    ],
+    "category": "Fanart",
+    "description": "某作品のキャラクターファンアート。原作の雰囲気を大切にしつつ、自分なりの解釈を加えました。",
+    "nsfw": false,
+    "external_links": {
+      "pixiv": "https://www.pixiv.net"
+    }
+  },
+  {
+    "id": 5,
+    "slug": "live2d-model-005",
+    "title": "Live2D立ち絵素材(仮)",
+    "date": "2025-01-01",
+    "image_path": "/static/img/works/placeholder.svg",
+    "thumbnail": "/static/img/works/placeholder.svg",
+    "tags": [
+      "Live2D",
+      "素材",
+      "オリジナル",
+      "VTuber"
+    ],
+    "category": "Live2D",
+    "description": "VTuber向けLive2D素材の立ち絵。瞬き、口パク、揺れものなど基本的な動きに対応しています。",
+    "nsfw": false,
+    "external_links": {
+      "booth": "https://www.pixiv.net"
+    }
+  },
+  {
+    "id": 6,
+    "slug": "summer-girl-006",
+    "title": "夏の少女",
+    "date": "2025-12-28",
+    "image_path": "/static/img/works/006-summer-girl.webp",
+    "thumbnail": "/static/img/works/006-summer-girl.jpg",
+    "tags": [
+      "オリジナル",
+      "夏",
+      "水着",
+      "青"
+    ],
+    "category": "Original",
+    "description": "夏をテーマにした爽やかなイラスト。青と白を基調とした涼しげな配色です。",
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {
+      "pixiv": "https://www.pixiv.net/artworks/139755634"
+    }
+  },
+  {
+    "id": 7,
+    "slug": "chingpao-dress-007",
+    "title": "チャイナドレス",
+    "date": "2025-12-25",
+    "image_path": "/static/img/works/007-chingpao-dress.webp",
+    "thumbnail": "/static/img/works/007-chingpao-dress.jpg",
+    "tags": [
+      "オリジナル",
+      "チャイナドレス",
+      "ドヤ顔"
+    ],
+    "category": "Original",
+    "description": "どや顔が可愛いチャイナ服娘。昔の絵柄です。",
+    "nsfw": false,
+    "external_links": {
+      "pixiv": "https://www.pixiv.net"
+    }
+  },
+  {
+    "id": 8,
+    "slug": "christmas-santa-008",
+    "title": "サンタガール",
+    "date": "2025-12-24",
+    "image_path": "/static/img/works/008-christmas-santa.webp",
+    "thumbnail": "/static/img/works/008-christmas-santa.jpg",
+    "tags": [
+      "オリジナル",
+      "クリスマス",
+      "サンタ",
+      "赤"
+    ],
+    "category": "Original",
+    "description": "クリスマスのサンタ衣装を着た少女。赤と白のクラシックな配色でまとめました。",
+    "nsfw": false,
+    "external_links": {
+      "pixiv": "https://www.pixiv.net/artworks/139755634"
+    }
+  },
+  {
+    "id": 9,
+    "slug": "oversized-vamp-009",
+    "title": "ブカブカ服ヴァンパイア",
+    "date": "2025-12-20",
+    "image_path": "/static/img/works/009-oversized-vamp.webp",
+    "thumbnail": "/static/img/works/009-oversized-vamp.jpg",
+    "tags": [
+      "オリジナル",
+      "ヴァンパイア",
+      "ブカブカ服"
+    ],
+    "category": "Original",
+    "description": "ブカブカの服を着たヴァンパイアの少女。独特の雰囲気を持っています。",
+    "nsfw": false,
+    "external_links": {
+      "pixiv": "https://www.pixiv.net"
+    }
+  },
+  {
+    "id": 10,
+    "slug": "swimsuit-zooming-010",
+    "title": "水着ズームイン",
+    "date": "2026-01-10",
+    "image_path": "/static/img/works/010-swimsuit-zooming.mp4",
+    "thumbnail": "/static/img/works/010-swimsuit-zooming-thumb.jpg",
+    "tags": [
+      "オリジナル",
+      "水着",
+      "動画",
+      "アニメーション"
+    ],
+    "category": "Animation",
+    "description": "水着を着た美少女のズーム。Grok Imagineで作成。",
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {}
+  },
+  {
+    "id": 11,
+    "slug": "r18-sample-011",
+    "title": "【R-18】サンプル作品",
+    "date": "2025-12-18",
+    "image_path": "/static/img/works/placeholder.svg",
+    "thumbnail": "/static/img/works/placeholder.svg",
+    "tags": [
+      "オリジナル",
+      "R-18"
+    ],
+    "category": "Original",
+    "description": "成人向け作品のサンプルです。18歳未満の方は閲覧をご遠慮ください。",
+    "nsfw": true,
+    "external_links": {
+      "fanbox": "https://yourname.fanbox.cc"
+    }
+  },
+  {
+    "id": 12,
+    "slug": "wariza-neko-012",
+    "title": "座りネコ",
+    "date": "2026-01-03",
+    "image_path": "/static/img/works/012-wariza-neko.webp",
+    "thumbnail": "/static/img/works/012-wariza-neko.jpg",
+    "tags": [
+      "オリジナル",
+      "ネコ",
+      "座りポーズ"
+    ],
+    "category": "Original",
+    "description": "座りポーズのネコガール。kawaii。",
+    "nsfw": false,
+    "external_links": {
+      "pixiv": "https://www.pixiv.net"
+    }
+  },
+  {
+    "id": 13,
+    "slug": "fuyufuku-api-013",
+    "title": "冬服アピガール",
+    "date": "2025-12-20",
+    "image_path": "/static/img/works/013-fuyufuku-api.mp4",
+    "thumbnail": "/static/img/works/013-fuyufuku-api-thumb.jpg",
+    "tags": [
+      "オリジナル",
+      "冬服",
+      "動画",
+      "アニメーション"
+    ],
+    "category": "Animation",
+    "description": "冬服ではしゃぐガール。Grok Imagineで作成。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 14,
+    "slug": "akemashiteomedetou-014",
+    "title": "あけましておめでとう",
+    "date": "2026-01-01",
+    "image_path": "/static/img/works/014-akemashiteomedetou.jpg",
+    "thumbnail": "/static/img/works/014-akemashiteomedetou.jpg",
+    "tags": [
+      "オリジナル",
+      "正月",
+      "新年",
+      "着物"
+    ],
+    "category": "Original",
+    "description": "新年のご挨拶イラスト。着物姿の少女が新年をお祝いします。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 15,
+    "slug": "manga-ohayo-015",
+    "title": "おはようマンガ",
+    "date": "2025-12-01",
+    "image_path": "/static/img/works/015-manga-ohayo.webp",
+    "thumbnail": "/static/img/works/015-manga-ohayo.jpg",
+    "tags": [
+      "オリジナル",
+      "マンガ",
+      "日常",
+      "おはよう"
+    ],
+    "category": "Manga",
+    "description": "朝の日常を描いたマンガ作品。元気なおはようの一コマです。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 16,
+    "slug": "kitsune-kick-016",
+    "title": "きつねキック",
+    "date": "2025-11-01",
+    "image_path": "/static/img/works/016-kitsune-kick.webp",
+    "thumbnail": "/static/img/works/016-kitsune-kick.jpg",
+    "tags": [
+      "オリジナル",
+      "きつね",
+      "獣耳",
+      "アクション"
+    ],
+    "category": "Original",
+    "description": "元気いっぱいのきつね耳少女！軽やかなキックポーズで魅せる躍動感あふれる一枚です。ふわふわの尻尾がとってもキュート♪",
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {}
+  },
+  {
+    "id": 17,
+    "slug": "bikini-girl-017",
+    "title": "ビキニガール",
+    "date": "2025-11-01",
+    "image_path": "/static/img/works/017-bikini-girl.webp",
+    "thumbnail": "/static/img/works/017-bikini-girl.jpg",
+    "tags": [
+      "オリジナル",
+      "水着",
+      "ビキニ",
+      "夏"
+    ],
+    "category": "Original",
+    "description": "夏の日差しが似合う元気な女の子。爽やかなビキニ姿で夏の思い出を彩ります。",
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {}
+  },
+  {
+    "id": 18,
+    "slug": "snake-pajamas-018",
+    "title": "スネークパジャマ",
+    "date": "2025-11-01",
+    "image_path": "/static/img/works/018-snake-pajamas.webp",
+    "thumbnail": "/static/img/works/018-snake-pajamas.jpg",
+    "tags": [
+      "オリジナル",
+      "パジャマ",
+      "ヘビ",
+      "着ぐるみ"
+    ],
+    "category": "Original",
+    "description": "もこもこヘビさんパジャマを着たリラックスモード。とぼけた表情がたまらなく愛らしい一枚です。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 19,
+    "slug": "shy-on-back-019",
+    "title": "シャイガール",
+    "date": "2025-11-01",
+    "image_path": "/static/img/works/019-shy-on-back.webp",
+    "thumbnail": "/static/img/works/019-shy-on-back.jpg",
+    "tags": [
+      "オリジナル",
+      "恥ずかしがり屋",
+      "かわいい"
+    ],
+    "category": "Original",
+    "description": "ちょっぴり恥ずかしがり屋な女の子。照れた表情と仕草がとってもキュートです",
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {}
+  },
+  {
+    "id": 20,
+    "slug": "kigurumi-neko-020",
+    "title": "着ぐるみネコ",
+    "date": "2025-11-01",
+    "image_path": "/static/img/works/020-kigurumi-neko.webp",
+    "thumbnail": "/static/img/works/020-kigurumi-neko.jpg",
+    "tags": [
+      "オリジナル",
+      "猫",
+      "着ぐるみ",
+      "もふもふ"
+    ],
+    "category": "Original",
+    "description": "ふわふわネコ着ぐるみに包まれた女の子。もこもこ素材のぬくもりと可愛さが詰まった癒やし系イラストです。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 21,
+    "slug": "sailor-angel-021",
+    "title": "セーラー天使",
+    "date": "2025-11-01",
+    "image_path": "/static/img/works/021-sailor-angel.webp",
+    "thumbnail": "/static/img/works/021-sailor-angel.jpg",
+    "tags": [
+      "オリジナル",
+      "天使",
+      "セーラー服",
+      "ファンタジー"
+    ],
+    "category": "Original",
+    "description": "セーラー服を着た清楚な天使ちゃん。純白の羽と制服の組み合わせが新鮮で、神聖な雰囲気を纏っています。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 22,
+    "slug": "hoodie-neko-bikini-022",
+    "title": "フーディーネコビキニ",
+    "date": "2025-11-01",
+    "image_path": "/static/img/works/022-hoodie-neko-bikini.webp",
+    "thumbnail": "/static/img/works/022-hoodie-neko-bikini.jpg",
+    "tags": [
+      "オリジナル",
+      "ネコミミ",
+      "フーディー",
+      "水着"
+    ],
+    "category": "Original",
+    "description": "ネコ耳フーディーとビキニのギャップがキュート！カジュアルさとセクシーさを両立した魅力的なコーディネートです。",
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {}
+  },
+  {
+    "id": 23,
+    "slug": "blonde-swimsuit-bikini-023",
+    "title": "ブロンド水着ビキニ",
+    "date": "2025-11-01",
+    "image_path": "/static/img/works/023-blonde-swimsuit-bikini.webp",
+    "thumbnail": "/static/img/works/023-blonde-swimsuit-bikini.jpg",
+    "tags": [
+      "オリジナル",
+      "金髪",
+      "ビキニ",
+      "水着"
+    ],
+    "category": "Original",
+    "description": "輝く金髪が眩しい水着美少女。明るい笑顔とスタイリッシュなビキニで夏のビーチを彩ります。",
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {}
+  },
+  {
+    "id": 24,
+    "slug": "debil-cat-kawaii-024",
+    "title": "デビルキャット",
+    "date": "2025-11-01",
+    "image_path": "/static/img/works/024-debil-cat-kawaii.webp",
+    "thumbnail": "/static/img/works/024-debil-cat-kawaii.jpg",
+    "tags": [
+      "オリジナル",
+      "悪魔",
+      "ネコミミ",
+      "ハロウィン"
+    ],
+    "category": "Original",
+    "description": "小悪魔な猫耳ちゃん。ツノとしっぽがチャームポイントのいたずら好きなデビル系女の子です",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 25,
+    "slug": "halloween-witch-girl-025",
+    "title": "ハロウィンウィッチ",
+    "date": "2025-11-01",
+    "image_path": "/static/img/works/025-halloween-witch-girl.webp",
+    "thumbnail": "/static/img/works/025-halloween-witch-girl.jpg",
+    "tags": [
+      "オリジナル",
+      "魔女",
+      "ハロウィン",
+      "かぼちゃ"
+    ],
+    "category": "Original",
+    "description": "ハロウィンの夜に現れる可愛い魔女っ子。とんがり帽子とほうきがトレードマークの愛らしいウィッチです。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 26,
+    "slug": "chibi-collection-026",
+    "title": "ちびキャラコレクション",
+    "date": "2026-01-12",
+    "image_path": "/static/img/works/026-chibi-collection.webp",
+    "thumbnail": "/static/img/works/026-chibi-collection.jpg",
+    "additional_images": [
+      "/static/img/works/026-chibi-collection-img2.webp",
+      "/static/img/works/026-chibi-collection-img3.webp"
+    ],
+    "tags": [
+      "オリジナル",
+      "ちびキャラ",
+      "SD",
+      "可愛い"
+    ],
+    "category": "Original",
+    "description": "ちびキャライラスト集。デフォルメされた可愛らしいスタイルで描いた3枚のイラストです。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 27,
+    "slug": "blonde-chibi-collection-027",
+    "title": "ブロンドちびキャラコレクション",
+    "date": "2026-01-12",
+    "image_path": "/static/img/works/027-blonde-chibi-collection.webp",
+    "thumbnail": "/static/img/works/027-blonde-chibi-collection.jpg",
+    "additional_images": [
+      "/static/img/works/027-blonde-chibi-collection-img2.webp",
+      "/static/img/works/027-blonde-chibi-collection-img3.webp"
+    ],
+    "tags": [
+      "オリジナル",
+      "ちびキャラ",
+      "SD",
+      "金髪",
+      "可愛い"
+    ],
+    "category": "Original",
+    "description": "金髪ちびキャライラスト集。元気いっぱいの表情とポーズが特徴の3枚のイラストです。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 28,
+    "slug": "blonde-zoom-kururin-028",
+    "title": "ブロンドズームくるりん",
+    "date": "2026-01-03",
+    "image_path": "/static/img/works/028-blonde-zoom-kururin.mp4",
+    "thumbnail": "/static/img/works/028-blonde-zoom-kururin-thumb.png",
+    "tags": [
+      "オリジナル",
+      "金髪",
+      "動画",
+      "アニメーション"
+    ],
+    "category": "Animation",
+    "description": "金髪美少女のズームアニメーション。Grok Imagineで作成。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 29,
+    "slug": "029-white-shirt-angel",
+    "title": "白シャツ天使",
+    "date": "2026-01-24",
+    "image_path": "/static/img/works/029-white-shirt-angel.webp",
+    "thumbnail": "/static/img/works/029-white-shirt-angel.jpg",
+    "category": "Original",
+    "tags": [
+      "天使",
+      "白",
+      "オリジナル"
+    ],
+    "description": "タイトル「白シャツ天使」は、清楚でありながら魅惑的な印象を与えるオリジナルキャラクターを描いています。柔らかな白い髪と無邪気な表情が、彼女の天使らしさを引き立てています。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2014941987347243399"
+    }
+  },
+  {
+    "id": 30,
+    "slug": "030-onback-winter",
+    "title": "白セーターガール",
+    "date": "2026-01-25",
+    "image_path": "/static/img/works/030-onback-winter.webp",
+    "thumbnail": "/static/img/works/030-onback-winter.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "セーター",
+      "白"
+    ],
+    "description": "「白セーターガール」は、柔らかい白のセーターとキャット耳が特徴的な可愛らしいキャラクターを描いたイラストです。シンプルながらも魅力的なスタイルが、見る人の心を惹きつけます。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2015213439438987663"
+    }
+  },
+  {
+    "id": 31,
+    "slug": "031-white-suyasuya",
+    "title": "すやすや",
+    "date": "2026-02-15",
+    "image_path": "/static/img/works/031-white-suyasuya.webp",
+    "thumbnail": "/static/img/works/031-white-suyasuyaa.jpg",
+    "category": "Original",
+    "tags": [
+      "白",
+      "ネコミミ"
+    ],
+    "description": "すやぁ。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 32,
+    "slug": "032-white-happy",
+    "title": "ごきげん白ネコミミ",
+    "date": "2026-02-16",
+    "image_path": "/static/img/works/032-white-happy.webp",
+    "thumbnail": "/static/img/works/032-white-happy.jpg",
+    "category": "Original",
+    "tags": [
+      "白",
+      "ネコミミ"
+    ],
+    "description": "ご機嫌な様子のシロネコ～",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2023366406142894129"
+    }
+  },
+  {
+    "id": 33,
+    "slug": "033-pink-cat-angel",
+    "title": "ネコミミ天使",
+    "date": "2026-02-21",
+    "image_path": "/static/img/works/033-pink-cat-angel.webp",
+    "thumbnail": "/static/img/works/033-pink-cat-angel.jpg",
+    "category": "Original",
+    "tags": [
+      "ネコミミ",
+      "白",
+      "着ぐるみ"
+    ],
+    "description": "「ネコミミ天使」は、愛らしい猫耳とAngel Wingsを持つキャラクターが、白と赤の鮮やかな着ぐるみで可愛さを演出。ファンタジックな要素が詰まった魅力的なイラストです。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2023731603923771899"
+    }
+  },
+  {
+    "id": 34,
+    "slug": "034-cat-angel",
+    "title": "ねこみみジャケット",
+    "date": "2026-02-21",
+    "image_path": "/static/img/works/034-cat-angel.webp",
+    "thumbnail": "/static/img/works/034-cat-angel.jpg",
+    "category": "Original",
+    "tags": [
+      "ネコミミ",
+      "フーディー"
+    ],
+    "description": "タイトル「ねこみみジャケット」は、キュートな猫耳フーディーを纏ったキャラクターが日常の魅力を引き立てる一作です。遊び心あふれるデザインと華やかな装飾が、親しみやすさとスタイリッシュさを兼ね備えています。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2024613716973826264"
+    }
+  },
+  {
+    "id": 35,
+    "slug": "035-cat-starangel",
+    "title": "ねこみみおへそジャケット",
+    "date": "2026-02-21",
+    "image_path": "/static/img/works/035-cat-starangel.webp",
+    "thumbnail": "/static/img/works/035-cat-starangel.jpg",
+    "category": "Original",
+    "tags": [
+      "ネコミミ",
+      "フーディー"
+    ],
+    "description": "タイトル「ねこみみおへそジャケット」は、愛らしいネコミミと魅力的なフーディーを組み合わせたファッションアイコンです。スタイリッシュで遊び心満載なデザインが、個性的な魅力を引き出します。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 36,
+    "slug": "036-hoodie-swimsuit",
+    "title": "水着パーカー",
+    "date": "2026-02-22",
+    "image_path": "/static/img/works/036-hoodie-swimsuit.webp",
+    "thumbnail": "/static/img/works/036-hoodie-swimsuit.jpg",
+    "category": "Original",
+    "x_thumbnail": "/static/img/works/036-hoodie-swimsuit_face.webp",
+    "tags": [
+      "ネコミミ",
+      "水着",
+      "フーディー",
+      "ビキニ"
+    ],
+    "description": "タイトル「水着パーカー」は、ネコミミ付きのフーディーとセクシーな水着を組み合わせた魅力的なキャラクターを描いています。ユニークなデザインが、遊び心とスタイリッシュさを両立させています。",
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {}
+  },
+  {
+    "id": 37,
+    "slug": "037-hoodie-bikini-girl",
+    "title": "水着パーカーガール",
+    "date": "2026-02-22",
+    "image_path": "/static/img/works/037-hoodie-bikini-girl.webp",
+    "thumbnail": "/static/img/works/037-hoodie-bikini-girl.jpg",
+    "category": "Original",
+    "x_thumbnail": "/static/img/works/037-hoodie-bikini-girl-face.webp",
+    "tags": [
+      "ネコミミ",
+      "ビキニ",
+      "フーディー",
+      "水着"
+    ],
+    "description": "タイトル「水着パーカーガール」は、ネコミミを持つ魅惑的なキャラクターがビキニとフーディーを組み合わせたスタイルで描かれています。独自の可愛らしさとセクシーさを兼ね備え、見る者を引きつける魅力的な一作品です。",
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {}
+  },
+  {
+    "id": 38,
+    "slug": "038-ghost-angel-girl",
+    "title": "ゴーストガール",
+    "date": "2026-02-22",
+    "image_path": "/static/img/works/038-ghost-angel-girl.webp",
+    "thumbnail": "/static/img/works/038-ghost-angel-girl.jpg",
+    "category": "Original",
+    "tags": [
+      "ファンタジー",
+      "天使",
+      "白",
+      "オバケ"
+    ],
+    "description": "タイトル「ゴーストガール」は、ファンタジーの世界観を表現した作品で、天使とゴーストが融合した独特のキャラクターが魅力です。白を基調にした可愛らしいデザインが、幻想的な雰囲気を引き立てています。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2025534120718446947"
+    }
+  },
+  {
+    "id": 39,
+    "slug": "039-ghost-star-angel-girl",
+    "title": "★ゴーストガール★",
+    "date": "2026-02-23",
+    "image_path": "/static/img/works/039-ghost-star-angel-girl.webp",
+    "thumbnail": "/static/img/works/039-ghost-star-angel-girl.jpg",
+    "category": "Original",
+    "tags": [
+      "白",
+      "ファンタジー",
+      "天使",
+      "オバケ"
+    ],
+    "description": "タイトル「ゴーストガール」は、星空を背景にした可愛らしいゴーストガールを描いた作品です。幻想的な雰囲気と遊び心あふれるデザインが魅力的です。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 40,
+    "slug": "040-ghost-angel-girl",
+    "title": "★Gohst Angel★",
+    "date": "2026-02-23",
+    "image_path": "/static/img/works/040-ghost-angel-girl.webp",
+    "thumbnail": "/static/img/works/040-ghost-angel-girl.jpg",
+    "category": "Original",
+    "tags": [
+      "オバケ",
+      "天使",
+      "白",
+      "ファンタジー"
+    ],
+    "description": "タイトル「★Gohst Angel★」は、オバケと天使が融合したファンタジーなキャラクターを描いています。柔らかい白と神秘的な黒のコントラストが特徴で、可愛らしいデザインが見る人の心を掴む一品です。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2025883421835448566"
+    }
+  },
+  {
+    "id": 41,
+    "slug": "041-cat-angel.webp",
+    "title": "白タイツ天使さん",
+    "date": "2026-02-26",
+    "image_path": "/static/img/works/041-cat-angel.webp.webp",
+    "thumbnail": "/static/img/works/041-cat-angel.webp.jpg",
+    "category": "Original",
+    "tags": [
+      "白タイツ",
+      "ネコミミ",
+      "フーディー"
+    ],
+    "description": "タイトル「白タイツ天使さん」は、可愛らしいネコミミとフーディーを身にまとったキャラクターが魅力の作品です。白タイツが織りなす清楚感とファンタジー要素が融合したデザインは、見る人の心を引きつけます。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 42,
+    "slug": "042-thighhighs-cat-angel",
+    "title": "白ニーソ天使さん",
+    "date": "2026-02-26",
+    "image_path": "/static/img/works/042-thighhighs-cat-angel.webp",
+    "thumbnail": "/static/img/works/042-thighhighs-cat-angel.jpg",
+    "category": "Original",
+    "tags": [
+      "ニーソ",
+      "フーディー",
+      "ネコミミ"
+    ],
+    "description": "タイトル「白ニーソ天使さん」は、フーディーとネコミミをまとったキュートなキャラクターを描いた作品です。白ニーソが特徴的なこの天使は、元気で愛らしい雰囲気を醸し出しており、見る者を魅了します。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2026974271701156171"
+    }
+  },
+  {
+    "id": 43,
+    "slug": "043-sleeves-past-wrist-angel",
+    "title": "萌え袖天使さん",
+    "date": "2026-03-01",
+    "image_path": "/static/img/works/043-sleeves-past-wrist-angel.webp",
+    "thumbnail": "/static/img/works/043-sleeves-past-wrist-angel.jpg",
+    "category": "Original",
+    "tags": [
+      "ネコミミ",
+      "天使",
+      "白タイツ"
+    ],
+    "description": "タイトル「萌え袖天使さん」は、ネコミミと天使の可愛らしい要素を融合させたイラストです。白タイツを纏った彼女は、その愛らしい姿で観る人を魅了します。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2028021169199452377"
+    }
+  },
+  {
+    "id": 44,
+    "slug": "044-hoodie-angel-kneeling",
+    "title": "着ぐるみパーカーガール",
+    "date": "2026-03-03",
+    "image_path": "/static/img/works/044-hoodie-angel-kneeling.webp",
+    "thumbnail": "/static/img/works/044-hoodie-angel-kneeling.jpg",
+    "category": "Original",
+    "tags": [
+      "着ぐるみ",
+      "ブカブカ服",
+      "素足"
+    ],
+    "description": "「着ぐるみパーカーガール」は、可愛らしい着ぐるみとブカブカの服を身に纏ったキャラクターが魅力的に描かれています。素足が見えることで、さらに親しみやすさと遊び心を感じさせる作品です。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2028798191014195416"
+    }
+  },
+  {
+    "id": 45,
+    "slug": "045-angel-collared-shirt",
+    "title": "白シャツ天使(全身)",
+    "date": "2026-04-04",
+    "image_path": "/static/img/works/045-angel-collared-shirt.webp",
+    "thumbnail": "/static/img/works/045-angel-collared-shirt.jpg",
+    "category": "Original",
+    "tags": [
+      "天使",
+      "白",
+      "シャツ"
+    ],
+    "description": "タイトル「白シャツ天使(全身)」は、清楚で可憐な天使の姿を描いた作品です。白シャツを纏った彼女の独特な魅力と優雅さが、見る人の心を引きつけます。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2038194685693538518"
+    }
+  },
+  {
+    "id": 46,
+    "slug": "046-angel-colared-shirt",
+    "title": "白シャツガール",
+    "date": "2026-04-04",
+    "image_path": "/static/img/works/046-angel-colared-shirt.webp",
+    "thumbnail": "/static/img/works/046-angel-colared-shirt.jpg",
+    "category": "Original",
+    "tags": [
+      "白",
+      "天使",
+      "シャツ"
+    ],
+    "description": "タイトル「白シャツガール」は、白いシャツを纏った天使のような少女を描いた作品です。清潔感と可愛らしさが融合し、見る人に爽やかな印象を与えます。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2038944785504067853"
+    }
+  },
+  {
+    "id": 47,
+    "slug": "047-multiple-oversized-shirt",
+    "title": "寝そべりガール",
+    "date": "2026-04-04",
+    "image_path": "/static/img/works/047-multiple-oversized-shirt.webp",
+    "thumbnail": "/static/img/works/047-multiple-oversized-shirt.jpg",
+    "category": "Original",
+    "tags": [
+      "リボン",
+      "複数"
+    ],
+    "description": "タイトル「寝そべりガール」は、リボンをあしらった可愛らしいデザインで、リラックスした姿勢の女の子を描いています。彼女の無邪気さと柔らかな雰囲気が、魅力的な一枚に仕上がっています。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2040009444977942783"
+    }
+  },
+  {
+    "id": 48,
+    "slug": "048-hair-ribbon-blue",
+    "title": "青リボンガール",
+    "date": "2026-04-04",
+    "image_path": "/static/img/works/048-hair-ribbon-blue.webp",
+    "thumbnail": "/static/img/works/048-hair-ribbon-blue.jpg",
+    "category": "Original",
+    "tags": [
+      "リボン",
+      "青",
+      "仰向け"
+    ],
+    "description": "「青リボンガール」は、柔らかな青色のリボンをアクセントにした可愛らしいキャラクターを描いたイラストです。仰向けに寝そべる姿とさまざまな表情が、彼女の無邪気さと魅力を引き立てています。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2040211587462762791"
+    }
+  },
+  {
+    "id": 49,
+    "slug": "049-hair-ribbon-blue",
+    "title": "青リボンガール",
+    "date": "2026-04-05",
+    "image_path": "/static/img/works/049-hair-ribbon-blue.webp",
+    "thumbnail": "/static/img/works/049-hair-ribbon-blue.jpg",
+    "category": "Original",
+    "tags": [
+      "青",
+      "リボン",
+      "仰向け"
+    ],
+    "description": "「青リボンガール」は、青いリボンをアクセントにした可愛らしいキャラクターが描かれています。仰向けに寝そべる姿からは、無邪気さと少しの大人びた表情が混ざり合い、見る人を引き込む魅力があります。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 50,
+    "slug": "050-petite-slender-girl",
+    "title": "小柄で華奢ガール",
+    "date": "2026-04-05",
+    "image_path": "/static/img/works/050-petite-slender-girl.webp",
+    "thumbnail": "/static/img/works/050-petite-slender-girl.jpg",
+    "category": "Original",
+    "tags": [
+      "ブカブカ服",
+      "青"
+    ],
+    "description": "タイトル「小柄で華奢ガール」は、ブカブカの青い服を着た愛らしいキャラクターの多様な表情とポーズを描いています。シンプルながらも魅力的なスタイルが、彼女の可愛らしさを引き立てています。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2040720567909896683"
+    }
+  },
+  {
+    "id": 51,
+    "slug": "051-petite-blue-girl",
+    "title": "シャツガール",
+    "date": "2026-04-12",
+    "image_path": "/static/img/works/051-petite-blue-girl.webp",
+    "thumbnail": "/static/img/works/051-petite-blue-girl.jpg",
+    "category": "Original",
+    "tags": [
+      "シャツ",
+      "青"
+    ],
+    "description": "タイトル「シャツガール」は、青いネクタイを締めたユニークなシャツスタイルのキャラクターを描いています。彼女の無邪気な表情とリラックスしたポーズが、遊び心と魅力を引き立てています。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2041835915883245888"
+    }
+  },
+  {
+    "id": 52,
+    "slug": "052-kigurumi-pajamas-girl",
+    "title": "着ぐるみパジャマガールズ",
+    "date": "2026-04-12",
+    "image_path": "/static/img/works/052-kigurumi-pajamas-girl.webp",
+    "thumbnail": "/static/img/works/052-kigurumi-pajamas-girl.jpg",
+    "category": "Original",
+    "tags": [
+      "着ぐるみ",
+      "パジャマ",
+      "仰向け"
+    ],
+    "description": "タイトル「着ぐるみパジャマガールズ」は、愛らしい着ぐるみを纏った少女たちが、リラックスした姿で楽しげに描かれています。カラフルなパジャマと遊び心満載の表情が、可愛さと温もりを感じさせる1枚です。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2042914536123174925"
+    }
+  },
+  {
+    "id": 53,
+    "slug": "053-pink-midhair-cadigan",
+    "title": "片目隠しリボンちゃん",
+    "date": "2026-04-12",
+    "image_path": "/static/img/works/053-pink-midhair-cadigan.webp",
+    "thumbnail": "/static/img/works/053-pink-midhair-cadigan.jpg",
+    "category": "Original",
+    "tags": [
+      "片目隠し",
+      "キャミソール",
+      "カーディガン"
+    ],
+    "description": "タイトル「片目隠しリボンちゃん」は、愛らしいキャミソール姿にカーディガンを羽織ったキャラクターが特徴です。片目を隠した独特のスタイルがシンプルながらも魅力的な個性を引き立てています。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2043294551419580622"
+    }
+  },
+  {
+    "id": 54,
+    "slug": "054",
+    "title": "ブカブカシャツ青ガール",
+    "date": "2026-04-12",
+    "image_path": "/static/img/works/054.webp",
+    "thumbnail": "/static/img/works/054.jpg",
+    "category": "Original",
+    "x_thumbnail": "/static/img/works/054_1.jpg",
+    "tags": [
+      "ブカブカ服",
+      "恥ずかしがり屋",
+      "仰向け"
+    ],
+    "description": "「ブカブカシャツ青ガール」は、恥ずかしがり屋の女の子がブカブカのシャツを着て仰向けに寝る姿を描いた作品です。柔らかな色合いと可愛らしい表情が、無邪気さと親しみやすさを引き立てています。",
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {}
+  },
+  {
+    "id": 55,
+    "slug": "055-blue-midhair-tanktop",
+    "title": "青タンクトップガール",
+    "date": "2026-04-13",
+    "image_path": "/static/img/works/055-blue-midhair-tanktop.webp",
+    "thumbnail": "/static/img/works/055-blue-midhair-tanktop.jpg",
+    "category": "Original",
+    "tags": [
+      "青",
+      "タンクトップ",
+      "スリーブレス"
+    ],
+    "description": "爽やかな青色のタンクトップを身にまとったキャラクターが魅力的に描かれています。彼女の多様な表情とポーズが、元気で親しみやすい印象を与えます。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2043656682774082008"
+    }
+  },
+  {
+    "id": 56,
+    "slug": "056-pink-midhair-tanktop",
+    "title": "ピンクタンクトップガール",
+    "date": "2026-04-14",
+    "image_path": "/static/img/works/056-pink-midhair-tanktop.webp",
+    "thumbnail": "/static/img/works/056-pink-midhair-tanktop.jpg",
+    "category": "Original",
+    "tags": [
+      "ピンク",
+      "タンクトップ"
+    ],
+    "description": "愛らしい表情と元気なポーズで、ピンクを基調にした魅力的なキャラクターを描いています。柔らかな色合いと楽しげなモチーフが、見る人に明るい気持ちを届ける一枚です。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 57,
+    "slug": "057-blue-shorts-tanktop",
+    "title": "ショーツガール",
+    "date": "2026-04-15",
+    "image_path": "/static/img/works/057-blue-shorts-tanktop.webp",
+    "thumbnail": "/static/img/works/057-blue-shorts-tanktop.jpg",
+    "category": "Original",
+    "tags": [
+      "ショーツ",
+      "タンクトップ"
+    ],
+    "description": "鮮やかな水色のタンクトップとショーツをまとったキャラクターが、元気いっぱいにポーズを決めたイラストです。愛らしい表情やフワッとした髪型が、明るく楽しい雰囲気を醸し出し、見ている人を惹きつけます。",
+    "ai_desc_override": {
+      "tone_preset": "minimal",
+      "length_rule": "single_sentence_60_90",
+      "must_include": [
+        "composition",
+        "color",
+        "motif"
+      ],
+      "custom_instruction": ""
+    },
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2044182661548372439"
+    }
+  },
+  {
+    "id": 58,
+    "slug": "058-pink-tanktop-cardigan.webp",
+    "title": "ピンクカーディガンガール",
+    "date": "2026-04-15",
+    "image_path": "/static/img/works/058-pink-tanktop-cardigan.webp.webp",
+    "thumbnail": "/static/img/works/058-pink-tanktop-cardigan.webp.jpg",
+    "category": "Original",
+    "tags": [
+      "カーディガン",
+      "ピンク"
+    ],
+    "description": "柔らかなピンク色を基調にした元気いっぱいのキャラクターが特徴の作品です。カーディガンをさまざまなスタイルで楽しむ彼女の姿から、明るいエネルギーと可愛らしさが伝わってきます。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2044295404616073402"
+    }
+  },
+  {
+    "id": 59,
+    "slug": "059-pink-tanktop-cardigan.webp.webp",
+    "title": "元気ガール",
+    "date": "2026-04-16",
+    "image_path": "/static/img/works/059-pink-tanktop-cardigan.webp.webp.webp",
+    "thumbnail": "/static/img/works/059-pink-tanktop-cardigan.webp.webp.jpg",
+    "category": "Original",
+    "tags": [
+      "ピンク",
+      "カーディガン",
+      "キャミソール"
+    ],
+    "description": "ピンクのカーディガンとキャミソールが魅力的なキャラクターです。明るい色使いと元気なポーズが、彼女のイキイキとした表情を引き立て、見る人に元気を与えてくれます！",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2044335921345253582"
+    }
+  },
+  {
+    "id": 60,
+    "slug": "060-pink-tanktop-cardigan.webp.webp",
+    "title": "おはようガール",
+    "date": "2026-04-16",
+    "image_path": "/static/img/works/060-pink-tanktop-cardigan.webp.webp.webp",
+    "thumbnail": "/static/img/works/060-pink-tanktop-cardigan.webp.webp.jpg",
+    "category": "Original",
+    "tags": [
+      "ピンク",
+      "キャミソール",
+      "カーディガン"
+    ],
+    "description": "朝の元気な雰囲気を存分に表現したオリジナル作品です。ピンクのキャミソールにカーディガンを合わせた明るいデザインが、キャラクターの可愛らしさを引き立てています。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2044562345280811018"
+    }
+  },
+  {
+    "id": 61,
+    "slug": "061-miko-sama",
+    "title": "可愛い巫女さま",
+    "date": "2026-04-16",
+    "image_path": "/static/img/works/061-miko-sama.webp",
+    "thumbnail": "/static/img/works/061-miko-sama.jpg",
+    "category": "Original",
+    "tags": [
+      "巫女",
+      "赤面"
+    ],
+    "description": "鮮やかな赤と白のコントラストが目を引く魅力的な作品です。恥ずかしがり屋な表情や愛らしいモチーフが、見る人に元気と癒しを届けてくれます！",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 62,
+    "slug": "062-boku-miko-sama",
+    "title": "僕巫女さま",
+    "date": "2026-04-17",
+    "image_path": "/static/img/works/062-boku-miko-sama.webp",
+    "thumbnail": "/static/img/works/062-boku-miko-sama.jpg",
+    "category": "Original",
+    "x_thumbnail": "/static/img/works/062-boku-miko-samaxxx.jpg",
+    "tags": [
+      "巫女",
+      "酒"
+    ],
+    "description": "元気いっぱいの巫女さまが、酒を手に笑顔を見せる姿を描いた作品です。鮮やかな赤と白のコントラストが印象的で、可愛らしいモチーフが魅力を引き立てています。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2045080326674718972"
+    }
+  },
+  {
+    "id": 63,
+    "slug": "063-miko-sama",
+    "title": "巫女さま",
+    "date": "2026-04-18",
+    "image_path": "/static/img/works/063-miko-sama.webp",
+    "thumbnail": "/static/img/works/063-miko-sama.jpg",
+    "category": "Original",
+    "tags": [
+      "巫女"
+    ],
+    "description": "鮮やかな赤と白のコントラストが印象的な巫女の魅力を引き立てる作品です。元気いっぱいの表情や可愛らしい仕草で、神秘的な雰囲気を感じさせるデザインが特徴です！",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2045277062928408824"
+    }
+  },
+  {
+    "id": 64,
+    "slug": "064-waki-miko-sama",
+    "title": "わき巫女さま",
+    "date": "2026-04-19",
+    "image_path": "/static/img/works/064-waki-miko-sama.webp",
+    "thumbnail": "/static/img/works/064-waki-miko-sama.jpg",
+    "category": "Original",
+    "tags": [
+      "巫女",
+      "わき"
+    ],
+    "description": "伝統的な巫女装束に身を包んだ女の子を描いています。鮮やかな赤と白のコントラストが目を引き、元気で可愛らしい表情とポーズが、見る人に明るいエネルギーを与えてくれます！",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2045443097241538833"
+    }
+  },
+  {
+    "id": 65,
+    "slug": "065-off-shoulder-girl",
+    "title": "オフショルガール",
+    "date": "2026-04-19",
+    "image_path": "/static/img/works/065-off-shoulder-girl.webp",
+    "thumbnail": "/static/img/works/065-off-shoulder-girl.jpg",
+    "category": "Original",
+    "tags": [
+      "オフショル",
+      "ピンク",
+      "タンクトップ"
+    ],
+    "description": "愛らしいオフショル姿の女の子を元気いっぱいに描いた作品です。ピンクを基調とした色使いと、軽やかな構図が彼女の魅力を一層引き立てています！",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 66,
+    "slug": "066-tenshinranman-miko",
+    "title": "天真爛漫巫女さん",
+    "date": "2026-04-19",
+    "image_path": "/static/img/works/066-tenshinranman-miko.webp",
+    "thumbnail": "/static/img/works/066-tenshinranman-miko.jpg",
+    "category": "Original",
+    "tags": [
+      "巫女"
+    ],
+    "description": "明るく元気な巫女さんをモチーフにしたイラストです。赤と白の鮮やかな色合いが目を引き、愛らしい表情と動きが彼女の活発さを感じさせます。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2045675215997538708"
+    }
+  },
+  {
+    "id": 67,
+    "slug": "067-ane-miko",
+    "title": "姉巫女",
+    "date": "2026-04-19",
+    "image_path": "/static/img/works/067-ane-miko.webp",
+    "thumbnail": "/static/img/works/067-ane-miko.jpg",
+    "category": "Original",
+    "tags": [
+      "巫女",
+      "姉",
+      "魔女"
+    ],
+    "description": "愛らしい姉の巫女が魅力的に描かれたオリジナル作品です。鮮やかな赤色の袴と素朴な白の衣装が、彼女の温かい笑顔と調和し、見る人に元気を与える一枚です！",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2045675259127541796"
+    }
+  },
+  {
+    "id": 68,
+    "slug": "068-miko-on-back-panties",
+    "title": "巫女さん",
+    "date": "2026-04-19",
+    "image_path": "/static/img/works/068-miko-on-back-panties.webp",
+    "thumbnail": "/static/img/works/068-miko-on-back-panties.jpg",
+    "category": "Original",
+    "x_thumbnail": "/static/img/works/068-SN2.jpg",
+    "tags": [
+      "巫女",
+      "下着",
+      "仰向け"
+    ],
+    "description": "ここにだけ保管してるやつ。\n鮮やかな赤と柔らかな白のコントラストが魅力的な作品です。仰向けに寝そべるちょっとエッチな巫女姿が、可愛らしさと少しセクシーさを兼ね備えています。素敵な構図と色使いで、思わず目が奪われる一枚です！",
+    "ai_desc_override": {
+      "tone_preset": "energetic",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "color",
+        "motif"
+      ],
+      "custom_instruction": "ちょっとエッチな　という言葉を入れて。"
+    },
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {},
+    "additional_images": [
+      "/static/img/works/068-miko-on-back-panties_1.webp",
+      "/static/img/works/068-miko-on-back-panties_2.webp",
+      "/static/img/works/068-miko-on-back-panties_3.webp",
+      "/static/img/works/068-miko-on-back-panties_4.webp",
+      "/static/img/works/068-miko-on-back-panties_5.webp",
+      "/static/img/works/068-miko-on-back-panties_6.webp"
+    ]
+  },
+  {
+    "id": 69,
+    "slug": "069-miko-on-back",
+    "title": "巫女さま抱き枕カバー",
+    "date": "2026-04-19",
+    "image_path": "/static/img/works/069-miko-on-back.webp",
+    "thumbnail": "/static/img/works/069-miko-on-back.jpg",
+    "category": "Original",
+    "tags": [
+      "巫女",
+      "抱き枕カバー"
+    ],
+    "description": "華やかな赤い色合いが目を引く、元気いっぱいの巫女をモチーフにした作品です。可愛らしい表情と独自の構図が、見る人を魅了し、心を温かくさせる一枚です。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2045799067704512843"
+    }
+  },
+  {
+    "id": 70,
+    "slug": "070-miko-mini-skirt",
+    "title": "ミニスカ巫女さん",
+    "date": "2026-04-20",
+    "image_path": "/static/img/works/070-miko-mini-skirt.webp",
+    "thumbnail": "/static/img/works/070-miko-mini-skirt.jpg",
+    "category": "Original",
+    "tags": [
+      "巫女",
+      "ミニスカート"
+    ],
+    "description": "赤と白の鮮やかな色使いで、元気いっぱいの巫女を描いた魅力的な作品です。可愛らしい表情やポーズが特徴で、伝統的なモチーフに現代的なアレンジを加えたデザインが楽しめます。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2046148112343851498"
+    }
+  },
+  {
+    "id": 71,
+    "slug": "072-miko-on-back",
+    "title": "巫女さん抱き枕カバー(スカート)",
+    "date": "2026-04-21",
+    "image_path": "/static/img/works/072-miko-on-back.webp",
+    "thumbnail": "/static/img/works/072-miko-on-back.jpg",
+    "category": "Original",
+    "tags": [
+      "巫女",
+      "仰向け",
+      "抱き枕カバー"
+    ],
+    "description": "元気いっぱいの巫女さんが可愛らしく描かれた抱き枕カバー風！仰向けの構図で、スカートのふんわり感と愛らしい表情が魅力的に仕上がっています。",
+    "ai_desc_override": {
+      "tone_preset": "energetic",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "motif"
+      ],
+      "custom_instruction": ""
+    },
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2046507228627095911"
+    }
+  },
+  {
+    "id": 72,
+    "slug": "072-ohayo-girl",
+    "title": "おはよーガール",
+    "date": "2026-04-22",
+    "image_path": "/static/img/works/072-ohayo-girl.webp",
+    "thumbnail": "/static/img/works/072-ohayo-girl.jpg",
+    "category": "Original",
+    "tags": [
+      "オフショル",
+      "ピンク"
+    ],
+    "description": "元気いっぱいのオフショルシャツをまとった女の子の愛らしさを描いた作品です。ピンクの色合いが彼女の可愛らしさを引き立て、朝の陽気な雰囲気を感じさせる心温まる一枚です。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2046724201781108842"
+    }
+  },
+  {
+    "id": 73,
+    "slug": "073-kawaii-miko-san",
+    "title": "可愛い僕巫女さま",
+    "date": "2026-04-22",
+    "image_path": "/static/img/works/073-kawaii-miko-san.webp",
+    "thumbnail": "/static/img/works/073-kawaii-miko-san.jpg",
+    "category": "Original",
+    "tags": [
+      "巫女"
+    ],
+    "description": "元気いっぱいな巫女の姿を描いたオリジナル作品です。華やかな赤い衣装に身を包んだ彼女の表情は、見る人の心を温かくし、癒しを与えてくれます！！！",
+    "ai_desc_override": {
+      "tone_preset": "energetic",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "motif"
+      ],
+      "custom_instruction": ""
+    },
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2046869868360679446"
+    }
+  },
+  {
+    "id": 74,
+    "slug": "074-shirt-miko",
+    "title": "素足巫女さん",
+    "date": "2026-04-26",
+    "image_path": "/static/img/works/074-shirt-miko.webp",
+    "thumbnail": "/static/img/works/074-shirt-miko.jpg",
+    "category": "Original",
+    "tags": [
+      "巫女",
+      "素足"
+    ],
+    "description": "かわいらしい巫女の姿を元気いっぱいに描いたオリジナルイラストです。素足と魅力的なふとももを強調し、明るい表情が観る人を引き込みます。",
+    "ai_desc_override": {
+      "tone_preset": "energetic",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "motif"
+      ],
+      "custom_instruction": "えっちなふともも"
+    },
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2048014021576835255"
+    }
+  },
+  {
+    "id": 75,
+    "slug": "075-kare-shirt",
+    "title": "彼シャツ巫女さん",
+    "date": "2026-04-26",
+    "image_path": "/static/img/works/075-kare-shirt.webp",
+    "thumbnail": "/static/img/works/075-kare-shirt.jpg",
+    "category": "Original",
+    "tags": [
+      "巫女",
+      "シャツ"
+    ],
+    "description": "愛らしい巫女の姿が魅力的な一枚です。大きなシャツを着た彼女の構図は、無邪気さと少しのセクシーさを兼ね備え、見る人を引き込むこと間違いなしです！",
+    "ai_desc_override": {
+      "tone_preset": "energetic",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "motif"
+      ],
+      "custom_instruction": ""
+    },
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2048192337453744487"
+    }
+  },
+  {
+    "id": 76,
+    "slug": "076-jk",
+    "title": "金髪JKガール",
+    "date": "2026-05-04",
+    "image_path": "/static/img/works/076-jk.webp",
+    "thumbnail": "/static/img/works/076-jk.jpg",
+    "category": "Original",
+    "tags": [
+      "jk",
+      "金髪"
+    ],
+    "description": "優しいパステルカラーで描かれた元気いっぱいの少女です。彼女の明るい表情や、可愛いリボンがアクセントとなり、爽やかな青春の一瞬を切り取ったような魅力を持っています。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 77,
+    "slug": "077-tie-shirt",
+    "title": "シャツネクタイガール",
+    "date": "2026-05-04",
+    "image_path": "/static/img/works/077-tie-shirt.webp",
+    "thumbnail": "/static/img/works/077-tie-shirt.jpg",
+    "category": "Original",
+    "tags": [],
+    "request_tags": [
+      "シャツ"
+    ],
+    "description": "魅力的な構図と明るい色使いで、元気いっぱいの女の子を描いたオリジナル作品です。シャツとネクタイというシンプルなモチーフが、彼女の可愛さを一層引き立てています！",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 78,
+    "slug": "078-on-back-camisole",
+    "title": "パジャマガール",
+    "date": "2026-05-04",
+    "image_path": "/static/img/works/078-on-back-camisole.webp",
+    "thumbnail": "/static/img/works/078-on-back-camisole.jpg",
+    "category": "Original",
+    "tags": [
+      "パジャマ",
+      "パンティ"
+    ],
+    "description": "明るい色合いのパジャマを着た女の子たちが元気いっぱいにポーズをとる、魅力的なオリジナル作品です。青とピンクのデザインが織りなす可愛いモチーフが、見る人の心を和ませます！",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 79,
+    "slug": "079-on-back-pajamas-panty",
+    "title": "パジャマガール2",
+    "date": "2026-05-05",
+    "image_path": "/static/img/works/079-on-back-pajamas-panty.webp",
+    "thumbnail": "/static/img/works/079-on-back-pajamas-panty.jpg",
+    "category": "Original",
+    "tags": [
+      "パジャマ",
+      "下着"
+    ],
+    "description": "元気で可愛らしいパジャマ姿の女の子が描かれたオリジナル作品です。ちらっと見える下着が、彼女の魅力を一層引き立て、明るく楽しい雰囲気を醸し出しています。",
+    "ai_desc_override": {
+      "tone_preset": "energetic",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition"
+      ],
+      "custom_instruction": "ちらっと見える下着"
+    },
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {}
+  },
+  {
+    "id": 80,
+    "slug": "080-dougan-suit",
+    "title": "童顔上司のいる職場",
+    "date": "2026-05-06",
+    "image_path": "/static/img/works/080-dougan-suit.webp",
+    "thumbnail": "/static/img/works/080-dougan-suit.jpg",
+    "category": "Original",
+    "tags": [
+      "スーツ"
+    ],
+    "description": "可愛らしい童顔の上司がスーツ姿で元気に振る舞う姿を描きました。明るい表情と仕草が、職場の雰囲気を一層楽しくしてくれること間違いなし！",
+    "ai_desc_override": {
+      "tone_preset": "energetic",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "motif"
+      ],
+      "custom_instruction": ""
+    },
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2051504865206288789"
+    }
+  },
+  {
+    "id": 81,
+    "slug": "081-hoodie-tie",
+    "title": "ネクタイ×フーティー",
+    "date": "2026-05-09",
+    "image_path": "/static/img/works/081-hoodie-tie.webp",
+    "thumbnail": "/static/img/works/081-hoodie-tie.jpg",
+    "category": "Original",
+    "tags": [
+      "ネクタイ",
+      "フーディー"
+    ],
+    "description": "ネクタイとフーディーの組み合わせが生み出すカジュアルでありながらちょっぴりクールなスタイルを表現した作品です。元気いっぱいのキャラクターがさまざまなポーズで魅力を届ける、このイラストは、ファッションと個性の楽しさを感じさせてくれます！",
+    "ai_desc_override": {
+      "tone_preset": "energetic",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "motif"
+      ],
+      "custom_instruction": ""
+    },
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2051578956445536680"
+    }
+  },
+  {
+    "id": 82,
+    "slug": "082-hoodie-offshoulder",
+    "title": "青フーディーガール",
+    "date": "2026-05-09",
+    "image_path": "/static/img/works/082-hoodie-offshoulder.webp",
+    "thumbnail": "/static/img/works/082-hoodie-offshoulder.jpg",
+    "category": "Original",
+    "tags": [
+      "フーディー"
+    ],
+    "description": "可愛らしい青いフーディーを着た恥ずかしがり屋の女の子を描いた作品です。鮮やかな青色が彼女の魅力を引き立て、心温まる構図が見る人をほっこりさせます。",
+    "ai_desc_override": {
+      "tone_preset": "energetic",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "color",
+        "motif"
+      ],
+      "custom_instruction": "恥ずかしがり屋"
+    },
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2051947073063543234"
+    }
+  },
+  {
+    "id": 83,
+    "slug": "084-shirt-tie",
+    "title": "シンプルネクタイガール",
+    "date": "2026-05-09",
+    "image_path": "/static/img/works/084-shirt-tie.webp",
+    "thumbnail": "/static/img/works/084-shirt-tie.jpg",
+    "category": "Original",
+    "tags": [
+      "ネクタイ"
+    ],
+    "description": "シャツにネクタイを軽やに着こなしたキャラクターが、明るく元気な笑顔で魅力を振りまく作品です。シンプルな構図の中に、彼女の愛らしさとチャーミングな雰囲気が引き立っています。",
+    "ai_desc_override": {
+      "tone_preset": "energetic",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "motif"
+      ],
+      "custom_instruction": ""
+    },
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2052309460916584932"
+    }
+  },
+  {
+    "id": 84,
+    "slug": "085-prison-costume1",
+    "title": "囚人コス ガール",
+    "date": "2026-05-09",
+    "image_path": "/static/img/works/085-prison-costume1.webp",
+    "thumbnail": "/static/img/works/085-prison-costume1.jpg",
+    "category": "Original",
+    "tags": [
+      "囚人コス"
+    ],
+    "description": "元気で遊び心あふれるデザインが魅力です！ストライプの囚人服を着た可愛らしいキャラクターが、さまざまな表情やポーズで描かれており、彼女の個性がパッと伝わる構図が特徴です。",
+    "ai_desc_override": {
+      "tone_preset": "energetic",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "motif"
+      ],
+      "custom_instruction": ""
+    },
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2052685109170757850"
+    }
+  },
+  {
+    "id": 85,
+    "slug": "086-prison-costume2",
+    "title": "囚人コス ガール2",
+    "date": "2026-05-09",
+    "image_path": "/static/img/works/086-prison-costume2.webp",
+    "thumbnail": "/static/img/works/086-prison-costume2.jpg",
+    "category": "Original",
+    "tags": [
+      "囚人コス"
+    ],
+    "description": "元気いっぱいな囚人コスの女の子が、さまざまな表情で魅力を引き立てています！可愛いカラーとユニークな構図が、彼女たちの個性を際立たせ、観る人を惹きつける作品です。",
+    "ai_desc_override": {
+      "tone_preset": "energetic",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "motif"
+      ],
+      "custom_instruction": ""
+    },
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2052705523305517333"
+    }
+  },
+  {
+    "id": 86,
+    "slug": "086-miko-girl",
+    "title": "元気いっぱい巫女さん",
+    "date": "2026-05-09",
+    "image_path": "/static/img/works/086-miko-girl.webp",
+    "thumbnail": "/static/img/works/086-miko-girl.jpg",
+    "category": "Original",
+    "tags": [
+      "巫女"
+    ],
+    "description": "華やかな衣装に身を包んだ巫女さんがさまざまな表情を見せる構図が魅力的です。明るく元気な彼女の姿から、伝統的な文化と青春のエネルギーが感じられます。",
+    "ai_desc_override": {
+      "tone_preset": "energetic",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "motif"
+      ],
+      "custom_instruction": ""
+    },
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2052992713193324619"
+    }
+  },
+  {
+    "id": 87,
+    "slug": "087-cat",
+    "title": "保護ねこ",
+    "date": "2026-05-21",
+    "image_path": "/static/img/works/087-cat.webp",
+    "thumbnail": "/static/img/works/087-cat.jpg",
+    "category": "Original",
+    "tags": [
+      "金髪",
+      "ネコミミ"
+    ],
+    "description": "金髪のネコミミキャラクターが優しい表情で描かれ、明るい色合いが印象的です。リラックスしたポーズと可愛らしいモチーフが、どこか心を癒す魅力を引き立てています。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 88,
+    "slug": "088-cat",
+    "title": "ねこグローブ",
+    "date": "2026-05-21",
+    "image_path": "/static/img/works/088-cat.webp",
+    "thumbnail": "/static/img/works/088-cat.jpg",
+    "category": "Original",
+    "tags": [
+      "ネコミミ"
+    ],
+    "description": "ネコミミをテーマにした可愛らしいキャラクターが、元気いっぱいにポーズを決める姿が印象的な作品です。明るいパステルカラーで彩られた構図は、愛らしさと楽しさを引き立て、見る人の心を和ませてくれます。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 89,
+    "slug": "089-vamp",
+    "title": "ヴァンパイアガール",
+    "date": "2026-05-21",
+    "image_path": "/static/img/works/089-vamp.webp",
+    "thumbnail": "/static/img/works/089-vamp.jpg",
+    "category": "Original",
+    "tags": [
+      "ヴァンパイア"
+    ],
+    "description": "可愛らしいヴァンパイアをモチーフにした作品です。鮮やかな赤のラインで描かれた彼女の表情やポーズが、元気で愛らしい雰囲気を引き立てています！",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 90,
+    "slug": "090-vamp",
+    "title": "ヴァンパイアちゃん",
+    "date": "2026-05-21",
+    "image_path": "/static/img/works/090-vamp.webp",
+    "thumbnail": "/static/img/works/090-vamp.jpg",
+    "category": "Original",
+    "tags": [
+      "ヴァンパイア"
+    ],
+    "description": "鮮やかな赤を基調にした可愛らしいキャラクターが魅力です。元気いっぱいの表情やファッション、そして独特のモチーフが織り交ぜられた構図が、彼女の妖しい魅力を引き立てています。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 91,
+    "slug": "091-sporty",
+    "title": "スポーツガール",
+    "date": "2026-05-21",
+    "image_path": "/static/img/works/091-sporty.webp",
+    "thumbnail": "/static/img/works/091-sporty.jpg",
+    "category": "Original",
+    "tags": [
+      "スポーツブラ",
+      "黒髪"
+    ],
+    "description": "活力あふれるポーズと鮮やかな紫色のスポーツブラが特徴の作品です。黒髪の彼女は、心躍る表情で、見ている人にも元気を与えてくれる魅力的なモチーフです！",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 92,
+    "slug": "092-fuuki-iin",
+    "title": "風紀委員",
+    "date": "2026-05-21",
+    "image_path": "/static/img/works/092-fuuki-iin.jpg",
+    "thumbnail": "/static/img/works/092-fuuki-iin.jpg",
+    "category": "Original",
+    "tags": [
+      "ブラ",
+      "ネクタイ"
+    ],
+    "description": "明るい色合いとユーモラスな構図で表現されたオリジナル作品です。透けたブラとネクタイが特徴的なキャラクターが、ちょっぴりドキッとする表情で楽しさを引き立てています！",
+    "ai_desc_override": {
+      "tone_preset": "energetic",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "color",
+        "motif"
+      ],
+      "custom_instruction": "透けたブラ"
+    },
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {}
+  },
+  {
+    "id": 93,
+    "slug": "093-vamp",
+    "title": "ヴァンパイアガール",
+    "date": "2026-05-24",
+    "image_path": "/static/img/works/093-vamp.webp",
+    "thumbnail": "/static/img/works/093-vamp.jpg",
+    "category": "Original",
+    "tags": [
+      "ヴァンパイア"
+    ],
+    "description": "明るい色合いとキュートなデザインが魅力のオリジナル作品です。可愛らしいヴァンパイアをモチーフに、オシャレで個性的な構図が印象的で、思わず目を奪われる一枚となっています。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2057399443243323581"
+    }
+  },
+  {
+    "id": 95,
+    "slug": "094p5_miko2",
+    "title": "舞巫女",
+    "date": "2026-05-30",
+    "image_path": "/static/img/works/094p5_miko2.webp",
+    "thumbnail": "/static/img/works/094p5_miko2.jpg",
+    "category": "Original",
+    "tags": [
+      "巫女"
+    ],
+    "description": "伝統的な巫女の衣装を身にまとった可愛らしいキャラクターを描いた作品です。元気いっぱいに舞い踊る姿と、心躍るモチーフが織りなす魅力あふれる構図で、見る人の心をつかむこと間違いなし！",
+    "ai_desc_override": {
+      "tone_preset": "energetic",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "motif"
+      ],
+      "custom_instruction": ""
+    },
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2060299643729383555"
+    }
+  },
+  {
+    "id": 96,
+    "slug": "097",
+    "title": "シャツガール",
+    "date": "2026-05-30",
+    "image_path": "/static/img/works/097.jpg",
+    "thumbnail": "/static/img/works/097.jpg",
+    "category": "Original",
+    "x_thumbnail": "/static/img/works/097.jpg",
+    "tags": [],
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 97,
+    "slug": "094-1",
+    "title": "【リクエスト】金髪JKちゃん 抱き枕カバー風 5枚",
+    "date": "2026-05-30",
+    "image_path": "/static/img/works/094-1.jpg",
+    "thumbnail": "/static/img/works/094-1.jpg",
+    "category": "Original",
+    "x_thumbnail": "/static/img/works/094-1sumb07.jpg",
+    "tags": [
+      "抱き枕カバー",
+      "金髪",
+      "ミニスカート"
+    ],
+    "description": "リクエスト対応！リクエスト募集中！",
+    "ai_desc_override": {
+      "tone_preset": "polite",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "color",
+        "motif"
+      ],
+      "custom_instruction": ""
+    },
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {},
+    "additional_images": [
+      "/static/img/works/094-2.webp",
+      "/static/img/works/094-3.webp",
+      "/static/img/works/094-4.webp",
+      "/static/img/works/094-5.webp"
+    ]
+  },
+  {
+    "id": 98,
+    "slug": "097a-neko-chan",
+    "title": "【リクエスト】猫ちゃん！",
+    "date": "2026-05-31",
+    "image_path": "/static/img/works/097a-neko-chan.webp",
+    "thumbnail": "/static/img/works/097a-neko-chan.jpg",
+    "category": "Original",
+    "tags": [
+      "ネコミミ",
+      "着ぐるみ"
+    ],
+    "description": "可愛らしい猫耳とキュートな着ぐるみ姿の女の子が、元気いっぱいにポーズを決めた作品です！たくさんの表情や動きが詰まった構図で、見ているだけで心がほっこりする魅力を放っています。",
+    "ai_desc_override": {
+      "tone_preset": "energetic",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "motif"
+      ],
+      "custom_instruction": ""
+    },
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2060902498563698811"
+    }
+  },
+  {
+    "id": 99,
+    "slug": "098-heart-hands",
+    "title": "【リクエスト】手ハートのシャツガール",
+    "date": "2026-05-31",
+    "image_path": "/static/img/works/098-heart-hands.webp",
+    "thumbnail": "/static/img/works/098-heart-hands.jpg",
+    "category": "Original",
+    "tags": [
+      "シャツ",
+      "手ハート"
+    ],
+    "description": "可愛らしい表情で愛らしいポーズを取るキャラクターが特徴のオリジナルイラストです。シャツを身にまとい、手でハートを作る姿からは元気いっぱいの魅力が溢れ、見る人の心を明るくしてくれます！",
+    "ai_desc_override": {
+      "tone_preset": "energetic",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "motif"
+      ],
+      "custom_instruction": ""
+    },
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 100,
+    "slug": "100-vamp",
+    "title": "ヴァンパイアちゃん",
+    "date": "2026-06-07",
+    "image_path": "/static/img/works/100-vamp.webp",
+    "thumbnail": "/static/img/works/100-vamp.jpg",
+    "category": "Original",
+    "tags": [
+      "ヴァンパイア",
+      "シャツ"
+    ],
+    "description": "ハートのモチーフとシャツ姿が印象的なキャラクターです。鮮やかな赤を基に明るく元気な構図で描かれ、見る人を惹きつける魅力に満ちています！",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2063426149003493598"
+    }
+  },
+  {
+    "id": 101,
+    "slug": "111-changpao",
+    "title": "チーパオ",
+    "date": "2026-06-11",
+    "image_path": "/static/img/works/111-changpao.webp",
+    "thumbnail": "/static/img/works/111-changpao.jpg",
+    "category": "Original",
+    "tags": [
+      "チーパオ",
+      "チャイナドレス"
+    ],
+    "description": "元気いっぱいの女の子が、鮮やかな赤のチーパオを着て魅力的にポーズを決めています！ キラキラした瞳と大胆な構図で、伝統的なチャイナドレスに現代的なエッセンスをプラスした作品です。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2063577933915320668"
+    }
+  },
+  {
+    "id": 102,
+    "slug": "112-off-shoulder-elf",
+    "title": "エルフさん",
+    "date": "2026-06-11",
+    "image_path": "/static/img/works/112-off-shoulder-elf.webp",
+    "thumbnail": "/static/img/works/112-off-shoulder-elf.jpg",
+    "category": "Original",
+    "tags": [
+      "エルフ",
+      "オフショル"
+    ],
+    "description": "オフショルの可愛らしいエルフキャラクターが魅力たっぷりに描かれています。鮮やかな色使いとキュートな表情が特徴で、様々なポーズで楽しませてくれる構図が心を躍らせます！",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2064271530713059618"
+    }
+  },
+  {
+    "id": 103,
+    "slug": "113-flandre scarlet",
+    "title": "フランドール・スカーレット(2枚)",
+    "date": "2026-06-11",
+    "image_path": "/static/img/works/113-flandre scarlet.webp",
+    "thumbnail": "/static/img/works/113-flandre scarlet.jpg",
+    "category": "Fanart",
+    "tags": [
+      "フランドール・スカーレット"
+    ],
+    "description": "鮮やかな赤と黄色を基調に、元気いっぱいなフランドールの魅力を引き出しています。多彩なモチーフが彼女の可愛らしさを際立たせ、見る人をハッピーな世界へと誘います！",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2064588873129435372"
+    },
+    "additional_images": [
+      "/static/img/works/113-2-flandre scarlet.webp.webp"
+    ]
+  },
+  {
+    "id": 104,
+    "slug": "104-sitting-peace",
+    "title": "【リクエスト】しゃがんで座って片手でV",
+    "date": "2026-06-11",
+    "image_path": "/static/img/works/104-sitting-peace.webp",
+    "thumbnail": "/static/img/works/104-sitting-peace.jpg",
+    "category": "Original",
+    "tags": [
+      "ピース",
+      "シャツ",
+      "ネクタイ"
+    ],
+    "description": "元気いっぱいの少女が、しゃがんで座りながら片手でピースサインを送っています！爽やかな青のシャツとネクタイが、明るいカラーで描かれた彼女の表情を引き立て、観る人に元気と笑顔を届けます。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2065023964624384265"
+    }
+  },
+  {
+    "id": 105,
+    "slug": "105-miko-cute",
+    "title": "巫女さん",
+    "date": "2026-06-11",
+    "image_path": "/static/img/works/105-miko-cute.webp",
+    "thumbnail": "/static/img/works/105-miko-cute.jpg",
+    "category": "Original",
+    "tags": [
+      "巫女"
+    ],
+    "description": "元気いっぱいな表情が心を惹きつけます。シンプルながらも魅力的な構図で、彼女の愛らしさと神秘的な雰囲気を見事に表現しています。",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2065038550400393636"
+    }
+  }
+]

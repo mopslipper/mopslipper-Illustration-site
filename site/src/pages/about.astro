@@ -1,0 +1,91 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import { siteConfig, resolveRootImage, url } from '../lib/data';
+
+const author = siteConfig.author;
+const portrait = resolveRootImage('/static/img/helo-angel-asp1134-2016.webp');
+const social = siteConfig.social_links;
+---
+
+<Layout title="About" activeNav="about">
+  <section class="section container about">
+    <h1 class="section-title">About</h1>
+
+    <div class="profile-card">
+      {portrait && <Image src={portrait} alt={author.name} width={420} format="webp" class="portrait" />}
+      <div class="profile-body">
+        <h2>{author.name}</h2>
+        <p>{author.bio}</p>
+        <p class="muted">{author.bio_detail}</p>
+        {author.experience && <p class="muted">{author.experience}</p>}
+
+        <h3>得意なこと</h3>
+        <div class="row">
+          {author.skills.map((skill) => <span class="tag">{skill}</span>)}
+        </div>
+
+        <h3>使用ツール</h3>
+        <ul>
+          {author.tools.map((tool) => <li>{tool}</li>)}
+        </ul>
+
+        <h3>Links</h3>
+        <div class="row">
+          {social.twitter && <a class="btn btn-outline" href={social.twitter} target="_blank" rel="noopener">X (Twitter)</a>}
+          {social.pixiv && <a class="btn btn-outline" href={social.pixiv} target="_blank" rel="noopener">Pixiv</a>}
+        </div>
+
+        <p style="margin-top:1.5rem;">
+          <a class="btn btn-primary" href={url('/contact.html')}>イラストリクエストはこちら</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .profile-card {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) 2fr;
+    gap: 1.6rem;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    padding: 1.6rem;
+    align-items: start;
+  }
+
+  @media (max-width: 700px) {
+    .profile-card {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  :global(.portrait) {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+  }
+
+  .profile-body h2 {
+    color: var(--primary-deep);
+    margin-bottom: 0.5rem;
+  }
+
+  .profile-body h3 {
+    color: var(--primary-deep);
+    font-size: 1rem;
+    margin: 1.1rem 0 0.4rem;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  ul {
+    padding-left: 1.3rem;
+  }
+</style>

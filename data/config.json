@@ -1,0 +1,44 @@
+{
+  "site_name": "mopslipper",
+  "site_title": "mopslipper - Portfolio of Illustrations",
+  "site_description": "mopslipperのポートフォリオ。生成AIを使用したオリジナルイラスト作品を公開しています。",
+  "site_url": "https://mopslipper.github.io",
+  "custom_domain": "",
+  "hero_image": "/static/img/helo-angel-asp1134-2016.jpg",
+  "hero_text": "イラストリクエスト募集中！",
+  "hero_subtext": "オリジナル〇｜版権イラスト▲｜依頼受付〇",
+  "author": {
+    "name": "mopslipper",
+    "name_en": "mopslipper",
+    "bio": "生成AIを使用した2次元イラスト製作者。可愛くて儚い女の子を作るのが得意です。",
+    "bio_detail": "生成AIを活用し、主にオリジナルキャラクターを中心に制作しています。レース、リボンなど装飾的なデザインが好きです。",
+    "tools": [
+      "ConfyUI",
+      "VRAM 6GB",
+      "CLIP STUDIO PAINT"
+    ],
+    "skills": [
+      "可愛い系",
+      "ゴシック",
+      "儚い雰囲気",
+      "フリル・レース",
+      "Live2D素材"
+    ],
+    "experience": "イラスト製作歴 3年｜Live2D素材製作歴 0年"
+  },
+  "social_links": {
+    "twitter": "https://x.com/facet_boy",
+    "twitter_handle": "@facet_boy",
+    "pixiv": "https://www.pixiv.net/users/122921797",
+    "booth": "https://yourname.booth.pm",
+    "fanbox": "https://yourname.fanbox.cc"
+  },
+  "contact_form_action": "https://formspree.io/f/xnjjazjr",
+  "nsfw_warning": true,
+  "nsfw_text": "このサイトにはR-15（15歳以上推奨）の表現が含まれる作品があります。",
+  "footer_text": "転載・無断使用禁止｜Commission inquiries welcome",
+  "copyright_year": 2026,
+  "google_analytics": "",
+  "meta_keywords": "イラスト,イラストレーター,2次元,美少女,ゴシック,オリジナル,依頼,commission",
+  "base_path": "/mopslipper-Illustration-site"
+}

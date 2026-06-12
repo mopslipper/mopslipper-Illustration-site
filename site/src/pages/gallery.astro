@@ -1,0 +1,190 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WorkCard from '../components/WorkCard.astro';
+import { works } from '../lib/data';
+
+const categories = ['すべて', 'Original', 'Animation', 'Manga', 'Fanart'];
+
+// 人気タグ上位20件（「オリジナル」除外）
+const tagCount = new Map<string, number>();
+for (const work of works) {
+  for (const tag of work.tags) {
+    if (tag === 'オリジナル') continue;
+    tagCount.set(tag, (tagCount.get(tag) ?? 0) + 1);
+  }
+}
+const popularTags = [...tagCount.entries()]
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 20)
+  .map(([tag]) => tag);
+---
+
+<Layout title="Gallery" activeNav="gallery">
+  <section class="section container">
+    <h1 class="section-title">Gallery</h1>
+
+    <div class="gallery-layout">
+      <aside class="gallery-sidebar">
+        <div class="panel">
+          <h3>カテゴリ</h3>
+          <div class="category-list" id="category-list">
+            {
+              categories.map((cat, i) => (
+                <button class={`cat-btn${i === 0 ? ' active' : ''}`} data-category={cat === 'すべて' ? '' : cat}>
+                  {cat}
+                </button>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>フィルター</h3>
+          <label class="check"><input type="checkbox" id="show-r18" /> R-18作品のみ(予定なし)</label>
+          <label class="check"><input type="checkbox" id="show-r15" /> R-15作品のみ</label>
+        </div>
+
+        <div class="panel">
+          <h3>検索</h3>
+          <input type="text" id="search-input" placeholder="タイトル・タグで検索" />
+        </div>
+
+        <div class="panel">
+          <h3>人気タグ</h3>
+          <div class="tag-cloud" id="tag-cloud">
+            {popularTags.map((tag) => <button class="tag tag-btn" data-tag={tag}>{tag}</button>)}
+          </div>
+        </div>
+      </aside>
+
+      <div class="gallery-main">
+        <p class="muted" id="result-count"></p>
+        <div class="works-grid" id="works-grid">
+          {works.map((work) => <WorkCard work={work} />)}
+        </div>
+        <p class="muted text-center" id="no-results" hidden>該当する作品が見つかりませんでした</p>
+        <nav class="pagination" id="pagination" aria-label="ページ送り"></nav>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import { initGallery } from '../scripts/gallery';
+  initGallery();
+</script>
+
+<style>
+  .gallery-layout {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  @media (max-width: 800px) {
+    .gallery-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .panel {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .panel h3 {
+    font-size: 0.95rem;
+    color: var(--primary-deep);
+    margin-bottom: 0.6rem;
+  }
+
+  .category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .cat-btn {
+    text-align: left;
+    padding: 0.4rem 0.9rem;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .cat-btn:hover {
+    background: var(--primary-pale);
+  }
+
+  .cat-btn.active {
+    background: linear-gradient(135deg, var(--primary), var(--accent-2));
+    color: #fff;
+  }
+
+  .check {
+    display: block;
+    font-size: 0.88rem;
+    margin-bottom: 0.4rem;
+    cursor: pointer;
+  }
+
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .tag-btn {
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    transition: all 0.15s;
+  }
+
+  .tag-btn:hover,
+  .tag-btn.active {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-top: 1.6rem;
+    flex-wrap: wrap;
+  }
+
+  .pagination :global(button) {
+    min-width: 2.4rem;
+    padding: 0.45rem 0.7rem;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-weight: 700;
+    color: var(--text);
+    cursor: pointer;
+  }
+
+  .pagination :global(button.active) {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+  }
+
+  .pagination :global(button:disabled) {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+</style>

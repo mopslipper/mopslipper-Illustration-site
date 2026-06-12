@@ -1,0 +1,83 @@
+---
+import { Image } from 'astro:assets';
+import { isVideo, resolveWorkImage, url, type Work } from '../lib/data';
+
+interface Props {
+  work: Work;
+  /** ライトボックス用グループ名（指定時は a が PhotoSwipe 対象になる） */
+  galleryGroup?: string;
+  widths?: number[];
+}
+
+const { work, galleryGroup } = Astro.props;
+
+const video = isVideo(work.image_path);
+const thumb = resolveWorkImage(work.thumbnail) ?? resolveWorkImage(work.image_path);
+const full = video ? undefined : resolveWorkImage(work.image_path);
+const detailUrl = url(`/works/${work.slug}.html`);
+---
+
+<article
+  class="work-card"
+  data-slug={work.slug}
+  data-title={work.title}
+  data-nsfw={String(work.nsfw)}
+  data-sensitive={String(work.sensitive ?? false)}
+  data-category={work.category}
+  data-tags={work.tags.join(',')}
+  data-date={work.date}
+  data-description={work.description}
+  data-is-video={String(video)}
+>
+  <a
+    class="thumb"
+    href={detailUrl}
+    data-pswp-group={galleryGroup}
+    data-pswp-src={video ? undefined : full?.src}
+    data-pswp-width={full?.width}
+    data-pswp-height={full?.height}
+  >
+    {
+      thumb ? (
+        <Image
+          src={thumb}
+          alt={work.title}
+          width={480}
+          height={480}
+          format="webp"
+          loading="lazy"
+        />
+      ) : (
+        <img src={url('/placeholder.svg')} alt={work.title} loading="lazy" />
+      )
+    }
+    {video && <div class="video-indicator">▶</div>}
+    {
+      work.nsfw && (
+        <div class="nsfw-overlay">
+          <span class="nsfw-label">R-18</span>
+          <p>クリックして表示</p>
+        </div>
+      )
+    }
+  </a>
+  <div class="info">
+    <a href={detailUrl} class="title">{work.title}</a>
+    <div class="meta">
+      <span class="tag">{work.category}</span>
+      {work.tags.slice(0, 3).map((tag) => <span class="tag">{tag}</span>)}
+    </div>
+  </div>
+</article>
+
+<style>
+  .title {
+    display: block;
+    color: var(--text);
+  }
+
+  .title:hover {
+    color: var(--primary-deep);
+    text-decoration: none;
+  }
+</style>

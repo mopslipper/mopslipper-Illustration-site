@@ -1,0 +1,365 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import {
+  works,
+  siteConfig,
+  isVideo,
+  resolveWorkImage,
+  resolveVideoUrl,
+  url,
+} from '../../lib/data';
+
+export function getStaticPaths() {
+  return works.map((work, i) => ({
+    params: { slug: work.slug },
+    props: {
+      work,
+      prevWork: works[i + 1] ?? null, // worksは新しい順: 次に古い作品
+      nextWork: works[i - 1] ?? null,
+    },
+  }));
+}
+
+const { work, prevWork, nextWork } = Astro.props;
+
+const video = isVideo(work.image_path);
+const mainImage = video ? undefined : resolveWorkImage(work.image_path);
+const videoUrl = video ? resolveVideoUrl(work.image_path) : undefined;
+const additionalImages = (work.additional_images ?? [])
+  .map((p) => resolveWorkImage(p))
+  .filter((img) => img !== undefined);
+const allImages = mainImage ? [mainImage, ...additionalImages] : additionalImages;
+
+const links = work.external_links ?? {};
+const linkEntries = Object.entries(links).filter(([, v]) => v);
+
+const requestQuery = new URLSearchParams({
+  from: 'work',
+  slug: work.slug,
+  title: work.title,
+  request_tags: (work.request_tags ?? work.tags).join(','),
+}).toString();
+
+// OGP: NSFW / センシティブ（X非表示指定）はプレースホルダー（旧サイト互換）
+const hideOgThumb = work.nsfw || (work.sensitive && work.hide_sensitive_thumbnail_on_x);
+const ogSource = hideOgThumb
+  ? '/static/img/works/placeholder.svg'
+  : (work.x_thumbnail ?? work.thumbnail);
+const ogImg = resolveWorkImage(ogSource);
+const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
+---
+
+<Layout title={work.title} description={work.description} ogImage={ogImage} activeNav="gallery">
+  <section class="section container detail">
+    <nav class="detail-nav">
+      {
+        prevWork ? (
+          <a href={url(`/works/${prevWork.slug}.html`)}>← 前の作品</a>
+        ) : (
+          <span class="muted">← 前の作品</span>
+        )
+      }
+      <a href={url('/gallery.html')}>Gallery</a>
+      {
+        nextWork ? (
+          <a href={url(`/works/${nextWork.slug}.html`)}>次の作品 →</a>
+        ) : (
+          <span class="muted">次の作品 →</span>
+        )
+      }
+    </nav>
+
+    <div class="detail-grid">
+      <div class="media-column" id="media-column" data-nsfw={String(work.nsfw)}>
+        {
+          video ? (
+            <video src={videoUrl} controls loop playsinline class="main-media"></video>
+          ) : (
+            allImages.length > 0 && (
+              <>
+                <div class="main-image-wrap" id="pswp-gallery">
+                  {allImages.map((img, i) => (
+                    <a
+                      href={img.src}
+                      data-pswp-width={img.width}
+                      data-pswp-height={img.height}
+                      class={`main-image${i === 0 ? ' active' : ''}`}
+                      data-index={i}
+                    >
+                      <Image
+                        src={img}
+                        alt={`${work.title} (${i + 1})`}
+                        width={900}
+                        format="webp"
+                        class={work.nsfw ? 'nsfw-blur' : ''}
+                        loading={i === 0 ? 'eager' : 'lazy'}
+                      />
+                    </a>
+                  ))}
+                </div>
+                {allImages.length > 1 && (
+                  <div class="thumb-strip" id="thumb-strip">
+                    {allImages.map((img, i) => (
+                      <button class={`thumb-btn${i === 0 ? ' active' : ''}`} data-index={i}>
+                        <Image src={img} alt="" width={100} height={100} format="webp" />
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </>
+            )
+          )
+        }
+        {
+          work.nsfw && (
+            <div class="nsfw-warning" id="nsfw-warning">
+              <p>⚠️ R-18作品</p>
+              <p class="muted">この作品には成人向けの表現が含まれます。</p>
+              <button class="btn btn-primary" id="nsfw-show">18歳以上です（表示する）</button>
+            </div>
+          )
+        }
+      </div>
+
+      <div class="info-column">
+        <h1>{work.title}</h1>
+        <div class="meta-row">
+          <span class="badge">{work.category}</span>
+          <span class="muted">{work.date}</span>
+          {work.nsfw && <span class="badge" style="background:var(--danger)">R-18</span>}
+        </div>
+        <div class="meta-row">
+          {work.tags.map((tag) => <span class="tag">{tag}</span>)}
+        </div>
+        {work.description && <p class="description">{work.description}</p>}
+
+        <div class="request-box">
+          <p>この作品の雰囲気をベースに、気軽にリクエストできます。</p>
+          {
+            (work.request_tags ?? []).length > 0 && (
+              <div class="meta-row">
+                {(work.request_tags ?? []).map((tag) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            )
+          }
+          <a class="btn btn-primary" href={`${url('/contact.html')}?${requestQuery}`}>
+            この作品をベースに依頼する
+          </a>
+        </div>
+
+        {
+          linkEntries.length > 0 && (
+            <div class="external-links">
+              <h3>External Links</h3>
+              <div class="meta-row">
+                {linkEntries.map(([name, href]) => (
+                  <a class="btn btn-outline btn-sm" href={href} target="_blank" rel="noopener">
+                    {name}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )
+        }
+
+        <div class="share">
+          <h3>Share</h3>
+          <div class="meta-row">
+            <a
+              class="btn btn-outline btn-sm"
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`${work.title} - ${siteConfig.site_name}`)}&url=${encodeURIComponent(new URL(Astro.url.pathname, Astro.site).href)}`}
+              target="_blank"
+              rel="noopener">X でシェア</a
+            >
+            <button class="btn btn-outline btn-sm" id="copy-url">URLコピー</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import PhotoSwipeLightbox from 'photoswipe/lightbox';
+  import 'photoswipe/style.css';
+
+  // PhotoSwipe（画像ズーム・キーボード操作 ←→/Esc 標準対応）
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: '#pswp-gallery',
+    children: 'a.main-image',
+    pswpModule: () => import('photoswipe'),
+  });
+  lightbox.init();
+
+  // 追加画像の切替
+  const mainImages = [...document.querySelectorAll<HTMLElement>('.main-image')];
+  const thumbBtns = [...document.querySelectorAll<HTMLElement>('.thumb-btn')];
+  const show = (index: number) => {
+    mainImages.forEach((el, i) => el.classList.toggle('active', i === index));
+    thumbBtns.forEach((el, i) => el.classList.toggle('active', i === index));
+  };
+  thumbBtns.forEach((btn) =>
+    btn.addEventListener('click', () => show(Number(btn.dataset.index ?? 0))),
+  );
+
+  // NSFW 表示解除
+  document.getElementById('nsfw-show')?.addEventListener('click', () => {
+    document.querySelectorAll('.nsfw-blur').forEach((el) => el.classList.remove('nsfw-blur'));
+    const warning = document.getElementById('nsfw-warning');
+    if (warning) warning.remove();
+  });
+
+  // URLコピー
+  document.getElementById('copy-url')?.addEventListener('click', async (e) => {
+    await navigator.clipboard.writeText(location.href);
+    (e.currentTarget as HTMLButtonElement).textContent = '✓ コピーしました';
+  });
+</script>
+
+<style>
+  .detail-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+    font-weight: 700;
+  }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr);
+    gap: 1.6rem;
+    align-items: start;
+  }
+
+  @media (max-width: 800px) {
+    .detail-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .media-column {
+    position: relative;
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+  }
+
+  .main-media {
+    width: 100%;
+  }
+
+  .main-image {
+    display: none;
+  }
+
+  .main-image.active {
+    display: block;
+    cursor: zoom-in;
+  }
+
+  .main-image :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  :global(.nsfw-blur) {
+    filter: blur(28px);
+  }
+
+  .nsfw-warning {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: rgba(14, 13, 18, 0.6);
+    text-align: center;
+    padding: 1rem;
+    font-weight: 700;
+    z-index: 3;
+  }
+
+  .thumb-strip {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.7rem;
+    overflow-x: auto;
+    background: var(--bg-accent);
+  }
+
+  .thumb-btn {
+    flex-shrink: 0;
+    width: 72px;
+    height: 72px;
+    padding: 0;
+    border: 3px solid transparent;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    cursor: pointer;
+    background: none;
+  }
+
+  .thumb-btn.active {
+    border-color: var(--primary);
+  }
+
+  .thumb-btn :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .info-column h1 {
+    color: var(--primary-deep);
+    font-size: 1.5rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .description {
+    margin: 1rem 0;
+    font-size: 0.95rem;
+  }
+
+  .request-box {
+    background: var(--bg-accent);
+    border-radius: var(--radius);
+    padding: 1.1rem;
+    margin: 1.2rem 0;
+    font-size: 0.92rem;
+  }
+
+  .request-box .btn {
+    margin-top: 0.6rem;
+  }
+
+  .external-links,
+  .share {
+    margin-top: 1.2rem;
+  }
+
+  .external-links h3,
+  .share h3 {
+    font-size: 0.95rem;
+    color: var(--primary-deep);
+    margin-bottom: 0.4rem;
+  }
+
+  .btn-sm {
+    padding: 0.35rem 1rem;
+    font-size: 0.85rem;
+  }
+</style>

@@ -1,0 +1,22 @@
+{
+  "name": "mopslipper-illustration-site",
+  "private": true,
+  "type": "module",
+  "version": "2.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.0.0",
+    "photoswipe": "^5.4.4",
+    "sharp": "^0.33.0"
+  },
+  "devDependencies": {
+    "vitest": "^3.0.0"
+  }
+}

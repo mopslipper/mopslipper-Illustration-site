@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { url } from '../lib/data';
+---
+
+<Layout title="404 Not Found">
+  <section class="section container text-center">
+    <h1 class="section-title">404</h1>
+    <p>お探しのページは見つかりませんでした…</p>
+    <p style="margin-top:1.5rem;">
+      <a class="btn btn-primary" href={url('/')}>ホームへ戻る</a>
+    </p>
+  </section>
+</Layout>

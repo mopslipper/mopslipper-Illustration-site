@@ -1,0 +1,18 @@
+---
+// 旧URL keyshare.html → cliantshare.html へのリダイレクト（旧サイト互換）
+import { url } from '../lib/data';
+const target = url('/cliantshare.html');
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <title>Redirecting...</title>
+  </head>
+  <body>
+    <p>Redirecting to Cliant Share...</p>
+    <p>If you are not redirected automatically, <a href={target}>click here</a>.</p>
+  </body>
+</html>

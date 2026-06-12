@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local
+
+# Output files (プロジェクトに合わせて追加)
+output/
+*.log
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node / Astro
+node_modules/
+site/dist/
+site/.astro/
+
+# API keys and secrets (works_manager AI設定)
+api_keys.json
+ai_config.json
+
+# 暗号化前の元素材（GitHubにアップロードしない）
+cliantshare_source/
+static/img/cliantshare/
+
+.venv/
