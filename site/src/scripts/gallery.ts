@@ -19,7 +19,7 @@ export function initGallery(): void {
   if (!grid) return;
 
   const cards = [...grid.querySelectorAll<HTMLElement>('.work-card')];
-  const pagination = document.getElementById('pagination')!;
+  const paginations = [...document.querySelectorAll<HTMLElement>('[data-pagination]')];
   const resultCount = document.getElementById('result-count')!;
   const noResults = document.getElementById('no-results')!;
   const searchInput = document.getElementById('search-input') as HTMLInputElement;
@@ -67,31 +67,33 @@ export function initGallery(): void {
   }
 
   function renderPagination(totalPages: number, count: number): void {
-    pagination.innerHTML = '';
-    if (count <= PER_PAGE) return;
+    for (const pagination of paginations) {
+      pagination.innerHTML = '';
+      if (count <= PER_PAGE) continue;
 
-    const make = (label: string, page: number, opts: { disabled?: boolean; active?: boolean } = {}) => {
-      const btn = document.createElement('button');
-      btn.textContent = label;
-      btn.disabled = !!opts.disabled;
-      if (opts.active) btn.classList.add('active');
-      btn.addEventListener('click', () => {
-        state.page = page;
-        render();
-        document.getElementById('works-grid')?.scrollIntoView({ behavior: 'smooth' });
-      });
-      return btn;
-    };
+      const make = (label: string, page: number, opts: { disabled?: boolean; active?: boolean } = {}) => {
+        const btn = document.createElement('button');
+        btn.textContent = label;
+        btn.disabled = !!opts.disabled;
+        if (opts.active) btn.classList.add('active');
+        btn.addEventListener('click', () => {
+          state.page = page;
+          render();
+          document.getElementById('works-grid')?.scrollIntoView({ behavior: 'smooth' });
+        });
+        return btn;
+      };
 
-    pagination.appendChild(make('‹', state.page - 1, { disabled: state.page === 1 }));
+      pagination.appendChild(make('‹', state.page - 1, { disabled: state.page === 1 }));
 
-    const windowStart = Math.max(1, Math.min(state.page - 2, totalPages - 4));
-    const windowEnd = Math.min(totalPages, windowStart + 4);
-    for (let p = windowStart; p <= windowEnd; p++) {
-      pagination.appendChild(make(String(p), p, { active: p === state.page }));
+      const windowStart = Math.max(1, Math.min(state.page - 2, totalPages - 4));
+      const windowEnd = Math.min(totalPages, windowStart + 4);
+      for (let p = windowStart; p <= windowEnd; p++) {
+        pagination.appendChild(make(String(p), p, { active: p === state.page }));
+      }
+
+      pagination.appendChild(make('›', state.page + 1, { disabled: state.page === totalPages }));
     }
-
-    pagination.appendChild(make('›', state.page + 1, { disabled: state.page === totalPages }));
   }
 
   // ---- イベント ----

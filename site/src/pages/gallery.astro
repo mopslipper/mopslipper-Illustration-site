@@ -59,11 +59,12 @@ const popularTags = [...tagCount.entries()]
 
       <div class="gallery-main">
         <p class="muted" id="result-count"></p>
+        <nav class="pagination pagination-top" data-pagination aria-label="ページ送り（上）"></nav>
         <div class="works-grid" id="works-grid">
           {works.map((work) => <WorkCard work={work} />)}
         </div>
         <p class="muted text-center" id="no-results" hidden>該当する作品が見つかりませんでした</p>
-        <nav class="pagination" id="pagination" aria-label="ページ送り"></nav>
+        <nav class="pagination" data-pagination aria-label="ページ送り"></nav>
       </div>
     </div>
   </section>
@@ -163,6 +164,11 @@ const popularTags = [...tagCount.entries()]
     gap: 0.4rem;
     margin-top: 1.6rem;
     flex-wrap: wrap;
+  }
+
+  .pagination-top {
+    margin-top: 0;
+    margin-bottom: 1.2rem;
   }
 
   .pagination :global(button) {
