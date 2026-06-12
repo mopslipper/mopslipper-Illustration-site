@@ -1550,40 +1550,6 @@ class WorksManagerQt(QMainWindow):
             QMessageBox.critical(self, "エラー", f"保存エラー:\n{e}")
             return False
 
-    def build_site_for_push(self, repo_dir):
-        """push前に静的サイトを再生成"""
-        generator_path = repo_dir / "generator.py"
-        if not generator_path.exists():
-            raise FileNotFoundError(f"generator.py が見つかりません: {generator_path}")
-
-        python_candidates = []
-        if sys.executable:
-            python_candidates.append(sys.executable)
-        python_candidates.extend(["python", "py"])
-
-        last_result = None
-        for candidate in python_candidates:
-            try:
-                result = subprocess.run(
-                    [candidate, str(generator_path)],
-                    cwd=str(repo_dir),
-                    capture_output=True,
-                    text=True,
-                    encoding='utf-8',
-                    errors='replace'
-                )
-            except FileNotFoundError:
-                continue
-
-            last_result = result
-            if result.returncode == 0:
-                return result
-
-        if last_result is None:
-            raise FileNotFoundError("Python実行環境が見つかりません")
-
-        raise RuntimeError((last_result.stdout or "") + (last_result.stderr or ""))
-    
     def save_work(self):
         """作品を保存"""
         try:
@@ -2059,13 +2025,7 @@ class WorksManagerQt(QMainWindow):
                 QMessageBox.critical(self, "エラー", "Gitコマンドが実行できません。Gitをインストールしてください。")
                 return
 
-            progress.setLabelText("静的サイトを再生成しています...")
-            QApplication.processEvents()
-            try:
-                self.build_site_for_push(repo_dir)
-            except Exception as e:
-                QMessageBox.critical(self, "エラー", f"サイト再生成に失敗しました:\n{e}")
-                return
+            # サイトのビルドは push 後に GitHub Actions (deploy.yml) が自動実行する
 
             # 変更有無確認
             progress.setLabelText("変更を確認しています...")
