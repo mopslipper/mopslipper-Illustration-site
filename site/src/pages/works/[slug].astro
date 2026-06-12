@@ -129,6 +129,12 @@ const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
           <span class="muted">{work.date}</span>
           {work.nsfw && <span class="badge" style="background:var(--danger)">R-18</span>}
         </div>
+        <div class="meta-row stats-row">
+          <span class="stat" title="閲覧数">👁 <span id="view-count">–</span></span>
+          <button class="like-btn" id="like-btn" data-work-id={work.id} title="いいね">
+            ♥ <span id="like-count">–</span>
+          </button>
+        </div>
         <div class="meta-row">
           {work.tags.map((tag) => <span class="tag">{tag}</span>)}
         </div>
@@ -185,6 +191,9 @@ const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
 <script>
   import PhotoSwipeLightbox from 'photoswipe/lightbox';
   import 'photoswipe/style.css';
+  import { initCounter } from '../../scripts/counter';
+
+  initCounter();
 
   // PhotoSwipe（画像ズーム・キーボード操作 ←→/Esc 標準対応）
   const lightbox = new PhotoSwipeLightbox({
@@ -225,6 +234,53 @@ const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
     justify-content: space-between;
     margin-bottom: 1.2rem;
     font-weight: 700;
+  }
+
+  .stats-row {
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .stat {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+  }
+
+  .like-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    background: var(--bg-card);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .like-btn:hover:not(:disabled) {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  .like-btn.liked {
+    background: linear-gradient(135deg, var(--primary), var(--accent-2));
+    border-color: transparent;
+    color: #fff;
+    opacity: 1;
+  }
+
+  .like-btn:disabled:not(.liked) {
+    opacity: 0.5;
+    cursor: wait;
+  }
+
+  .like-btn.liked:disabled {
+    cursor: default;
   }
 
   .detail-grid {

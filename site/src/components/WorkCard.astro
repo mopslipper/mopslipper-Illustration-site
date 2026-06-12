@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { isVideo, resolveWorkImage, url, type Work } from '../lib/data';
+import { isVideo, resolveWorkImage, getCounts, url, type Work } from '../lib/data';
 
 interface Props {
   work: Work;
@@ -15,6 +15,7 @@ const video = isVideo(work.image_path);
 const thumb = resolveWorkImage(work.thumbnail) ?? resolveWorkImage(work.image_path);
 const full = video ? undefined : resolveWorkImage(work.image_path);
 const detailUrl = url(`/works/${work.slug}.html`);
+const stats = getCounts(work.id);
 ---
 
 <article
@@ -67,6 +68,10 @@ const detailUrl = url(`/works/${work.slug}.html`);
       <span class="tag">{work.category}</span>
       {work.tags.slice(0, 3).map((tag) => <span class="tag">{tag}</span>)}
     </div>
+    <div class="card-stats">
+      <span title="閲覧数">👁 {stats.views.toLocaleString('ja-JP')}</span>
+      <span title="いいね">♥ {stats.likes.toLocaleString('ja-JP')}</span>
+    </div>
   </div>
 </article>
 
@@ -79,5 +84,13 @@ const detailUrl = url(`/works/${work.slug}.html`);
   .title:hover {
     color: var(--primary-deep);
     text-decoration: none;
+  }
+
+  .card-stats {
+    display: flex;
+    gap: 0.7rem;
+    margin-top: 0.35rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
   }
 </style>

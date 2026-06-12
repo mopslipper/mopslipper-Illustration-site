@@ -6,6 +6,7 @@ import type { ImageMetadata } from 'astro';
 import worksJson from '../../../data/works.json';
 import configJson from '../../../data/config.json';
 import commissionJson from '../../../data/commission.json';
+import countsJson from '../../../data/counts.json';
 import {
   worksSchema,
   configSchema,
@@ -17,6 +18,15 @@ import {
 
 export const siteConfig = configSchema.parse(configJson);
 export const commission = commissionSchema.parse(commissionJson);
+
+/**
+ * 閲覧数・いいね数の日次スナップショット (data/counts.json、update-counts.yml が更新)。
+ * ギャラリーカードの表示用。詳細ページはクライアントでライブ取得。
+ */
+export function getCounts(id: number): { views: number; likes: number } {
+  const entry = (countsJson as Record<string, { views: number; likes: number }>)[String(id)];
+  return entry ?? { views: 0, likes: 0 };
+}
 
 /** 日付降順 → id降順 で整列した公開作品（hidden は除外、旧サイト互換） */
 export const works: Work[] = worksSchema

@@ -1,0 +1,36 @@
+name: Update view/like counts
+
+on:
+  schedule:
+    - cron: '0 18 * * *' # JST 3:00 (毎日)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Fetch counts from Abacus
+        run: node tools/fetch_counts.mjs
+      - name: Commit & trigger deploy if changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet data/counts.json; then
+            echo "No changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/counts.json
+          git commit -m "chore: 閲覧数・いいねスナップショット更新"
+          git push
+          # GITHUB_TOKEN の push は deploy.yml をトリガーしないため明示的に dispatch
+          gh workflow run deploy.yml --ref main
