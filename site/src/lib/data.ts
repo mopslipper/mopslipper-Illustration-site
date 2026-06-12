@@ -59,6 +59,18 @@ export const heroImages: ImageMetadata[] = Object.entries(heroImageGlob)
   .sort(([a], [b]) => a.localeCompare(b))
   .map(([, mod]) => mod.default);
 
+const ogImageGlob = import.meta.glob<{ default: ImageMetadata }>(
+  '../../../static/img/ogp.{webp,jpg,jpeg,png}',
+  { eager: true },
+);
+
+/**
+ * OGPフォールバック画像 (X/SNSカード用)。static/img/ogp.png (推奨1200x630) を置くと
+ * og:image 未指定の全ページで使われる。無ければ undefined (og:image 省略)。
+ */
+export const defaultOgImage: ImageMetadata | undefined =
+  Object.values(ogImageGlob)[0]?.default;
+
 const workVideos = import.meta.glob<{ default: string }>(
   '../../../static/img/works/*.{mp4,mov,webm}',
   { eager: true, query: '?url', import: 'default' },
