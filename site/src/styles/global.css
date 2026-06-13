@@ -134,6 +134,17 @@ a:hover {
   text-decoration: none;
 }
 
+.site-nav a.nav-puzzle {
+  background: linear-gradient(135deg, var(--primary), var(--accent-2));
+  color: #fff;
+  font-weight: 700;
+}
+
+.site-nav a.nav-puzzle:hover {
+  filter: brightness(1.12);
+  color: #fff;
+}
+
 @media (max-width: 800px) {
   .nav-toggle {
     display: block;

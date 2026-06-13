@@ -29,6 +29,12 @@ const navItems = [
   { label: 'About', href: url('/about.html'), key: 'about' },
   { label: 'Contact', href: url('/contact.html'), key: 'contact' },
   { label: 'Cliant Share', href: url('/cliantshare.html'), key: 'cliantshare' },
+  {
+    label: 'Slide Puzzle',
+    href: 'https://mopslipper.github.io/7-girl-slide-puzzle/',
+    key: 'slidepuzzle',
+    external: true,
+  },
 ];
 
 const social = siteConfig.social_links;
@@ -72,7 +78,11 @@ const social = siteConfig.social_links;
             {
               navItems.map((item) => (
                 <li>
-                  <a href={item.href} class={item.key === activeNav ? 'active' : ''}>
+                  <a
+                    href={item.href}
+                    class={`${item.key === activeNav ? 'active' : ''}${item.external ? ' nav-puzzle' : ''}`}
+                    {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}
+                  >
                     {item.label}
                   </a>
                 </li>
