@@ -2056,6 +2056,25 @@ class WorksManagerQt(QMainWindow):
                     QMessageBox.critical(self, "エラー", f"git commit 失敗:\n{commit_output}")
                     return
 
+            # push前にリモートの変更（日次カウント更新bot等）を取り込む
+            progress.setLabelText("リモートの変更を取り込んでいます (git pull --rebase)...")
+            QApplication.processEvents()
+            pull_result = self.run_git_command(
+                ["git", "pull", "--rebase", "origin", "main"], repo_dir
+            )
+            pull_output = (pull_result.stdout or "") + (pull_result.stderr or "")
+            if pull_result.returncode != 0:
+                # コンフリクト等で失敗した場合は rebase を中断して安全な状態に戻す
+                self.run_git_command(["git", "rebase", "--abort"], repo_dir)
+                QMessageBox.critical(
+                    self,
+                    "エラー",
+                    "リモートの変更の取り込み (git pull --rebase) に失敗しました。\n\n"
+                    "コンフリクトの可能性があります。手動で解決してください。\n\n"
+                    f"詳細:\n{pull_output}"
+                )
+                return
+
             # push
             progress.setLabelText("git push を実行しています...")
             QApplication.processEvents()
