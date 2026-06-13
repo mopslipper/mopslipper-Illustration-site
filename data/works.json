@@ -2092,5 +2092,34 @@
     "external_links": {
       "twitter": "https://x.com/facet_boy/status/2065625807461253321"
     }
+  },
+  {
+    "id": 107,
+    "slug": "108-flying-angel",
+    "title": "【リクエスト】 天使の子 (2枚)",
+    "date": "2026-06-13",
+    "image_path": "/static/img/works/108-flying-angel.webp",
+    "thumbnail": "/static/img/works/108-flying-angel.jpg",
+    "category": "Original",
+    "tags": [
+      "天使",
+      "シャツ"
+    ],
+    "description": "ふんわりとした白いシャツを着た可愛らしい天使の女の子が、無邪気にポーズをとる様子を描いた作品です。羽の柔らかな質感や、輝く小物たちが彼女の魅力を引き立て、元気で明るい雰囲気を演出しています！",
+    "ai_desc_override": {
+      "tone_preset": "energetic",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "motif"
+      ],
+      "instruction_preset": "none",
+      "custom_instruction": ""
+    },
+    "nsfw": false,
+    "external_links": {},
+    "additional_images": [
+      "/static/img/works/108-1-cute-angel.webp"
+    ]
   }
 ]

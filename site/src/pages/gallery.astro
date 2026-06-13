@@ -55,6 +55,19 @@ const popularTags = [...tagCount.entries()]
             {popularTags.map((tag) => <button class="tag tag-btn" data-tag={tag}>{tag}</button>)}
           </div>
         </div>
+
+        <div class="panel panel-game">
+          <h3>🧩 ミニゲーム</h3>
+          <p class="muted">ギャラリーの作品で遊べるスライドパズル</p>
+          <a
+            class="btn btn-primary game-btn"
+            href="https://mopslipper.github.io/7-girl-slide-puzzle/"
+            target="_blank"
+            rel="noopener"
+          >
+            Slide Puzzle で遊ぶ
+          </a>
+        </div>
       </aside>
 
       <div class="gallery-main">
@@ -156,6 +169,18 @@ const popularTags = [...tagCount.entries()]
   .tag-btn.active {
     background: var(--primary);
     color: #fff;
+  }
+
+  .panel-game p {
+    font-size: 0.82rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .game-btn {
+    display: block;
+    text-align: center;
+    padding: 0.55rem 1rem;
+    font-size: 0.92rem;
   }
 
   .pagination {
