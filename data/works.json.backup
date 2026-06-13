@@ -2061,7 +2061,7 @@
   {
     "id": 105,
     "slug": "105-miko-cute",
-    "title": "巫女さん",
+    "title": "【リクエスト】卖萌(あざとく可愛く)",
     "date": "2026-06-11",
     "image_path": "/static/img/works/105-miko-cute.webp",
     "thumbnail": "/static/img/works/105-miko-cute.jpg",
@@ -2074,5 +2074,20 @@
     "external_links": {
       "twitter": "https://x.com/facet_boy/status/2065038550400393636"
     }
+  },
+  {
+    "id": 106,
+    "slug": "107-komakyo-reimu",
+    "title": "紅魔郷霊夢",
+    "date": "2026-06-13",
+    "image_path": "/static/img/works/107-komakyo-reimu.webp",
+    "thumbnail": "/static/img/works/107-komakyo-reimu.jpg",
+    "category": "Original",
+    "tags": [
+      "博麗霊夢",
+      "巫女"
+    ],
+    "nsfw": false,
+    "external_links": {}
   }
 ]

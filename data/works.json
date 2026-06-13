@@ -2074,5 +2074,23 @@
     "external_links": {
       "twitter": "https://x.com/facet_boy/status/2065038550400393636"
     }
+  },
+  {
+    "id": 106,
+    "slug": "107-komakyo-reimu",
+    "title": "紅魔郷霊夢",
+    "date": "2026-06-13",
+    "image_path": "/static/img/works/107-komakyo-reimu.webp",
+    "thumbnail": "/static/img/works/107-komakyo-reimu.jpg",
+    "category": "Original",
+    "tags": [
+      "博麗霊夢",
+      "巫女"
+    ],
+    "description": "明るい赤色を基調にした可愛らしい巫女姿の博麗霊夢が魅力的に描かれています。ユーモラスな表情と元気なポーズが、彼女の個性を引き立て、おどけた雰囲気を楽しめる一枚です！",
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2065625807461253321"
+    }
   }
 ]
