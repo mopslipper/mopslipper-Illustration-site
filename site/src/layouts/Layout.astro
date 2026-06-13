@@ -80,7 +80,7 @@ const social = siteConfig.social_links;
                 <li>
                   <a
                     href={item.href}
-                    class={`${item.key === activeNav ? 'active' : ''}${item.external ? ' nav-puzzle' : ''}`}
+                    class={item.key === activeNav ? 'active' : ''}
                     {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}
                   >
                     {item.label}
