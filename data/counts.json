@@ -12,11 +12,11 @@
     "likes": 0
   },
   "4": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "5": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "6": {
@@ -40,7 +40,7 @@
     "likes": 0
   },
   "11": {
-    "views": 2,
+    "views": 10,
     "likes": 0
   },
   "12": {
@@ -60,11 +60,11 @@
     "likes": 0
   },
   "16": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "17": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "18": {
@@ -72,7 +72,7 @@
     "likes": 0
   },
   "19": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "20": {
@@ -96,7 +96,7 @@
     "likes": 0
   },
   "25": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "26": {
@@ -152,7 +152,7 @@
     "likes": 0
   },
   "39": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "40": {
@@ -184,243 +184,247 @@
     "likes": 0
   },
   "47": {
-    "views": 0,
+    "views": 3,
     "likes": 0
   },
   "48": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "49": {
-    "views": 0,
+    "views": 2,
     "likes": 0
   },
   "50": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "51": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "52": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "53": {
-    "views": 0,
+    "views": 1,
     "likes": 0
   },
   "54": {
-    "views": 1,
+    "views": 5,
     "likes": 0
   },
   "55": {
-    "views": 0,
+    "views": 2,
     "likes": 0
   },
   "56": {
-    "views": 0,
+    "views": 2,
     "likes": 0
   },
   "57": {
-    "views": 0,
+    "views": 3,
     "likes": 0
   },
   "58": {
-    "views": 0,
+    "views": 2,
     "likes": 0
   },
   "59": {
-    "views": 0,
+    "views": 2,
     "likes": 0
   },
   "60": {
-    "views": 0,
-    "likes": 0
-  },
-  "61": {
-    "views": 2,
-    "likes": 0
-  },
-  "62": {
-    "views": 1,
-    "likes": 0
-  },
-  "63": {
-    "views": 0,
-    "likes": 0
-  },
-  "64": {
-    "views": 0,
-    "likes": 0
-  },
-  "65": {
-    "views": 2,
-    "likes": 0
-  },
-  "66": {
-    "views": 1,
-    "likes": 0
-  },
-  "67": {
-    "views": 2,
-    "likes": 0
-  },
-  "68": {
-    "views": 5,
-    "likes": 0
-  },
-  "69": {
-    "views": 1,
-    "likes": 0
-  },
-  "70": {
-    "views": 1,
-    "likes": 0
-  },
-  "71": {
-    "views": 1,
-    "likes": 0
-  },
-  "72": {
-    "views": 0,
-    "likes": 0
-  },
-  "73": {
-    "views": 1,
-    "likes": 0
-  },
-  "74": {
-    "views": 2,
-    "likes": 0
-  },
-  "75": {
-    "views": 1,
-    "likes": 0
-  },
-  "76": {
-    "views": 0,
-    "likes": 0
-  },
-  "77": {
-    "views": 0,
-    "likes": 0
-  },
-  "78": {
-    "views": 1,
-    "likes": 0
-  },
-  "79": {
-    "views": 1,
-    "likes": 0
-  },
-  "80": {
-    "views": 0,
-    "likes": 0
-  },
-  "81": {
-    "views": 1,
-    "likes": 0
-  },
-  "82": {
-    "views": 3,
-    "likes": 0
-  },
-  "83": {
-    "views": 2,
-    "likes": 0
-  },
-  "84": {
-    "views": 2,
-    "likes": 0
-  },
-  "85": {
-    "views": 1,
-    "likes": 0
-  },
-  "86": {
-    "views": 2,
-    "likes": 0
-  },
-  "87": {
-    "views": 0,
-    "likes": 0
-  },
-  "88": {
-    "views": 0,
-    "likes": 0
-  },
-  "89": {
-    "views": 0,
-    "likes": 0
-  },
-  "90": {
-    "views": 0,
-    "likes": 0
-  },
-  "91": {
-    "views": 0,
-    "likes": 0
-  },
-  "92": {
-    "views": 3,
-    "likes": 0
-  },
-  "93": {
-    "views": 0,
-    "likes": 0
-  },
-  "95": {
-    "views": 5,
-    "likes": 0
-  },
-  "96": {
-    "views": 2,
-    "likes": 0
-  },
-  "97": {
-    "views": 5,
-    "likes": 0
-  },
-  "98": {
-    "views": 0,
-    "likes": 0
-  },
-  "99": {
-    "views": 1,
-    "likes": 0
-  },
-  "100": {
-    "views": 2,
-    "likes": 0
-  },
-  "101": {
-    "views": 5,
-    "likes": 0
-  },
-  "102": {
-    "views": 1,
-    "likes": 0
-  },
-  "103": {
     "views": 4,
     "likes": 0
   },
-  "104": {
-    "views": 12,
-    "likes": 2
+  "61": {
+    "views": 5,
+    "likes": 0
   },
-  "105": {
-    "views": 25,
-    "likes": 2
+  "62": {
+    "views": 5,
+    "likes": 0
   },
-  "106": {
+  "63": {
+    "views": 2,
+    "likes": 0
+  },
+  "64": {
+    "views": 2,
+    "likes": 0
+  },
+  "65": {
     "views": 8,
     "likes": 0
   },
-  "107": {
+  "66": {
+    "views": 4,
+    "likes": 0
+  },
+  "67": {
+    "views": 6,
+    "likes": 0
+  },
+  "68": {
+    "views": 9,
+    "likes": 0
+  },
+  "69": {
+    "views": 3,
+    "likes": 0
+  },
+  "70": {
+    "views": 4,
+    "likes": 0
+  },
+  "71": {
+    "views": 3,
+    "likes": 0
+  },
+  "72": {
+    "views": 2,
+    "likes": 0
+  },
+  "73": {
+    "views": 2,
+    "likes": 0
+  },
+  "74": {
+    "views": 4,
+    "likes": 0
+  },
+  "75": {
+    "views": 2,
+    "likes": 0
+  },
+  "76": {
+    "views": 3,
+    "likes": 0
+  },
+  "77": {
+    "views": 3,
+    "likes": 0
+  },
+  "78": {
+    "views": 4,
+    "likes": 0
+  },
+  "79": {
+    "views": 4,
+    "likes": 0
+  },
+  "80": {
+    "views": 2,
+    "likes": 0
+  },
+  "81": {
+    "views": 4,
+    "likes": 0
+  },
+  "82": {
+    "views": 5,
+    "likes": 0
+  },
+  "83": {
+    "views": 3,
+    "likes": 0
+  },
+  "84": {
+    "views": 3,
+    "likes": 0
+  },
+  "85": {
+    "views": 2,
+    "likes": 0
+  },
+  "86": {
+    "views": 3,
+    "likes": 0
+  },
+  "87": {
+    "views": 2,
+    "likes": 0
+  },
+  "88": {
+    "views": 2,
+    "likes": 0
+  },
+  "89": {
+    "views": 2,
+    "likes": 0
+  },
+  "90": {
+    "views": 1,
+    "likes": 0
+  },
+  "91": {
+    "views": 1,
+    "likes": 0
+  },
+  "92": {
+    "views": 5,
+    "likes": 0
+  },
+  "93": {
+    "views": 1,
+    "likes": 0
+  },
+  "95": {
+    "views": 7,
+    "likes": 0
+  },
+  "96": {
+    "views": 4,
+    "likes": 0
+  },
+  "97": {
+    "views": 11,
+    "likes": 0
+  },
+  "98": {
+    "views": 5,
+    "likes": 0
+  },
+  "99": {
+    "views": 6,
+    "likes": 0
+  },
+  "100": {
+    "views": 12,
+    "likes": 0
+  },
+  "101": {
     "views": 10,
+    "likes": 0
+  },
+  "102": {
+    "views": 5,
+    "likes": 0
+  },
+  "103": {
+    "views": 8,
+    "likes": 0
+  },
+  "104": {
+    "views": 18,
+    "likes": 2
+  },
+  "105": {
+    "views": 29,
+    "likes": 2
+  },
+  "106": {
+    "views": 13,
+    "likes": 0
+  },
+  "107": {
+    "views": 21,
+    "likes": 0
+  },
+  "108": {
+    "views": 7,
     "likes": 0
   }
 }
