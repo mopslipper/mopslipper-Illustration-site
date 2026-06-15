@@ -2149,5 +2149,32 @@
     "external_links": {
       "twitter": "https://x.com/facet_boy/status/2066002948761804954"
     }
+  },
+  {
+    "id": 109,
+    "slug": "109x-shirt-girl",
+    "title": "おはようシャツガール",
+    "date": "2026-06-15",
+    "image_path": "/static/img/works/109x-shirt-girl.webp",
+    "thumbnail": "/static/img/works/109x-shirt-girl.jpg",
+    "category": "Original",
+    "tags": [
+      "シャツ"
+    ],
+    "description": "ふんわりとしたシャツを着た女の子の元気いっぱいな姿を描いたオリジナル作品です。明るい表情と愛らしいポーズで、朝の爽やかな雰囲気を伝える魅力的な一枚です！",
+    "ai_desc_override": {
+      "tone_preset": "energetic",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "motif"
+      ],
+      "instruction_preset": "none",
+      "custom_instruction": ""
+    },
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2066298639052591546"
+    }
   }
 ]

@@ -2121,5 +2121,33 @@
     "additional_images": [
       "/static/img/works/108-1-cute-angel.webp"
     ]
+  },
+  {
+    "id": 108,
+    "slug": "109-awawa-shop-worker",
+    "title": "店員さん",
+    "date": "2026-06-14",
+    "image_path": "/static/img/works/109-awawa-shop-worker.webp",
+    "thumbnail": "/static/img/works/109-awawa-shop-worker.jpg",
+    "category": "Original",
+    "tags": [
+      "店員",
+      "制服"
+    ],
+    "description": "元気いっぱいの店員さんをモチーフにしたこのイラストは、可愛らしい制服とキュートな表情が魅力です。構図には、明るい色使いやキラキラしたエフェクトが施され、見ているだけで楽しい気持ちにさせてくれます！",
+    "ai_desc_override": {
+      "tone_preset": "energetic",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "motif"
+      ],
+      "instruction_preset": "none",
+      "custom_instruction": ""
+    },
+    "nsfw": false,
+    "external_links": {
+      "twitter": "https://x.com/facet_boy/status/2066002948761804954"
+    }
   }
 ]
