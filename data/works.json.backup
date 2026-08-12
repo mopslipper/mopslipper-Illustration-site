@@ -2332,5 +2332,80 @@
     "tags": [],
     "nsfw": false,
     "external_links": {}
+  },
+  {
+    "id": 123,
+    "slug": "123",
+    "title": "ベレー帽ちゃん",
+    "date": "2026-07-29",
+    "image_path": "/static/img/works/123.webp",
+    "thumbnail": "/static/img/works/123.jpg",
+    "category": "Original",
+    "tags": [],
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 124,
+    "slug": "124",
+    "title": "【イラストリクエスト】\n---ぼろぼろ服首輪手錠の少女---",
+    "date": "2026-08-12",
+    "image_path": "/static/img/works/124.webp",
+    "thumbnail": "/static/img/works/124.jpg",
+    "category": "Original",
+    "tags": [],
+    "description": "【イラストリクエスト】\n---ちょっとボロい服を着た子。首には鉄の首輪とそれにつながる長い鎖がついている。手は後ろで手錠をかけている。---",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 125,
+    "slug": "125",
+    "title": "【イラストリクエスト】\n---褐色スク水ロングヘア娘---",
+    "date": "2026-08-12",
+    "image_path": "/static/img/works/125.webp",
+    "thumbnail": "/static/img/works/125.jpg",
+    "category": "Original",
+    "tags": [],
+    "description": "【イラストリクエスト】\n---褐色肌でスク水着ているロングヘアの娘見たいです---",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 126,
+    "slug": "126",
+    "title": "イラストリクエスト】\n---萌え袖パーカー娘---",
+    "date": "2026-08-12",
+    "image_path": "/static/img/works/126.webp",
+    "thumbnail": "/static/img/works/126.jpg",
+    "category": "Original",
+    "tags": [],
+    "description": "イラストリクエスト】\n---やっぱり萌え袖パーカーが最高ですよ---",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 127,
+    "slug": "127",
+    "title": "白スクヴァンパイアちゃん",
+    "date": "2026-08-12",
+    "image_path": "/static/img/works/127.webp",
+    "thumbnail": "/static/img/works/127.jpg",
+    "category": "Original",
+    "tags": [],
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 128,
+    "slug": "128",
+    "title": "白シャツ ヴァンパイアちゃん",
+    "date": "2026-08-12",
+    "image_path": "/static/img/works/128.webp",
+    "thumbnail": "/static/img/works/128.jpg",
+    "category": "Original",
+    "tags": [],
+    "nsfw": false,
+    "external_links": {}
   }
 ]
