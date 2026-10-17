@@ -2407,5 +2407,146 @@
     "tags": [],
     "nsfw": false,
     "external_links": {}
+  },
+  {
+    "id": 129,
+    "slug": "129",
+    "title": "制服ガール",
+    "date": "2026-08-12",
+    "image_path": "/static/img/works/129.webp",
+    "thumbnail": "/static/img/works/129.jpg",
+    "category": "Original",
+    "tags": [],
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 130,
+    "slug": "130",
+    "title": "鎖の魔女っ娘",
+    "date": "2026-10-17",
+    "image_path": "/static/img/works/130.webp",
+    "thumbnail": "/static/img/works/130.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "魔女",
+      "金髪",
+      "首輪",
+      "八重歯"
+    ],
+    "description": "大きな魔女帽子と鎖つきの杖が目印の魔女っ娘。首輪と手枷をつけながらも、八重歯を見せてにっこり笑っています。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 131,
+    "slug": "131",
+    "title": "鎖の魔女っ娘（ピンク線画）",
+    "date": "2026-10-17",
+    "image_path": "/static/img/works/131.webp",
+    "thumbnail": "/static/img/works/131.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "魔女",
+      "首輪",
+      "八重歯",
+      "線画"
+    ],
+    "description": "鎖の魔女っ娘をピンク基調の線画で。クロップトップに腰巻きパーカー、編み上げパンツのラフなスタイルです。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 132,
+    "slug": "132",
+    "title": "盃を持つ鬼っ娘",
+    "date": "2026-10-17",
+    "image_path": "/static/img/works/132.webp",
+    "thumbnail": "/static/img/works/132.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "鬼",
+      "和服",
+      "線画"
+    ],
+    "description": "赤い角とお団子ヘアの鬼っ娘。白い着物に赤い帯、盃を手にほろ酔い気分な表情です。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 133,
+    "slug": "133",
+    "title": "湯上がりバスタオルちゃん",
+    "date": "2026-10-17",
+    "image_path": "/static/img/works/133.webp",
+    "thumbnail": "/static/img/works/133.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "黒髪",
+      "バスタオル",
+      "ポニーテール"
+    ],
+    "description": "お風呂上がりでバスタオル一枚の黒髪ポニーテールの女の子。照れた表情を色々な角度から描きました。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 134,
+    "slug": "134",
+    "title": "ぶかぶかTシャツちゃん",
+    "date": "2026-10-17",
+    "image_path": "/static/img/works/134.webp",
+    "thumbnail": "/static/img/works/134.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "黒髪",
+      "オフショルダー",
+      "ぶかぶか"
+    ],
+    "description": "肩が落ちるほどぶかぶかの水色Tシャツを着た黒髪の女の子。裾を引っぱって恥ずかしそうにしています。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 135,
+    "slug": "135",
+    "title": "セーラー襟シャツのベレー帽ちゃん",
+    "date": "2026-10-17",
+    "image_path": "/static/img/works/135.webp",
+    "thumbnail": "/static/img/works/135.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "黒髪",
+      "ベレー帽",
+      "セーラー"
+    ],
+    "description": "青いベレー帽とセーラー襟のオーバーサイズシャツを合わせた黒髪の女の子。リボンのポニーテールがポイントです。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 136,
+    "slug": "136",
+    "title": "冬服エルフちゃん",
+    "date": "2026-10-17",
+    "image_path": "/static/img/works/136.webp",
+    "thumbnail": "/static/img/works/136.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "エルフ",
+      "黒髪",
+      "マフラー",
+      "ベレー帽"
+    ],
+    "description": "白いベレー帽に赤いマフラー、フリルのワンピースで冬のおでかけコーデのエルフちゃん。八重歯がチャームポイントです。",
+    "nsfw": false,
+    "external_links": {}
   }
 ]
