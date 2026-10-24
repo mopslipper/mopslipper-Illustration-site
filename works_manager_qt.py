@@ -524,6 +524,8 @@ class WorksManagerQt(QMainWindow):
         self.tag_combo.setEditable(True)
         self.tag_combo.setPlaceholderText("タグを選択または入力")
         self.tag_combo.setMinimumWidth(200)
+        self.tag_combo.setInsertPolicy(QComboBox.InsertPolicy.NoInsert)
+        self.tag_combo.lineEdit().returnPressed.connect(self.add_tag)
         tag_input_layout.addWidget(self.tag_combo)
         
         tag_add_btn = QPushButton("追加")
@@ -560,6 +562,8 @@ class WorksManagerQt(QMainWindow):
         self.request_tag_combo.setEditable(True)
         self.request_tag_combo.setPlaceholderText("リクエストタグを選択または入力")
         self.request_tag_combo.setMinimumWidth(200)
+        self.request_tag_combo.setInsertPolicy(QComboBox.InsertPolicy.NoInsert)
+        self.request_tag_combo.lineEdit().returnPressed.connect(self.add_request_tag)
         request_tag_input_layout.addWidget(self.request_tag_combo)
 
         request_tag_add_btn = QPushButton("追加")

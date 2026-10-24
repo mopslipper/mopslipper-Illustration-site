@@ -2568,21 +2568,32 @@
   {
     "id": 138,
     "slug": "138",
-    "title": "????????????",
+    "title": "へそ出しチーパオの狐っ娘",
     "date": "2026-10-24",
     "image_path": "/static/img/works/138.webp",
     "thumbnail": "/static/img/works/138.jpg",
     "category": "Original",
     "tags": [
-      "?????",
-      "???",
-      "??",
-      "????",
-      "????",
-      "???",
-      "?"
+      "オリジナル",
+      "キツネ",
+      "狐耳",
+      "チーパオ",
+      "へそ出し",
+      "八重歯",
+      "赤"
     ],
-    "description": "?????????????????????????????????????????????????????????????????",
+    "description": "赤いへそ出しチーパオにお団子ヘア、バツ印の髪飾りがトレードマークの狐っ娘。指ハートやピースで元気いっぱいにポーズを決める、八重歯がキュートな差分イラストです。",
+    "ai_desc_override": {
+      "tone_preset": "minimal",
+      "length_rule": "short_1_2_sentences",
+      "must_include": [
+        "composition",
+        "color",
+        "motif"
+      ],
+      "instruction_preset": "none",
+      "custom_instruction": ""
+    },
     "nsfw": false,
     "external_links": {}
   }
