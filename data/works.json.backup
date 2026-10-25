@@ -2596,5 +2596,35 @@
     },
     "nsfw": false,
     "external_links": {}
+  },
+  {
+    "id": 139,
+    "slug": "139",
+    "title": "チーパオ狐っ娘の抱き枕カバー風",
+    "date": "2026-10-24",
+    "image_path": "/static/img/works/139.webp",
+    "thumbnail": "/static/img/works/139.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "キツネ",
+      "狐耳",
+      "チーパオ",
+      "抱き枕カバー",
+      "仰向け",
+      "下着",
+      "八重歯",
+      "赤"
+    ],
+    "description": "赤いチーパオに白いズボン、バツ印の髪飾りと赤いリボンがトレードマークの狐っ娘を抱き枕カバー風の表裏デザインで描きました。衣装違いやズボンをずらした差分など、全5種のバリエーションを収録しています。",
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {},
+    "additional_images": [
+      "/static/img/works/139-1.webp",
+      "/static/img/works/139-2.webp",
+      "/static/img/works/139-3.webp",
+      "/static/img/works/139-4.webp"
+    ]
   }
 ]
