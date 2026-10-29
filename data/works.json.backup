@@ -2626,5 +2626,26 @@
       "/static/img/works/139-3.webp",
       "/static/img/works/139-4.webp"
     ]
+  },
+  {
+    "id": 140,
+    "slug": "140",
+    "title": "着ぐるみ狐娘",
+    "date": "2026-10-25",
+    "image_path": "/static/img/works/140.webp",
+    "thumbnail": "/static/img/works/140.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "キツネ",
+      "狐耳",
+      "着ぐるみ",
+      "白髪",
+      "しっぽ",
+      "ピンク"
+    ],
+    "description": "淡いピンクの着ぐるみに身を包んだ、白髪の狐娘。ふわふわの耳としっぽ、黒いリボンがポイントの全身姿に、着ぐるみを肩からずらした姿やキャミソール姿を添えました。",
+    "nsfw": false,
+    "external_links": {}
   }
 ]
