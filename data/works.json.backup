@@ -2647,5 +2647,25 @@
     "description": "淡いピンクの着ぐるみに身を包んだ、白髪の狐娘。ふわふわの耳としっぽ、黒いリボンがポイントの全身姿に、着ぐるみを肩からずらした姿やキャミソール姿を添えました。",
     "nsfw": false,
     "external_links": {}
+  },
+  {
+    "id": 141,
+    "slug": "141",
+    "title": "ご主人様？白髪メイドちゃん",
+    "date": "2026-10-29",
+    "image_path": "/static/img/works/141.webp",
+    "thumbnail": "/static/img/works/141.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "メイド",
+      "白髪",
+      "片目隠し",
+      "リボン",
+      "青"
+    ],
+    "description": "「ご主人様？」と小首をかしげる、白髪ロングのメイドちゃん。フリルのヘッドドレスと青いリボン、ふんわり袖の水色ドレスに、X字のヘアピンと金色の瞳がポイントです。",
+    "nsfw": false,
+    "external_links": {}
   }
 ]

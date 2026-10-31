@@ -2667,5 +2667,51 @@
     "description": "「ご主人様？」と小首をかしげる、白髪ロングのメイドちゃん。フリルのヘッドドレスと青いリボン、ふんわり袖の水色ドレスに、X字のヘアピンと金色の瞳がポイントです。",
     "nsfw": false,
     "external_links": {}
+  },
+  {
+    "id": 142,
+    "slug": "142",
+    "title": "Trick or Treat…おばけ包帯ちゃん",
+    "date": "2026-10-31",
+    "image_path": "/static/img/works/142.webp",
+    "thumbnail": "/static/img/works/142.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "ハロウィン",
+      "オバケ",
+      "ネコミミ",
+      "包帯",
+      "白髪",
+      "片目隠し",
+      "リボン"
+    ],
+    "description": "「Trick or Treat…」と恥ずかしそうにつぶやく、白髪の女の子。猫耳つきのおばけフードを被り、体には包帯をぐるぐる巻き。黒いリボンのおさげとX字のヘアピン、金色の瞳がポイントのハロウィン仮装です。",
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {}
+  },
+  {
+    "id": 143,
+    "slug": "143",
+    "title": "Trick or Treat♡ 白髪魔女っ娘",
+    "date": "2026-10-31",
+    "image_path": "/static/img/works/143.webp",
+    "thumbnail": "/static/img/works/143.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "ハロウィン",
+      "魔女",
+      "白髪",
+      "八重歯",
+      "首輪",
+      "手袋",
+      "リボン"
+    ],
+    "description": "「Trick or Treat♡」と八重歯を見せていたずらっぽく笑う、白髪の魔女っ娘。オレンジのリボンを巻いた大きな魔女帽子に、オフショルダーの黒いドレスと白い手袋、チョーカーとX字のヘアピンがポイントです。",
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {}
   }
 ]
