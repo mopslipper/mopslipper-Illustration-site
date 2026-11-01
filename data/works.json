@@ -12,7 +12,7 @@
       "かわいい"
     ],
     "request_tags": [
-      "猫耳",
+      "ネコミミ",
       "ふわふわ",
       "あざとかわいい",
       "パステル"
@@ -71,8 +71,6 @@
     "image_path": "/static/img/works/placeholder.svg",
     "thumbnail": "/static/img/works/placeholder.svg",
     "tags": [
-      "版権",
-      "ファンアート",
       "二次創作"
     ],
     "category": "Fanart",
@@ -191,8 +189,7 @@
     "tags": [
       "オリジナル",
       "水着",
-      "動画",
-      "アニメーション"
+      "動画"
     ],
     "category": "Animation",
     "description": "水着を着た美少女のズーム。Grok Imagineで作成。",
@@ -227,7 +224,7 @@
     "thumbnail": "/static/img/works/012-wariza-neko.jpg",
     "tags": [
       "オリジナル",
-      "ネコ",
+      "ネコミミ",
       "座りポーズ"
     ],
     "category": "Original",
@@ -247,8 +244,7 @@
     "tags": [
       "オリジナル",
       "冬服",
-      "動画",
-      "アニメーション"
+      "動画"
     ],
     "category": "Animation",
     "description": "冬服ではしゃぐガール。Grok Imagineで作成。",
@@ -265,7 +261,6 @@
     "tags": [
       "オリジナル",
       "正月",
-      "新年",
       "着物"
     ],
     "category": "Original",
@@ -300,8 +295,7 @@
     "thumbnail": "/static/img/works/016-kitsune-kick.jpg",
     "tags": [
       "オリジナル",
-      "きつね",
-      "獣耳",
+      "キツネ",
       "アクション"
     ],
     "category": "Original",
@@ -374,7 +368,7 @@
     "thumbnail": "/static/img/works/020-kigurumi-neko.jpg",
     "tags": [
       "オリジナル",
-      "猫",
+      "ネコミミ",
       "着ぐるみ",
       "もふもふ"
     ],
@@ -489,8 +483,7 @@
     "tags": [
       "オリジナル",
       "ちびキャラ",
-      "SD",
-      "可愛い"
+      "かわいい"
     ],
     "category": "Original",
     "description": "ちびキャライラスト集。デフォルメされた可愛らしいスタイルで描いた3枚のイラストです。",
@@ -511,9 +504,8 @@
     "tags": [
       "オリジナル",
       "ちびキャラ",
-      "SD",
       "金髪",
-      "可愛い"
+      "かわいい"
     ],
     "category": "Original",
     "description": "金髪ちびキャライラスト集。元気いっぱいの表情とポーズが特徴の3枚のイラストです。",
@@ -530,8 +522,7 @@
     "tags": [
       "オリジナル",
       "金髪",
-      "動画",
-      "アニメーション"
+      "動画"
     ],
     "category": "Animation",
     "description": "金髪美少女のズームアニメーション。Grok Imagineで作成。",
@@ -585,6 +576,7 @@
     "thumbnail": "/static/img/works/031-white-suyasuyaa.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "白",
       "ネコミミ"
     ],
@@ -601,6 +593,7 @@
     "thumbnail": "/static/img/works/032-white-happy.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "白",
       "ネコミミ"
     ],
@@ -619,6 +612,7 @@
     "thumbnail": "/static/img/works/033-pink-cat-angel.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "ネコミミ",
       "白",
       "着ぐるみ"
@@ -638,6 +632,7 @@
     "thumbnail": "/static/img/works/034-cat-angel.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "ネコミミ",
       "フーディー"
     ],
@@ -656,6 +651,7 @@
     "thumbnail": "/static/img/works/035-cat-starangel.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "ネコミミ",
       "フーディー"
     ],
@@ -673,6 +669,7 @@
     "category": "Original",
     "x_thumbnail": "/static/img/works/036-hoodie-swimsuit_face.webp",
     "tags": [
+      "オリジナル",
       "ネコミミ",
       "水着",
       "フーディー",
@@ -693,6 +690,7 @@
     "category": "Original",
     "x_thumbnail": "/static/img/works/037-hoodie-bikini-girl-face.webp",
     "tags": [
+      "オリジナル",
       "ネコミミ",
       "ビキニ",
       "フーディー",
@@ -712,6 +710,7 @@
     "thumbnail": "/static/img/works/038-ghost-angel-girl.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "ファンタジー",
       "天使",
       "白",
@@ -732,6 +731,7 @@
     "thumbnail": "/static/img/works/039-ghost-star-angel-girl.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "白",
       "ファンタジー",
       "天使",
@@ -750,6 +750,7 @@
     "thumbnail": "/static/img/works/040-ghost-angel-girl.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "オバケ",
       "天使",
       "白",
@@ -770,6 +771,7 @@
     "thumbnail": "/static/img/works/041-cat-angel.webp.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "白タイツ",
       "ネコミミ",
       "フーディー"
@@ -787,6 +789,7 @@
     "thumbnail": "/static/img/works/042-thighhighs-cat-angel.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "ニーソ",
       "フーディー",
       "ネコミミ"
@@ -806,6 +809,7 @@
     "thumbnail": "/static/img/works/043-sleeves-past-wrist-angel.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "ネコミミ",
       "天使",
       "白タイツ"
@@ -825,6 +829,7 @@
     "thumbnail": "/static/img/works/044-hoodie-angel-kneeling.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "着ぐるみ",
       "ブカブカ服",
       "素足"
@@ -844,6 +849,7 @@
     "thumbnail": "/static/img/works/045-angel-collared-shirt.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "天使",
       "白",
       "シャツ"
@@ -863,6 +869,7 @@
     "thumbnail": "/static/img/works/046-angel-colared-shirt.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "白",
       "天使",
       "シャツ"
@@ -882,6 +889,7 @@
     "thumbnail": "/static/img/works/047-multiple-oversized-shirt.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "リボン",
       "複数"
     ],
@@ -900,6 +908,7 @@
     "thumbnail": "/static/img/works/048-hair-ribbon-blue.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "リボン",
       "青",
       "仰向け"
@@ -919,6 +928,7 @@
     "thumbnail": "/static/img/works/049-hair-ribbon-blue.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "青",
       "リボン",
       "仰向け"
@@ -936,6 +946,7 @@
     "thumbnail": "/static/img/works/050-petite-slender-girl.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "ブカブカ服",
       "青"
     ],
@@ -954,6 +965,7 @@
     "thumbnail": "/static/img/works/051-petite-blue-girl.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "シャツ",
       "青"
     ],
@@ -972,6 +984,7 @@
     "thumbnail": "/static/img/works/052-kigurumi-pajamas-girl.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "着ぐるみ",
       "パジャマ",
       "仰向け"
@@ -991,6 +1004,7 @@
     "thumbnail": "/static/img/works/053-pink-midhair-cadigan.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "片目隠し",
       "キャミソール",
       "カーディガン"
@@ -1011,6 +1025,7 @@
     "category": "Original",
     "x_thumbnail": "/static/img/works/054_1.jpg",
     "tags": [
+      "オリジナル",
       "ブカブカ服",
       "恥ずかしがり屋",
       "仰向け"
@@ -1029,9 +1044,9 @@
     "thumbnail": "/static/img/works/055-blue-midhair-tanktop.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "青",
-      "タンクトップ",
-      "スリーブレス"
+      "タンクトップ"
     ],
     "description": "爽やかな青色のタンクトップを身にまとったキャラクターが魅力的に描かれています。彼女の多様な表情とポーズが、元気で親しみやすい印象を与えます。",
     "nsfw": false,
@@ -1048,6 +1063,7 @@
     "thumbnail": "/static/img/works/056-pink-midhair-tanktop.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "ピンク",
       "タンクトップ"
     ],
@@ -1064,7 +1080,8 @@
     "thumbnail": "/static/img/works/057-blue-shorts-tanktop.jpg",
     "category": "Original",
     "tags": [
-      "ショーツ",
+      "オリジナル",
+      "下着",
       "タンクトップ"
     ],
     "description": "鮮やかな水色のタンクトップとショーツをまとったキャラクターが、元気いっぱいにポーズを決めたイラストです。愛らしい表情やフワッとした髪型が、明るく楽しい雰囲気を醸し出し、見ている人を惹きつけます。",
@@ -1092,6 +1109,7 @@
     "thumbnail": "/static/img/works/058-pink-tanktop-cardigan.webp.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "カーディガン",
       "ピンク"
     ],
@@ -1110,6 +1128,7 @@
     "thumbnail": "/static/img/works/059-pink-tanktop-cardigan.webp.webp.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "ピンク",
       "カーディガン",
       "キャミソール"
@@ -1129,6 +1148,7 @@
     "thumbnail": "/static/img/works/060-pink-tanktop-cardigan.webp.webp.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "ピンク",
       "キャミソール",
       "カーディガン"
@@ -1148,6 +1168,7 @@
     "thumbnail": "/static/img/works/061-miko-sama.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "巫女",
       "赤面"
     ],
@@ -1165,6 +1186,7 @@
     "category": "Original",
     "x_thumbnail": "/static/img/works/062-boku-miko-samaxxx.jpg",
     "tags": [
+      "オリジナル",
       "巫女",
       "酒"
     ],
@@ -1183,6 +1205,7 @@
     "thumbnail": "/static/img/works/063-miko-sama.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "巫女"
     ],
     "description": "鮮やかな赤と白のコントラストが印象的な巫女の魅力を引き立てる作品です。元気いっぱいの表情や可愛らしい仕草で、神秘的な雰囲気を感じさせるデザインが特徴です！",
@@ -1200,6 +1223,7 @@
     "thumbnail": "/static/img/works/064-waki-miko-sama.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "巫女",
       "わき"
     ],
@@ -1218,7 +1242,8 @@
     "thumbnail": "/static/img/works/065-off-shoulder-girl.jpg",
     "category": "Original",
     "tags": [
-      "オフショル",
+      "オリジナル",
+      "オフショルダー",
       "ピンク",
       "タンクトップ"
     ],
@@ -1235,6 +1260,7 @@
     "thumbnail": "/static/img/works/066-tenshinranman-miko.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "巫女"
     ],
     "description": "明るく元気な巫女さんをモチーフにしたイラストです。赤と白の鮮やかな色合いが目を引き、愛らしい表情と動きが彼女の活発さを感じさせます。",
@@ -1252,6 +1278,7 @@
     "thumbnail": "/static/img/works/067-ane-miko.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "巫女",
       "姉",
       "魔女"
@@ -1272,6 +1299,7 @@
     "category": "Original",
     "x_thumbnail": "/static/img/works/068-SN2.jpg",
     "tags": [
+      "オリジナル",
       "巫女",
       "下着",
       "仰向け"
@@ -1308,6 +1336,7 @@
     "thumbnail": "/static/img/works/069-miko-on-back.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "巫女",
       "抱き枕カバー"
     ],
@@ -1326,6 +1355,7 @@
     "thumbnail": "/static/img/works/070-miko-mini-skirt.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "巫女",
       "ミニスカート"
     ],
@@ -1344,6 +1374,7 @@
     "thumbnail": "/static/img/works/072-miko-on-back.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "巫女",
       "仰向け",
       "抱き枕カバー"
@@ -1372,7 +1403,8 @@
     "thumbnail": "/static/img/works/072-ohayo-girl.jpg",
     "category": "Original",
     "tags": [
-      "オフショル",
+      "オリジナル",
+      "オフショルダー",
       "ピンク"
     ],
     "description": "元気いっぱいのオフショルシャツをまとった女の子の愛らしさを描いた作品です。ピンクの色合いが彼女の可愛らしさを引き立て、朝の陽気な雰囲気を感じさせる心温まる一枚です。",
@@ -1390,6 +1422,7 @@
     "thumbnail": "/static/img/works/073-kawaii-miko-san.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "巫女"
     ],
     "description": "元気いっぱいな巫女の姿を描いたオリジナル作品です。華やかな赤い衣装に身を包んだ彼女の表情は、見る人の心を温かくし、癒しを与えてくれます！！！",
@@ -1416,6 +1449,7 @@
     "thumbnail": "/static/img/works/074-shirt-miko.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "巫女",
       "素足"
     ],
@@ -1443,6 +1477,7 @@
     "thumbnail": "/static/img/works/075-kare-shirt.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "巫女",
       "シャツ"
     ],
@@ -1470,7 +1505,8 @@
     "thumbnail": "/static/img/works/076-jk.jpg",
     "category": "Original",
     "tags": [
-      "jk",
+      "オリジナル",
+      "制服",
       "金髪"
     ],
     "description": "優しいパステルカラーで描かれた元気いっぱいの少女です。彼女の明るい表情や、可愛いリボンがアクセントとなり、爽やかな青春の一瞬を切り取ったような魅力を持っています。",
@@ -1485,7 +1521,9 @@
     "image_path": "/static/img/works/077-tie-shirt.webp",
     "thumbnail": "/static/img/works/077-tie-shirt.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "request_tags": [
       "シャツ"
     ],
@@ -1502,8 +1540,9 @@
     "thumbnail": "/static/img/works/078-on-back-camisole.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "パジャマ",
-      "パンティ"
+      "下着"
     ],
     "description": "明るい色合いのパジャマを着た女の子たちが元気いっぱいにポーズをとる、魅力的なオリジナル作品です。青とピンクのデザインが織りなす可愛いモチーフが、見る人の心を和ませます！",
     "nsfw": false,
@@ -1518,6 +1557,7 @@
     "thumbnail": "/static/img/works/079-on-back-pajamas-panty.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "パジャマ",
       "下着"
     ],
@@ -1543,6 +1583,7 @@
     "thumbnail": "/static/img/works/080-dougan-suit.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "スーツ"
     ],
     "description": "可愛らしい童顔の上司がスーツ姿で元気に振る舞う姿を描きました。明るい表情と仕草が、職場の雰囲気を一層楽しくしてくれること間違いなし！",
@@ -1569,6 +1610,7 @@
     "thumbnail": "/static/img/works/081-hoodie-tie.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "ネクタイ",
       "フーディー"
     ],
@@ -1596,6 +1638,7 @@
     "thumbnail": "/static/img/works/082-hoodie-offshoulder.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "フーディー"
     ],
     "description": "可愛らしい青いフーディーを着た恥ずかしがり屋の女の子を描いた作品です。鮮やかな青色が彼女の魅力を引き立て、心温まる構図が見る人をほっこりさせます。",
@@ -1623,6 +1666,7 @@
     "thumbnail": "/static/img/works/084-shirt-tie.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "ネクタイ"
     ],
     "description": "シャツにネクタイを軽やに着こなしたキャラクターが、明るく元気な笑顔で魅力を振りまく作品です。シンプルな構図の中に、彼女の愛らしさとチャーミングな雰囲気が引き立っています。",
@@ -1649,6 +1693,7 @@
     "thumbnail": "/static/img/works/085-prison-costume1.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "囚人コス"
     ],
     "description": "元気で遊び心あふれるデザインが魅力です！ストライプの囚人服を着た可愛らしいキャラクターが、さまざまな表情やポーズで描かれており、彼女の個性がパッと伝わる構図が特徴です。",
@@ -1675,6 +1720,7 @@
     "thumbnail": "/static/img/works/086-prison-costume2.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "囚人コス"
     ],
     "description": "元気いっぱいな囚人コスの女の子が、さまざまな表情で魅力を引き立てています！可愛いカラーとユニークな構図が、彼女たちの個性を際立たせ、観る人を惹きつける作品です。",
@@ -1701,6 +1747,7 @@
     "thumbnail": "/static/img/works/086-miko-girl.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "巫女"
     ],
     "description": "華やかな衣装に身を包んだ巫女さんがさまざまな表情を見せる構図が魅力的です。明るく元気な彼女の姿から、伝統的な文化と青春のエネルギーが感じられます。",
@@ -1727,6 +1774,7 @@
     "thumbnail": "/static/img/works/087-cat.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "金髪",
       "ネコミミ"
     ],
@@ -1743,6 +1791,7 @@
     "thumbnail": "/static/img/works/088-cat.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "ネコミミ"
     ],
     "description": "ネコミミをテーマにした可愛らしいキャラクターが、元気いっぱいにポーズを決める姿が印象的な作品です。明るいパステルカラーで彩られた構図は、愛らしさと楽しさを引き立て、見る人の心を和ませてくれます。",
@@ -1758,6 +1807,7 @@
     "thumbnail": "/static/img/works/089-vamp.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "ヴァンパイア"
     ],
     "description": "可愛らしいヴァンパイアをモチーフにした作品です。鮮やかな赤のラインで描かれた彼女の表情やポーズが、元気で愛らしい雰囲気を引き立てています！",
@@ -1773,6 +1823,7 @@
     "thumbnail": "/static/img/works/090-vamp.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "ヴァンパイア"
     ],
     "description": "鮮やかな赤を基調にした可愛らしいキャラクターが魅力です。元気いっぱいの表情やファッション、そして独特のモチーフが織り交ぜられた構図が、彼女の妖しい魅力を引き立てています。",
@@ -1788,7 +1839,8 @@
     "thumbnail": "/static/img/works/091-sporty.jpg",
     "category": "Original",
     "tags": [
-      "スポーツブラ",
+      "オリジナル",
+      "下着",
       "黒髪"
     ],
     "description": "活力あふれるポーズと鮮やかな紫色のスポーツブラが特徴の作品です。黒髪の彼女は、心躍る表情で、見ている人にも元気を与えてくれる魅力的なモチーフです！",
@@ -1804,7 +1856,8 @@
     "thumbnail": "/static/img/works/092-fuuki-iin.jpg",
     "category": "Original",
     "tags": [
-      "ブラ",
+      "オリジナル",
+      "下着",
       "ネクタイ"
     ],
     "description": "明るい色合いとユーモラスな構図で表現されたオリジナル作品です。透けたブラとネクタイが特徴的なキャラクターが、ちょっぴりドキッとする表情で楽しさを引き立てています！",
@@ -1831,6 +1884,7 @@
     "thumbnail": "/static/img/works/093-vamp.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "ヴァンパイア"
     ],
     "description": "明るい色合いとキュートなデザインが魅力のオリジナル作品です。可愛らしいヴァンパイアをモチーフに、オシャレで個性的な構図が印象的で、思わず目を奪われる一枚となっています。",
@@ -1848,6 +1902,7 @@
     "thumbnail": "/static/img/works/094p5_miko2.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "巫女"
     ],
     "description": "伝統的な巫女の衣装を身にまとった可愛らしいキャラクターを描いた作品です。元気いっぱいに舞い踊る姿と、心躍るモチーフが織りなす魅力あふれる構図で、見る人の心をつかむこと間違いなし！",
@@ -1874,7 +1929,9 @@
     "thumbnail": "/static/img/works/097.jpg",
     "category": "Original",
     "x_thumbnail": "/static/img/works/097.jpg",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "nsfw": false,
     "external_links": {}
   },
@@ -1888,6 +1945,7 @@
     "category": "Original",
     "x_thumbnail": "/static/img/works/094-1sumb07.jpg",
     "tags": [
+      "オリジナル",
       "抱き枕カバー",
       "金髪",
       "ミニスカート"
@@ -1922,6 +1980,7 @@
     "thumbnail": "/static/img/works/097a-neko-chan.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "ネコミミ",
       "着ぐるみ"
     ],
@@ -1949,6 +2008,7 @@
     "thumbnail": "/static/img/works/098-heart-hands.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "シャツ",
       "手ハート"
     ],
@@ -1974,6 +2034,7 @@
     "thumbnail": "/static/img/works/100-vamp.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "ヴァンパイア",
       "シャツ"
     ],
@@ -1992,7 +2053,7 @@
     "thumbnail": "/static/img/works/111-changpao.jpg",
     "category": "Original",
     "tags": [
-      "チーパオ",
+      "オリジナル",
       "チャイナドレス"
     ],
     "description": "元気いっぱいの女の子が、鮮やかな赤のチーパオを着て魅力的にポーズを決めています！ キラキラした瞳と大胆な構図で、伝統的なチャイナドレスに現代的なエッセンスをプラスした作品です。",
@@ -2010,8 +2071,9 @@
     "thumbnail": "/static/img/works/112-off-shoulder-elf.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "エルフ",
-      "オフショル"
+      "オフショルダー"
     ],
     "description": "オフショルの可愛らしいエルフキャラクターが魅力たっぷりに描かれています。鮮やかな色使いとキュートな表情が特徴で、様々なポーズで楽しませてくれる構図が心を躍らせます！",
     "nsfw": false,
@@ -2048,6 +2110,7 @@
     "thumbnail": "/static/img/works/104-sitting-peace.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "ピース",
       "シャツ",
       "ネクタイ"
@@ -2067,6 +2130,7 @@
     "thumbnail": "/static/img/works/105-miko-cute.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "巫女"
     ],
     "description": "元気いっぱいな表情が心を惹きつけます。シンプルながらも魅力的な構図で、彼女の愛らしさと神秘的な雰囲気を見事に表現しています。",
@@ -2084,6 +2148,7 @@
     "thumbnail": "/static/img/works/107-komakyo-reimu.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "博麗霊夢",
       "巫女"
     ],
@@ -2102,6 +2167,7 @@
     "thumbnail": "/static/img/works/108-flying-angel.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "天使",
       "シャツ"
     ],
@@ -2131,6 +2197,7 @@
     "thumbnail": "/static/img/works/109-awawa-shop-worker.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "店員",
       "制服"
     ],
@@ -2159,6 +2226,7 @@
     "thumbnail": "/static/img/works/109x-shirt-girl.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "シャツ"
     ],
     "description": "ふんわりとしたシャツを着た女の子の元気いっぱいな姿を描いたオリジナル作品です。明るい表情と愛らしいポーズで、朝の爽やかな雰囲気を伝える魅力的な一枚です！",
@@ -2185,7 +2253,9 @@
     "image_path": "/static/img/works/110.webp",
     "thumbnail": "/static/img/works/110.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "nsfw": false,
     "external_links": {}
   },
@@ -2197,7 +2267,9 @@
     "image_path": "/static/img/works/111.webp",
     "thumbnail": "/static/img/works/111.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "nsfw": false,
     "external_links": {}
   },
@@ -2209,7 +2281,9 @@
     "image_path": "/static/img/works/112.webp",
     "thumbnail": "/static/img/works/112.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "nsfw": false,
     "external_links": {}
   },
@@ -2221,7 +2295,9 @@
     "image_path": "/static/img/works/113.webp",
     "thumbnail": "/static/img/works/113.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "nsfw": false,
     "external_links": {}
   },
@@ -2233,7 +2309,9 @@
     "image_path": "/static/img/works/114.webp",
     "thumbnail": "/static/img/works/114.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "nsfw": false,
     "external_links": {}
   },
@@ -2245,7 +2323,9 @@
     "image_path": "/static/img/works/115.webp",
     "thumbnail": "/static/img/works/115.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "nsfw": false,
     "external_links": {}
   },
@@ -2257,7 +2337,9 @@
     "image_path": "/static/img/works/116.webp",
     "thumbnail": "/static/img/works/116.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "nsfw": false,
     "external_links": {}
   },
@@ -2269,7 +2351,9 @@
     "image_path": "/static/img/works/117.webp",
     "thumbnail": "/static/img/works/117.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "nsfw": false,
     "external_links": {}
   },
@@ -2281,7 +2365,9 @@
     "image_path": "/static/img/works/118.webp",
     "thumbnail": "/static/img/works/118.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "nsfw": false,
     "external_links": {}
   },
@@ -2293,7 +2379,9 @@
     "image_path": "/static/img/works/119.webp",
     "thumbnail": "/static/img/works/119.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "nsfw": false,
     "external_links": {}
   },
@@ -2305,7 +2393,9 @@
     "image_path": "/static/img/works/120.webp",
     "thumbnail": "/static/img/works/120.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "nsfw": false,
     "external_links": {}
   },
@@ -2317,7 +2407,9 @@
     "image_path": "/static/img/works/121.webp",
     "thumbnail": "/static/img/works/121.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "nsfw": false,
     "external_links": {}
   },
@@ -2329,7 +2421,9 @@
     "image_path": "/static/img/works/122.webp",
     "thumbnail": "/static/img/works/122.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "nsfw": false,
     "external_links": {}
   },
@@ -2341,7 +2435,9 @@
     "image_path": "/static/img/works/123.webp",
     "thumbnail": "/static/img/works/123.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "nsfw": false,
     "external_links": {}
   },
@@ -2353,7 +2449,9 @@
     "image_path": "/static/img/works/124.webp",
     "thumbnail": "/static/img/works/124.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "description": "【イラストリクエスト】\n---ちょっとボロい服を着た子。首には鉄の首輪とそれにつながる長い鎖がついている。手は後ろで手錠をかけている。---",
     "nsfw": false,
     "external_links": {}
@@ -2366,7 +2464,9 @@
     "image_path": "/static/img/works/125.webp",
     "thumbnail": "/static/img/works/125.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "description": "【イラストリクエスト】\n---褐色肌でスク水着ているロングヘアの娘見たいです---",
     "nsfw": false,
     "external_links": {}
@@ -2379,7 +2479,9 @@
     "image_path": "/static/img/works/126.webp",
     "thumbnail": "/static/img/works/126.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "description": "イラストリクエスト】\n---やっぱり萌え袖パーカーが最高ですよ---",
     "nsfw": false,
     "external_links": {}
@@ -2392,7 +2494,9 @@
     "image_path": "/static/img/works/127.webp",
     "thumbnail": "/static/img/works/127.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "nsfw": false,
     "external_links": {}
   },
@@ -2404,7 +2508,9 @@
     "image_path": "/static/img/works/128.webp",
     "thumbnail": "/static/img/works/128.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "nsfw": false,
     "external_links": {}
   },
@@ -2416,7 +2522,9 @@
     "image_path": "/static/img/works/129.webp",
     "thumbnail": "/static/img/works/129.jpg",
     "category": "Original",
-    "tags": [],
+    "tags": [
+      "オリジナル"
+    ],
     "nsfw": false,
     "external_links": {}
   },
@@ -2469,7 +2577,7 @@
     "tags": [
       "オリジナル",
       "鬼",
-      "和服",
+      "着物",
       "線画"
     ],
     "description": "赤い角とお団子ヘアの鬼っ娘。白い着物に赤い帯、盃を手にほろ酔い気分な表情です。",
@@ -2506,7 +2614,7 @@
       "オリジナル",
       "黒髪",
       "オフショルダー",
-      "ぶかぶか"
+      "ブカブカ服"
     ],
     "description": "肩が落ちるほどぶかぶかの水色Tシャツを着た黒髪の女の子。裾を引っぱって恥ずかしそうにしています。",
     "nsfw": false,
@@ -2524,7 +2632,7 @@
       "オリジナル",
       "黒髪",
       "ベレー帽",
-      "セーラー"
+      "セーラー服"
     ],
     "description": "青いベレー帽とセーラー襟のオーバーサイズシャツを合わせた黒髪の女の子。リボンのポニーテールがポイントです。",
     "nsfw": false,
@@ -2558,8 +2666,9 @@
     "thumbnail": "/static/img/works/137.jpg",
     "category": "Original",
     "tags": [
+      "オリジナル",
       "キツネ",
-      "チーパオ"
+      "チャイナドレス"
     ],
     "description": "銀髪の狐耳を持つチーパオの娘が、明るく元気にポーズを決める姿を描きました。淡いピンクを基調とした色合いと、キュートな表情に心が和む、思わず笑顔になってしまうイラストです！",
     "nsfw": false,
@@ -2576,8 +2685,7 @@
     "tags": [
       "オリジナル",
       "キツネ",
-      "狐耳",
-      "チーパオ",
+      "チャイナドレス",
       "へそ出し",
       "八重歯",
       "赤"
@@ -2608,8 +2716,7 @@
     "tags": [
       "オリジナル",
       "キツネ",
-      "狐耳",
-      "チーパオ",
+      "チャイナドレス",
       "抱き枕カバー",
       "仰向け",
       "下着",
@@ -2638,7 +2745,6 @@
     "tags": [
       "オリジナル",
       "キツネ",
-      "狐耳",
       "着ぐるみ",
       "白髪",
       "しっぽ",
@@ -2725,7 +2831,6 @@
     "tags": [
       "オリジナル",
       "キツネ",
-      "狐耳",
       "白髪",
       "シャツ",
       "ネクタイ",
