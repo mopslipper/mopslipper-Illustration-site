@@ -2713,5 +2713,30 @@
     "nsfw": false,
     "sensitive": true,
     "external_links": {}
+  },
+  {
+    "id": 144,
+    "slug": "144",
+    "title": "からっぽシャツの白髪狐っ娘",
+    "date": "2026-11-01",
+    "image_path": "/static/img/works/144.webp",
+    "thumbnail": "/static/img/works/144.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "キツネ",
+      "狐耳",
+      "白髪",
+      "シャツ",
+      "ネクタイ",
+      "ミニスカート",
+      "素足",
+      "首輪",
+      "赤"
+    ],
+    "description": "ぶかぶかの白シャツをはおり、赤いネクタイとプリーツスカートで片足立ちする白髪の狐っ娘。ふわふわの大きなしっぽに、X字のヘアピンと赤いリボン、鈴つきの首輪がポイントです。",
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {}
   }
 ]
