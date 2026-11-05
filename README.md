@@ -25,6 +25,14 @@ npm run build    # 本番ビルド
 
 main ブランチへの push で GitHub Actions が自動ビルドし GitHub Pages に公開されます。
 
+## 開発者向けページ（リクエストメモ）
+
+`npm run dev` 中のみ（ルートの `run.bat` をダブルクリックでも起動可）http://localhost:4321/mopslipper-Illustration-site/dev/requests が使えます（ナビ非掲載・本番ビルドには含まれません）。
+
+- メール等で届いたイラストリクエストの本文をメモし、「PNG出力」でマシュマロ風の画像（1200×630）を生成
+- メモはブラウザの localStorage に保存（リポジトリには保存されない）。ポートやブラウザが変わると見えなくなるため、「JSONエクスポート」でバックアップし「JSONインポート」で復元する
+- ページ本体は `site/src/dev/requests.astro`。ルートは `astro.config.mjs` の `dev-only-pages` integration が dev 時だけ登録する
+
 ## 閲覧数・いいね機能
 
 カウントは無料カウンター API([Abacus](https://abacus.jasoncameron.dev), namespace `mopslipper-illustration-site`, キー `views-{id}` / `likes-{id}`)に保存されます。

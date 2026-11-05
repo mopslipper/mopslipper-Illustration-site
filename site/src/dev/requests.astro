@@ -1,0 +1,184 @@
+---
+// 開発者向け: メール等で届いたイラストリクエストのメモ ＋ マシュマロ風画像出力
+// astro.config.mjs の dev-only-pages integration により `npm run dev` のときだけ /dev/requests に登録される
+// （src/pages の外に置いているため本番ビルドには含まれない）
+import Layout from '../layouts/Layout.astro';
+import { siteConfig } from '../lib/data';
+import { IMAGE_WIDTH, IMAGE_HEIGHT } from '../scripts/marshmallow-image';
+---
+
+<Layout title="Request Memo (dev)">
+  <section class="section container" id="dev-requests" data-site-name={siteConfig.site_name}>
+    <h1 class="section-title">Request Memo <span class="dev-badge">dev only</span></h1>
+    <p class="notice">
+      このページは <code>npm run dev</code> のときだけ表示されます（本番には公開されません）。
+      メモはこのブラウザの localStorage に保存されます。ポートやブラウザが変わると見えなくなるため、定期的にエクスポートしてください。
+    </p>
+
+    <div class="req-grid">
+      <div class="req-panel">
+        <div class="req-panel-head">
+          <h2>リクエスト本文 <span class="req-mode" id="req-mode">新規</span></h2>
+          <span class="muted" id="req-count">0 文字</span>
+        </div>
+        <textarea id="req-text" rows="10" placeholder="メールで届いたリクエスト内容を貼り付け"></textarea>
+        <div class="req-actions">
+          <button type="button" class="btn btn-primary btn-small" id="req-save" disabled>保存</button>
+          <button type="button" class="btn btn-outline btn-small" id="req-new">新規作成</button>
+          <span class="req-status" id="req-status" role="status"></span>
+        </div>
+      </div>
+
+      <div class="req-panel">
+        <div class="req-panel-head">
+          <h2>プレビュー</h2>
+          <span class="muted">{IMAGE_WIDTH}×{IMAGE_HEIGHT}</span>
+        </div>
+        <canvas id="req-preview" class="req-preview" width={IMAGE_WIDTH} height={IMAGE_HEIGHT}></canvas>
+        <p class="req-warning" id="req-truncated" hidden>※ 本文が長いため末尾を省略しています</p>
+        <div class="req-actions">
+          <button type="button" class="btn btn-primary btn-small" id="req-download" disabled>PNG出力</button>
+          <button type="button" class="btn btn-outline btn-small" id="req-copy" disabled>画像をコピー</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="req-panel req-list-panel">
+      <div class="req-panel-head">
+        <h2>保存済みリクエスト</h2>
+        <div class="req-actions">
+          <button type="button" class="btn btn-outline btn-small" id="req-export">JSONエクスポート</button>
+          <button type="button" class="btn btn-outline btn-small" id="req-import">JSONインポート</button>
+          <input type="file" id="req-import-file" accept="application/json,.json" hidden />
+        </div>
+      </div>
+      <p class="muted" id="req-empty">まだ保存されたリクエストはありません。</p>
+      <ul class="req-list" id="req-list"></ul>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import '../scripts/dev-requests';
+</script>
+
+<style>
+  .dev-badge {
+    font-size: 0.75rem;
+    vertical-align: middle;
+    padding: 0.15rem 0.6rem;
+    border-radius: var(--radius-pill);
+    background: var(--primary-pale);
+    color: var(--primary-deep);
+    letter-spacing: 0;
+  }
+  .req-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .req-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    min-width: 0;
+  }
+  .req-panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.8rem;
+  }
+  .req-panel-head h2 {
+    font-size: 1.05rem;
+  }
+  .req-mode {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-left: 0.4rem;
+  }
+  #req-text {
+    resize: vertical;
+    line-height: 1.7;
+  }
+  .req-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-top: 0.8rem;
+  }
+  .req-panel-head .req-actions {
+    margin-top: 0;
+  }
+  .req-status {
+    font-size: 0.85rem;
+    color: var(--primary-deep);
+  }
+  .req-preview {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1200 / 630;
+    border-radius: var(--radius-sm);
+    background: var(--bg-accent);
+    display: block;
+  }
+  .req-warning {
+    font-size: 0.85rem;
+    color: var(--danger);
+    margin-top: 0.4rem;
+  }
+  .req-list {
+    list-style: none;
+    display: grid;
+    gap: 0.8rem;
+  }
+  :global(.req-item) {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.9rem 1rem;
+    background: var(--bg-accent);
+  }
+  :global(.req-item.is-active) {
+    border-color: var(--primary-soft);
+  }
+  :global(.req-item-meta) {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+  }
+  :global(.req-item-text) {
+    white-space: pre-wrap;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  :global(.req-item-actions) {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.6rem;
+  }
+  :global(#dev-requests .btn-small) {
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+  }
+  :global(#dev-requests .btn:disabled) {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+  }
+  :global(#dev-requests .btn-danger) {
+    background: transparent;
+    color: var(--danger);
+    border: 2px solid var(--danger);
+  }
+</style>
