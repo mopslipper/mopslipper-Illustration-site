@@ -23,7 +23,7 @@ export function initGallery(): void {
   const resultCount = document.getElementById('result-count')!;
   const noResults = document.getElementById('no-results')!;
   const searchInput = document.getElementById('search-input') as HTMLInputElement;
-  const r18Check = document.getElementById('show-r18') as HTMLInputElement;
+  const r18Check = document.getElementById('show-r18') as HTMLInputElement | null;
   const r15Check = document.getElementById('show-r15') as HTMLInputElement;
 
   const state: State = { category: '', r18Only: false, r15Only: false, query: '', page: 1 };
@@ -107,8 +107,8 @@ export function initGallery(): void {
     });
   });
 
-  r18Check?.addEventListener('change', () => {
-    state.r18Only = r18Check.checked;
+  r18Check?.addEventListener('change', (e) => {
+    state.r18Only = (e.currentTarget as HTMLInputElement).checked;
     if (state.r18Only) {
       r15Check.checked = false;
       state.r15Only = false;
@@ -120,7 +120,7 @@ export function initGallery(): void {
   r15Check?.addEventListener('change', () => {
     state.r15Only = r15Check.checked;
     if (state.r15Only) {
-      r18Check.checked = false;
+      if (r18Check) r18Check.checked = false;
       state.r18Only = false;
     }
     state.page = 1;

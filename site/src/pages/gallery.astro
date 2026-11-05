@@ -5,6 +5,9 @@ import { works } from '../lib/data';
 
 const categories = ['すべて', 'Original', 'Animation', 'Manga', 'Fanart'];
 
+// 公開中のR-18作品が無い間はフィルターを出さない（押しても0件になるため）
+const hasR18 = works.some((w) => w.nsfw);
+
 // 人気タグ上位20件（「オリジナル」除外）
 const tagCount = new Map<string, number>();
 for (const work of works) {
@@ -40,7 +43,7 @@ const popularTags = [...tagCount.entries()]
 
         <div class="panel">
           <h3>フィルター</h3>
-          <label class="check"><input type="checkbox" id="show-r18" /> R-18作品のみ(予定なし)</label>
+          {hasR18 && <label class="check"><input type="checkbox" id="show-r18" /> R-18作品のみ</label>}
           <label class="check"><input type="checkbox" id="show-r15" /> R-15作品のみ</label>
         </div>
 

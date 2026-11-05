@@ -211,6 +211,7 @@
     "category": "Original",
     "description": "成人向け作品のサンプルです。18歳未満の方は閲覧をご遠慮ください。",
     "nsfw": true,
+    "hidden": true,
     "external_links": {
       "fanbox": "https://yourname.fanbox.cc"
     }
