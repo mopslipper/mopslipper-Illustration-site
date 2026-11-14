@@ -2844,5 +2844,140 @@
     "nsfw": false,
     "sensitive": true,
     "external_links": {}
+  },
+  {
+    "id": 145,
+    "slug": "145",
+    "title": "にくきゅうエプロンの狐っ娘店員さん",
+    "date": "2026-11-03",
+    "image_path": "/static/img/works/145.webp",
+    "thumbnail": "/static/img/works/145.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "キツネ",
+      "白髪",
+      "店員",
+      "セーラー服",
+      "ミニスカート",
+      "ポニーテール",
+      "リボン",
+      "しっぽ",
+      "ピンク"
+    ],
+    "description": "ピンクのサンバイザーにセーラー襟のトップス、肉球ポケットのエプロンを合わせた白髪の狐っ娘店員さん。ウインクしながらスカートの裾をつまんでごあいさつ。高めのポニーテールと大きなしっぽ、X字のヘアピンがポイントです。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 146,
+    "slug": "146",
+    "title": "湯上がりバスタオルの白髪狐っ娘",
+    "date": "2026-11-04",
+    "image_path": "/static/img/works/146.webp",
+    "thumbnail": "/static/img/works/146.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "キツネ",
+      "白髪",
+      "バスタオル",
+      "リボン",
+      "首輪",
+      "素足"
+    ],
+    "description": "お風呂あがりにバスタオルを巻いた、白髪ロングの狐っ娘。赤いリボンと鈴つきのチョーカー、足首に結んだリボンがポイント。ごきげんな笑顔の一枚です。",
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {}
+  },
+  {
+    "id": 147,
+    "slug": "147",
+    "title": "青リボンとドロワーズの白髪狐っ娘",
+    "date": "2026-11-06",
+    "image_path": "/static/img/works/147.webp",
+    "thumbnail": "/static/img/works/147.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "キツネ",
+      "白髪",
+      "キャミソール",
+      "へそ出し",
+      "リボン",
+      "青",
+      "白"
+    ],
+    "description": "青いリボンをあしらった白のキャミソールとドロワーズに、ふんわり長い羽織を合わせた白髪の狐っ娘。片手を上げてごあいさつ、もう片方の手で裾をつまんだポーズです。X字のヘアピンと金色の瞳がポイント。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 148,
+    "slug": "148",
+    "title": "ごろんとゴスロリ白髪ちゃん",
+    "date": "2026-11-08",
+    "image_path": "/static/img/works/148.webp",
+    "thumbnail": "/static/img/works/148.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "白髪",
+      "ゴスロリ",
+      "仰向け",
+      "片目隠し",
+      "手袋",
+      "リボン"
+    ],
+    "description": "黒いフリルのヘッドドレスとゴスロリドレスに身を包み、ごろんと仰向けになった白髪ロングの女の子。胸元でそっと重ねた白い手袋の手と編み上げのコルセット、X字のヘアピンと金色の瞳がポイントです。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 149,
+    "slug": "149",
+    "title": "「食べないの…？」黒髪シャツちゃん",
+    "date": "2026-11-11",
+    "image_path": "/static/img/works/149.webp",
+    "thumbnail": "/static/img/works/149.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "黒髪",
+      "シャツ",
+      "ブカブカ服",
+      "オフショルダー",
+      "片目隠し",
+      "八重歯",
+      "手袋",
+      "リボン",
+      "赤面"
+    ],
+    "description": "「食べないの…？」とスティック菓子をくわえて見上げる、黒髪ショートの女の子。肩からずり落ちたぶかぶかの白シャツに指ぬきグローブ、赤いリボンとX字のヘアピン。とがった耳と八重歯、赤い瞳がポイントです。",
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {}
+  },
+  {
+    "id": 150,
+    "slug": "150",
+    "title": "くまさんパジャマの白髪ケモミミちゃん",
+    "date": "2026-11-14",
+    "image_path": "/static/img/works/150.webp",
+    "thumbnail": "/static/img/works/150.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "白髪",
+      "パジャマ",
+      "オフショルダー",
+      "リボン",
+      "手袋",
+      "ピンク"
+    ],
+    "description": "くまさん柄のピンクのパジャマを着た、白髪のケモミミちゃん。きょとんとした立ち姿、八重歯を見せた笑顔、枕に突っ伏してすやすや眠る姿の3カットです。マゼンタのリボンとX字のヘアピンがポイント。",
+    "nsfw": false,
+    "external_links": {}
   }
 ]
