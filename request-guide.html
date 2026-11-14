@@ -443,14 +443,14 @@
     <main>
       <h1>リクエストが届いたら</h1>
       <p class="lead">
-        メールでリクエストが届いてから、作品を公開して「リクエストのゆくえ」が「できました」になるまでの手順です。<br />
+        メールでリクエストが届いてから、作品を公開して「リクエスト対応予定」が「できました」になるまでの手順です。<br />
         画面のボタンや項目の名前は <span class="ui">こう</span>、管理ツールのタブは <span class="tab">こう</span> 書いています。
       </p>
 
       <ol class="flow" aria-label="全体の流れ">
-        <li><a href="#step1"><span class="num">1</span>メールを<br />確認する</a></li>
+        <li><a href="#step1"><span class="num">1</span>メールを読んで<br />作るか決める</a></li>
         <li><a href="#step2"><span class="num">2</span>管理ツールに<br />取り込む</a></li>
-        <li><a href="#step3"><span class="num">3</span>作るか<br />決めて公開</a></li>
+        <li><a href="#step3"><span class="num">3</span>進み具合を<br />決めて公開</a></li>
         <li><a href="#step4"><span class="num">4</span>イラストを<br />作る</a></li>
         <li><a href="#step5"><span class="num">5</span>作品を<br />登録する</a></li>
         <li><a href="#step6"><span class="num">6</span>公開して<br />お知らせ</a></li>
@@ -458,7 +458,8 @@
 
       <div class="box ok">
         <strong>大事なこと：リクエストは自動ではサイトに載りません。</strong>
-        管理ツールで追加して、公開したものだけが「リクエストのゆくえ」に出ます。それまで、送ってくれた人の画面には「受け取りました」と表示されています。
+        作ることにしたリクエストを管理ツールで追加して、公開すると「リクエスト対応予定」に出ます。それまで、送ってくれた人の画面には「受け取りました」と表示されています。
+        <br />追加したリクエストは、<strong>内容とニックネームをサイトに載せます</strong>（フォームに「サイト掲載OK」のチェックはありません。送る人には、フォームとプライバシーポリシーでその旨を知らせています）。
       </div>
 
       <h2 id="prepare">使うもの</h2>
@@ -492,12 +493,11 @@
       <section class="step" id="step1">
         <div class="step-head">
           <span class="num">1</span>
-          <h3>メールを確認する</h3>
+          <h3>メールを読んで、作るか決める</h3>
           <span class="where">メール</span>
         </div>
         <p>リクエストは Formspree からメールで届きます。本文はこの形です。</p>
         <pre>【受付番号】R-7K2M
-【サイト掲載】OK              <span class="c">← 「掲載しない」のこともあります</span>
 【ニックネーム】もふ           <span class="c">← 書いてあるときだけ</span>
 【ベースの作品】からっぽシャツの白髪狐っ娘 (144)   <span class="c">← 作品ページから来たときだけ</span>
 
@@ -508,9 +508,10 @@
 ポーズ: ピース
 【以上】</pre>
         <ul>
-          <li><strong>【サイト掲載】</strong>が「OK」なら、内容を「リクエストのゆくえ」に載せられます。「掲載しない」なら、載るのは受付番号と進み具合だけです。</li>
+          <li><strong>作るかどうかを、ここで決めます。</strong>作ることにしたものを、手順 2 で取り込みます。作らないものは、取り込まなくてかまいません（一覧には載らず、送ってくれた人の画面は「受け取りました」のままです）。</li>
           <li>メールアドレスが書かれていたら、返信がほしい人です。返信はメールで直接送ります（管理ツールからは送れません）。</li>
-          <li>R-18（成人向け）など、受けられない内容でないかをここで見ておきます。</li>
+          <li>R-18（成人向け）など、受けられない内容でないかも見ておきます。</li>
+          <li>取り込んだリクエストは内容をサイトに載せるので、<strong>載せて困る内容</strong>（個人的なこと、ほかの人の名前など）が書かれていないかも見ておきます。</li>
         </ul>
       </section>
 
@@ -523,23 +524,23 @@
         <ol>
           <li>メールの本文をコピーします（【受付番号】から【以上】まで。メール全体でも大丈夫です）。</li>
           <li><code>manager.bat</code> を開き、<span class="tab">リクエスト</span> の <span class="ui">メールから取り込む</span> に貼り付けて、<span class="ui">読み取る</span> を押します。</li>
-          <li>受付番号・掲載の可否・内容が表示されるので、合っていれば <span class="ui">リクエストのゆくえに追加</span> を押します。</li>
+          <li>受付番号・ニックネーム・内容が表示されるので、合っていれば <span class="ui">リクエスト対応予定に追加</span> を押します。</li>
         </ol>
         <p>追加すると、進み具合は <span class="pill received">受付</span> になり、そのリクエストの編集画面が開きます。</p>
         <div class="box">
-          「掲載しない」のリクエストは、内容とニックネームを<strong>この PC の中だけ</strong>に保存します。サイトにも GitHub にも出ません。一覧には「非公開」の印が付きます。
+          内容をサイトに載せたくないリクエストは、編集画面で <span class="ui">内容をサイトに載せる</span> のチェックを外して保存します。内容とニックネームは<strong>この PC の中だけ</strong>に保存され、サイトにも GitHub にも出ません（サイトには受付番号と進み具合だけが載り、管理ツールの一覧には「非公開」の印が付きます）。
         </div>
       </section>
 
       <section class="step" id="step3">
         <div class="step-head">
           <span class="num">3</span>
-          <h3>作るか決めて、いったん公開する</h3>
+          <h3>進み具合を決めて、いったん公開する</h3>
           <span class="where">管理ツール ＞ リクエスト → 公開</span>
         </div>
         <ol>
           <li>
-            <span class="ui">進み具合</span> を選びます。作るなら <span class="pill making">制作中</span>、受けられないなら <span class="pill">見送り</span>、まだ決めていなければ
+            <span class="ui">進み具合</span> を選びます。もう作りはじめているなら <span class="pill making">制作中</span>、これから作るなら
             <span class="pill received">受付</span> のままにします。
           </li>
           <li>ひとこと伝えたいときは <span class="ui">作者の返信</span> に書きます（「いま作ってます！」など。サイトに表示されます）。</li>
@@ -596,12 +597,12 @@
         </div>
         <ol>
           <li><span class="tab">公開</span> を開いて <span class="ui">公開する</span> を押します。公開の前に、データに問題がないか自動で確かめます。</li>
-          <li>数分後、サイトに作品が並び、「リクエストのゆくえ」が「できました」になります。</li>
+          <li>数分後、サイトに作品が並び、「リクエスト対応予定」が「できました」になります。</li>
           <li>X に投稿します。リクエスト文を画像にして添えたいときは、<span class="tab">リクエスト</span> でそのリクエストを開き、<span class="ui">X 投稿用の画像を作る</span> → <span class="ui">PNG を保存</span> を使います。</li>
           <li>トップページでも知らせたいときは、<span class="tab">サイト</span> の <span class="ui">ひとこと</span> に書いて、保存 → 公開します。</li>
         </ol>
         <div class="box">
-          「掲載しない」のリクエスト文を X に載せるのは、サイトに載せるのと同じことです。画像にして投稿する前に、送ってくれた人に確認してください。
+          <span class="ui">内容をサイトに載せる</span> のチェックを外したリクエストの文を X に載せるのは、サイトに載せるのと同じことです。画像にして投稿してよいか、確かめてから使ってください。
         </div>
       </section>
 
@@ -623,12 +624,12 @@
             </tr>
             <tr>
               <td><span class="pill received">受付</span></td>
-              <td>取り込んだ直後。読んだけれど、作るかはまだ決めていないとき。</td>
-              <td rowspan="4">「リクエストのゆくえ」の一覧と、自分の画面の「あなたのリクエスト」の両方に出ます。「できました」には作品へのリンクが付きます。</td>
+              <td>取り込んだ直後。作る予定で、まだ作りはじめていないとき。</td>
+              <td rowspan="4">「リクエスト対応予定」の一覧と、自分の画面の「あなたのリクエスト」の両方に出ます。「できました」には作品へのリンクが付きます。</td>
             </tr>
             <tr>
               <td><span class="pill making">制作中</span></td>
-              <td>作ると決めたとき。</td>
+              <td>作りはじめたとき。</td>
             </tr>
             <tr>
               <td><span class="pill done">できました</span></td>
@@ -636,7 +637,7 @@
             </tr>
             <tr>
               <td><span class="pill">見送り</span></td>
-              <td>受けられない内容のとき、作るのをやめたとき。</td>
+              <td>一度は載せたけれど、作るのをやめたとき。</td>
             </tr>
           </tbody>
         </table>
@@ -656,7 +657,7 @@
             <tr>
               <td>受付番号・日付・進み具合</td>
               <td><span class="yes">出る</span></td>
-              <td>「掲載しない」のリクエストでも出ます。</td>
+              <td><span class="ui">内容をサイトに載せる</span> のチェックを外したリクエストでも出ます。</td>
             </tr>
             <tr>
               <td>作者の返信・できあがった作品</td>
@@ -666,7 +667,7 @@
             <tr>
               <td>リクエスト内容・ニックネーム</td>
               <td><span class="yes">出る</span> / <span class="no">出ない</span></td>
-              <td><span class="ui">内容をサイトに載せる</span> にチェックがあるときだけ出ます。チェックがなければ「（内容は非公開のリクエストです）」と表示されます。</td>
+              <td>ふだんは出ます。<span class="ui">内容をサイトに載せる</span> のチェックを外したときだけ出ず、「（内容は非公開のリクエストです）」と表示されます。</td>
             </tr>
             <tr>
               <td>作業メモ</td>
@@ -682,21 +683,21 @@
         </table>
       </div>
       <p class="small muted">
-        <span class="ui">内容をサイトに載せる</span> は、メールが【サイト掲載】OK のときだけ、取り込み時に自動でチェックが入ります。あとから自分でチェックを入れるときは、送ってくれた人の同意があるかを確認する画面が出ます。
+        <span class="ui">内容をサイトに載せる</span> は、取り込み・手入力のどちらでも最初からチェックが入っています。「サイト掲載OK」のチェックがあった頃のメールで【サイト掲載】掲載しない と書かれているものだけ、取り込み時にチェックが外れます。
       </p>
 
       <h2 id="cases">こんなときは</h2>
 
       <details>
         <summary>受けられない内容だった（R-18 など）</summary>
-        <p>取り込んだうえで、進み具合を <span class="pill">見送り</span> にして、保存 → 公開します。理由を伝えたいときは <span class="ui">作者の返信</span> に書きます。</p>
-        <p>一覧に載せたくないときは、取り込まずにそのままにしておくこともできます。その場合、送ってくれた人の画面は「受け取りました」のままになります。</p>
+        <p>取り込まずに、そのままにします。一覧には載らず、送ってくれた人の画面は「受け取りました」のままになります。</p>
+        <p>受けられないことを伝えたいときは、取り込んだうえで <span class="ui">内容をサイトに載せる</span> のチェックを外し、進み具合を <span class="pill">見送り</span> にして、保存 → 公開します。理由は <span class="ui">作者の返信</span> に書けます。</p>
       </details>
 
       <details>
         <summary>X の DM など、メール以外でリクエストをもらった</summary>
         <p><span class="tab">リクエスト</span> の <span class="ui">手入力で追加（X の DM など）</span> を押して、内容を入力します。受付番号は、空欄のままなら自動で付きます。</p>
-        <p>内容をサイトに載せてよいか聞けていないときは、<span class="ui">内容をサイトに載せる</span> のチェックを外したままにします。</p>
+        <p>フォームから送られたものと違い、DM の相手は内容がサイトに載ることを知りません。載せてよいか聞けていないときは、<span class="ui">内容をサイトに載せる</span> のチェックを外して追加します。</p>
       </details>
 
       <details>
@@ -749,20 +750,20 @@
 
       <details>
         <summary>PC を替える</summary>
-        <p><code>data/private/</code> フォルダは、この PC にしかありません（「掲載しない」リクエストの内容と、作業メモが入っています）。フォルダごと新しい PC にコピーしてください。</p>
+        <p><code>data/private/</code> フォルダは、この PC にしかありません（サイトに載せていないリクエストの内容と、作業メモが入っています）。フォルダごと新しい PC にコピーしてください。</p>
       </details>
 
       <h2 id="checklist">1件ごとのチェックリスト</h2>
       <p class="small muted">チェックはこのページを閉じると消えます。印刷して使うこともできます。</p>
       <ul class="checklist">
         <li>
-          <label><input type="checkbox" /><span>メールを読んだ（受けられる内容か・返信がほしい人か）</span></label>
+          <label><input type="checkbox" /><span>メールを読んで、作ると決めた（受けられる内容か・載せて困る内容がないか・返信がほしい人か）</span></label>
         </li>
         <li>
-          <label><input type="checkbox" /><span>管理ツールに貼り付けて、「リクエストのゆくえに追加」した</span></label>
+          <label><input type="checkbox" /><span>管理ツールに貼り付けて、「リクエスト対応予定に追加」した</span></label>
         </li>
         <li>
-          <label><input type="checkbox" /><span>進み具合を「制作中」（または「見送り」）にして保存した</span></label>
+          <label><input type="checkbox" /><span>進み具合を確かめて保存した（作りはじめていれば「制作中」）</span></label>
         </li>
         <li>
           <label><input type="checkbox" /><span>いったん公開した（送ってくれた人に進み具合が見える）</span></label>

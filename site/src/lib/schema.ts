@@ -121,7 +121,7 @@ export const commissionSchema = z.object({
     .optional(),
 }).passthrough();
 
-// ---- v2: リクエストのゆくえ / かんたんリクエスト / 作者のひとこと ------------
+// ---- v2: リクエスト対応予定 / かんたんリクエスト / 作者のひとこと ------------
 
 export const requestSchema = z
   .object({
@@ -129,9 +129,9 @@ export const requestSchema = z
     id: z.string().regex(RECEIPT_PATTERN),
     date: dateString,
     status: z.enum(REQUEST_STATUSES),
-    /** 送信者が「サイト掲載OK」にチェックした場合のみ true */
+    /** 内容（text / nickname）をサイトに載せるか。作ることにしたリクエストは載せるのが基本 */
     public: z.boolean(),
-    /** 掲載同意があるときだけ書く。同意の無い内容は data/private/（git 管理外）に保存する */
+    /** public: true のときだけ書く。載せない内容は data/private/（git 管理外）に保存する */
     text: z.string().optional(),
     nickname: z.string().optional(),
     /** 完成した作品の slug（status: done のときに指定） */
@@ -144,7 +144,7 @@ export const requestSchema = z
     message: 'public: true のリクエストには text が必要です',
     path: ['text'],
   })
-  // このファイルは公開リポジトリに入るため、同意の無い内容を書けないようにする
+  // このファイルは公開リポジトリに入るため、載せないことにした内容を書けないようにする
   .refine((r) => r.public || (r.text === undefined && r.nickname === undefined), {
     message: 'public: false のリクエストには text / nickname を書けません',
     path: ['public'],

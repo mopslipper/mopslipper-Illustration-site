@@ -77,19 +77,18 @@ export function composeRequestText(draft: RequestDraft): string {
 
 export interface RequestMeta {
   receiptId: string;
-  publishOk: boolean;
   nickname?: string;
 }
 
 /** メール本文の終わりの目印（管理ツール tools/manager が読み取りに使う） */
 export const MESSAGE_END_MARK = '【以上】';
 
-/** 作者に届くメール本文。管理ツール (tools/manager) に貼り付けて取り込める形にする */
+/**
+ * 作者に届くメール本文。管理ツール (tools/manager) に貼り付けて取り込める形にする。
+ * 以前あった【サイト掲載】の行は無くした（作ることにしたリクエストは、すべて内容を載せる方針のため）。
+ */
 export function composeRequestMessage(draft: RequestDraft, meta: RequestMeta): string {
-  const lines = [
-    `【受付番号】${meta.receiptId}`,
-    `【サイト掲載】${meta.publishOk ? 'OK' : '掲載しない'}`,
-  ];
+  const lines = [`【受付番号】${meta.receiptId}`];
   const nickname = meta.nickname?.trim();
   if (nickname) lines.push(`【ニックネーム】${nickname}`);
   if (draft.reference) lines.push(`【ベースの作品】${draft.reference.title} (${draft.reference.slug})`);

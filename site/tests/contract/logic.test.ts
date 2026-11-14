@@ -78,22 +78,22 @@ describe('リクエスト文の組み立て', () => {
     ).toBe('「狐っ娘」をベースに\nメイド服で\n\nどんな子？: ネコミミ、キツネ\n髪・色: 白髪');
   });
 
-  it('メール本文には受付番号・掲載可否・参照作品の slug が入る', () => {
+  it('メール本文には受付番号・ニックネーム・参照作品の slug が入る', () => {
     const message = composeRequestMessage(
       { ...draft, reference: { slug: '144', title: '狐っ娘' } },
-      { receiptId: 'R-7K2M', publishOk: true, nickname: ' もふ ' },
+      { receiptId: 'R-7K2M', nickname: ' もふ ' },
     );
     expect(message).toContain('【受付番号】R-7K2M');
-    expect(message).toContain('【サイト掲載】OK');
     expect(message).toContain('【ニックネーム】もふ');
     expect(message).toContain('【ベースの作品】狐っ娘 (144)');
     expect(message).toContain('どんな子？: ネコミミ、キツネ');
   });
 
-  it('掲載に同意していなければ、その旨が明記される', () => {
-    const message = composeRequestMessage(draft, { receiptId: 'R-7K2M', publishOk: false });
-    expect(message).toContain('【サイト掲載】掲載しない');
+  it('掲載可否の行は無い。ニックネームが無ければ、その行も無い', () => {
+    const message = composeRequestMessage(draft, { receiptId: 'R-7K2M' });
+    expect(message).not.toContain('【サイト掲載】');
     expect(message).not.toContain('【ニックネーム】');
+    expect(message.split('\n').slice(0, 3)).toEqual(['【受付番号】R-7K2M', '', '【リクエスト内容】']);
   });
 
   it('空の下書きを判定する', () => {

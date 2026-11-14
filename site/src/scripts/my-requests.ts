@@ -78,7 +78,7 @@ export function renderMyRequests(): void {
     root.hidden = false;
   });
 
-  // リクエストのゆくえ一覧で、自分のものに目印をつける
+  // リクエスト対応予定一覧で、自分のものに目印をつける
   const myIds = new Set(mine.map((r) => r.id));
   document.querySelectorAll<HTMLElement>('[data-request-id]').forEach((item) => {
     const isMine = myIds.has(item.dataset.requestId ?? '');

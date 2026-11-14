@@ -68,7 +68,7 @@ export const tagCounts: [tag: string, count: number][] = (() => {
   return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ja'));
 })();
 
-// ---- リクエストのゆくえ / 作者のひとこと ------------------------------------
+// ---- リクエスト対応予定 / 作者のひとこと ------------------------------------
 
 /** リクエスト（新しい順）。同じ日付は requests.json に書いた順を保つ */
 export const requests: RequestEntry[] = requestsSchema.parse(requestsJson).sort(byDateDesc);

@@ -1,5 +1,5 @@
 ---
-/** リクエストのゆくえの1件。掲載同意 (public) が無いものは本文・名前を出さない */
+/** リクエスト対応予定の1件。内容を載せない設定 (public: false) のものは本文・名前を出さない */
 import { Image } from 'astro:assets';
 import { siteConfig, getWork, resolveWorkThumb, url, formatDate, THUMB_SIZE, type RequestEntry } from '../lib/data';
 import { STATUS_LABELS } from '../lib/request';

@@ -2,7 +2,7 @@
  * 管理ツールのサーバ (tools/manager/lib/app.mjs) の契約テスト。
  * 本物のデータには触れず、一時フォルダを相手に動かす。
  * - ほかのサイトからの操作・読み取りを断ること、フォルダの外に出られないこと
- * - 掲載同意の無いリクエストの内容が、公開ファイル・git に入らないこと
+ * - 内容を載せない設定のリクエストの内容が、公開ファイル・git に入らないこと
  * - 画像の登録、作品とリクエストの紐付け、公開 (commit / push) の流れ
  */
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
@@ -190,10 +190,11 @@ describe('リクエストの取り込みと公開・非公開', () => {
     port = (await start(root)).port;
   });
 
-  const mail = (id: string, consent: string, text: string) =>
-    `message:\n【受付番号】${id}\n【サイト掲載】${consent}\n【ニックネーム】もふ\n\n【リクエスト内容】\n${text}\n【以上】\n\nreceipt_id:\n${id}\n`;
+  // consent を渡すと、掲載可否のチェックがあった頃のメールになる。いまのメールにその行は無い
+  const mail = (id: string, consent: string | null, text: string) =>
+    `message:\n【受付番号】${id}\n${consent === null ? '' : `【サイト掲載】${consent}\n`}【ニックネーム】もふ\n\n【リクエスト内容】\n${text}\n【以上】\n\nreceipt_id:\n${id}\n`;
 
-  it('掲載しないリクエスト: 内容は非公開ファイルだけに入り、公開ファイルには入らない', async () => {
+  it('昔の「掲載しない」のリクエスト: 内容は非公開ファイルだけに入り、公開ファイルには入らない', async () => {
     const parsed = (await call(port, 'POST', '/api/requests/parse', { body: { text: mail('R-HIDE', '掲載しない', 'ひみつのお願い') } })).json();
     expect(parsed).toMatchObject({ found: true, duplicate: false, publishOk: false, request: { id: 'R-HIDE', public: false, text: 'ひみつのお願い', nickname: 'もふ' } });
 
@@ -208,12 +209,13 @@ describe('リクエストの取り込みと公開・非公開', () => {
     // 管理画面には内容が見える
     const listed = (await call(port, 'GET', '/api/requests')).json();
     expect(listed.requests[0]).toMatchObject({ id: 'R-HIDE', text: 'ひみつのお願い', nickname: 'もふ', public: false });
-    expect((await call(port, 'POST', '/api/requests/parse', { body: { text: mail('R-HIDE', 'OK', 'x') } })).json().duplicate).toBe(true);
+    expect((await call(port, 'POST', '/api/requests/parse', { body: { text: mail('R-HIDE', null, 'x') } })).json().duplicate).toBe(true);
     expect((await call(port, 'POST', '/api/requests', { body: parsed.request })).status).toBe(400);
   });
 
-  it('掲載OKのリクエストは公開ファイルに入る。取り下げると消える', async () => {
-    const parsed = (await call(port, 'POST', '/api/requests/parse', { body: { text: mail('R-OPEN', 'OK', 'ネコミミちゃん\nピース') } })).json();
+  it('いまのメール（掲載可否の行なし）のリクエストは公開ファイルに入る。取り下げると消える', async () => {
+    const parsed = (await call(port, 'POST', '/api/requests/parse', { body: { text: mail('R-OPEN', null, 'ネコミミちゃん\nピース') } })).json();
+    expect(parsed).toMatchObject({ found: true, duplicate: false, publishOk: true, request: { id: 'R-OPEN', public: true } });
     await call(port, 'POST', '/api/requests', { body: parsed.request });
     expect(readJson(root, 'data/requests.json')[0]).toEqual({ id: 'R-OPEN', date: parsed.request.date, status: 'received', public: true, text: 'ネコミミちゃん\nピース', nickname: 'もふ' });
 

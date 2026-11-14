@@ -2,8 +2,11 @@
  * リクエストの純粋ロジック。
  *
  * 保存先は2つに分かれる:
- * - data/requests.json（公開）        … 受付番号・日付・進み具合・返信・作品との紐付け。内容は掲載同意があるときだけ
- * - data/private/requests_private.json … 掲載同意の無い内容・ニックネーム、作業メモ（この PC だけ・git 管理外）
+ * - data/requests.json（公開）        … 受付番号・日付・進み具合・返信・作品との紐付け。内容は「サイトに載せる」のときだけ
+ * - data/private/requests_private.json … サイトに載せない内容・ニックネーム、作業メモ（この PC だけ・git 管理外）
+ *
+ * 作ることにしたリクエストは、内容をサイトに載せるのが基本（フォームに掲載可否のチェックは無い）。
+ * 載せたくないものだけ、管理画面で「内容をサイトに載せる」を外す。
  *
  * 管理画面はこの2つを合わせた1件（MergedRequest）として扱い、保存時にここで振り分ける。
  */
@@ -15,7 +18,7 @@ import { ValidationError } from './works.mjs';
  * @property {string} id
  * @property {string} date
  * @property {string} status
- * @property {boolean} public   内容をサイトに載せるか（送り主の同意があるときだけ true）
+ * @property {boolean} public   内容をサイトに載せるか（基本は true）
  * @property {string} text
  * @property {string} nickname
  * @property {string} reply     作者の返信（公開）
@@ -39,8 +42,8 @@ export function parseRequestMessage(source) {
     .split('\n')
     .map((line) => line.replace(/^(\s*>)+ ?/, '').replace(/^\s+(?=【)/, ''));
 
-  // 項目（受付番号・掲載可否など）は【リクエスト内容】より前の行だけから読む。
-  // 自由記入の文章に同じ書式の行があっても、掲載の同意などを書き換えられないようにするため。
+  // 項目（受付番号・ニックネームなど）は【リクエスト内容】より前の行だけから読む。
+  // 自由記入の文章に同じ書式の行があっても、受付番号などを書き換えられないようにするため。
   const start = lines.findIndex((line) => line.startsWith('【リクエスト内容】'));
   const header = start >= 0 ? lines.slice(0, start) : lines;
   const field = (name) => {
@@ -69,10 +72,13 @@ export function parseRequestMessage(source) {
     .replace(/\n{3,}/g, '\n\n')
     .trim();
   const nickname = field('ニックネーム');
+  // 【サイト掲載】の行は、掲載可否のチェックがあった頃のメールにだけある。
+  // いまのメールには無く、無ければ載せる。昔のメールで「掲載しない」だったものは、そのまま尊重する。
+  const consent = field('サイト掲載');
 
   return {
     id,
-    publishOk: field('サイト掲載') === 'OK',
+    publishOk: consent === undefined || consent === 'OK',
     ...(nickname ? { nickname } : {}),
     text,
   };

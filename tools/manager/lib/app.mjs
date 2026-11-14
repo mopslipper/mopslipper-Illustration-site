@@ -341,7 +341,7 @@ export function createManagerApp({ root, fetchImpl, openAiBaseUrl, retryDelayMs 
       }
       const next = upsertRequest(publicList, privateMap, request, { originalId, workSlugs: works.map((w) => w.slug) });
       throwIfProblems(validateRequests(next.publicList, works));
-      // 非公開側を先に書く（途中で止まっても、公開ファイルに同意の無い内容が残らない順）
+      // 非公開側を先に書く（途中で止まっても、公開ファイルに載せない内容が残らない順）
       await store.write('privateRequests', next.privateMap);
       await store.write('requests', next.publicList);
       return { id: next.entry.id };

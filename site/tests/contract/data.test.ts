@@ -117,14 +117,14 @@ describe('requests.json 契約', () => {
     expect(broken).toEqual([]);
   });
 
-  it('掲載同意 (public: true) には本文が必要', () => {
+  it('内容を載せるリクエスト (public: true) には本文が必要', () => {
     const base = { id: 'R-7K2M', date: '2026-11-14', status: 'received' };
     expect(requestsSchema.safeParse([{ ...base, public: true }]).success).toBe(false);
     expect(requestsSchema.safeParse([{ ...base, public: true, text: 'ネコミミ' }]).success).toBe(true);
     expect(requestsSchema.safeParse([{ ...base, public: false }]).success).toBe(true);
   });
 
-  it('掲載同意の無いリクエストの内容・ニックネームは、公開されるこのファイルに書けない', () => {
+  it('内容を載せない設定のリクエストの内容・ニックネームは、公開されるこのファイルに書けない', () => {
     const base = { id: 'R-7K2M', date: '2026-11-14', status: 'received', public: false };
     expect(requestsSchema.safeParse([{ ...base, text: 'ひみつ' }]).success).toBe(false);
     expect(requestsSchema.safeParse([{ ...base, nickname: 'ないしょ' }]).success).toBe(false);

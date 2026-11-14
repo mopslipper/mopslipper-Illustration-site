@@ -13,14 +13,14 @@ const statusCounts = REQUEST_STATUSES.map((status) => ({
 ---
 
 <Layout
-  title="リクエストのゆくえ"
-  description="いただいたイラストリクエストの進み具合と、できあがった作品の一覧です。"
+  title="リクエスト対応予定"
+  description="いただいたイラストリクエストのうち、作る予定のものと進み具合、できあがった作品の一覧です。"
   activeNav="requests"
 >
   <section class="section container board">
-    <h1 class="section-title">リクエストのゆくえ</h1>
+    <h1 class="section-title">リクエスト対応予定</h1>
     <p class="section-lead">
-      いただいたリクエストの進み具合です。できあがった作品もここからたどれます。
+      いただいたリクエストのうち、作る予定のものと進み具合です。できあがった作品もここからたどれます。
     </p>
 
     <div class="mine">
@@ -60,8 +60,7 @@ const statusCounts = REQUEST_STATUSES.map((status) => ({
     </div>
 
     <p class="muted small text-center">
-      内容は「サイト掲載OK」にチェックがあったものだけ載せています。掲載の取り下げは
-      <a href={url('/contact.html')}>Contact</a> からどうぞ。
+      掲載の取り下げは <a href={url('/contact.html')}>Contact</a> からどうぞ。
     </p>
   </section>
 </Layout>

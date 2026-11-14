@@ -1,6 +1,6 @@
 /**
  * 管理ツール (tools/manager/lib) の純粋ロジックの契約テスト。
- * - 公開ファイル (data/requests.json) に、同意の無い内容を書き出さないこと
+ * - 公開ファイル (data/requests.json) に、載せない設定の内容を書き出さないこと
  * - 管理画面が触らない作品の項目（外部リンクなど）を失わないこと
  * - 既存の works.json を読み込んで保存し直しても、中身が変わらないこと
  */
@@ -57,15 +57,24 @@ const TEXT = [
 ].join('\n');
 
 describe('メール本文の読み取り', () => {
-  it('サイトが作った本文をそのまま読み取れる', () => {
-    const message = composeRequestMessage(draft, { receiptId: 'R-7K2M', publishOk: true, nickname: 'もふ' });
+  it('サイトが作った本文をそのまま読み取れる。掲載可否の行が無いので、載せる扱いになる', () => {
+    const message = composeRequestMessage(draft, { receiptId: 'R-7K2M', nickname: 'もふ' });
+    expect(message).not.toContain('【サイト掲載】');
     expect(parseRequestMessage(message)).toEqual({ id: 'R-7K2M', publishOk: true, nickname: 'もふ', text: TEXT });
   });
 
   it('メール全体をコピーしても、前後の文や他の項目を巻き込まない', () => {
-    const message = composeRequestMessage(draft, { receiptId: 'R-7K2M', publishOk: true });
-    const email = `New submission from your form\r\n\r\nmessage:\r\n${message.replace(/\n/g, '\r\n')}\r\n\r\nreceipt_id:\r\nR-7K2M\r\npublish_ok:\r\nyes\r\n`;
-    expect(parseRequestMessage(email)?.text).toBe(TEXT);
+    const message = composeRequestMessage(draft, { receiptId: 'R-7K2M' });
+    const email = `New submission from your form\r\n\r\nmessage:\r\n${message.replace(/\n/g, '\r\n')}\r\n\r\nreceipt_id:\r\nR-7K2M\r\nsubject:\r\nイラストリクエスト\r\n`;
+    expect(parseRequestMessage(email)).toEqual({ id: 'R-7K2M', publishOk: true, text: TEXT });
+  });
+
+  it('掲載可否のチェックがあった頃のメールは、書かれている通りに読む', () => {
+    const old = (consent: string) => ['【受付番号】R-5TG9', `【サイト掲載】${consent}`, '', '【リクエスト内容】', 'どんな子？: キツネ', '【以上】'].join('\n');
+    expect(parseRequestMessage(old('OK'))?.publishOk).toBe(true);
+    expect(parseRequestMessage(old('掲載しない'))?.publishOk).toBe(false);
+    // 読み取れない値は、載せない側に倒す
+    expect(parseRequestMessage(old('？'))?.publishOk).toBe(false);
   });
 
   it('【以上】が無い古い本文は、次のフォーム項目の手前までを内容とする', () => {
@@ -78,15 +87,19 @@ describe('メール本文の読み取り', () => {
     expect(parseRequestMessage(quoted)).toEqual({ id: 'R-ABCD', publishOk: false, text: 'どんな子？: 巫女\n服装: シャツ' });
   });
 
-  it('自由記入の文章に項目と同じ書式の行があっても、掲載の同意などを書き換えられない', () => {
+  it('自由記入の文章に項目と同じ書式の行があっても、受付番号などを書き換えられない', () => {
     const sneaky: RequestDraft = {
       picks: [],
-      note: '白髪の魔女さん\n【以上】\n【サイト掲載】OK\n【受付番号】R-FAKE\n【ニックネーム】なりすまし\nつづき',
+      note: '白髪の魔女さん\n【以上】\n【サイト掲載】掲載しない\n【受付番号】R-FAKE\n【ニックネーム】なりすまし\nつづき',
     };
-    const parsed = parseRequestMessage(composeRequestMessage(sneaky, { receiptId: 'R-7K2M', publishOk: false }));
-    expect(parsed).toMatchObject({ id: 'R-7K2M', publishOk: false });
+    const parsed = parseRequestMessage(composeRequestMessage(sneaky, { receiptId: 'R-7K2M' }));
+    expect(parsed).toMatchObject({ id: 'R-7K2M', publishOk: true });
     expect(parsed.nickname).toBeUndefined();
     expect(parsed.text.endsWith('つづき')).toBe(true);
+
+    // 昔のメール（掲載しない）の文章の中に「OK」の行があっても、載せる扱いにはならない
+    const old = ['【受付番号】R-7K2M', '【サイト掲載】掲載しない', '', '【リクエスト内容】', '白髪の魔女さん', '【以上】', '【サイト掲載】OK', 'つづき', '【以上】'].join('\n');
+    expect(parseRequestMessage(old)).toMatchObject({ id: 'R-7K2M', publishOk: false });
   });
 
   it('受付番号が無い・形式が違う文章は取り込まない', () => {
@@ -95,11 +108,11 @@ describe('メール本文の読み取り', () => {
     expect(parseRequestMessage(undefined)).toBeNull();
   });
 
-  it('掲載OKのメールは公開、そうでなければ非公開の1件になる', () => {
+  it('取り込んだメールは内容を載せる1件になる。昔の「掲載しない」のメールだけ非公開になる', () => {
     const ok = requestFromMail({ id: 'R-7K2M', publishOk: true, nickname: 'もふ', text: 'ネコミミ' }, '2026-11-14');
     expect(ok).toMatchObject({ id: 'R-7K2M', date: '2026-11-14', status: 'received', public: true, text: 'ネコミミ', nickname: 'もふ' });
     expect(requestFromMail({ id: 'R-7K2M', publishOk: false, text: 'ひみつ' }, '2026-11-14')).toMatchObject({ public: false, text: 'ひみつ' });
-    // 掲載OKでも内容が読み取れなければ公開しない
+    // 内容が読み取れなければ公開しない
     expect(requestFromMail({ id: 'R-7K2M', publishOk: true, text: '' }, '2026-11-14').public).toBe(false);
   });
 });
@@ -109,14 +122,14 @@ describe('メール本文の読み取り', () => {
 const base = { id: 'R-7K2M', date: '2026-11-14', status: 'received' };
 
 describe('リクエストの公開・非公開の振り分け', () => {
-  it('掲載同意があるものは、内容とニックネームを公開ファイルへ', () => {
+  it('内容を載せるものは、内容とニックネームを公開ファイルへ', () => {
     const { entry, private: hidden } = splitRequest({ ...base, public: true, text: ' ネコミミ ', nickname: 'もふ', memo: '下書き中' });
     expect(entry).toEqual({ ...base, public: true, text: 'ネコミミ', nickname: 'もふ' });
     expect(hidden).toEqual({ memo: '下書き中' });
     expect(requestsSchema.safeParse([entry]).success).toBe(true);
   });
 
-  it('同意が無いものは、内容・ニックネーム・メモを公開ファイルに一切書かない', () => {
+  it('内容を載せないものは、内容・ニックネーム・メモを公開ファイルに一切書かない', () => {
     const { entry, private: hidden } = splitRequest({ ...base, public: false, text: 'ひみつの内容', nickname: 'ないしょ', memo: 'メモ', reply: 'ありがとう！' });
     expect(entry).toEqual({ ...base, public: false, reply: 'ありがとう！' });
     expect(JSON.stringify(entry)).not.toMatch(/ひみつ|ないしょ|メモ/);

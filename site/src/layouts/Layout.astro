@@ -28,7 +28,7 @@ const navItems = [
   { label: 'Commission', href: url('/commission.html'), key: 'commission' },
   { label: 'About', href: url('/about.html'), key: 'about' },
   // 広い画面ではヘッダー右端（「リクエストする」の右）に出すので、メニュー内は狭い画面だけ
-  { label: 'リクエストのゆくえ', href: url('/requests.html'), key: 'requests', mobileOnly: true },
+  { label: 'リクエスト対応予定', href: url('/requests.html'), key: 'requests', mobileOnly: true },
 ];
 
 const footerLinks = [
@@ -100,7 +100,7 @@ const rssUrl = url('/rss.xml');
           href={url('/requests.html')}
           aria-current={activeNav === 'requests' ? 'page' : undefined}
         >
-          リクエストのゆくえ
+          リクエスト対応予定
         </a>
         <button class="nav-toggle" id="nav-toggle" aria-label="メニュー" aria-expanded="false" aria-controls="site-nav">
           ☰

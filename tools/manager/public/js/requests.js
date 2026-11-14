@@ -2,7 +2,7 @@
 import { api } from './api.js';
 import { h, setChildren, field, toast, toastError, confirmDialog, setDirtyCheck, formatDate, summarize, busy, snapshot } from './ui.js';
 
-const BLANK = { id: '', status: 'received', public: false, text: '', nickname: '', reply: '', work_slug: '', memo: '' };
+const BLANK = { id: '', status: 'received', public: true, text: '', nickname: '', reply: '', work_slug: '', memo: '' };
 
 export async function renderRequests(root, route, ctx) {
   let data = await api.get('/api/requests');
@@ -44,7 +44,7 @@ export async function renderRequests(root, route, ctx) {
     }
 
     const request = result.request;
-    const add = h('button', { class: 'btn btn-primary', type: 'button', id: 'intake-add' }, 'リクエストのゆくえに追加');
+    const add = h('button', { class: 'btn btn-primary', type: 'button', id: 'intake-add' }, 'リクエスト対応予定に追加');
     add.addEventListener('click', async () => {
       try {
         const saved = await busy(add, '追加中…', () => api.post('/api/requests', request));
@@ -63,15 +63,15 @@ export async function renderRequests(root, route, ctx) {
         'div',
         { class: 'intake-head' },
         h('strong', { class: 'receipt' }, request.id),
-        h('span', { class: `consent ${result.publishOk ? 'consent-ok' : 'consent-no'}` }, result.publishOk ? 'サイト掲載OK' : '掲載しない'),
+        result.publishOk ? null : h('span', { class: 'consent consent-no' }, '掲載しない'),
         request.nickname ? h('span', { class: 'muted' }, `${request.nickname} さん`) : null,
       ),
       h('p', { class: 'request-text' }, request.text || '（内容を読み取れませんでした）'),
       result.publishOk
         ? request.public
-          ? null
+          ? h('p', { class: 'note note-public' }, '追加すると、内容とニックネームが「リクエスト対応予定」に載ります（「公開」するまでサイトには出ません）。')
           : h('p', { class: 'note' }, '内容を読み取れなかったため、受付番号と進み具合だけを載せます。')
-        : h('p', { class: 'note' }, '「掲載しない」のリクエストです。内容はこの PC の中だけに保存し、サイトには受付番号と進み具合だけを載せます。'),
+        : h('p', { class: 'note' }, '以前のフォームで「掲載しない」として送られたリクエストです。内容はこの PC の中だけに保存し、サイトには受付番号と進み具合だけを載せます。'),
       result.duplicate
         ? h(
             'div',
@@ -211,7 +211,7 @@ export async function renderRequests(root, route, ctx) {
 
     const updatePrivacy = () => {
       privacyNote.textContent = publicInput.checked
-        ? '内容とニックネームが「リクエストのゆくえ」に表示されます。'
+        ? '内容とニックネームが「リクエスト対応予定」に表示されます。'
         : '内容とニックネームはこの PC の中だけに保存され、公開されません。サイトには受付番号と進み具合だけが載ります。';
       privacyNote.classList.toggle('note-public', publicInput.checked);
     };
@@ -231,10 +231,10 @@ export async function renderRequests(root, route, ctx) {
 
     async function save() {
       const value = read();
-      if (value.public && !original.public) {
+      if (value.public && !original.public && !isNew) {
         const ok = await confirmDialog({
           title: '内容をサイトに載せます',
-          message: '送り主から「サイト掲載OK」をもらっていますか？ 載せた内容は誰でも読めるようになります。',
+          message: 'いまは載せていない内容を、サイトに載せます。載せた内容は誰でも読めるようになります。よろしいですか？',
           okLabel: '載せる',
         });
         if (!ok) return;
@@ -254,7 +254,7 @@ export async function renderRequests(root, route, ctx) {
     async function remove() {
       const ok = await confirmDialog({
         title: `${original.id} を削除します`,
-        message: '「リクエストのゆくえ」から消え、この PC に保存した内容・メモも削除されます。元に戻せません。',
+        message: '「リクエスト対応予定」から消え、この PC に保存した内容・メモも削除されます。元に戻せません。',
         okLabel: '削除する',
         danger: true,
       });
@@ -286,10 +286,10 @@ export async function renderRequests(root, route, ctx) {
       ),
       h('div', { class: 'field' }, h('span', { class: 'field-label' }, '進み具合'), h('div', { class: 'segs', id: 'request-status' }, statusInputs)),
       field('リクエスト内容', textInput),
-      h('label', { class: 'check' }, publicInput, h('span', null, '内容をサイトに載せる', h('small', null, '（送り主が「サイト掲載OK」のときだけ）'))),
+      h('label', { class: 'check' }, publicInput, h('span', null, '内容をサイトに載せる', h('small', null, '（ふだんは入れたまま。載せたくないときだけ外します）'))),
       privacyNote,
       field('ニックネーム', nicknameInput, { optional: true }),
-      field('作者の返信', replyInput, { optional: true, hint: '「リクエストのゆくえ」に表示されます。' }),
+      field('作者の返信', replyInput, { optional: true, hint: '「リクエスト対応予定」に表示されます。' }),
       field('作業メモ', memoInput, { optional: true, hint: 'この PC の中だけに保存されます（公開されません）。' }),
       h(
         'div',
@@ -322,7 +322,7 @@ export async function renderRequests(root, route, ctx) {
       'div',
       { class: 'page-head' },
       h('h1', null, 'リクエスト'),
-      h('p', { class: 'muted' }, '届いたリクエストを取り込み、進み具合を「リクエストのゆくえ」に反映します。リクエストは自動では載りません。'),
+      h('p', { class: 'muted' }, '届いたリクエストを取り込み、進み具合を「リクエスト対応予定」に反映します。リクエストは自動では載りません。'),
     ),
     intake,
     h('div', { class: 'split' }, h('aside', { class: 'side' }, filtersEl, listEl), detailEl),
@@ -379,7 +379,7 @@ function buildImageTool(request, ctx) {
     { class: 'card tool', id: 'image-tool' },
     h('summary', null, 'X 投稿用の画像を作る'),
     h('p', { class: 'hint' }, 'リクエスト文を 1200×630 の画像にします。文章はここで書き換えられます（保存したリクエストは変わりません）。'),
-    request.public ? null : h('p', { class: 'note' }, 'このリクエストは「掲載しない」です。画像にして投稿してよいか、送り主に確認してください。'),
+    request.public ? null : h('p', { class: 'note' }, 'このリクエストは、内容をサイトに載せない設定です。画像にして投稿してよいか、確かめてから使ってください。'),
     textInput,
     canvas,
     status,

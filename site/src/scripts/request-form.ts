@@ -133,15 +133,13 @@ export function initRequestForm(): void {
     if (isDraftEmpty(draft)) return;
 
     const receiptId = createReceiptId(secureRandom);
-    const publishOk = $<HTMLInputElement>('publish-ok').checked;
     const nickname = $<HTMLInputElement>('nickname').value.trim();
     const email = $<HTMLInputElement>('email').value.trim();
 
     const body = new FormData();
     body.set('subject', 'イラストリクエスト');
     body.set('receipt_id', receiptId);
-    body.set('publish_ok', publishOk ? 'yes' : 'no');
-    body.set('message', composeRequestMessage(draft, { receiptId, publishOk, nickname }));
+    body.set('message', composeRequestMessage(draft, { receiptId, nickname }));
     if (nickname) body.set('name', nickname);
     if (email) body.set('email', email);
     if (draft.reference) {

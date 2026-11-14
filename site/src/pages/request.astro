@@ -34,13 +34,13 @@ const worksData = Object.fromEntries(
       <p class="done-title">リクエストを受け取りました！</p>
       <p>受付番号 <strong class="receipt" id="done-receipt"></strong></p>
       <p class="muted" id="done-saved">
-        この番号はこのブラウザに保存しました。作者が確認したら「リクエストのゆくえ」に載るので、また見に来てください。
+        この番号はこのブラウザに保存しました。作ることになったら「リクエスト対応予定」に載るので、また見に来てください。
       </p>
       <p class="muted" id="done-unsaved" hidden>
-        このブラウザには番号を保存できませんでした。「リクエストのゆくえ」で探せるよう、番号をメモしておいてください。
+        このブラウザには番号を保存できませんでした。「リクエスト対応予定」で探せるよう、番号をメモしておいてください。
       </p>
       <div class="row done-actions">
-        <a class="btn btn-primary" href={url('/requests.html')}>リクエストのゆくえを見る</a>
+        <a class="btn btn-primary" href={url('/requests.html')}>リクエスト対応予定を見る</a>
         <a class="btn btn-ghost" href={url('/request.html')}>もうひとつ送る</a>
         <a class="btn btn-ghost" href={url('/gallery.html')}>Gallery にもどる</a>
       </div>
@@ -117,15 +117,11 @@ const worksData = Object.fromEntries(
         <h2>こんなリクエストになります</h2>
         <p class="preview is-empty" id="request-preview" aria-live="polite">書いた内容・えらんだ内容がここに表示されます。</p>
 
-        <label class="check publish">
-          <input type="checkbox" id="publish-ok" name="publish_ok" value="yes" checked />
-          <span>
-            サイト掲載OK
-            <span class="muted small block">
-              作者が確認したあと「リクエストのゆくえ」に内容を載せます。載せたくないときは、チェックを外してください（内容は公開しません）。
-            </span>
-          </span>
-        </label>
+        <p class="publish-note small">
+          作ることにしたリクエストは、内容を
+          <a href={url('/requests.html')}>リクエスト対応予定</a>
+          に載せます（ニックネームを書いた場合は、ニックネームも）。
+        </p>
 
         <div class="form-group">
           <label for="nickname">ニックネーム <span class="optional">任意</span></label>
@@ -381,14 +377,12 @@ const worksData = Object.fromEntries(
     color: var(--text-muted);
   }
 
-  .publish {
+  .publish-note {
     margin-bottom: 1.1rem;
-    font-weight: 700;
-  }
-
-  .block {
-    display: block;
-    font-weight: 400;
+    padding: 0.55rem 0.8rem;
+    border-left: 3px solid var(--primary-soft);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    background: var(--bg-accent);
   }
 
   .request-side .form-group label {
