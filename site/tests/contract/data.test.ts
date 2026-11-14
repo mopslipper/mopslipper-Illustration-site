@@ -1,8 +1,8 @@
 /**
- * データ契約テスト（TDD Step 1: 仕様の固定）
- * - data/*.json が旧サイト互換スキーマに適合すること
- * - slug / id の一意性
- * - 参照アセットの実在
+ * データ契約テスト
+ * - data/*.json がスキーマに適合すること（works / config / commission は旧サイト互換）
+ * - slug / id の一意性、参照アセットの実在
+ * - v2 追加ファイル（requests / request_options / notes）の整合性
  * このテストは実装の都合で変更しない（仕様変更時のみ更新）。
  */
 import { describe, it, expect } from 'vitest';
@@ -12,26 +12,30 @@ import {
   worksSchema,
   configSchema,
   commissionSchema,
+  requestsSchema,
+  requestOptionsSchema,
+  notesSchema,
   isVideo,
   worksFileName,
 } from '../../src/lib/schema';
 
 const DATA_DIR = resolve(__dirname, '../../../data');
-// 正準メディアディレクトリ（works_manager GUI が書き込む場所）
+// 正準メディアディレクトリ（管理ツールが画像を保存する場所）
 const STATIC_WORKS = resolve(__dirname, '../../../static/img/works');
 
 const loadJson = (name: string) =>
   JSON.parse(readFileSync(join(DATA_DIR, name), 'utf-8'));
 
+const expectValid = (result: { success: boolean; error?: { issues: unknown } }) => {
+  if (!result.success) console.error(JSON.stringify(result.error?.issues, null, 2));
+  expect(result.success).toBe(true);
+};
+
 describe('works.json 契約', () => {
   const raw = loadJson('works.json');
 
   it('スキーマに適合する', () => {
-    const result = worksSchema.safeParse(raw);
-    if (!result.success) {
-      console.error(JSON.stringify(result.error.issues, null, 2));
-    }
-    expect(result.success).toBe(true);
+    expectValid(worksSchema.safeParse(raw));
   });
 
   it('slug が一意である', () => {
@@ -68,27 +72,99 @@ describe('works.json 契約', () => {
 
 describe('config.json 契約', () => {
   it('スキーマに適合する', () => {
-    const result = configSchema.safeParse(loadJson('config.json'));
-    if (!result.success) {
-      console.error(JSON.stringify(result.error.issues, null, 2));
-    }
-    expect(result.success).toBe(true);
+    expectValid(configSchema.safeParse(loadJson('config.json')));
   });
 
-  it('公開URLが旧サイトと同一（base_path 維持）', () => {
-    const config = configSchema.parse(loadJson('config.json'));
-    expect(config.site_url).toBe('https://mopslipper.github.io');
-    expect(config.base_path).toBe('/mopslipper-Illustration-site');
+  it('base_path は "" か "/xxx" 形式（末尾スラッシュなし）', () => {
+    const base = { ...loadJson('config.json') };
+    expect(configSchema.safeParse({ ...base, base_path: '' }).success).toBe(true);
+    expect(configSchema.safeParse({ ...base, base_path: '/my-site' }).success).toBe(true);
+    expect(configSchema.safeParse({ ...base, base_path: '/my-site/' }).success).toBe(false);
+    expect(configSchema.safeParse({ ...base, base_path: 'my-site' }).success).toBe(false);
   });
 });
 
 describe('commission.json 契約', () => {
   it('スキーマに適合する', () => {
-    const result = commissionSchema.safeParse(loadJson('commission.json'));
-    if (!result.success) {
-      console.error(JSON.stringify(result.error.issues, null, 2));
+    expectValid(commissionSchema.safeParse(loadJson('commission.json')));
+  });
+
+  it('R-18 を受け付ける記載がない（掲載は R-15 まで）', () => {
+    const commission = commissionSchema.parse(loadJson('commission.json'));
+    expect((commission.policy?.ok ?? []).filter((item) => /R-?18/i.test(item))).toEqual([]);
+  });
+});
+
+describe('requests.json 契約', () => {
+  const raw = loadJson('requests.json');
+
+  it('スキーマに適合する', () => {
+    expectValid(requestsSchema.safeParse(raw));
+  });
+
+  it('受付番号が一意である', () => {
+    const ids = raw.map((r: { id: string }) => r.id);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+
+  it('work_slug は works.json にある作品を指す', () => {
+    // 非表示の作品を指していてもよい（サイト側はリンクを出さないだけ）。書き間違いを検出するためのテスト
+    const slugs = new Set(worksSchema.parse(loadJson('works.json')).map((w) => w.slug));
+    const broken = requestsSchema
+      .parse(raw)
+      .filter((r) => r.work_slug && !slugs.has(r.work_slug))
+      .map((r) => `${r.id}: ${r.work_slug}`);
+    expect(broken).toEqual([]);
+  });
+
+  it('掲載同意 (public: true) には本文が必要', () => {
+    const base = { id: 'R-7K2M', date: '2026-11-14', status: 'received' };
+    expect(requestsSchema.safeParse([{ ...base, public: true }]).success).toBe(false);
+    expect(requestsSchema.safeParse([{ ...base, public: true, text: 'ネコミミ' }]).success).toBe(true);
+    expect(requestsSchema.safeParse([{ ...base, public: false }]).success).toBe(true);
+  });
+
+  it('掲載同意の無いリクエストの内容・ニックネームは、公開されるこのファイルに書けない', () => {
+    const base = { id: 'R-7K2M', date: '2026-11-14', status: 'received', public: false };
+    expect(requestsSchema.safeParse([{ ...base, text: 'ひみつ' }]).success).toBe(false);
+    expect(requestsSchema.safeParse([{ ...base, nickname: 'ないしょ' }]).success).toBe(false);
+    expect(requestsSchema.safeParse([{ ...base, reply: 'ありがとう', work_slug: '144' }]).success).toBe(true);
+  });
+
+  it('非公開データの置き場 (data/private/) は git の管理対象外', () => {
+    const ignore = readFileSync(resolve(DATA_DIR, '../.gitignore'), 'utf-8').split(/\r?\n/);
+    expect(ignore).toContain('data/private/');
+  });
+
+  it('未知の項目・ステータスは弾く（書き間違いの検出）', () => {
+    const base = { id: 'R-7K2M', date: '2026-11-14', public: false };
+    expect(requestsSchema.safeParse([{ ...base, status: 'finished' }]).success).toBe(false);
+    expect(requestsSchema.safeParse([{ ...base, status: 'done', workslug: '144' }]).success).toBe(false);
+  });
+});
+
+describe('request_options.json 契約', () => {
+  const raw = loadJson('request_options.json');
+
+  it('スキーマに適合する', () => {
+    expectValid(requestOptionsSchema.safeParse(raw));
+  });
+
+  it('グループ id・選択肢に重複がない', () => {
+    const options = requestOptionsSchema.parse(raw);
+    const groupIds = options.groups.map((g) => g.id);
+    expect(new Set(groupIds).size).toBe(groupIds.length);
+    for (const group of options.groups) {
+      expect(new Set(group.options).size, group.id).toBe(group.options.length);
     }
-    expect(result.success).toBe(true);
+    const variantIds = options.variants.map((v) => v.id);
+    expect(new Set(variantIds).size).toBe(variantIds.length);
+  });
+});
+
+describe('notes.json 契約', () => {
+  it('スキーマに適合する', () => {
+    expectValid(notesSchema.safeParse(loadJson('notes.json')));
   });
 });
 

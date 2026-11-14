@@ -1,0 +1,31 @@
+---
+/** ランダムな作品へ飛ぶリンク。JS が無ければギャラリーへ。1ページに1回だけ置くこと */
+import { works, url, jsonForScript } from '../lib/data';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = 'btn btn-ghost btn-sm' } = Astro.props;
+---
+
+<a class={className} href={url('/gallery.html')} data-random-work data-works-base={url('/works/')}>
+  <slot>おまかせで1枚</slot>
+</a>
+
+<script is:inline type="application/json" id="random-work-slugs" set:html={jsonForScript(works.map((w) => w.slug))} />
+
+<script>
+  const slugs: string[] = JSON.parse(document.getElementById('random-work-slugs')?.textContent ?? '[]');
+  document.querySelectorAll<HTMLAnchorElement>('[data-random-work]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      // いま見ている作品は避ける
+      const current = location.pathname.split('/').pop()?.replace(/\.html$/, '');
+      const candidates = slugs.filter((slug) => slug !== decodeURIComponent(current ?? ''));
+      if (candidates.length === 0) return;
+      e.preventDefault();
+      const slug = candidates[Math.floor(Math.random() * candidates.length)];
+      location.href = `${link.dataset.worksBase}${encodeURIComponent(slug)}.html`;
+    });
+  });
+</script>

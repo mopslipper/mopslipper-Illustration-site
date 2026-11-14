@@ -1,7 +1,6 @@
 @echo off
 chcp 65001 > nul
 rem ローカル開発サーバ (astro dev) を起動するスクリプト
-rem 開発者向けページ /dev/requests は dev サーバでのみ利用可能
 setlocal
 
 cd /d "%~dp0site"
@@ -17,23 +16,13 @@ if not exist node_modules (
     )
 )
 
-set "BASE_URL=http://localhost:4321/mopslipper-Illustration-site"
-
-netstat -ano | findstr ":4321" | findstr "LISTENING" >nul
-if not errorlevel 1 (
-    echo === ポート4321 は使用中です。既に起動しているサーバを開きます ===
-    start "" "%BASE_URL%/"
-    exit /b 0
-)
-
 echo ============================================================
 echo   mopslipper 開発サーバ
-echo   サイト        : %BASE_URL%/
-echo   リクエストメモ: %BASE_URL%/dev/requests
+echo   起動するとブラウザでサイトが開きます
 echo   終了するには Ctrl+C
 echo ============================================================
 echo.
 
-rem --open: 起動後にブラウザでサイトを開く
+rem --open: 起動後にブラウザでサイトを開く（base_path は data/config.json から自動で付く）
 call npx astro dev --port 4321 --open
 pause

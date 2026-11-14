@@ -1,13 +1,12 @@
 /**
- * マシュマロ風（匿名質問カード）画像の生成
- * - レイアウト計算（折り返し・禁則・縮小・省略）は measure 関数を注入する純粋関数でテスト可能
+ * マシュマロ風（匿名質問カード）画像の生成。X に投稿するとき、リクエスト文を画像にするためのもの。
+ * 旧サイトの開発用ページ (marshmallow-image.ts) からの移植。
+ * - レイアウト計算（折り返し・禁則・縮小・省略）は measure 関数を注入する純粋関数（テスト可能）
  * - 描画は Canvas 2D（ブラウザ専用）
  */
 
 export const IMAGE_WIDTH = 1200;
 export const IMAGE_HEIGHT = 630;
-
-export type Measure = (text: string) => number;
 
 // 行頭に置かない文字（ぶら下げ対象）
 const NO_LINE_START = new Set(
@@ -17,14 +16,14 @@ const NO_LINE_START = new Set(
 const NO_LINE_END = new Set(Array.from('（(「『【〔〈《［[｛{'));
 const MAX_HANG = 2;
 
-const isWordChar = (c: string) => /^[A-Za-z0-9'_\-]$/.test(c);
+const isWordChar = (c) => /^[A-Za-z0-9'_\-]$/.test(c);
 
-function wrapParagraph(paragraph: string, maxWidth: number, measure: Measure): string[] {
+function wrapParagraph(paragraph, maxWidth, measure) {
   const chars = Array.from(paragraph);
   if (chars.length === 0) return [''];
 
-  const lines: string[] = [];
-  let line: string[] = [];
+  const lines = [];
+  let line = [];
   let hung = 0;
 
   for (const c of chars) {
@@ -38,7 +37,7 @@ function wrapParagraph(paragraph: string, maxWidth: number, measure: Measure): s
       continue;
     }
 
-    let carry: string[] = [];
+    let carry = [];
     // 英単語の途中で改行しない（行頭からの単語なら諦めて文字単位で折る）
     if (isWordChar(c) && isWordChar(line[line.length - 1])) {
       let start = line.length - 1;
@@ -49,7 +48,7 @@ function wrapParagraph(paragraph: string, maxWidth: number, measure: Measure): s
       }
     }
     while (line.length > 1 && NO_LINE_END.has(line[line.length - 1])) {
-      carry.unshift(line.pop()!);
+      carry.unshift(line.pop());
     }
 
     lines.push(line.join('').trimEnd());
@@ -61,7 +60,7 @@ function wrapParagraph(paragraph: string, maxWidth: number, measure: Measure): s
 }
 
 /** 改行を保持しつつ maxWidth に収まるよう折り返す */
-export function wrapText(text: string, maxWidth: number, measure: Measure): string[] {
+export function wrapText(text, maxWidth, measure) {
   return text
     .replace(/\r\n?/g, '\n')
     .split('\n')
@@ -69,29 +68,20 @@ export function wrapText(text: string, maxWidth: number, measure: Measure): stri
 }
 
 /** 末尾に「…」を付けて maxWidth に収める */
-export function ellipsize(line: string, maxWidth: number, measure: Measure): string {
+export function ellipsize(line, maxWidth, measure) {
   const chars = Array.from(line);
   while (chars.length > 0 && measure(chars.join('') + '…') > maxWidth) chars.pop();
   return chars.join('').trimEnd() + '…';
 }
 
-export interface FitOptions {
-  maxWidth: number;
-  maxHeight: number;
-  maxFontSize: number;
-  minFontSize: number;
-  lineHeight: number;
-  step?: number;
-}
-
-export interface FitResult {
-  fontSize: number;
-  lines: string[];
-  truncated: boolean;
-}
-
-/** 大きいフォントから順に試し、枠に収まる最大サイズを選ぶ。最小でも溢れたら省略 */
-export function fitText(text: string, opts: FitOptions, measureAt: (fontSize: number) => Measure): FitResult {
+/**
+ * 大きいフォントから順に試し、枠に収まる最大サイズを選ぶ。最小でも溢れたら省略。
+ * @param {string} text
+ * @param {{ maxWidth: number, maxHeight: number, maxFontSize: number, minFontSize: number, lineHeight: number, step?: number }} opts
+ * @param {(fontSize: number) => (text: string) => number} measureAt
+ * @returns {{ fontSize: number, lines: string[], truncated: boolean }}
+ */
+export function fitText(text, opts, measureAt) {
   const step = opts.step ?? 2;
   const trimmed = text.trim();
   for (let size = opts.maxFontSize; size >= opts.minFontSize; size -= step) {
@@ -115,7 +105,7 @@ const FONT_FAMILY = '"Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic UI"
 const CARD = { x: 70, y: 56, w: IMAGE_WIDTH - 140, h: 460, radius: 36, paddingX: 72, paddingY: 56 };
 const LINE_HEIGHT = 1.6;
 
-function roundRectPath(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
+function roundRectPath(ctx, x, y, w, h, r) {
   ctx.beginPath();
   ctx.moveTo(x + r, y);
   ctx.arcTo(x + w, y, x + w, y + h, r);
@@ -125,7 +115,7 @@ function roundRectPath(ctx: CanvasRenderingContext2D, x: number, y: number, w: n
   ctx.closePath();
 }
 
-async function ensureFonts(text: string, siteName: string) {
+async function ensureFonts(text, siteName) {
   if (typeof document === 'undefined' || !document.fonts) return;
   // Google Fonts は unicode-range でサブセット分割されるため、実際に使う文字を指定して読み込む
   await Promise.all([
@@ -134,11 +124,12 @@ async function ensureFonts(text: string, siteName: string) {
   ]).catch(() => undefined);
 }
 
-export interface RenderOptions {
-  siteName: string;
-}
-
-export async function renderMarshmallow(canvas: HTMLCanvasElement, text: string, opts: RenderOptions): Promise<FitResult> {
+/**
+ * @param {HTMLCanvasElement} canvas
+ * @param {string} text
+ * @param {{ siteName: string }} opts
+ */
+export async function renderMarshmallow(canvas, text, opts) {
   await ensureFonts(text, opts.siteName);
 
   canvas.width = IMAGE_WIDTH;
@@ -178,7 +169,7 @@ export async function renderMarshmallow(canvas: HTMLCanvasElement, text: string,
   // 本文
   const maxWidth = CARD.w - CARD.paddingX * 2;
   const maxHeight = CARD.h - CARD.paddingY * 2;
-  const measureAt = (size: number): Measure => {
+  const measureAt = (size) => {
     ctx.font = `500 ${size}px ${FONT_FAMILY}`;
     return (s) => ctx.measureText(s).width;
   };
@@ -207,7 +198,7 @@ export async function renderMarshmallow(canvas: HTMLCanvasElement, text: string,
   return fit;
 }
 
-export function canvasToPngBlob(canvas: HTMLCanvasElement): Promise<Blob> {
+export function canvasToPngBlob(canvas) {
   return new Promise((resolve, reject) => {
     canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('PNG の生成に失敗しました'))), 'image/png');
   });

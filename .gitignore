@@ -61,4 +61,8 @@ ai_config.json
 cliantshare_source/
 static/img/cliantshare/
 
+# 管理ツールがこの PC だけに保存するデータ
+# （掲載同意の無いリクエストの内容・作業メモ・保存前のバックアップ）
+data/private/
+
 .venv/

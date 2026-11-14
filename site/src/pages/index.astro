@@ -2,12 +2,27 @@
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import WorkCard from '../components/WorkCard.astro';
-import { siteConfig, commission, works, heroImages, resolveRootImage, url } from '../lib/data';
+import RandomWork from '../components/RandomWork.astro';
+import MyRequests from '../components/MyRequests.astro';
+import RequestItem from '../components/RequestItem.astro';
+import {
+  siteConfig,
+  commission,
+  works,
+  requests,
+  notes,
+  heroImages,
+  resolveRootImage,
+  formatDate,
+  url,
+} from '../lib/data';
 
 // static/img/hero/ の画像（ファイル名順）を優先。空なら config.json の hero_image 1枚にフォールバック
 const fallbackHero = resolveRootImage(siteConfig.hero_image);
 const stripImages = heroImages.length > 0 ? heroImages : fallbackHero ? [fallbackHero] : [];
-const recentWorks = works.filter((w) => !w.nsfw).slice(0, 6);
+const recentWorks = works.slice(0, 6);
+const recentRequests = requests.slice(0, 3);
+const recentNotes = notes.slice(0, 3);
 const social = siteConfig.social_links;
 ---
 
@@ -15,9 +30,9 @@ const social = siteConfig.social_links;
   <section class="hero">
     {
       stripImages.length > 0 && (
-        <div class="hero-strip" data-count={stripImages.length}>
+        <div class="hero-strip">
           {stripImages.map((img) => (
-            <Image src={img} alt="" class="hero-strip-img" widths={[480, 800]} format="webp" />
+            <Image src={img} alt="" class="hero-strip-img" widths={[480, 800]} sizes="(max-width: 600px) 50vw, 20vw" format="webp" loading="eager" />
           ))}
         </div>
       )
@@ -26,54 +41,118 @@ const social = siteConfig.social_links;
       <h1>{siteConfig.hero_text}</h1>
       <p>{siteConfig.hero_subtext}</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href={url('/gallery.html')}>Gallery</a>
-        <a class="btn btn-outline" href={url('/contact.html')}>イラストリクエスト</a>
+        <a class="btn btn-primary" href={url('/request.html')}>リクエストする</a>
+        <a class="btn btn-outline" href={url('/gallery.html')}>Gallery を見る</a>
       </div>
     </div>
   </section>
 
-  <section class="section container">
-    <div class="commission-status">
-      {
-        commission.status.open ? (
-          <span class="badge">✓ {commission.status.message}</span>
-        ) : (
-          <span class="badge closed">● 締切中</span>
-        )
-      }
-      <a href={url('/commission.html')}>詳細を見る →</a>
-    </div>
-  </section>
+  <div class="container">
+    <form class="quick card" action={url('/request.html')} method="get">
+      <label for="quick-text">見てみたいイラスト、ひとことでどうぞ</label>
+      <div class="quick-row">
+        <input type="text" id="quick-text" name="text" maxlength="200" placeholder="例: 白髪のネコミミちゃんがピース" autocomplete="off" />
+        <button class="btn btn-primary" type="submit">つづきへ</button>
+      </div>
+      <p class="muted small">まだ送信されません。次の画面でつづきを書いたり、えらんで足したりできます。名前もメールもいりません。</p>
+    </form>
+  </div>
 
   <section class="section container">
-    <h2 class="section-title">Recent Works</h2>
+    <div class="section-head">
+      <h2>あたらしい作品</h2>
+      <a class="more" href={url('/gallery.html')}>すべて見る（{works.length}）→</a>
+    </div>
     <div class="works-grid">
       {recentWorks.map((work) => <WorkCard work={work} />)}
     </div>
-    <p class="text-center" style="margin-top:1.5rem;">
-      <a class="btn btn-outline" href={url('/gallery.html')}>すべて見る →</a>
+    <p class="text-center random">
+      <RandomWork class="btn btn-ghost">🎲 おまかせで1枚</RandomWork>
     </p>
   </section>
 
-  <section class="section container">
-    <h2 class="section-title">Links</h2>
-    <div class="links-grid">
+  <section class="section container split">
+    <div>
+      <div class="section-head">
+        <h2>リクエストのゆくえ</h2>
+        <a class="more" href={url('/requests.html')}>すべて見る →</a>
+      </div>
+      <div class="mine">
+        <MyRequests limit={3} />
+      </div>
       {
-        social.twitter && (
-          <a class="link-card" href={social.twitter} target="_blank" rel="noopener">
-            <strong>X (Twitter)</strong>
-            <span class="muted">最新作品をチェック {social.twitter_handle}</span>
-          </a>
+        recentRequests.length > 0 ? (
+          <ul class="request-list">
+            {recentRequests.map((request) => (
+              <RequestItem request={request} />
+            ))}
+          </ul>
+        ) : (
+          <div class="empty">
+            <p>いま掲載しているリクエストはありません。</p>
+            <p class="muted">最初のひとつ、送ってみませんか？</p>
+            <a class="btn btn-outline btn-sm" href={url('/request.html')}>リクエストする</a>
+          </div>
         )
       }
+    </div>
+
+    <div>
       {
-        social.pixiv && (
-          <a class="link-card" href={social.pixiv} target="_blank" rel="noopener">
-            <strong>Pixiv</strong>
-            <span class="muted">作品まとめはこちら</span>
-          </a>
+        recentNotes.length > 0 && (
+          <>
+            <div class="section-head">
+              <h2>{siteConfig.author.name} のひとこと</h2>
+            </div>
+            <ul class="notes">
+              {recentNotes.map((note) => (
+                <li>
+                  <time datetime={note.date} class="muted small">{formatDate(note.date)}</time>
+                  <p>{note.text}</p>
+                  {note.link && (
+                    <a class="small" href={note.link.startsWith('/') ? url(note.link) : note.link}>
+                      くわしく →
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </>
         )
       }
+
+      <div class="status card">
+        <p>
+          有償依頼
+          {
+            commission.status.open ? (
+              <span class="badge">{commission.status.message}</span>
+            ) : (
+              <span class="badge closed">{commission.status.message}</span>
+            )
+          }
+        </p>
+        <a href={url('/commission.html')}>Commission を見る →</a>
+      </div>
+
+      <div class="links">
+        {
+          social.twitter && (
+            <a class="link-card" href={social.twitter} target="_blank" rel="noopener">
+              <strong>X (Twitter)</strong>
+              <span class="muted small">最新作品はこちら {social.twitter_handle}</span>
+            </a>
+          )
+        }
+        {
+          social.pixiv && (
+            <a class="link-card" href={social.pixiv} target="_blank" rel="noopener">
+              <strong>Pixiv</strong>
+              <span class="muted small">作品まとめはこちら</span>
+            </a>
+          )
+        }
+      </div>
     </div>
   </section>
 </Layout>
@@ -81,9 +160,9 @@ const social = siteConfig.social_links;
 <style>
   .hero {
     position: relative;
-    min-height: 420px;
+    min-height: clamp(380px, 56vh, 520px);
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     overflow: hidden;
     text-align: center;
@@ -101,7 +180,7 @@ const social = siteConfig.social_links;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 30%;
+    object-position: center 25%;
   }
 
   /* モバイルでは帯が細切れになるため先頭2枚のみ表示 */
@@ -117,76 +196,167 @@ const social = siteConfig.social_links;
     inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(14, 13, 18, 0.35),
-      rgba(14, 13, 18, 0.92) 95%
+      rgba(15, 13, 20, 0.1) 0%,
+      rgba(15, 13, 20, 0.45) 35%,
+      rgba(15, 13, 20, 0.88) 68%,
+      rgba(15, 13, 20, 1) 100%
     );
   }
 
   .hero-content {
     position: relative;
     z-index: 1;
-    padding: 3rem 1rem;
+    padding: 2rem 1rem 4.2rem;
   }
 
   .hero-content h1 {
-    font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+    font-size: clamp(1.25rem, 6.4vw, 2.7rem);
     color: #fff;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
-    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7);
+    margin-bottom: 0.4rem;
   }
 
   .hero-content p {
     font-weight: 500;
     color: var(--text);
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
-    margin-bottom: 1.4rem;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+    margin-bottom: 1.3rem;
   }
 
   .hero-actions {
     display: flex;
-    gap: 0.8rem;
+    gap: 0.7rem;
     justify-content: center;
     flex-wrap: wrap;
   }
 
-  .commission-status {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    background: var(--bg-card);
-    border-radius: var(--radius);
+  .hero-actions .btn-outline {
+    background: rgba(15, 13, 20, 0.55);
+    backdrop-filter: blur(4px);
+  }
+
+  .quick {
+    position: relative;
+    z-index: 2;
+    max-width: 640px;
+    margin: -2rem auto 0;
     box-shadow: var(--shadow-soft);
-    padding: 1rem;
+  }
+
+  .quick label {
+    display: block;
+    font-family: var(--font-display);
     font-weight: 700;
+    margin-bottom: 0.5rem;
   }
 
-  .badge.closed {
-    background: var(--text-muted);
+  .quick-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
   }
 
-  .links-grid {
+  .quick-row input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .quick-row .btn {
+    flex-shrink: 0;
+    padding-inline: 1.2rem;
+  }
+
+  .random {
+    margin-top: 1.4rem;
+  }
+
+  .split {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1rem;
-    max-width: 700px;
-    margin: 0 auto;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  @media (max-width: 800px) {
+    .split {
+      grid-template-columns: 1fr;
+      gap: 2.2rem;
+    }
+  }
+
+  .mine :global(.my-requests) {
+    margin-bottom: 0.8rem;
+  }
+
+  .request-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .empty {
+    text-align: center;
+    padding: 1.8rem 1rem;
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius);
+  }
+
+  .empty .btn {
+    margin-top: 0.8rem;
+  }
+
+  .notes {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .notes li {
+    border-left: 2px solid var(--border-strong);
+    padding-left: 0.9rem;
+  }
+
+  .notes p {
+    font-size: 0.95rem;
+    white-space: pre-line;
+  }
+
+  .status {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem 1rem;
+    padding: 0.8rem 1rem;
+    font-size: 0.92rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .status .badge {
+    margin-left: 0.5rem;
+  }
+
+  .links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 0.7rem;
   }
 
   .link-card {
     background: var(--bg-card);
+    border: 1px solid var(--border);
     border-radius: var(--radius);
-    box-shadow: var(--shadow-soft);
-    padding: 1.2rem;
+    padding: 0.8rem 1rem;
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
-    transition: transform 0.2s, box-shadow 0.2s;
+    color: var(--text);
+    transition: border-color 0.2s;
   }
 
   .link-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-hover);
+    border-color: var(--primary-soft);
     text-decoration: none;
   }
 </style>

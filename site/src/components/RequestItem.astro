@@ -1,0 +1,136 @@
+---
+/** リクエストのゆくえの1件。掲載同意 (public) が無いものは本文・名前を出さない */
+import { Image } from 'astro:assets';
+import { siteConfig, getWork, resolveWorkThumb, url, formatDate, THUMB_SIZE, type RequestEntry } from '../lib/data';
+import { STATUS_LABELS } from '../lib/request';
+
+interface Props {
+  request: RequestEntry;
+}
+
+const { request } = Astro.props;
+const work = request.work_slug ? getWork(request.work_slug) : undefined;
+const thumb = work ? resolveWorkThumb(work) : undefined;
+const text = request.public ? request.text?.trim() : undefined;
+const nickname = request.public ? request.nickname?.trim() : undefined;
+---
+
+<li class="request-item" data-request-id={request.id}>
+  <div class="head">
+    <span class="status-pill" data-status={request.status}>{STATUS_LABELS[request.status]}</span>
+    <span class="id">{request.id}</span>
+    <time datetime={request.date} class="muted">{formatDate(request.date)}</time>
+    <span class="mine" data-mine-mark hidden>あなたのリクエスト</span>
+  </div>
+
+  {text ? <p class="text">{text}</p> : <p class="text muted">（内容は非公開のリクエストです）</p>}
+  {nickname && <p class="muted small">— {nickname} さん</p>}
+  {
+    request.reply && (
+      <p class="reply">
+        <span class="reply-from">{siteConfig.author.name}</span>
+        {request.reply}
+      </p>
+    )
+  }
+  {
+    work && (
+      <a class="work" href={url(`/works/${work.slug}.html`)}>
+        {thumb && <Image src={thumb} alt="" width={THUMB_SIZE} height={THUMB_SIZE} format="webp" loading="lazy" />}
+        <span>
+          <span class="muted small">できあがった作品</span>
+          <strong>{work.title} →</strong>
+        </span>
+      </a>
+    )
+  }
+</li>
+
+<style>
+  .request-item {
+    list-style: none;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.95rem 1.1rem;
+  }
+
+  .request-item:global(.is-mine) {
+    border-color: var(--primary-soft);
+  }
+
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.3rem 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .id {
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .mine {
+    color: var(--primary-deep);
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+
+  .text {
+    margin-top: 0.5rem;
+    white-space: pre-line;
+    font-size: 0.95rem;
+  }
+
+  .reply {
+    margin-top: 0.6rem;
+    padding: 0.55rem 0.8rem;
+    border-radius: var(--radius-sm);
+    background: var(--bg-accent);
+    font-size: 0.9rem;
+    white-space: pre-line;
+  }
+
+  .reply-from {
+    display: block;
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: var(--primary-deep);
+  }
+
+  .work {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 0.7rem;
+    padding: 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    transition: border-color 0.2s;
+  }
+
+  .work:hover {
+    border-color: var(--primary-soft);
+    text-decoration: none;
+  }
+
+  .work :global(img) {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  .work span span,
+  .work strong {
+    display: block;
+  }
+
+  .work strong {
+    color: var(--primary-deep);
+  }
+</style>

@@ -1,96 +1,73 @@
 ---
 import { Image } from 'astro:assets';
-import { isVideo, resolveWorkImage, getCounts, url, type Work } from '../lib/data';
+import { isVideo, resolveWorkThumb, getCounts, url, tagUrl, THUMB_SIZE, type Work } from '../lib/data';
+import { GENERIC_TAGS } from '../lib/related';
 
 interface Props {
   work: Work;
-  /** ライトボックス用グループ名（指定時は a が PhotoSwipe 対象になる） */
-  galleryGroup?: string;
-  widths?: number[];
+  /** 画像とタイトルだけの小さなカード（似た作品など） */
+  compact?: boolean;
 }
 
-const { work, galleryGroup } = Astro.props;
+const { work, compact = false } = Astro.props;
 
 const video = isVideo(work.image_path);
-const thumb = resolveWorkImage(work.thumbnail) ?? resolveWorkImage(work.image_path);
-const full = video ? undefined : resolveWorkImage(work.image_path);
+const thumb = resolveWorkThumb(work);
 const detailUrl = url(`/works/${work.slug}.html`);
 const stats = getCounts(work.id);
+const cardTags = work.tags.filter((tag) => !GENERIC_TAGS.includes(tag)).slice(0, 3);
 ---
 
 <article
-  class="work-card"
+  class:list={['work-card', { compact }]}
   data-slug={work.slug}
   data-title={work.title}
-  data-nsfw={String(work.nsfw)}
   data-sensitive={String(work.sensitive ?? false)}
   data-category={work.category}
   data-tags={work.tags.join(',')}
-  data-date={work.date}
   data-description={work.description}
-  data-is-video={String(video)}
 >
-  <a
-    class="thumb"
-    href={detailUrl}
-    data-pswp-group={galleryGroup}
-    data-pswp-src={video ? undefined : full?.src}
-    data-pswp-width={full?.width}
-    data-pswp-height={full?.height}
-  >
+  <a class="thumb" href={detailUrl} tabindex="-1" aria-hidden="true">
     {
       thumb ? (
-        <Image
-          src={thumb}
-          alt={work.title}
-          width={480}
-          height={480}
-          format="webp"
-          loading="lazy"
-        />
+        <Image src={thumb} alt="" width={THUMB_SIZE} height={THUMB_SIZE} format="webp" loading="lazy" />
       ) : (
-        <img src={url('/placeholder.svg')} alt={work.title} loading="lazy" />
+        <span class="thumb-missing">No image</span>
       )
     }
-    {video && <div class="video-indicator">▶</div>}
-    {
-      work.nsfw && (
-        <div class="nsfw-overlay">
-          <span class="nsfw-label">R-18</span>
-          <p>クリックして表示</p>
-        </div>
-      )
-    }
+    {work.sensitive && <span class="r15-mark">R-15</span>}
+    {video && <span class="video-indicator">▶</span>}
   </a>
   <div class="info">
     <a href={detailUrl} class="title">{work.title}</a>
-    <div class="meta">
-      <span class="tag">{work.category}</span>
-      {work.tags.slice(0, 3).map((tag) => <span class="tag">{tag}</span>)}
-    </div>
-    <div class="card-stats">
-      <span title="閲覧数">👁 {stats.views.toLocaleString('ja-JP')}</span>
-      <span title="いいね">♥ {stats.likes.toLocaleString('ja-JP')}</span>
-    </div>
+    {
+      !compact && (
+        <>
+          <div class="meta">
+            {cardTags.map((tag) => (
+              <a class="tag" href={tagUrl(tag)} data-tag-link={tag}>
+                {tag}
+              </a>
+            ))}
+          </div>
+          <div class="card-stats">
+            <span title="閲覧数">👁 {stats.views.toLocaleString('ja-JP')}</span>
+            <span title="いいね">♥ {stats.likes.toLocaleString('ja-JP')}</span>
+          </div>
+        </>
+      )
+    }
   </div>
 </article>
 
 <style>
-  .title {
-    display: block;
-    color: var(--text);
-  }
-
-  .title:hover {
-    color: var(--primary-deep);
-    text-decoration: none;
-  }
-
-  .card-stats {
+  .thumb-missing {
     display: flex;
-    gap: 0.7rem;
-    margin-top: 0.35rem;
-    font-size: 0.8rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
     color: var(--text-muted);
+    font-size: 0.85rem;
   }
 </style>

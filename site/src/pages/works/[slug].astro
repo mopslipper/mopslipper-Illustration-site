@@ -1,14 +1,20 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
+import WorkCard from '../../components/WorkCard.astro';
 import {
   works,
   siteConfig,
+  requestOptions,
   isVideo,
   resolveWorkImage,
   resolveVideoUrl,
+  getRequestsForWork,
+  formatDate,
+  tagUrl,
   url,
 } from '../../lib/data';
+import { relatedWorks } from '../../lib/related';
 
 export function getStaticPaths() {
   return works.map((work, i) => ({
@@ -33,29 +39,30 @@ const allImages = mainImage ? [mainImage, ...additionalImages] : additionalImage
 
 const links = work.external_links ?? {};
 const linkEntries = Object.entries(links).filter(([, v]) => v);
+const linkLabels: Record<string, string> = { twitter: 'X (Twitter)', pixiv: 'Pixiv', booth: 'BOOTH', fanbox: 'FANBOX' };
 
-const requestQuery = new URLSearchParams({
-  from: 'work',
-  slug: work.slug,
-  title: work.title,
-  request_tags: (work.request_tags ?? work.tags).join(','),
-}).toString();
+const related = relatedWorks(work, works, 6);
+const origins = getRequestsForWork(work.slug);
 
-// OGP: NSFW / センシティブ（X非表示指定）はプレースホルダー（旧サイト互換）
-const hideOgThumb = work.nsfw || (work.sensitive && work.hide_sensitive_thumbnail_on_x);
+const requestUrl = (variant?: string) =>
+  `${url('/request.html')}?${new URLSearchParams({ from: 'work', slug: work.slug, ...(variant ? { variant } : {}) })}`;
+
+// OGP: R-15 で X 非表示指定のものはプレースホルダー（旧サイト互換）
+const hideOgThumb = work.sensitive && work.hide_sensitive_thumbnail_on_x;
 const ogSource = hideOgThumb
   ? '/static/img/works/placeholder.svg'
   : (work.x_thumbnail ?? work.thumbnail);
 const ogImg = resolveWorkImage(ogSource);
 const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
-<Layout title={work.title} description={work.description} ogImage={ogImage} activeNav="gallery">
+<Layout title={work.title} description={work.description || undefined} ogImage={ogImage} activeNav="gallery">
   <section class="section container detail">
-    <nav class="detail-nav">
+    <nav class="detail-nav" aria-label="作品の前後">
       {
         prevWork ? (
-          <a href={url(`/works/${prevWork.slug}.html`)}>← 前の作品</a>
+          <a href={url(`/works/${prevWork.slug}.html`)} rel="prev">← 前の作品</a>
         ) : (
           <span class="muted">← 前の作品</span>
         )
@@ -63,7 +70,7 @@ const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
       <a href={url('/gallery.html')}>Gallery</a>
       {
         nextWork ? (
-          <a href={url(`/works/${nextWork.slug}.html`)}>次の作品 →</a>
+          <a href={url(`/works/${nextWork.slug}.html`)} rel="next">次の作品 →</a>
         ) : (
           <span class="muted">次の作品 →</span>
         )
@@ -71,7 +78,7 @@ const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
     </nav>
 
     <div class="detail-grid">
-      <div class="media-column" id="media-column" data-nsfw={String(work.nsfw)}>
+      <div class="media-column">
         {
           video ? (
             <video src={videoUrl} controls loop playsinline class="main-media"></video>
@@ -89,10 +96,9 @@ const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
                     >
                       <Image
                         src={img}
-                        alt={`${work.title} (${i + 1})`}
+                        alt={allImages.length > 1 ? `${work.title} (${i + 1}/${allImages.length})` : work.title}
                         width={900}
                         format="webp"
-                        class={work.nsfw ? 'nsfw-blur' : ''}
                         loading={i === 0 ? 'eager' : 'lazy'}
                       />
                     </a>
@@ -107,7 +113,12 @@ const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
                 {allImages.length > 1 && (
                   <div class="thumb-strip" id="thumb-strip">
                     {allImages.map((img, i) => (
-                      <button class={`thumb-btn${i === 0 ? ' active' : ''}`} data-index={i}>
+                      <button
+                        class={`thumb-btn${i === 0 ? ' active' : ''}`}
+                        data-index={i}
+                        type="button"
+                        aria-label={`${i + 1}枚目を表示`}
+                      >
                         <Image src={img} alt="" width={100} height={100} format="webp" />
                       </button>
                     ))}
@@ -117,59 +128,66 @@ const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
             )
           )
         }
-        {
-          work.nsfw && (
-            <div class="nsfw-warning" id="nsfw-warning">
-              <p>⚠️ R-18作品</p>
-              <p class="muted">この作品には成人向けの表現が含まれます。</p>
-              <button class="btn btn-primary" id="nsfw-show">18歳以上です（表示する）</button>
-            </div>
-          )
-        }
       </div>
 
       <div class="info-column">
         <h1>{work.title}</h1>
         <div class="meta-row">
-          <span class="badge">{work.category}</span>
-          <span class="muted">{work.date}</span>
-          {work.nsfw && <span class="badge" style="background:var(--danger)">R-18</span>}
+          <time datetime={work.date} class="muted">{formatDate(work.date)}</time>
+          <span class="tag">{work.category}</span>
+          {work.sensitive && <span class="r15-mark">R-15</span>}
         </div>
         <div class="meta-row stats-row">
           <span class="stat" title="閲覧数">👁 <span id="view-count">–</span></span>
-          <button class="like-btn" id="like-btn" data-work-id={work.id} title="いいね">
+          <button class="like-btn" id="like-btn" data-work-id={work.id} title="いいね" type="button">
             ♥ <span id="like-count">–</span>
           </button>
         </div>
-        <div class="meta-row">
-          {work.tags.map((tag) => <span class="tag">{tag}</span>)}
-        </div>
+
         {work.description && <p class="description">{work.description}</p>}
 
+        <div class="meta-row">
+          {work.tags.map((tag) => <a class="tag" href={tagUrl(tag)}>{tag}</a>)}
+        </div>
+
+        {
+          origins.length > 0 && (
+            <div class="origin">
+              <p class="origin-title">リクエストから生まれた作品です</p>
+              {origins.map((r) => (
+                <p class="origin-item">
+                  <span class="origin-id">{r.id}</span>
+                  {r.public && r.text ? <span class="origin-text">{r.text}</span> : <span class="muted">（内容は非公開）</span>}
+                </p>
+              ))}
+              <a href={url('/requests.html')}>リクエストのゆくえを見る →</a>
+            </div>
+          )
+        }
+
         <div class="request-box">
-          <p>この作品の雰囲気をベースに、気軽にリクエストできます。</p>
-          {
-            (work.request_tags ?? []).length > 0 && (
-              <div class="meta-row">
-                {(work.request_tags ?? []).map((tag) => (
-                  <span class="tag">{tag}</span>
-                ))}
-              </div>
-            )
-          }
-          <a class="btn btn-primary" href={`${url('/contact.html')}?${requestQuery}`}>
-            この作品をベースに依頼する
-          </a>
+          <h2>この子の別バージョンをリクエスト</h2>
+          <p class="muted small">ボタンをえらんで、次の画面で自由に書き足せます。名前もメールもいりません。</p>
+          <div class="variants">
+            {
+              requestOptions.variants.map((variant) => (
+                <a class="btn btn-outline btn-sm" href={requestUrl(variant.id)}>
+                  {variant.label}
+                </a>
+              ))
+            }
+          </div>
+          <a class="more-link" href={requestUrl()}>くわしく書いてリクエストする →</a>
         </div>
 
         {
           linkEntries.length > 0 && (
-            <div class="external-links">
-              <h3>External Links</h3>
+            <div class="sub-block">
+              <h2>ほかの場所でも見る</h2>
               <div class="meta-row">
                 {linkEntries.map(([name, href]) => (
-                  <a class="btn btn-outline btn-sm" href={href} target="_blank" rel="noopener">
-                    {name}
+                  <a class="btn btn-ghost btn-sm" href={href} target="_blank" rel="noopener">
+                    {linkLabels[name] ?? name}
                   </a>
                 ))}
               </div>
@@ -177,20 +195,35 @@ const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
           )
         }
 
-        <div class="share">
-          <h3>Share</h3>
+        <div class="sub-block">
+          <h2>シェア</h2>
           <div class="meta-row">
             <a
-              class="btn btn-outline btn-sm"
-              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`${work.title} - ${siteConfig.site_name}`)}&url=${encodeURIComponent(new URL(Astro.url.pathname, Astro.site).href)}`}
+              class="btn btn-ghost btn-sm"
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`${work.title} - ${siteConfig.site_name}`)}&url=${encodeURIComponent(pageUrl)}`}
               target="_blank"
               rel="noopener">X でシェア</a
             >
-            <button class="btn btn-outline btn-sm" id="copy-url">URLコピー</button>
+            <button class="btn btn-ghost btn-sm" id="copy-url" type="button">URLコピー</button>
           </div>
         </div>
       </div>
     </div>
+
+    {
+      related.length > 0 && (
+        <div class="related">
+          <div class="section-head">
+            <h2>似た雰囲気の作品</h2>
+          </div>
+          <div class="works-grid cols-6">
+            {related.map((item) => (
+              <WorkCard work={item} compact />
+            ))}
+          </div>
+        </div>
+      )
+    }
   </section>
 </Layout>
 
@@ -228,17 +261,15 @@ const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
   document.getElementById('img-prev')?.addEventListener('click', () => step(-1));
   document.getElementById('img-next')?.addEventListener('click', () => step(1));
 
-  // NSFW 表示解除
-  document.getElementById('nsfw-show')?.addEventListener('click', () => {
-    document.querySelectorAll('.nsfw-blur').forEach((el) => el.classList.remove('nsfw-blur'));
-    const warning = document.getElementById('nsfw-warning');
-    if (warning) warning.remove();
-  });
-
   // URLコピー
   document.getElementById('copy-url')?.addEventListener('click', async (e) => {
-    await navigator.clipboard.writeText(location.href);
-    (e.currentTarget as HTMLButtonElement).textContent = '✓ コピーしました';
+    const button = e.currentTarget as HTMLButtonElement;
+    try {
+      await navigator.clipboard.writeText(location.href);
+      button.textContent = '✓ コピーしました';
+    } catch {
+      button.textContent = 'コピーできませんでした';
+    }
   });
 </script>
 
@@ -246,75 +277,40 @@ const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
   .detail-nav {
     display: flex;
     justify-content: space-between;
+    gap: 1rem;
     margin-bottom: 1.2rem;
-    font-weight: 700;
-  }
-
-  .stats-row {
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .stat {
-    color: var(--text-muted);
+    font-weight: 500;
     font-size: 0.92rem;
-  }
-
-  .like-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    padding: 0.3rem 0.85rem;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-pill);
-    background: var(--bg-card);
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 0.92rem;
-    color: var(--text-muted);
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-
-  .like-btn:hover:not(:disabled) {
-    border-color: var(--primary);
-    color: var(--primary);
-  }
-
-  .like-btn.liked {
-    background: linear-gradient(135deg, var(--primary), var(--accent-2));
-    border-color: transparent;
-    color: #fff;
-    opacity: 1;
-  }
-
-  .like-btn:disabled:not(.liked) {
-    opacity: 0.5;
-    cursor: wait;
-  }
-
-  .like-btn.liked:disabled {
-    cursor: default;
   }
 
   .detail-grid {
     display: grid;
     grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr);
-    gap: 1.6rem;
+    gap: 1.8rem;
     align-items: start;
+  }
+
+  .info-column {
+    position: sticky;
+    top: 5rem;
   }
 
   @media (max-width: 800px) {
     .detail-grid {
       grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+
+    .info-column {
+      position: static;
     }
   }
 
   .media-column {
     position: relative;
     background: var(--bg-card);
+    border: 1px solid var(--border);
     border-radius: var(--radius);
-    box-shadow: var(--shadow-soft);
     overflow: hidden;
   }
 
@@ -338,7 +334,7 @@ const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
     justify-content: center;
     border: none;
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(15, 13, 20, 0.55);
     color: #fff;
     font-size: 1.7rem;
     line-height: 1;
@@ -348,7 +344,7 @@ const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
   }
 
   .img-nav:hover {
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(15, 13, 20, 0.8);
   }
 
   .img-nav-prev {
@@ -373,25 +369,6 @@ const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
     height: auto;
   }
 
-  :global(.nsfw-blur) {
-    filter: blur(28px);
-  }
-
-  .nsfw-warning {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    background: rgba(14, 13, 18, 0.6);
-    text-align: center;
-    padding: 1rem;
-    font-weight: 700;
-    z-index: 3;
-  }
-
   .thumb-strip {
     display: flex;
     gap: 0.5rem;
@@ -402,14 +379,21 @@ const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
 
   .thumb-btn {
     flex-shrink: 0;
-    width: 72px;
-    height: 72px;
+    width: 68px;
+    height: 68px;
     padding: 0;
-    border: 3px solid transparent;
+    border: 2px solid transparent;
     border-radius: var(--radius-sm);
     overflow: hidden;
     cursor: pointer;
     background: none;
+    opacity: 0.65;
+    transition: opacity 0.15s, border-color 0.15s;
+  }
+
+  .thumb-btn:hover,
+  .thumb-btn.active {
+    opacity: 1;
   }
 
   .thumb-btn.active {
@@ -423,9 +407,8 @@ const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
   }
 
   .info-column h1 {
-    color: var(--primary-deep);
-    font-size: 1.5rem;
-    margin-bottom: 0.6rem;
+    font-size: clamp(1.35rem, 3vw, 1.65rem);
+    margin-bottom: 0.5rem;
   }
 
   .meta-row {
@@ -433,40 +416,128 @@ const ogImage = ogImg ? new URL(ogImg.src, Astro.site).href : undefined;
     flex-wrap: wrap;
     align-items: center;
     gap: 0.4rem;
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.8rem;
   }
 
-  .description {
-    margin: 1rem 0;
-    font-size: 0.95rem;
+  .meta-row time {
+    font-size: 0.9rem;
+    margin-right: 0.2rem;
   }
 
-  .request-box {
-    background: var(--bg-accent);
-    border-radius: var(--radius);
-    padding: 1.1rem;
-    margin: 1.2rem 0;
+  .stats-row {
+    gap: 0.8rem;
+  }
+
+  .stat {
+    color: var(--text-muted);
     font-size: 0.92rem;
   }
 
-  .request-box .btn {
-    margin-top: 0.6rem;
+  .like-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.9rem;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-pill);
+    background: var(--bg-card);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
   }
 
-  .external-links,
-  .share {
+  .like-btn:hover:not(:disabled) {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  .like-btn.liked {
+    background: var(--gradient);
+    border-color: transparent;
+    color: var(--ink-on-primary);
+    opacity: 1;
+  }
+
+  .like-btn:disabled:not(.liked) {
+    opacity: 0.5;
+    cursor: wait;
+  }
+
+  .like-btn.liked:disabled {
+    cursor: default;
+  }
+
+  .description {
+    margin: 0.4rem 0 1rem;
+    font-size: 0.95rem;
+  }
+
+  .origin {
+    border-left: 3px solid var(--primary);
+    background: var(--bg-accent);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 0.8rem 1rem;
+    margin: 1.2rem 0;
+    font-size: 0.9rem;
+  }
+
+  .origin-title {
+    font-weight: 700;
+    color: var(--primary-deep);
+  }
+
+  .origin-item {
+    margin: 0.3rem 0;
+  }
+
+  .origin-id {
+    font-weight: 700;
+    margin-right: 0.5rem;
+  }
+
+  .origin-text {
+    white-space: pre-line;
+  }
+
+  .request-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.1rem;
+    margin: 1.3rem 0;
+  }
+
+  .request-box h2 {
+    font-size: 1.02rem;
+    color: var(--primary-deep);
+  }
+
+  .variants {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin: 0.7rem 0;
+  }
+
+  .more-link {
+    font-size: 0.88rem;
+  }
+
+  .sub-block {
     margin-top: 1.2rem;
   }
 
-  .external-links h3,
-  .share h3 {
-    font-size: 0.95rem;
-    color: var(--primary-deep);
-    margin-bottom: 0.4rem;
+  .sub-block h2 {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    margin-bottom: 0.45rem;
   }
 
-  .btn-sm {
-    padding: 0.35rem 1rem;
-    font-size: 0.85rem;
+  .related {
+    margin-top: 3rem;
   }
 </style>

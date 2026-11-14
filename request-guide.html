@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>リクエストが届いたら — 対応ガイド</title>
+    <style>
+      :root {
+        --primary: #ff69b4;
+        --accent-2: #c58bff;
+        --primary-soft: #d67fc4;
+        --primary-deep: #f6a0d6;
+        --primary-pale: #2e1f33;
+        --bg: #0f0d14;
+        --bg-card: #17141e;
+        --bg-accent: #1d1926;
+        --text: #ece9f2;
+        --text-muted: #a8a1b8;
+        --border: #2b2636;
+        --border-strong: #3d3550;
+        --ink-on-primary: #1d0f1c;
+        --ok: #7fd6a6;
+        --warn: #f2c56b;
+        --danger: #ff6b81;
+        --gradient: linear-gradient(135deg, var(--primary), var(--accent-2));
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 1rem;
+      }
+
+      body {
+        font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.85;
+        font-size: 16px;
+        overflow-wrap: anywhere;
+      }
+
+      main {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 2.5rem 1.2rem 5rem;
+      }
+
+      h1 {
+        font-size: clamp(1.6rem, 5vw, 2.1rem);
+        line-height: 1.4;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+        line-height: 1.4;
+        margin: 3rem 0 1rem;
+        padding-bottom: 0.4rem;
+        border-bottom: 1px solid var(--border-strong);
+      }
+
+      h3 {
+        font-size: 1.08rem;
+        line-height: 1.5;
+      }
+
+      p + p,
+      p + ul,
+      ul + p,
+      p + ol,
+      ol + p {
+        margin-top: 0.6rem;
+      }
+
+      ul,
+      ol {
+        padding-left: 1.4rem;
+      }
+
+      li + li {
+        margin-top: 0.3rem;
+      }
+
+      a {
+        color: var(--primary-deep);
+      }
+
+      .lead {
+        color: var(--text-muted);
+        margin-top: 0.6rem;
+      }
+
+      .muted {
+        color: var(--text-muted);
+      }
+
+      .small {
+        font-size: 0.88rem;
+      }
+
+      /* 画面のボタン・項目名 */
+      .ui {
+        display: inline-block;
+        border: 1px solid var(--primary-soft);
+        border-radius: 999px;
+        padding: 0 0.6rem;
+        font-size: 0.88em;
+        font-weight: 700;
+        line-height: 1.6;
+        color: var(--primary-deep);
+        white-space: nowrap;
+      }
+
+      .tab {
+        display: inline-block;
+        border-radius: 999px;
+        padding: 0 0.65rem;
+        font-size: 0.88em;
+        font-weight: 700;
+        line-height: 1.6;
+        background: var(--primary-pale);
+        color: var(--primary-deep);
+        white-space: nowrap;
+      }
+
+      code {
+        font-family: Consolas, 'Courier New', monospace;
+        font-size: 0.9em;
+        background: var(--bg-accent);
+        border-radius: 5px;
+        padding: 0.05rem 0.35rem;
+      }
+
+      /* 全体の流れ */
+      .flow {
+        list-style: none;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 0.5rem;
+        margin-top: 1.2rem;
+      }
+
+      .flow li {
+        margin: 0;
+      }
+
+      .flow a {
+        display: block;
+        height: 100%;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 0.7rem 0.5rem;
+        text-align: center;
+        text-decoration: none;
+        color: var(--text);
+        font-size: 0.85rem;
+        font-weight: 700;
+        line-height: 1.5;
+      }
+
+      .flow a:hover {
+        border-color: var(--primary-soft);
+      }
+
+      .flow .num {
+        display: block;
+        width: 1.7rem;
+        height: 1.7rem;
+        margin: 0 auto 0.35rem;
+        border-radius: 50%;
+        background: var(--gradient);
+        color: var(--ink-on-primary);
+        line-height: 1.7rem;
+      }
+
+      @media (max-width: 700px) {
+        .flow {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
+      /* 手順 */
+      .step {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.2rem 1.3rem;
+        margin-top: 1rem;
+      }
+
+      .step-head {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        margin-bottom: 0.7rem;
+      }
+
+      .step-head .num {
+        flex-shrink: 0;
+        width: 2.1rem;
+        height: 2.1rem;
+        border-radius: 50%;
+        background: var(--gradient);
+        color: var(--ink-on-primary);
+        font-weight: 700;
+        text-align: center;
+        line-height: 2.1rem;
+      }
+
+      .step-head h3 {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .step-head .where {
+        color: var(--text-muted);
+        font-size: 0.82rem;
+        white-space: nowrap;
+      }
+
+      /* 狭い画面では、場所の表示を見出しの下に回す */
+      @media (max-width: 600px) {
+        .step-head {
+          flex-wrap: wrap;
+          row-gap: 0;
+        }
+
+        .step-head .where {
+          flex-basis: 100%;
+          margin-left: 2.8rem;
+          white-space: normal;
+        }
+      }
+
+      .box {
+        background: var(--bg-accent);
+        border-left: 3px solid var(--warn);
+        border-radius: 0 8px 8px 0;
+        padding: 0.6rem 0.9rem;
+        font-size: 0.92rem;
+        margin-top: 0.9rem;
+      }
+
+      .box.ok {
+        border-left-color: var(--ok);
+      }
+
+      .box.danger {
+        border-left-color: var(--danger);
+      }
+
+      .box strong {
+        color: var(--text);
+      }
+
+      pre {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.8rem 1rem;
+        margin-top: 0.8rem;
+        font-family: Consolas, 'Courier New', monospace;
+        font-size: 0.86rem;
+        line-height: 1.7;
+        white-space: pre-wrap;
+      }
+
+      pre .c {
+        color: var(--text-muted);
+      }
+
+      /* 表 */
+      .table-wrap {
+        overflow-x: auto;
+        margin-top: 1rem;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.92rem;
+        min-width: 520px;
+      }
+
+      th,
+      td {
+        border: 1px solid var(--border);
+        padding: 0.55rem 0.7rem;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background: var(--bg-accent);
+        white-space: nowrap;
+      }
+
+      td code {
+        white-space: nowrap;
+      }
+
+      .pill {
+        display: inline-block;
+        border: 1px solid var(--border-strong);
+        border-radius: 999px;
+        padding: 0 0.65rem;
+        font-size: 0.82rem;
+        font-weight: 700;
+        line-height: 1.7;
+        color: var(--text-muted);
+        white-space: nowrap;
+      }
+
+      .pill.pending {
+        border-style: dashed;
+      }
+
+      .pill.received {
+        border-color: var(--accent-2);
+        color: var(--accent-2);
+      }
+
+      .pill.making {
+        border-color: var(--warn);
+        color: var(--warn);
+      }
+
+      .pill.done {
+        border-color: transparent;
+        background: var(--gradient);
+        color: var(--ink-on-primary);
+      }
+
+      .yes {
+        color: var(--ok);
+        font-weight: 700;
+      }
+
+      .no {
+        color: var(--danger);
+        font-weight: 700;
+      }
+
+      /* こんなときは */
+      details {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 0.8rem 1.1rem;
+        margin-top: 0.6rem;
+      }
+
+      summary {
+        cursor: pointer;
+        font-weight: 700;
+      }
+
+      details[open] summary {
+        margin-bottom: 0.6rem;
+      }
+
+      /* チェックリスト */
+      .checklist {
+        list-style: none;
+        padding: 0;
+        margin-top: 1rem;
+      }
+
+      .checklist li {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        margin-top: 0.4rem;
+      }
+
+      .checklist label {
+        display: flex;
+        gap: 0.7rem;
+        align-items: flex-start;
+        padding: 0.6rem 0.9rem;
+        cursor: pointer;
+      }
+
+      .checklist input {
+        width: 1.1rem;
+        height: 1.1rem;
+        margin-top: 0.4rem;
+        flex-shrink: 0;
+        accent-color: var(--primary);
+      }
+
+      .checklist input:checked + span {
+        color: var(--text-muted);
+        text-decoration: line-through;
+      }
+
+      footer {
+        margin-top: 3.5rem;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+      }
+
+      /* 印刷するときは白い紙に */
+      @media print {
+        :root {
+          --bg: #fff;
+          --bg-card: #fff;
+          --bg-accent: #f6f2f7;
+          --text: #222;
+          --text-muted: #555;
+          --border: #ccc;
+          --border-strong: #aaa;
+          --primary-deep: #b0237a;
+          --primary-pale: #fbe3f1;
+          --accent-2: #7a3fc0;
+          --warn: #9a6b00;
+          --ok: #1c7a4a;
+        }
+
+        body {
+          font-size: 11pt;
+        }
+
+        details {
+          break-inside: avoid;
+        }
+
+        .step {
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>リクエストが届いたら</h1>
+      <p class="lead">
+        メールでリクエストが届いてから、作品を公開して「リクエストのゆくえ」が「できました」になるまでの手順です。<br />
+        画面のボタンや項目の名前は <span class="ui">こう</span>、管理ツールのタブは <span class="tab">こう</span> 書いています。
+      </p>
+
+      <ol class="flow" aria-label="全体の流れ">
+        <li><a href="#step1"><span class="num">1</span>メールを<br />確認する</a></li>
+        <li><a href="#step2"><span class="num">2</span>管理ツールに<br />取り込む</a></li>
+        <li><a href="#step3"><span class="num">3</span>作るか<br />決めて公開</a></li>
+        <li><a href="#step4"><span class="num">4</span>イラストを<br />作る</a></li>
+        <li><a href="#step5"><span class="num">5</span>作品を<br />登録する</a></li>
+        <li><a href="#step6"><span class="num">6</span>公開して<br />お知らせ</a></li>
+      </ol>
+
+      <div class="box ok">
+        <strong>大事なこと：リクエストは自動ではサイトに載りません。</strong>
+        管理ツールで追加して、公開したものだけが「リクエストのゆくえ」に出ます。それまで、送ってくれた人の画面には「受け取りました」と表示されています。
+      </div>
+
+      <h2 id="prepare">使うもの</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ファイル</th>
+              <th>何をするもの</th>
+              <th>開く画面</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>manager.bat</code></td>
+              <td><strong>管理ツール</strong>。リクエスト・作品の編集と、公開をします。</td>
+              <td><code>http://127.0.0.1:4400/</code></td>
+            </tr>
+            <tr>
+              <td><code>run.bat</code></td>
+              <td><strong>確認用のサイト</strong>。保存した内容が、公開前にどう見えるか確かめます（使わなくても進められます）。</td>
+              <td><code>http://localhost:4321/…</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small muted">どちらもダブルクリックするとブラウザが開きます。終わるときは、黒いウィンドウを閉じます。</p>
+
+      <h2 id="steps">手順</h2>
+
+      <section class="step" id="step1">
+        <div class="step-head">
+          <span class="num">1</span>
+          <h3>メールを確認する</h3>
+          <span class="where">メール</span>
+        </div>
+        <p>リクエストは Formspree からメールで届きます。本文はこの形です。</p>
+        <pre>【受付番号】R-7K2M
+【サイト掲載】OK              <span class="c">← 「掲載しない」のこともあります</span>
+【ニックネーム】もふ           <span class="c">← 書いてあるときだけ</span>
+【ベースの作品】からっぽシャツの白髪狐っ娘 (144)   <span class="c">← 作品ページから来たときだけ</span>
+
+【リクエスト内容】
+ぶかぶかのパーカーで、ねむそうな顔でぬいぐるみを抱っこ
+
+どんな子？: ネコミミ            <span class="c">← えらんだもの（あるときだけ）</span>
+ポーズ: ピース
+【以上】</pre>
+        <ul>
+          <li><strong>【サイト掲載】</strong>が「OK」なら、内容を「リクエストのゆくえ」に載せられます。「掲載しない」なら、載るのは受付番号と進み具合だけです。</li>
+          <li>メールアドレスが書かれていたら、返信がほしい人です。返信はメールで直接送ります（管理ツールからは送れません）。</li>
+          <li>R-18（成人向け）など、受けられない内容でないかをここで見ておきます。</li>
+        </ul>
+      </section>
+
+      <section class="step" id="step2">
+        <div class="step-head">
+          <span class="num">2</span>
+          <h3>管理ツールに取り込む</h3>
+          <span class="where">管理ツール ＞ リクエスト</span>
+        </div>
+        <ol>
+          <li>メールの本文をコピーします（【受付番号】から【以上】まで。メール全体でも大丈夫です）。</li>
+          <li><code>manager.bat</code> を開き、<span class="tab">リクエスト</span> の <span class="ui">メールから取り込む</span> に貼り付けて、<span class="ui">読み取る</span> を押します。</li>
+          <li>受付番号・掲載の可否・内容が表示されるので、合っていれば <span class="ui">リクエストのゆくえに追加</span> を押します。</li>
+        </ol>
+        <p>追加すると、進み具合は <span class="pill received">受付</span> になり、そのリクエストの編集画面が開きます。</p>
+        <div class="box">
+          「掲載しない」のリクエストは、内容とニックネームを<strong>この PC の中だけ</strong>に保存します。サイトにも GitHub にも出ません。一覧には「非公開」の印が付きます。
+        </div>
+      </section>
+
+      <section class="step" id="step3">
+        <div class="step-head">
+          <span class="num">3</span>
+          <h3>作るか決めて、いったん公開する</h3>
+          <span class="where">管理ツール ＞ リクエスト → 公開</span>
+        </div>
+        <ol>
+          <li>
+            <span class="ui">進み具合</span> を選びます。作るなら <span class="pill making">制作中</span>、受けられないなら <span class="pill">見送り</span>、まだ決めていなければ
+            <span class="pill received">受付</span> のままにします。
+          </li>
+          <li>ひとこと伝えたいときは <span class="ui">作者の返信</span> に書きます（「いま作ってます！」など。サイトに表示されます）。</li>
+          <li>自分用の覚え書きは <span class="ui">作業メモ</span> に書きます（公開されません）。</li>
+          <li><span class="ui">保存する</span> を押します。</li>
+          <li><span class="tab">公開</span> を開いて <span class="ui">公開する</span> を押します。数分後、サイトに反映されます。</li>
+        </ol>
+        <div class="box ok">
+          ここで一度公開しておくと、送ってくれた人が次に来たとき、自分のリクエストが「受付」や「制作中」になっているのが見えます。<strong>これが「また来たくなる」きっかけになります。</strong>
+        </div>
+        <div class="box">
+          ボタンが <span class="ui">変更を記録する</span> になっているときは、公開先（リモート）がまだ設定されていません。その間は記録するだけで、サイトには反映されません。
+        </div>
+      </section>
+
+      <section class="step" id="step4">
+        <div class="step-head">
+          <span class="num">4</span>
+          <h3>イラストを作る</h3>
+          <span class="where">いつもの制作</span>
+        </div>
+        <p>いつもどおり制作します。背景は基本的に白背景、という案内をリクエストページに出しています。</p>
+        <ul>
+          <li>途中で伝えたいことができたら、<span class="ui">作者の返信</span> を書き換えて、保存 → 公開します。</li>
+          <li>作るのをやめるときは、進み具合を <span class="pill">見送り</span> にして、保存 → 公開します。</li>
+        </ul>
+      </section>
+
+      <section class="step" id="step5">
+        <div class="step-head">
+          <span class="num">5</span>
+          <h3>できあがった作品を登録する</h3>
+          <span class="where">管理ツール ＞ リクエスト → 作品</span>
+        </div>
+        <ol>
+          <li><span class="tab">リクエスト</span> でそのリクエストを開き、<span class="ui">このリクエストから作品を登録</span> を押します。作品の登録画面に移ります。</li>
+          <li>点線の枠に、画像をドラッグ＆ドロップします（クリックして選んでも大丈夫です）。サムネイルは自動で作られます。</li>
+          <li><span class="ui">タイトル</span> を入力し、<span class="ui">タグ</span> を付けます。タグは、下に並ぶ候補を押すだけでも追加できます。</li>
+          <li><span class="ui">説明</span> を書きます。<span class="ui">AI で説明文を生成</span> も使えます（API キーの設定が必要です）。</li>
+          <li>ちょっとセクシーな作品は <span class="ui">R-15</span> にチェックを入れます。</li>
+          <li><span class="ui">登録する</span> を押します。</li>
+        </ol>
+        <div class="box ok">
+          保存すると、リクエストの進み具合が自動で <span class="pill done">できました</span> になり、サイトで作品とリクエストが相互にリンクされます。作品ページには「リクエストから生まれた作品です」と表示されます。
+        </div>
+        <p class="small muted">複数枚の作品は、<span class="ui">追加画像・サムネイル・X カード</span> を開いて追加画像を登録します。</p>
+      </section>
+
+      <section class="step" id="step6">
+        <div class="step-head">
+          <span class="num">6</span>
+          <h3>公開して、お知らせする</h3>
+          <span class="where">管理ツール ＞ 公開 → X</span>
+        </div>
+        <ol>
+          <li><span class="tab">公開</span> を開いて <span class="ui">公開する</span> を押します。公開の前に、データに問題がないか自動で確かめます。</li>
+          <li>数分後、サイトに作品が並び、「リクエストのゆくえ」が「できました」になります。</li>
+          <li>X に投稿します。リクエスト文を画像にして添えたいときは、<span class="tab">リクエスト</span> でそのリクエストを開き、<span class="ui">X 投稿用の画像を作る</span> → <span class="ui">PNG を保存</span> を使います。</li>
+          <li>トップページでも知らせたいときは、<span class="tab">サイト</span> の <span class="ui">ひとこと</span> に書いて、保存 → 公開します。</li>
+        </ol>
+        <div class="box">
+          「掲載しない」のリクエスト文を X に載せるのは、サイトに載せるのと同じことです。画像にして投稿する前に、送ってくれた人に確認してください。
+        </div>
+      </section>
+
+      <h2 id="status">進み具合の使い分け</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>進み具合</th>
+              <th>いつ使う</th>
+              <th>送ってくれた人に見えるもの</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="pill pending">受け取りました</span></td>
+              <td>（選べません）まだ管理ツールで追加・公開していない間の表示です。</td>
+              <td>自分の画面の「あなたのリクエスト」にだけ出ます。一覧には出ません。</td>
+            </tr>
+            <tr>
+              <td><span class="pill received">受付</span></td>
+              <td>取り込んだ直後。読んだけれど、作るかはまだ決めていないとき。</td>
+              <td rowspan="4">「リクエストのゆくえ」の一覧と、自分の画面の「あなたのリクエスト」の両方に出ます。「できました」には作品へのリンクが付きます。</td>
+            </tr>
+            <tr>
+              <td><span class="pill making">制作中</span></td>
+              <td>作ると決めたとき。</td>
+            </tr>
+            <tr>
+              <td><span class="pill done">できました</span></td>
+              <td>作品を登録したとき（手順 5 で自動で変わります）。</td>
+            </tr>
+            <tr>
+              <td><span class="pill">見送り</span></td>
+              <td>受けられない内容のとき、作るのをやめたとき。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="privacy">公開されるもの・されないもの</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th>サイトに出る？</th>
+              <th>補足</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>受付番号・日付・進み具合</td>
+              <td><span class="yes">出る</span></td>
+              <td>「掲載しない」のリクエストでも出ます。</td>
+            </tr>
+            <tr>
+              <td>作者の返信・できあがった作品</td>
+              <td><span class="yes">出る</span></td>
+              <td>書いたとき・紐付けたときだけ。</td>
+            </tr>
+            <tr>
+              <td>リクエスト内容・ニックネーム</td>
+              <td><span class="yes">出る</span> / <span class="no">出ない</span></td>
+              <td><span class="ui">内容をサイトに載せる</span> にチェックがあるときだけ出ます。チェックがなければ「（内容は非公開のリクエストです）」と表示されます。</td>
+            </tr>
+            <tr>
+              <td>作業メモ</td>
+              <td><span class="no">出ない</span></td>
+              <td>この PC の中だけに保存されます。</td>
+            </tr>
+            <tr>
+              <td>メールアドレス</td>
+              <td><span class="no">出ない</span></td>
+              <td>管理ツールには取り込みません。メールにだけ残ります。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small muted">
+        <span class="ui">内容をサイトに載せる</span> は、メールが【サイト掲載】OK のときだけ、取り込み時に自動でチェックが入ります。あとから自分でチェックを入れるときは、送ってくれた人の同意があるかを確認する画面が出ます。
+      </p>
+
+      <h2 id="cases">こんなときは</h2>
+
+      <details>
+        <summary>受けられない内容だった（R-18 など）</summary>
+        <p>取り込んだうえで、進み具合を <span class="pill">見送り</span> にして、保存 → 公開します。理由を伝えたいときは <span class="ui">作者の返信</span> に書きます。</p>
+        <p>一覧に載せたくないときは、取り込まずにそのままにしておくこともできます。その場合、送ってくれた人の画面は「受け取りました」のままになります。</p>
+      </details>
+
+      <details>
+        <summary>X の DM など、メール以外でリクエストをもらった</summary>
+        <p><span class="tab">リクエスト</span> の <span class="ui">手入力で追加（X の DM など）</span> を押して、内容を入力します。受付番号は、空欄のままなら自動で付きます。</p>
+        <p>内容をサイトに載せてよいか聞けていないときは、<span class="ui">内容をサイトに載せる</span> のチェックを外したままにします。</p>
+      </details>
+
+      <details>
+        <summary>「読み取る」を押しても読み取れない</summary>
+        <p>貼り付けた文章に【受付番号】R-XXXX の行が入っているか確かめてください。入っているのに読み取れないときは、<span class="ui">手入力で追加</span> を使い、<span class="ui">受付番号</span> にメールの番号を入力すれば、同じように扱えます（番号が同じなら、送ってくれた人の画面にも進み具合が出ます）。</p>
+      </details>
+
+      <details>
+        <summary>「この受付番号はすでに登録されています」と出た</summary>
+        <p>同じメールを取り込み済みです。<span class="ui">開く</span> を押すと、そのリクエストの編集画面が開きます。</p>
+      </details>
+
+      <details>
+        <summary>掲載を取り下げてほしいと連絡が来た</summary>
+        <p>そのリクエストを開き、<span class="ui">内容をサイトに載せる</span> のチェックを外して、保存 → 公開します。内容とニックネームがサイトから消え、受付番号と進み具合だけが残ります。</p>
+        <p>番号ごと消したいときは <span class="ui">削除</span> を押して、公開します。</p>
+        <p class="small muted">一度公開した内容は、サイトからは消えますが、GitHub の過去の履歴には残ります。</p>
+      </details>
+
+      <details>
+        <summary>ひとつの作品が、複数のリクエストに応えている</summary>
+        <p><span class="tab">作品</span> でその作品を開き、<span class="ui">元になったリクエスト</span> の一覧から、もうひとつのリクエストを選んで保存します。選んだリクエストも「できました」になります。</p>
+      </details>
+
+      <details>
+        <summary>過去にリクエストから作った作品も、一覧に載せたい</summary>
+        <p><span class="ui">手入力で追加</span> でリクエストを作り、<span class="ui">できあがった作品</span> でその作品を選びます。進み具合は自動で「できました」になります。</p>
+      </details>
+
+      <details>
+        <summary>公開する前に、どう見えるか確かめたい</summary>
+        <p><code>run.bat</code> を開いておくと、管理ツールの右上に <span class="ui">サイトを確認 ↗</span> が出ます。保存した内容は、確認用のサイトにすぐ反映されます。</p>
+      </details>
+
+      <details>
+        <summary>「公開する」を押したら、問題があると表示された</summary>
+        <p>どのファイルの何が問題かが一覧で出ます（画像が見つからない、など）。直してから、もう一度 <span class="ui">公開する</span> を押します。問題がある間は公開されないので、サイトが壊れることはありません。</p>
+      </details>
+
+      <details>
+        <summary>まちがえて保存・削除してしまった</summary>
+        <p><code>data/private/backup/</code> に、保存する直前のデータが残っています（各ファイル直近 20 回分。<code>requests.20261114-190512-123.json</code> のように日時が付いています）。戻したい時点のファイルを <code>data/</code> にコピーし、名前を <code>requests.json</code> のように元の名前に直すと、元に戻せます。</p>
+      </details>
+
+      <details>
+        <summary>PC を替える</summary>
+        <p><code>data/private/</code> フォルダは、この PC にしかありません（「掲載しない」リクエストの内容と、作業メモが入っています）。フォルダごと新しい PC にコピーしてください。</p>
+      </details>
+
+      <h2 id="checklist">1件ごとのチェックリスト</h2>
+      <p class="small muted">チェックはこのページを閉じると消えます。印刷して使うこともできます。</p>
+      <ul class="checklist">
+        <li>
+          <label><input type="checkbox" /><span>メールを読んだ（受けられる内容か・返信がほしい人か）</span></label>
+        </li>
+        <li>
+          <label><input type="checkbox" /><span>管理ツールに貼り付けて、「リクエストのゆくえに追加」した</span></label>
+        </li>
+        <li>
+          <label><input type="checkbox" /><span>進み具合を「制作中」（または「見送り」）にして保存した</span></label>
+        </li>
+        <li>
+          <label><input type="checkbox" /><span>いったん公開した（送ってくれた人に進み具合が見える）</span></label>
+        </li>
+        <li>
+          <label><input type="checkbox" /><span>イラストを作った</span></label>
+        </li>
+        <li>
+          <label><input type="checkbox" /><span>「このリクエストから作品を登録」で、作品を登録した</span></label>
+        </li>
+        <li>
+          <label><input type="checkbox" /><span>公開した（「できました」になり、作品とリンクされる）</span></label>
+        </li>
+        <li>
+          <label><input type="checkbox" /><span>X に投稿した／返信がほしい人にメールした</span></label>
+        </li>
+      </ul>
+
+      <footer>
+        <p>管理ツールのほかの機能（作品の編集・サイトの設定など）は <code>README.md</code> にまとめています。</p>
+      </footer>
+    </main>
+  </body>
+</html>

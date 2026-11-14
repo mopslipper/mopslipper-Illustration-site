@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+import MyRequests from '../components/MyRequests.astro';
+import RequestItem from '../components/RequestItem.astro';
+import { requests, url } from '../lib/data';
+import { REQUEST_STATUSES, STATUS_LABELS } from '../lib/request';
+
+const statusCounts = REQUEST_STATUSES.map((status) => ({
+  status,
+  label: STATUS_LABELS[status],
+  count: requests.filter((r) => r.status === status).length,
+})).filter(({ count }) => count > 0);
+---
+
+<Layout
+  title="リクエストのゆくえ"
+  description="いただいたイラストリクエストの進み具合と、できあがった作品の一覧です。"
+  activeNav="requests"
+>
+  <section class="section container board">
+    <h1 class="section-title">リクエストのゆくえ</h1>
+    <p class="section-lead">
+      いただいたリクエストの進み具合です。できあがった作品もここからたどれます。
+    </p>
+
+    <div class="mine">
+      <MyRequests />
+    </div>
+
+    {
+      requests.length > 0 ? (
+        <>
+          <p class="summary">
+            {statusCounts.map(({ status, label, count }) => (
+              <span>
+                <span class="status-pill" data-status={status}>
+                  {label}
+                </span>
+                {count} 件
+              </span>
+            ))}
+          </p>
+          <ul class="request-list">
+            {requests.map((request) => (
+              <RequestItem request={request} />
+            ))}
+          </ul>
+        </>
+      ) : (
+        <div class="empty">
+          <p>いま掲載しているリクエストはありません。</p>
+          <p class="muted">最初のひとつ、送ってみませんか？</p>
+        </div>
+      )
+    }
+
+    <div class="cta">
+      <p>見てみたいイラストがあれば、気軽にどうぞ。自由に書いても、えらぶだけでも送れます。</p>
+      <a class="btn btn-primary" href={url('/request.html')}>リクエストする</a>
+    </div>
+
+    <p class="muted small text-center">
+      内容は「サイト掲載OK」にチェックがあったものだけ載せています。掲載の取り下げは
+      <a href={url('/contact.html')}>Contact</a> からどうぞ。
+    </p>
+  </section>
+</Layout>
+
+<style>
+  .board {
+    max-width: 760px;
+  }
+
+  .mine :global(.my-requests) {
+    margin-bottom: 1.4rem;
+  }
+
+  .summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.2rem;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .summary .status-pill {
+    margin-right: 0.4rem;
+  }
+
+  .request-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .empty {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius);
+  }
+
+  .cta {
+    text-align: center;
+    margin: 2.2rem 0 1.5rem;
+  }
+
+  .cta p {
+    margin-bottom: 0.8rem;
+  }
+</style>

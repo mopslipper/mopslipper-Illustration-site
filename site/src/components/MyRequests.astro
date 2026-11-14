@@ -1,0 +1,79 @@
+---
+/**
+ * 「あなたのリクエスト」表示枠。中身は scripts/my-requests.ts がブラウザ側で埋める。
+ * 1ページに1回だけ置くこと（進み具合の JSON を id で埋め込むため）。
+ */
+import { getRequestBoard, jsonForScript } from '../lib/data';
+
+interface Props {
+  /** 表示する件数の上限（省略時は全件） */
+  limit?: number;
+}
+
+const { limit } = Astro.props;
+---
+
+<aside class="my-requests" data-my-requests data-limit={limit} hidden aria-label="あなたのリクエスト">
+  <h3>あなたのリクエスト</h3>
+  <ul></ul>
+  <p class="muted note">
+    受付番号はこのブラウザにだけ保存されています。「受け取りました」のリクエストは、作者が確認したあと一覧に載ります。
+  </p>
+</aside>
+
+<script is:inline type="application/json" id="request-board-data" set:html={jsonForScript(getRequestBoard())} />
+
+<script>
+  import { renderMyRequests } from '../scripts/my-requests';
+  renderMyRequests();
+</script>
+
+<style>
+  .my-requests {
+    background: var(--bg-accent);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--primary);
+    border-radius: var(--radius);
+    padding: 0.9rem 1.1rem;
+  }
+
+  h3 {
+    font-size: 0.95rem;
+    color: var(--primary-deep);
+    margin-bottom: 0.45rem;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  ul :global(.my-request) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.3rem 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  ul :global(.my-request-id) {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+  }
+
+  ul :global(.my-request-summary) {
+    color: var(--text-muted);
+  }
+
+  ul :global(.my-request-link) {
+    font-weight: 700;
+  }
+
+  .note {
+    font-size: 0.76rem;
+    margin-top: 0.5rem;
+  }
+</style>

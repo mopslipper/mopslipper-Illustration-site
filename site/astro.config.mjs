@@ -1,25 +1,19 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { readFileSync } from 'node:fs';
 
-// 開発者向けページ（`npm run dev` のときだけルート登録。本番ビルドには出力されない）
-/** @type {import('astro').AstroIntegration} */
-const devOnlyPages = {
-  name: 'dev-only-pages',
-  hooks: {
-    'astro:config:setup': ({ command, injectRoute }) => {
-      if (command !== 'dev') return;
-      injectRoute({ pattern: '/dev/requests', entrypoint: './src/dev/requests.astro' });
-    },
-  },
-};
+// 公開先は data/config.json の site_url / base_path が唯一の設定元。
+// 一時的に変えたいときは環境変数 SITE_URL / BASE_PATH で上書きできる。
+const config = JSON.parse(
+  readFileSync(new URL('../data/config.json', import.meta.url), 'utf-8').replace(/^\uFEFF/, ''),
+);
+const site = process.env.SITE_URL ?? config.site_url;
+const base = (process.env.BASE_PATH ?? config.base_path ?? '').replace(/\/$/, '') || '/';
 
-// 公開URL: https://mopslipper.github.io/mopslipper-Illustration-site/
-// dev/preview でも base が適用される（本番URL構造をローカルで再現）
 export default defineConfig({
-  site: 'https://mopslipper.github.io',
-  base: '/mopslipper-Illustration-site',
+  site,
+  base,
   trailingSlash: 'ignore',
-  integrations: [devOnlyPages],
   build: {
     format: 'file',
   },

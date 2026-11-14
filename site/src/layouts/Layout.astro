@@ -18,7 +18,7 @@ const {
 
 const pageTitle = title ? `${title} - ${siteConfig.site_title}` : siteConfig.site_title;
 
-// og:image: ページ指定が無ければ共通OGP画像 (static/img/ogp.png) にフォールバック
+// og:image: ページ指定が無ければ共通OGP画像 (static/img/ogp.*) にフォールバック
 const resolvedOgImage = ogImage ?? (defaultOgImage ? new URL(defaultOgImage.src, Astro.site).href : undefined);
 const isDefaultOg = !ogImage && !!defaultOgImage;
 
@@ -27,17 +27,20 @@ const navItems = [
   { label: 'Gallery', href: url('/gallery.html'), key: 'gallery' },
   { label: 'Commission', href: url('/commission.html'), key: 'commission' },
   { label: 'About', href: url('/about.html'), key: 'about' },
-  { label: 'Contact', href: url('/contact.html'), key: 'contact' },
-  { label: 'Cliant Share', href: url('/cliantshare.html'), key: 'cliantshare' },
-  {
-    label: 'Slide Puzzle',
-    href: 'https://mopslipper.github.io/7-girl-slide-puzzle/',
-    key: 'slidepuzzle',
-    external: true,
-  },
+  // 広い画面ではヘッダー右端（「リクエストする」の右）に出すので、メニュー内は狭い画面だけ
+  { label: 'リクエストのゆくえ', href: url('/requests.html'), key: 'requests', mobileOnly: true },
+];
+
+const footerLinks = [
+  { label: 'リクエストする', href: url('/request.html') },
+  { label: 'Contact', href: url('/contact.html') },
+  { label: 'Cliant Share', href: url('/cliantshare.html') },
+  { label: 'Privacy Policy', href: url('/privacy.html') },
+  { label: 'RSS', href: url('/rss.xml') },
 ];
 
 const social = siteConfig.social_links;
+const rssUrl = url('/rss.xml');
 ---
 
 <!doctype html>
@@ -49,6 +52,7 @@ const social = siteConfig.social_links;
     <meta name="description" content={description} />
     <meta name="keywords" content={siteConfig.meta_keywords} />
     <meta name="author" content={siteConfig.author.name} />
+    <meta name="theme-color" content="#0f0d14" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
@@ -59,29 +63,29 @@ const social = siteConfig.social_links;
     {isDefaultOg && defaultOgImage && <meta property="og:image:height" content={String(defaultOgImage.height)} />}
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title={siteConfig.site_title} href={rssUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap"
     />
   </head>
   <body>
+    <a class="skip-link" href="#main">本文へスキップ</a>
+
     <header class="site-header">
       <div class="inner">
-        <a class="brand" href={url('/')}
-          >{siteConfig.site_name}</a
-        >
-        <button class="nav-toggle" id="nav-toggle" aria-label="メニュー">☰</button>
-        <nav class="site-nav" id="site-nav">
+        <a class="brand" href={url('/')}>{siteConfig.site_name}</a>
+        <nav class="site-nav" id="site-nav" aria-label="メインメニュー">
           <ul>
             {
               navItems.map((item) => (
-                <li>
+                <li class={item.mobileOnly ? 'nav-mobile-only' : undefined}>
                   <a
                     href={item.href}
                     class={item.key === activeNav ? 'active' : ''}
-                    {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}
+                    aria-current={item.key === activeNav ? 'page' : undefined}
                   >
                     {item.label}
                   </a>
@@ -90,38 +94,56 @@ const social = siteConfig.social_links;
             }
           </ul>
         </nav>
+        <a class="btn btn-primary btn-sm header-cta" href={url('/request.html')}>リクエストする</a>
+        <a
+          class:list={['btn', 'btn-outline', 'btn-sm', 'header-board', { active: activeNav === 'requests' }]}
+          href={url('/requests.html')}
+          aria-current={activeNav === 'requests' ? 'page' : undefined}
+        >
+          リクエストのゆくえ
+        </a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="メニュー" aria-expanded="false" aria-controls="site-nav">
+          ☰
+        </button>
       </div>
     </header>
 
-    <main>
+    <main id="main">
       <slot />
     </main>
 
     <footer class="site-footer">
-      <div class="social">
-        {social.twitter && <a href={social.twitter} target="_blank" rel="noopener">X (Twitter)</a>}
-        {social.pixiv && <a href={social.pixiv} target="_blank" rel="noopener">Pixiv</a>}
+      <div class="inner">
+        <div>
+          <p class="footer-brand">{siteConfig.site_name}</p>
+          <p>{siteConfig.footer_text}</p>
+          <p class="row" style="margin-top:0.5rem;">
+            {social.twitter && <a href={social.twitter} target="_blank" rel="noopener">X (Twitter)</a>}
+            {social.pixiv && <a href={social.pixiv} target="_blank" rel="noopener">Pixiv</a>}
+          </p>
+        </div>
+        <ul class="footer-links">
+          {footerLinks.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+        </ul>
+        <p class="copyright">
+          &copy; {siteConfig.copyright_year} {siteConfig.author.name}. All Rights Reserved.
+        </p>
       </div>
-      <p>{siteConfig.footer_text}</p>
-      <p>&copy; {siteConfig.copyright_year} {siteConfig.author.name}. All Rights Reserved.</p>
-      <p>
-        <a href={url('/privacy.html')}>Privacy Policy</a> | <a href={url('/contact.html')}>Contact</a>
-      </p>
     </footer>
 
     {
       siteConfig.nsfw_warning && (
-        <div class="modal-backdrop" id="nsfw-gate" hidden>
-          <div class="modal" role="dialog" aria-modal="true" aria-labelledby="nsfw-gate-title">
-            <h2 id="nsfw-gate-title">⚠️ 年齢確認</h2>
+        <div class="modal-backdrop" id="age-gate" hidden>
+          <div class="modal" role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
+            <h2 id="age-gate-title">年齢確認</h2>
             <p>{siteConfig.nsfw_text}</p>
             <p>あなたは15歳以上ですか？</p>
-            <p class="muted">※ どちらを選んでもサイトの閲覧は可能です</p>
+            <p class="muted small">※ どちらを選んでもサイトの閲覧は可能です</p>
             <div class="actions">
-              <button class="btn btn-primary" id="nsfw-yes">
+              <button class="btn btn-primary" id="age-yes" type="button">
                 はい（15歳以上）
               </button>
-              <button class="btn btn-outline" id="nsfw-no">
+              <button class="btn btn-outline" id="age-no" type="button">
                 いいえ（15歳未満）
               </button>
             </div>
@@ -134,21 +156,36 @@ const social = siteConfig.social_links;
       // モバイルナビ
       const toggle = document.getElementById('nav-toggle');
       const nav = document.getElementById('site-nav');
-      toggle?.addEventListener('click', () => nav?.classList.toggle('open'));
+      toggle?.addEventListener('click', () => {
+        const open = nav?.classList.toggle('open') ?? false;
+        toggle.setAttribute('aria-expanded', String(open));
+      });
 
-      // NSFW 年齢確認ゲート（初回のみ表示）
-      const gate = document.getElementById('nsfw-gate');
+      // 年齢確認（初回のみ）。R-15 の作品があることを知らせる案内で、
+      // 回答は記録するだけ。どちらを選んでも表示内容は変えない。
+      const gate = document.getElementById('age-gate');
       const KEY = 'mopslipper_age_confirmed_v1';
-      if (gate && !localStorage.getItem(KEY)) {
-        gate.hidden = false;
-      }
-      const close = (isAdult: boolean) => {
-        localStorage.setItem(KEY, isAdult ? 'adult' : 'minor');
-        if (gate) gate.hidden = true;
-        document.dispatchEvent(new CustomEvent('agegate:changed'));
+      const read = () => {
+        try {
+          return localStorage.getItem(KEY);
+        } catch {
+          return 'unavailable'; // 保存できない環境では毎回出さない
+        }
       };
-      document.getElementById('nsfw-yes')?.addEventListener('click', () => close(true));
-      document.getElementById('nsfw-no')?.addEventListener('click', () => close(false));
+      if (gate && !read()) {
+        gate.hidden = false;
+        document.getElementById('age-yes')?.focus();
+      }
+      const close = (answer: 'adult' | 'minor') => {
+        try {
+          localStorage.setItem(KEY, answer);
+        } catch {
+          /* 保存できなくても閲覧は続けられる */
+        }
+        if (gate) gate.hidden = true;
+      };
+      document.getElementById('age-yes')?.addEventListener('click', () => close('adult'));
+      document.getElementById('age-no')?.addEventListener('click', () => close('minor'));
     </script>
   </body>
 </html>
