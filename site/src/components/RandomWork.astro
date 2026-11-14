@@ -1,19 +1,24 @@
 ---
-/** ランダムな作品へ飛ぶリンク。JS が無ければギャラリーへ。1ページに1回だけ置くこと */
+/**
+ * ランダムな作品へ飛ぶリンク。JS が無ければギャラリーへ。
+ * 同じページに2つ以上置くときは、2つ目以降に list={false} を付ける（作品一覧の埋め込みは1回でよいため）。
+ */
 import { works, url, jsonForScript } from '../lib/data';
 
 interface Props {
   class?: string;
+  /** 作品一覧（slug）をページに埋め込むか */
+  list?: boolean;
 }
 
-const { class: className = 'btn btn-ghost btn-sm' } = Astro.props;
+const { class: className = 'btn btn-ghost btn-sm', list = true } = Astro.props;
 ---
 
 <a class={className} href={url('/gallery.html')} data-random-work data-works-base={url('/works/')}>
   <slot>おまかせで1枚</slot>
 </a>
 
-<script is:inline type="application/json" id="random-work-slugs" set:html={jsonForScript(works.map((w) => w.slug))} />
+{list && <script is:inline type="application/json" id="random-work-slugs" set:html={jsonForScript(works.map((w) => w.slug))} />}
 
 <script>
   const slugs: string[] = JSON.parse(document.getElementById('random-work-slugs')?.textContent ?? '[]');

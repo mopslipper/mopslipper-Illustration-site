@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import WorkCard from '../../components/WorkCard.astro';
+import RandomWork from '../../components/RandomWork.astro';
 import {
   works,
   siteConfig,
@@ -59,20 +60,23 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
 
 <Layout title={work.title} description={work.description || undefined} ogImage={ogImage} activeNav="gallery">
   <section class="section container detail">
-    <nav class="detail-nav" aria-label="作品の前後">
+    <nav class="detail-nav" aria-label="ほかの作品へ">
       {
         prevWork ? (
-          <a href={url(`/works/${prevWork.slug}.html`)} rel="prev">← 前の作品</a>
+          <a class="nav-prev" href={url(`/works/${prevWork.slug}.html`)} rel="prev">← 前の作品</a>
         ) : (
-          <span class="muted">← 前の作品</span>
+          <span class="nav-prev muted">← 前の作品</span>
         )
       }
-      <a href={url('/gallery.html')}>Gallery</a>
+      <span class="nav-center">
+        <a href={url('/gallery.html')}>Gallery</a>
+        <RandomWork class="random-link">🎲 おまかせで1枚</RandomWork>
+      </span>
       {
         nextWork ? (
-          <a href={url(`/works/${nextWork.slug}.html`)} rel="next">次の作品 →</a>
+          <a class="nav-next" href={url(`/works/${nextWork.slug}.html`)} rel="next">次の作品 →</a>
         ) : (
-          <span class="muted">次の作品 →</span>
+          <span class="nav-next muted">次の作品 →</span>
         )
       }
     </nav>
@@ -224,6 +228,10 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
         </div>
       )
     }
+
+    <p class="text-center more-random">
+      <RandomWork class="btn btn-ghost" list={false}>🎲 おまかせで1枚</RandomWork>
+    </p>
   </section>
 </Layout>
 
@@ -275,12 +283,49 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
 
 <style>
   .detail-nav {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-areas: 'prev center next';
+    align-items: center;
+    gap: 0.5rem 1rem;
     margin-bottom: 1.2rem;
     font-weight: 500;
     font-size: 0.92rem;
+  }
+
+  .nav-prev {
+    grid-area: prev;
+    justify-self: start;
+  }
+
+  .nav-next {
+    grid-area: next;
+    justify-self: end;
+  }
+
+  .nav-center {
+    grid-area: center;
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+  }
+
+  /* せまい画面では「Gallery・おまかせ」を2段目に回す */
+  @media (max-width: 560px) {
+    .detail-nav {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        'prev next'
+        'center center';
+    }
+
+    .nav-center {
+      justify-content: center;
+    }
+  }
+
+  .more-random {
+    margin-top: 2.5rem;
   }
 
   .detail-grid {
