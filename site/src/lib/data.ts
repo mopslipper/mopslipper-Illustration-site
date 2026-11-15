@@ -34,11 +34,15 @@ const byDateDesc = <T extends { date: string }>(a: T, b: T) => (a.date < b.date 
 
 /**
  * 閲覧数・いいね数の日次スナップショット (data/counts.json、update-counts.yml が更新)。
- * ギャラリーカードの表示用。詳細ページはクライアントでライブ取得。
+ * ギャラリーカードの表示用。詳細ページはクライアントでライブ取得し、取得できるまでの表示にこの値を使う。
+ * まだ集計されていない作品（登録したばかり）は undefined。
  */
+export function getCountsSnapshot(id: number): { views: number; likes: number } | undefined {
+  return (countsJson as Record<string, { views: number; likes: number }>)[String(id)];
+}
+
 export function getCounts(id: number): { views: number; likes: number } {
-  const entry = (countsJson as Record<string, { views: number; likes: number }>)[String(id)];
-  return entry ?? { views: 0, likes: 0 };
+  return getCountsSnapshot(id) ?? { views: 0, likes: 0 };
 }
 
 /**

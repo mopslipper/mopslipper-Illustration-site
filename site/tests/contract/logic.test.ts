@@ -24,6 +24,7 @@ import {
   EMPTY_FILTER,
 } from '../../src/lib/gallery-params';
 import { relatedWorks } from '../../src/lib/related';
+import { parsePendingLikes, addPendingLike, removePendingLike, likesToShow } from '../../src/lib/likes';
 
 const CATEGORIES = ['Original', 'Fanart', 'Animation'];
 
@@ -189,6 +190,36 @@ describe('ギャラリーの URL パラメータ', () => {
     expect(isFiltered(EMPTY_FILTER)).toBe(false);
     expect(isFiltered({ ...EMPTY_FILTER, page: 2 })).toBe(false);
     expect(isFiltered({ ...EMPTY_FILTER, r15Only: true })).toBe(true);
+  });
+});
+
+describe('いいね（届いていない分の控えと、表示する数）', () => {
+  it('控えは追加・削除でき、同じ作品は二重に入らない', () => {
+    const list = addPendingLike(addPendingLike(addPendingLike([], '152'), '7'), '152');
+    expect(list).toEqual(['152', '7']);
+    expect(removePendingLike(list, '152')).toEqual(['7']);
+    expect(parsePendingLikes(JSON.stringify(list))).toEqual(['152', '7']);
+  });
+
+  it('壊れた・想定外の保存内容は捨てる', () => {
+    expect(parsePendingLikes(null)).toEqual([]);
+    expect(parsePendingLikes('{broken')).toEqual([]);
+    expect(parsePendingLikes('{"a":1}')).toEqual([]);
+    expect(parsePendingLikes(JSON.stringify(['12', 12, '../x', '12', '', '1234567']))).toEqual(['12']);
+  });
+
+  it('届いていない自分のいいねは、分かっている数に足して出す', () => {
+    expect(likesToShow(3, { liked: false, pending: false })).toBe(3);
+    expect(likesToShow(3, { liked: true, pending: true })).toBe(4);
+    // 届いたあとは、サービスの数（自分の分を含む）をそのまま出す
+    expect(likesToShow(4, { liked: true, pending: false })).toBe(4);
+  });
+
+  it('自分が押したなら、数が古くても 1 以上になる。何も分からなければ数を出さない', () => {
+    expect(likesToShow(0, { liked: true, pending: false })).toBe(1);
+    expect(likesToShow(null, { liked: true, pending: true })).toBe(1);
+    expect(likesToShow(null, { liked: false, pending: false })).toBeNull();
+    expect(likesToShow(0, { liked: false, pending: false })).toBe(0);
   });
 });
 

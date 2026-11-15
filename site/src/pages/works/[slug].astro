@@ -11,6 +11,7 @@ import {
   resolveWorkImage,
   resolveVideoUrl,
   getRequestsForWork,
+  getCountsSnapshot,
   formatDate,
   tagUrl,
   url,
@@ -70,6 +71,8 @@ const linkEntries = Object.entries(links).filter(([, v]) => v);
 const linkLabels: Record<string, string> = { twitter: 'X (Twitter)', pixiv: 'Pixiv', booth: 'BOOTH', fanbox: 'FANBOX' };
 
 const related = relatedWorks(work, works, 6);
+/** 閲覧数・いいね数の前日までの集計値。サービスから最新の数が取れるまで（取れないときも）これを出しておく */
+const countsSnapshot = getCountsSnapshot(work.id);
 const origins = getRequestsForWork(work.slug);
 
 const requestUrl = (variant?: string) =>
@@ -182,9 +185,11 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
           {work.sensitive && <span class="r15-mark">R-15</span>}
         </div>
         <div class="meta-row stats-row">
-          <span class="stat" title="閲覧数">👁 <span id="view-count">–</span></span>
+          <span class="stat" title="閲覧数">
+            👁 <span id="view-count" data-snapshot={countsSnapshot?.views}>{countsSnapshot ? countsSnapshot.views.toLocaleString('ja-JP') : '–'}</span>
+          </span>
           <button class="like-btn" id="like-btn" data-work-id={work.id} title="いいね" type="button">
-            ♥ <span id="like-count">–</span>
+            ♥ <span id="like-count" data-snapshot={countsSnapshot?.likes}>{countsSnapshot ? countsSnapshot.likes.toLocaleString('ja-JP') : '–'}</span>
           </button>
         </div>
 
@@ -592,11 +597,6 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
     border-color: transparent;
     color: var(--ink-on-primary);
     opacity: 1;
-  }
-
-  .like-btn:disabled:not(.liked) {
-    opacity: 0.5;
-    cursor: wait;
   }
 
   .like-btn.liked:disabled {
