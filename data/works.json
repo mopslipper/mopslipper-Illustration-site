@@ -3001,5 +3001,40 @@
     "description": "赤い袴と白い巫女装束の黒髪少女を、様々な表情が魅力！青い瞳と赤いリボン、散りばめたハートや星がポイント。",
     "nsfw": false,
     "external_links": {}
+  },
+  {
+    "id": 152,
+    "slug": "152",
+    "title": "抱き枕カバー風・着物の白髪狐っ娘",
+    "date": "2026-11-15",
+    "image_path": "/static/img/works/152-1.webp",
+    "thumbnail": "/static/img/works/152.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "キツネ",
+      "白髪",
+      "着物",
+      "リボン",
+      "抱き枕カバー",
+      "ピンク"
+    ],
+    "description": "着物姿の白髪狐っ娘を抱き枕カバー風に描きました。表情や衣装が異なるバリエーションも一緒に楽しめます。",
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {},
+    "additional_images": [
+      "/static/img/works/152.webp",
+      "/static/img/works/152-2.webp",
+      "/static/img/works/152-3.webp",
+      "/static/img/works/152-4.webp",
+      "/static/img/works/152-5.webp",
+      "/static/img/works/152-6.webp",
+      "/static/img/works/152-7.webp",
+      "/static/img/works/152-8.webp",
+      "/static/img/works/152-9.webp",
+      "/static/img/works/152-10.webp",
+      "/static/img/works/152-11.webp"
+    ]
   }
 ]
