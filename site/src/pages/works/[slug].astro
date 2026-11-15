@@ -38,6 +38,28 @@ const additionalImages = (work.additional_images ?? [])
   .filter((img) => img !== undefined);
 const allImages = mainImage ? [mainImage, ...additionalImages] : additionalImages;
 
+/**
+ * 画像の「組」。1組ずつ切り替えて見せる。
+ * 1枚目（本体）は単独。追加画像は、作品の設定 (additional_images_per_row) が 2・3 のとき、その枚数ずつ横に並べる。
+ */
+const perRow = work.additional_images_per_row ?? 1;
+const slides: { images: typeof allImages; row: boolean }[] = mainImage ? [{ images: [mainImage], row: false }] : [];
+for (let i = 0; i < additionalImages.length; i += perRow) {
+  slides.push({ images: additionalImages.slice(i, i + perRow), row: perRow > 1 });
+}
+/** 通し番号つきの組（番号は「何枚目」の表示用） */
+let imageCount = 0;
+const numberedSlides = slides.map((slide) => ({ row: slide.row, items: slide.images.map((img) => ({ img, index: imageCount++ })) }));
+/** 下に並べる小さい画像（1枚ずつ）と、それが何組目にあるか */
+const stripItems = numberedSlides.flatMap((slide, s) => slide.items.map(({ img, index }) => ({ img, index, slide: s })));
+/**
+ * 横に並べた組の幅の上限 = 画面の高さ × この値。
+ * いちばん縦長の画像でも、切り抜かずに全体が画面の高さに収まるようにする。
+ */
+const rowFit = perRow * Math.min(1, ...additionalImages.map((img) => img.width / img.height));
+/** 横に並べる画像の書き出し幅（表示は列幅の 1/2〜1/3。拡大表示は元の画像を使う） */
+const ROW_IMAGE_WIDTH = 640;
+
 /** 高さが幅の2倍を超える画像（抱き枕カバー風など）。横幅いっぱいに広げず、全体が画面に収まる高さで見せる */
 const isTall = (img: { width: number; height: number }) => img.height > img.width * 2;
 /** 切り替え用の小さい画像の高さ（表示の2倍の解像度）。切り抜かず、縦横比のまま並べる */
@@ -94,25 +116,32 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
           ) : (
             allImages.length > 0 && (
               <>
-                <div class="main-image-wrap" id="pswp-gallery">
-                  {allImages.map((img, i) => (
-                    <a
-                      href={img.src}
-                      data-pswp-width={img.width}
-                      data-pswp-height={img.height}
-                      class:list={['main-image', { active: i === 0, tall: isTall(img) }]}
-                      data-index={i}
-                    >
-                      <Image
-                        src={img}
-                        alt={allImages.length > 1 ? `${work.title} (${i + 1}/${allImages.length})` : work.title}
-                        width={900}
-                        format="webp"
-                        loading={i === 0 ? 'eager' : 'lazy'}
-                      />
-                    </a>
+                <div
+                  class="main-image-wrap"
+                  id="pswp-gallery"
+                  style={perRow > 1 ? `--per-row: ${perRow}; --row-fit: ${rowFit.toFixed(4)}` : undefined}
+                >
+                  {numberedSlides.map((slide, s) => (
+                    <div class:list={['slide', { active: s === 0, row: slide.row }]}>
+                      {slide.items.map(({ img, index }) => (
+                        <a
+                          href={img.src}
+                          data-pswp-width={img.width}
+                          data-pswp-height={img.height}
+                          class:list={['main-image', { tall: isTall(img) }]}
+                        >
+                          <Image
+                            src={img}
+                            alt={allImages.length > 1 ? `${work.title} (${index + 1}/${allImages.length})` : work.title}
+                            width={slide.row ? Math.min(img.width, ROW_IMAGE_WIDTH) : 900}
+                            format="webp"
+                            loading={s === 0 ? 'eager' : 'lazy'}
+                          />
+                        </a>
+                      ))}
+                    </div>
                   ))}
-                  {allImages.length > 1 && (
+                  {slides.length > 1 && (
                     <>
                       <button class="img-nav img-nav-prev" id="img-prev" aria-label="前の画像" type="button">‹</button>
                       <button class="img-nav img-nav-next" id="img-next" aria-label="次の画像" type="button">›</button>
@@ -121,12 +150,12 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
                 </div>
                 {allImages.length > 1 && (
                   <div class="thumb-strip" id="thumb-strip">
-                    {allImages.map((img, i) => (
+                    {stripItems.map(({ img, index, slide }) => (
                       <button
-                        class={`thumb-btn${i === 0 ? ' active' : ''}`}
-                        data-index={i}
+                        class:list={['thumb-btn', { active: slide === 0 }]}
+                        data-slide={slide}
                         type="button"
-                        aria-label={`${i + 1}枚目を表示`}
+                        aria-label={`${index + 1}枚目を表示`}
                       >
                         <Image
                           src={img}
@@ -261,22 +290,30 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
   });
   lightbox.init();
 
-  // 追加画像の切替
-  const mainImages = [...document.querySelectorAll<HTMLElement>('.main-image')];
+  // 画像の切替。1組（1枚、または横に並べた2〜3枚）ずつ見せる
+  const slides = [...document.querySelectorAll<HTMLElement>('.slide')];
   const thumbBtns = [...document.querySelectorAll<HTMLElement>('.thumb-btn')];
-  let currentIndex = 0;
+  // 次の組の画像を先に読み込んでおく（切り替えた直後に、並んだ画像が空白で見えないように）
+  const preload = (index: number) =>
+    slides[index % slides.length]?.querySelectorAll('img').forEach((img) => {
+      img.loading = 'eager';
+    });
+  let currentSlide = 0;
   const show = (index: number) => {
-    currentIndex = index;
-    mainImages.forEach((el, i) => el.classList.toggle('active', i === index));
-    thumbBtns.forEach((el, i) => el.classList.toggle('active', i === index));
+    currentSlide = index;
+    slides.forEach((el, i) => el.classList.toggle('active', i === index));
+    // 下の小さい画像は、いま出ている組のものをすべて選択中にする
+    thumbBtns.forEach((el) => el.classList.toggle('active', Number(el.dataset.slide) === index));
+    preload(index + 1);
   };
+  if (slides.length > 1) window.addEventListener('load', () => preload(1));
   thumbBtns.forEach((btn) =>
-    btn.addEventListener('click', () => show(Number(btn.dataset.index ?? 0))),
+    btn.addEventListener('click', () => show(Number(btn.dataset.slide ?? 0))),
   );
 
-  // 左右矢印で画像切替 (クリック/タップ)
+  // 左右矢印で切替 (クリック/タップ)
   const step = (dir: number) =>
-    show((currentIndex + dir + mainImages.length) % mainImages.length);
+    show((currentSlide + dir + slides.length) % slides.length);
   document.getElementById('img-prev')?.addEventListener('click', () => step(-1));
   document.getElementById('img-next')?.addEventListener('click', () => step(1));
 
@@ -411,11 +448,15 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
     right: 0.6rem;
   }
 
-  .main-image {
+  .slide {
     display: none;
   }
 
-  .main-image.active {
+  .slide.active {
+    display: block;
+  }
+
+  .main-image {
     display: block;
     cursor: zoom-in;
   }
@@ -431,6 +472,34 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
     max-height: max(calc(100vh - 6rem), 30rem);
     max-height: max(calc(100dvh - 6rem), 30rem);
     margin: 0 auto;
+  }
+
+  /*
+   * 追加画像を2〜3枚ずつ横に並べる組（管理ツールの「追加画像の並べ方」）。
+   * 1枚の幅は列の 1/2・1/3。枚数が足りない最後の組も、同じ大きさのまま中央に寄せる。
+   * 幅の上限 (--row-fit) で、いちばん縦長の画像でも全体が画面の高さに収まるようにする。
+   */
+  .slide.row.active {
+    --row-gap: 4px;
+    --row-gaps: calc(var(--row-gap) * (var(--per-row) - 1));
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--row-gap);
+    max-width: calc(max(100vh - 6rem, 30rem) * var(--row-fit) + var(--row-gaps));
+    max-width: calc(max(100dvh - 6rem, 30rem) * var(--row-fit) + var(--row-gaps));
+    margin: 0 auto;
+  }
+
+  .slide.row .main-image {
+    flex: 0 0 calc((100% - var(--row-gaps)) / var(--per-row));
+    min-width: 0;
+  }
+
+  .slide.row .main-image :global(img) {
+    width: 100%;
+    max-height: none;
+    margin: 0;
   }
 
   .thumb-strip {

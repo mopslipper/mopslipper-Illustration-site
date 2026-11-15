@@ -289,6 +289,32 @@ describe('作品フォーム ⇔ works.json', () => {
     expect(worksSchema.safeParse([work]).success).toBe(true);
   });
 
+  it('追加画像の並べ方（2枚ずつ・3枚ずつ）は、追加画像があるときだけ保存される', () => {
+    const base = {
+      id: 152, slug: '152', title: '抱き枕', date: '2026-11-15', category: 'Original', image_path: '152.webp', thumbnail: '152.jpg',
+      additional_images: ['152-1.webp', '152-2.webp'], tags: [], ai_directives: DEFAULTS,
+    };
+    const three = applyWorkForm(undefined, { ...base, additional_images_per_row: 3 }, { aiDefaults: DEFAULTS });
+    expect(three.additional_images_per_row).toBe(3);
+    expect(Object.keys(three).slice(-2)).toEqual(['additional_images', 'additional_images_per_row']);
+    expect(worksSchema.safeParse([three]).success).toBe(true);
+    expect(toForm(three, DEFAULTS).additional_images_per_row).toBe(3);
+
+    // 1枚ずつ（ふつう）に戻すと、項目ごと消える
+    const back = applyWorkForm(three, { ...toForm(three, DEFAULTS), additional_images_per_row: 1 }, { aiDefaults: DEFAULTS });
+    expect('additional_images_per_row' in back).toBe(false);
+    expect(toForm(back, DEFAULTS).additional_images_per_row).toBe(1);
+    // 追加画像が無ければ保存しない
+    expect('additional_images_per_row' in applyWorkForm(three, { ...toForm(three, DEFAULTS), additional_images: [] }, { aiDefaults: DEFAULTS })).toBe(false);
+
+    // 項目を送ってこない古い画面から保存しても、今の設定は消えない
+    const { additional_images_per_row: _omit, ...oldForm } = toForm(three, DEFAULTS);
+    expect(applyWorkForm(three, oldForm, { aiDefaults: DEFAULTS }).additional_images_per_row).toBe(3);
+
+    expect(() => applyWorkForm(undefined, { ...base, additional_images_per_row: 4 }, { aiDefaults: DEFAULTS })).toThrowError(/並べ方/);
+    expect(worksSchema.safeParse([{ ...three, additional_images_per_row: 4 }]).success).toBe(false);
+  });
+
   it('「X でサムネを隠す」は R-15 のときだけ保存される', () => {
     const form = { ...toForm(realWorks[0], DEFAULTS), sensitive: false, hide_sensitive_thumbnail_on_x: true };
     expect(applyWorkForm(realWorks[0], form, { aiDefaults: DEFAULTS }).hide_sensitive_thumbnail_on_x).toBeUndefined();

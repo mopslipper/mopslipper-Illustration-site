@@ -100,6 +100,7 @@ export function toForm(work, aiDefaults) {
     thumbnail: work.thumbnail,
     x_thumbnail: work.x_thumbnail ?? '',
     additional_images: [...(work.additional_images ?? [])],
+    additional_images_per_row: work.additional_images_per_row ?? 1,
     tags: [...(work.tags ?? [])],
     description: work.description ?? '',
     sensitive: work.sensitive === true,
@@ -128,7 +129,7 @@ const uniqueTrimmed = (list) => {
 const FORM_KEYS = [
   'id', 'slug', 'title', 'date', 'image_path', 'thumbnail', 'category', 'x_thumbnail', 'tags', 'request_tags',
   'description', 'ai_desc_override', 'nsfw', 'hidden', 'sensitive', 'hide_sensitive_thumbnail_on_x',
-  'external_links', 'additional_images',
+  'external_links', 'additional_images', 'additional_images_per_row',
 ];
 
 /**
@@ -175,6 +176,12 @@ export function applyWorkForm(existing, form, { aiDefaults } = {}) {
   const additional = uniqueTrimmed(form.additional_images).map(normalizeMediaPath);
   if (additional.some((p) => !isSiteImageName(mediaFileName(p)))) problems.push('追加画像は画像にしてください');
 
+  // 追加画像を横に並べる枚数。項目ごと送られてこなければ（古い画面からの保存）、今の設定を保つ
+  const perRow = form.additional_images_per_row === undefined
+    ? (existing?.additional_images_per_row ?? 1)
+    : Number(form.additional_images_per_row);
+  if (![1, 2, 3].includes(perRow)) problems.push('追加画像の並べ方は 1枚ずつ・2枚ずつ・3枚ずつ から選んでください');
+
   if (problems.length > 0) throw new ValidationError(problems);
 
   const tags = uniqueTrimmed(form.tags);
@@ -208,6 +215,7 @@ export function applyWorkForm(existing, form, { aiDefaults } = {}) {
     ...(sensitive && form.hide_sensitive_thumbnail_on_x === true ? { hide_sensitive_thumbnail_on_x: true } : {}),
     external_links: existing?.external_links ?? {},
     ...(additional.length ? { additional_images: additional } : {}),
+    ...(additional.length && perRow > 1 ? { additional_images_per_row: perRow } : {}),
   };
 
   for (const [key, value] of Object.entries(existing ?? {})) {

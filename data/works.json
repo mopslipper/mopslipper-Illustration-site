@@ -3035,6 +3035,7 @@
       "/static/img/works/152-9.webp",
       "/static/img/works/152-10.webp",
       "/static/img/works/152-11.webp"
-    ]
+    ],
+    "additional_images_per_row": 3
   }
 ]

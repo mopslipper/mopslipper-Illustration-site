@@ -112,7 +112,7 @@ export async function renderWorks(root, route, ctx) {
     const original = isNew
       ? {
           id: data.nextId, slug: '', title: '', date: data.today, category: 'Original', image_path: '', thumbnail: '', x_thumbnail: '',
-          additional_images: [], tags: [], description: '', sensitive: false, hidden: false, hide_sensitive_thumbnail_on_x: false,
+          additional_images: [], additional_images_per_row: 1, tags: [], description: '', sensitive: false, hidden: false, hide_sensitive_thumbnail_on_x: false,
           ai_directives: ai.defaults, nsfw: false, external_links: {},
           request_ids: params.get('request') && findRequest(params.get('request')) ? [params.get('request')] : [],
         }
@@ -144,6 +144,13 @@ export async function renderWorks(root, route, ctx) {
     const sensitiveInput = h('input', { type: 'checkbox', id: 'work-sensitive', checked: original.sensitive });
     const hiddenInput = h('input', { type: 'checkbox', id: 'work-hidden', checked: original.hidden });
     const hideOnXInput = h('input', { type: 'checkbox', id: 'work-hide-x', checked: original.hide_sensitive_thumbnail_on_x });
+    const perRowSelect = h(
+      'select',
+      { id: 'work-extra-per-row' },
+      [[1, '1枚ずつ（ふつう）'], [2, '2枚ずつ並べる'], [3, '3枚ずつ並べる']].map(([value, label]) =>
+        h('option', { value: String(value), selected: value === (original.additional_images_per_row ?? 1) }, label),
+      ),
+    );
 
     const imagePathInput = h('input', { type: 'text', id: 'work-image-path', value: state.image_path, autocomplete: 'off' });
     const thumbPathInput = h('input', { type: 'text', id: 'work-thumb-path', value: state.thumbnail, autocomplete: 'off' });
@@ -185,6 +192,7 @@ export async function renderWorks(root, route, ctx) {
       thumbnail: state.thumbnail,
       x_thumbnail: state.x_thumbnail,
       additional_images: state.additional_images,
+      additional_images_per_row: Number(perRowSelect.value),
       tags: state.tags,
       description: descriptionInput.value.trim(),
       sensitive: sensitiveInput.checked,
@@ -661,6 +669,9 @@ export async function renderWorks(root, route, ctx) {
             }),
           ),
         ),
+        field('追加画像の並べ方', perRowSelect, {
+          hint: '縦長の画像（抱き枕カバー風など）向け。作品ページで、追加画像を横に並べて表示します。1枚目（本体の画像）は、これまで通り1枚で表示します。',
+        }),
         h(
           'div',
           { class: 'field' },

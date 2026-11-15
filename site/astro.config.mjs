@@ -25,6 +25,13 @@ const watchMediaDir = {
   },
 };
 
+/**
+ * astro build は、依存関係のキャッシュ (node_modules/.vite) を作り直す。確認用のサイト (astro dev) を
+ * 開いたままビルドすると、そのキャッシュが書き換わり、確認用のサイトで拡大表示や閲覧数の読み込みが
+ * 失敗するようになる（Outdated Optimize Dep）。ビルドのときは別のフォルダを使い、互いに影響しないようにする。
+ */
+const cacheDir = process.argv.includes('build') ? 'node_modules/.vite-build' : 'node_modules/.vite';
+
 export default defineConfig({
   site,
   base,
@@ -33,6 +40,7 @@ export default defineConfig({
     format: 'file',
   },
   vite: {
+    cacheDir,
     plugins: [watchMediaDir],
     server: {
       fs: {

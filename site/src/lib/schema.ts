@@ -22,6 +22,8 @@ export const workSchema = z.object({
   thumbnail: z.string().startsWith('/static/img/works/'),
   x_thumbnail: z.string().optional(),
   additional_images: z.array(z.string()).optional(),
+  /** 追加画像を横に並べて見せる枚数（2 か 3）。縦長の画像向け。無ければ1枚ずつ */
+  additional_images_per_row: z.union([z.literal(2), z.literal(3)]).optional(),
   tags: z.array(z.string()),
   request_tags: z.array(z.string()).optional(),
   category: z.enum(CATEGORIES),
