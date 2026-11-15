@@ -38,6 +38,11 @@ const additionalImages = (work.additional_images ?? [])
   .filter((img) => img !== undefined);
 const allImages = mainImage ? [mainImage, ...additionalImages] : additionalImages;
 
+/** 高さが幅の2倍を超える画像（抱き枕カバー風など）。横幅いっぱいに広げず、全体が画面に収まる高さで見せる */
+const isTall = (img: { width: number; height: number }) => img.height > img.width * 2;
+/** 切り替え用の小さい画像の高さ（表示の2倍の解像度）。切り抜かず、縦横比のまま並べる */
+const STRIP_THUMB_HEIGHT = 192;
+
 const links = work.external_links ?? {};
 const linkEntries = Object.entries(links).filter(([, v]) => v);
 const linkLabels: Record<string, string> = { twitter: 'X (Twitter)', pixiv: 'Pixiv', booth: 'BOOTH', fanbox: 'FANBOX' };
@@ -95,7 +100,7 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
                       href={img.src}
                       data-pswp-width={img.width}
                       data-pswp-height={img.height}
-                      class={`main-image${i === 0 ? ' active' : ''}`}
+                      class:list={['main-image', { active: i === 0, tall: isTall(img) }]}
                       data-index={i}
                     >
                       <Image
@@ -123,7 +128,13 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
                         type="button"
                         aria-label={`${i + 1}枚目を表示`}
                       >
-                        <Image src={img} alt="" width={100} height={100} format="webp" />
+                        <Image
+                          src={img}
+                          alt=""
+                          width={Math.round((STRIP_THUMB_HEIGHT * img.width) / img.height)}
+                          height={STRIP_THUMB_HEIGHT}
+                          format="webp"
+                        />
                       </button>
                     ))}
                   </div>
@@ -414,6 +425,14 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
     height: auto;
   }
 
+  /* とても縦長の画像は切り抜かず、全体が画面に収まる大きさにする（クリックで拡大） */
+  .main-image.tall :global(img) {
+    width: auto;
+    max-height: max(calc(100vh - 6rem), 30rem);
+    max-height: max(calc(100dvh - 6rem), 30rem);
+    margin: 0 auto;
+  }
+
   .thumb-strip {
     display: flex;
     gap: 0.5rem;
@@ -422,10 +441,10 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
     background: var(--bg-accent);
   }
 
+  /* 幅は画像の縦横比に合わせる（正方形に切り抜かない） */
   .thumb-btn {
     flex-shrink: 0;
-    width: 68px;
-    height: 68px;
+    height: 96px;
     padding: 0;
     border: 2px solid transparent;
     border-radius: var(--radius-sm);
@@ -446,9 +465,9 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
   }
 
   .thumb-btn :global(img) {
-    width: 100%;
+    width: auto;
+    max-width: none;
     height: 100%;
-    object-fit: cover;
   }
 
   .info-column h1 {
