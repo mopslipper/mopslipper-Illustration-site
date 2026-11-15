@@ -2979,5 +2979,27 @@
     "description": "くまさん柄のピンクのパジャマを着た、白髪のケモミミちゃん。きょとんとした立ち姿、八重歯を見せた笑顔、枕に突っ伏してすやすや眠る姿の3カットです。マゼンタのリボンとX字のヘアピンがポイント。",
     "nsfw": false,
     "external_links": {}
+  },
+  {
+    "id": 151,
+    "slug": "151-black-haired-miko",
+    "title": "赤い袴の黒髪巫女ちゃん",
+    "date": "2026-11-15",
+    "image_path": "/static/img/works/151.webp",
+    "thumbnail": "/static/img/works/151.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "黒髪",
+      "巫女",
+      "赤",
+      "リボン",
+      "青",
+      "複数",
+      "かわいい"
+    ],
+    "description": "赤い袴と白い巫女装束の黒髪少女を、表情やポーズを変えて描きました。青い瞳と赤いリボン、散りばめたハートや星がポイント。",
+    "nsfw": false,
+    "external_links": {}
   }
 ]
