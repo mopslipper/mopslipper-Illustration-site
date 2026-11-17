@@ -17,6 +17,7 @@ export const FILES = {
   config: 'data/config.json',
   /** この PC だけのデータ（.gitignore 済み・公開されない） */
   privateRequests: 'data/private/requests_private.json',
+  requestDrafts: 'data/private/request_drafts.json',
 };
 
 export const PRIVATE_DIR = 'data/private';

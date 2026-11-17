@@ -326,25 +326,73 @@ export function createManagerApp({ root, fetchImpl, openAiBaseUrl, retryDelayMs 
     };
   }
 
+  async function persistRequest(originalId, input) {
+    const [publicList, privateMap, works] = await Promise.all([
+      store.read('requests', []),
+      store.read('privateRequests', {}),
+      store.read('works'),
+    ]);
+    const request = { ...input };
+    if (originalId === undefined) {
+      request.id = String(request.id ?? '').trim() || generateReceiptId(publicList.map((r) => r.id));
+      request.date = String(request.date ?? '').trim() || localDate();
+      request.status = request.status || 'received';
+    }
+    const next = upsertRequest(publicList, privateMap, request, { originalId, workSlugs: works.map((w) => w.slug) });
+    throwIfProblems(validateRequests(next.publicList, works));
+    // 非公開側を先に書く（途中で止まっても、公開ファイルに載せない内容が残らない順）
+    await store.write('privateRequests', next.privateMap);
+    await store.write('requests', next.publicList);
+    return { id: next.entry.id };
+  }
+
   function saveRequest(originalId, input) {
+    return exclusive(() => persistRequest(originalId, input));
+  }
+
+  async function listRequestDrafts() {
+    const drafts = await store.read('requestDrafts', []);
+    return { drafts: drafts.slice().sort((a, b) => b.savedAt.localeCompare(a.savedAt)) };
+  }
+
+  function saveRequestDraft(input) {
     return exclusive(async () => {
-      const [publicList, privateMap, works] = await Promise.all([
+      const [drafts, publicList, works] = await Promise.all([
+        store.read('requestDrafts', []),
         store.read('requests', []),
-        store.read('privateRequests', {}),
         store.read('works'),
       ]);
-      const request = { ...input };
-      if (originalId === undefined) {
-        request.id = String(request.id ?? '').trim() || generateReceiptId(publicList.map((r) => r.id));
-        request.date = String(request.date ?? '').trim() || localDate();
-        request.status = request.status || 'received';
-      }
-      const next = upsertRequest(publicList, privateMap, request, { originalId, workSlugs: works.map((w) => w.slug) });
-      throwIfProblems(validateRequests(next.publicList, works));
-      // 非公開側を先に書く（途中で止まっても、公開ファイルに載せない内容が残らない順）
-      await store.write('privateRequests', next.privateMap);
-      await store.write('requests', next.publicList);
-      return { id: next.entry.id };
+      const request = input.request ?? {};
+      const id = String(request.id ?? '').trim().toUpperCase();
+      if (publicList.some((entry) => entry.id === id)) throw new ValidationError([`${id} はすでに登録されています`]);
+      if (drafts.some((draft) => draft.request?.id === id)) throw new ValidationError([`${id} はすでに保留中です`]);
+      const next = upsertRequest([], {}, { ...request, id }, { workSlugs: works.map((w) => w.slug) });
+      const draft = {
+        request: mergeRequests([next.entry], next.privateMap)[0],
+        savedAt: localTime(),
+      };
+      await store.write('requestDrafts', [draft, ...drafts]);
+      return { id };
+    });
+  }
+
+  function deleteRequestDraft(id) {
+    return exclusive(async () => {
+      const drafts = await store.read('requestDrafts', []);
+      if (!drafts.some((draft) => draft.request?.id === id)) throw new ValidationError([`${id} は保留中に見つかりません`]);
+      await store.write('requestDrafts', drafts.filter((draft) => draft.request?.id !== id));
+      return { ok: true };
+    });
+  }
+
+  function promoteRequestDraft(id) {
+    return exclusive(async () => {
+      const drafts = await store.read('requestDrafts', []);
+      const draft = drafts.find((item) => item.request?.id === id);
+      if (!draft) throw new ValidationError([`${id} は保留中に見つかりません`]);
+      const saved = await persistRequest(undefined, draft.request);
+      await store.write('requestDrafts', drafts.filter((item) => item.request?.id !== id));
+      return saved;
     });
   }
 
@@ -361,10 +409,12 @@ export function createManagerApp({ root, fetchImpl, openAiBaseUrl, retryDelayMs 
   async function parseMail(body) {
     const parsed = parseRequestMessage(String(body.text ?? ''));
     if (!parsed) return { found: false };
-    const publicList = await store.read('requests', []);
+    const [publicList, drafts] = await Promise.all([store.read('requests', []), store.read('requestDrafts', [])]);
+    const held = drafts.some((draft) => draft.request?.id === parsed.id);
     return {
       found: true,
-      duplicate: publicList.some((r) => r.id === parsed.id),
+      duplicate: held || publicList.some((r) => r.id === parsed.id),
+      held,
       publishOk: parsed.publishOk,
       request: requestFromMail(parsed, localDate()),
     };
@@ -518,6 +568,10 @@ export function createManagerApp({ root, fetchImpl, openAiBaseUrl, retryDelayMs 
     ['POST', /^\/api\/requests$/, ({ body }) => saveRequest(undefined, body)],
     ['PUT', /^\/api\/requests\/([^/]+)$/, ({ body, match }) => saveRequest(decodeURIComponent(match[1]), body)],
     ['DELETE', /^\/api\/requests\/([^/]+)$/, ({ match }) => deleteRequest(decodeURIComponent(match[1]))],
+    ['GET', /^\/api\/request-drafts$/, () => listRequestDrafts()],
+    ['POST', /^\/api\/request-drafts$/, ({ body }) => saveRequestDraft(body)],
+    ['POST', /^\/api\/request-drafts\/([^/]+)\/promote$/, ({ match }) => promoteRequestDraft(decodeURIComponent(match[1]))],
+    ['DELETE', /^\/api\/request-drafts\/([^/]+)$/, ({ match }) => deleteRequestDraft(decodeURIComponent(match[1]))],
     ['GET', /^\/api\/works$/, () => listWorks()],
     ['POST', /^\/api\/works$/, ({ body }) => saveWork(undefined, body)],
     ['PUT', /^\/api\/works\/(\d+)$/, ({ body, match }) => saveWork(Number(match[1]), body)],

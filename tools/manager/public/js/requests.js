@@ -6,6 +6,7 @@ const BLANK = { id: '', status: 'received', public: true, text: '', nickname: ''
 
 export async function renderRequests(root, route, ctx) {
   let data = await api.get('/api/requests');
+  let drafts = (await api.get('/api/request-drafts')).drafts;
   let filter = 'all';
   let selected = route.arg;
 
@@ -15,6 +16,11 @@ export async function renderRequests(root, route, ctx) {
   async function reload() {
     data = await api.get('/api/requests');
     ctx.refreshBadges();
+  }
+
+  async function reloadDrafts() {
+    drafts = (await api.get('/api/request-drafts')).drafts;
+    renderDrafts();
   }
 
   // ---- メールから取り込む -------------------------------------------------------
@@ -57,6 +63,18 @@ export async function renderRequests(root, route, ctx) {
         toastError(error);
       }
     });
+    const hold = h('button', { class: 'btn btn-outline', type: 'button', id: 'intake-hold' }, '保留に保存');
+    hold.addEventListener('click', async () => {
+      try {
+        const saved = await busy(hold, '保存中…', () => api.post('/api/request-drafts', { request }));
+        mailText.value = '';
+        clearIntake();
+        await reloadDrafts();
+        toast(`${saved.id} を保留中に保存しました`);
+      } catch (error) {
+        toastError(error);
+      }
+    });
 
     setChildren(intakeResult, 
       h(
@@ -76,10 +94,10 @@ export async function renderRequests(root, route, ctx) {
         ? h(
             'div',
             { class: 'row' },
-            h('span', { class: 'note' }, 'この受付番号はすでに登録されています。'),
-            h('button', { class: 'btn btn-ghost', type: 'button', onclick: () => ctx.navigate(`#requests/${request.id}`) }, '開く'),
+            h('span', { class: 'note' }, result.held ? 'この受付番号はすでに保留中です。下の一覧から確認できます。' : 'この受付番号はすでに登録されています。'),
+            result.held ? null : h('button', { class: 'btn btn-ghost', type: 'button', onclick: () => ctx.navigate(`#requests/${request.id}`) }, '開く'),
           )
-        : h('div', { class: 'row' }, add, h('button', { class: 'btn btn-ghost', type: 'button', onclick: clearIntake }, 'やめる')),
+        : h('div', { class: 'row' }, add, hold, h('button', { class: 'btn btn-ghost', type: 'button', onclick: clearIntake }, 'やめる')),
     );
     intakeResult.hidden = false;
   }
@@ -100,6 +118,61 @@ export async function renderRequests(root, route, ctx) {
     ),
     intakeResult,
   );
+
+  const draftsEl = h('section', { class: 'card', id: 'request-drafts' });
+
+  function renderDrafts() {
+    setChildren(
+      draftsEl,
+      h('h2', null, `保留中 ${drafts.length}`),
+      h('p', { class: 'hint' }, 'ここに保存した内容はこの PC の中だけにあり、「リクエスト対応予定」やサイトには表示されません。'),
+      drafts.length
+        ? h(
+            'ul',
+            { class: 'item-list' },
+            drafts.map(({ request, savedAt }) => {
+              const promote = h('button', { class: 'btn btn-primary btn-sm', type: 'button' }, '対応予定に追加');
+              promote.addEventListener('click', async () => {
+                try {
+                  const saved = await busy(promote, '追加中…', () =>
+                    api.post(`/api/request-drafts/${encodeURIComponent(request.id)}/promote`, {}),
+                  );
+                  await Promise.all([reload(), reloadDrafts()]);
+                  toast(`${saved.id} をリクエスト対応予定に追加しました`);
+                  ctx.navigate(`#requests/${saved.id}`);
+                } catch (error) {
+                  toastError(error);
+                }
+              });
+              const remove = h('button', { class: 'btn btn-ghost btn-sm danger', type: 'button' }, '削除');
+              remove.addEventListener('click', async () => {
+                const ok = await confirmDialog({
+                  title: `${request.id} の保留を削除します`,
+                  message: '保存したリクエスト内容をこの PC から削除します。元に戻せません。',
+                  okLabel: '削除する',
+                  danger: true,
+                });
+                if (!ok) return;
+                try {
+                  await api.delete(`/api/request-drafts/${encodeURIComponent(request.id)}`);
+                  await reloadDrafts();
+                  toast(`${request.id} の保留を削除しました`);
+                } catch (error) {
+                  toastError(error);
+                }
+              });
+              return h(
+                'li',
+                { class: 'draft-item' },
+                h('div', { class: 'item-top' }, h('strong', null, request.id), h('span', { class: 'muted' }, `${request.nickname ? `${request.nickname} さん ・ ` : ''}${savedAt} 保存`)),
+                h('p', { class: 'request-text' }, request.text || '（内容なし）'),
+                h('div', { class: 'row' }, promote, remove),
+              );
+            }),
+          )
+        : h('p', { class: 'empty' }, '保留中のリクエストはありません。'),
+    );
+  }
 
   // ---- 一覧 ---------------------------------------------------------------------
 
@@ -325,8 +398,10 @@ export async function renderRequests(root, route, ctx) {
       h('p', { class: 'muted' }, '届いたリクエストを取り込み、進み具合を「リクエスト対応予定」に反映します。リクエストは自動では載りません。'),
     ),
     intake,
+    draftsEl,
     h('div', { class: 'split' }, h('aside', { class: 'side' }, filtersEl, listEl), detailEl),
   );
+  renderDrafts();
   renderList();
   renderDetail();
 

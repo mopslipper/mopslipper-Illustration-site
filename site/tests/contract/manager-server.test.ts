@@ -127,7 +127,7 @@ describe('ローカルサーバの安全対策', () => {
     expect((await call(port, 'POST', '/api/requests', { body, headers: { 'X-Manager': undefined } })).status).toBe(403);
     expect((await call(port, 'POST', '/api/requests', { body, headers: { Origin: 'https://evil.example' } })).status).toBe(403);
     expect((await call(port, 'POST', '/api/requests', { body, headers: { 'Sec-Fetch-Site': 'cross-site' } })).status).toBe(403);
-    expect(readJson(root, 'data/requests.json')).toEqual([]);
+    expect(readJson(root, 'data/requests.json').some((entry: { id: string }) => entry.id === 'R-HOLD')).toBe(false);
     expect((await call(port, 'POST', '/api/requests', { body, headers: { Origin: `http://127.0.0.1:${port}`, 'Sec-Fetch-Site': 'same-origin' } })).status).toBe(200);
   });
 
@@ -213,6 +213,41 @@ describe('リクエストの取り込みと公開・非公開', () => {
     expect((await call(port, 'POST', '/api/requests', { body: parsed.request })).status).toBe(400);
   });
 
+  it('メールから保留した内容は非公開保存され、後から対応予定に追加できる', async () => {
+    const parsed = (await call(port, 'POST', '/api/requests/parse', { body: { text: mail('R-HOLD', null, 'あとで判断するお願い') } })).json();
+    expect(parsed).toMatchObject({ found: true, duplicate: false, held: false, request: { id: 'R-HOLD' } });
+
+    expect((await call(port, 'POST', '/api/request-drafts', { body: { request: parsed.request } })).json()).toEqual({ id: 'R-HOLD' });
+    expect((await call(port, 'GET', '/api/request-drafts')).json().drafts[0]).toMatchObject({
+      request: { id: 'R-HOLD', text: 'あとで判断するお願い', nickname: 'もふ' },
+    });
+    expect(readJson(root, 'data/requests.json').some((entry: { id: string }) => entry.id === 'R-HOLD')).toBe(false);
+    expect(readFileSync(join(root, 'data/requests.json'), 'utf-8')).not.toContain('あとで判断する');
+    expect(readJson(root, 'data/private/request_drafts.json')[0].request.text).toBe('あとで判断するお願い');
+    expect((await call(port, 'POST', '/api/requests/parse', { body: { text: mail('R-HOLD', null, '重複') } })).json()).toMatchObject({
+      duplicate: true,
+      held: true,
+    });
+    expect((await call(port, 'POST', '/api/request-drafts', { body: { request: parsed.request } })).status).toBe(400);
+
+    const restartedPort = (await start(root)).port;
+    expect((await call(restartedPort, 'GET', '/api/request-drafts')).json().drafts).toHaveLength(1);
+    expect((await call(restartedPort, 'POST', '/api/request-drafts/R-HOLD/promote', { body: {} })).json()).toEqual({ id: 'R-HOLD' });
+    expect(readJson(root, 'data/requests.json')[0]).toMatchObject({
+      id: 'R-HOLD',
+      public: true,
+      text: 'あとで判断するお願い',
+      nickname: 'もふ',
+    });
+    expect(readJson(root, 'data/private/request_drafts.json')).toEqual([]);
+    expect((await call(restartedPort, 'GET', '/api/request-drafts')).json().drafts).toEqual([]);
+
+    const another = (await call(port, 'POST', '/api/requests/parse', { body: { text: mail('R-DEL', null, '削除する保留') } })).json().request;
+    await call(port, 'POST', '/api/request-drafts', { body: { request: another } });
+    expect((await call(port, 'DELETE', '/api/request-drafts/R-DEL')).status).toBe(200);
+    expect((await call(port, 'GET', '/api/request-drafts')).json().drafts).toEqual([]);
+  });
+
   it('いまのメール（掲載可否の行なし）のリクエストは公開ファイルに入る。取り下げると消える', async () => {
     const parsed = (await call(port, 'POST', '/api/requests/parse', { body: { text: mail('R-OPEN', null, 'ネコミミちゃん\nピース') } })).json();
     expect(parsed).toMatchObject({ found: true, duplicate: false, publishOk: true, request: { id: 'R-OPEN', public: true } });
@@ -241,7 +276,7 @@ describe('リクエストの取り込みと公開・非公開', () => {
     expect(readFileSync(join(root, 'data/requests.json'), 'utf-8')).toBe(before);
 
     expect((await call(port, 'DELETE', `/api/requests/${added.id}`)).status).toBe(200);
-    expect(readJson(root, 'data/requests.json').map((r: { id: string }) => r.id)).toEqual(['R-OPEN', 'R-HIDE']);
+    expect(readJson(root, 'data/requests.json').map((r: { id: string }) => r.id)).toEqual(['R-OPEN', 'R-HOLD', 'R-HIDE']);
     expect(readJson(root, 'data/private/requests_private.json')[added.id]).toBeUndefined();
     expect((await call(port, 'DELETE', '/api/requests/R-NONE')).status).toBe(400);
   });
