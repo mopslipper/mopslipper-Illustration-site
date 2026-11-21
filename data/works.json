@@ -3037,5 +3037,54 @@
       "/static/img/works/152-22.webp"
     ],
     "additional_images_per_row": 3
+  },
+  {
+    "id": 153,
+    "slug": "153",
+    "title": "青いリボンの黒髪少女",
+    "date": "2026-11-21",
+    "image_path": "/static/img/works/153.webp",
+    "thumbnail": "/static/img/works/153.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "黒髪",
+      "青い瞳",
+      "水色",
+      "オフショルダー",
+      "ヘアピン",
+      "リボン",
+      "赤面",
+      "ハート",
+      "星",
+      "複数"
+    ],
+    "description": "ゆるく肩の落ちた水色のトップスを着た黒髪の少女。青い瞳とヘアピン、頬を染めた表情やハート・星のあしらいを、4つのポーズでまとめました。",
+    "nsfw": false,
+    "external_links": {}
+  },
+  {
+    "id": 154,
+    "slug": "154",
+    "title": "白シャツの黒髪少女",
+    "date": "2026-11-21",
+    "image_path": "/static/img/works/154.webp",
+    "thumbnail": "/static/img/works/154.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "黒髪",
+      "青い瞳",
+      "白シャツ",
+      "ヘアピン",
+      "リボン",
+      "赤面",
+      "太もも",
+      "複数",
+      "かわいい"
+    ],
+    "description": "ゆったりした白シャツを着た黒髪の少女を、さまざまなポーズと表情で描いた一枚。青いヘアピンとリボン、青い瞳、頬を染めた仕草がポイントです。",
+    "nsfw": false,
+    "external_links": {}
   }
 ]
