@@ -3144,5 +3144,34 @@
     "nsfw": false,
     "sensitive": true,
     "external_links": {}
+  },
+  {
+    "id": 157,
+    "slug": "157",
+    "title": "「おはー」寝起き白シャツの黒髪少女",
+    "date": "2026-11-22",
+    "image_path": "/static/img/works/157.webp",
+    "thumbnail": "/static/img/works/157.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "黒髪",
+      "白シャツ",
+      "ブカブカ服",
+      "寝起き",
+      "あくび",
+      "青い瞳",
+      "ヘアピン",
+      "リボン",
+      "チョーカー",
+      "八重歯",
+      "素足",
+      "太もも",
+      "複数"
+    ],
+    "description": "「おはー」と伸びをしたり、あくびをしたりする寝起きの黒髪少女。ぶかぶかの白シャツに水色のリボン、X字のヘアピンと黒いチョーカーがポイント。片足を上げた立ち姿の2カットです。",
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {}
   }
 ]
