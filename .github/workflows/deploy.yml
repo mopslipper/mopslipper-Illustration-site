@@ -35,9 +35,10 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Build Astro site
-        uses: withastro/action@v3
+        uses: withastro/action@v6
         with:
           path: ./site
+          node-version: 22
 
   deploy:
     needs: build
@@ -48,4 +49,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
