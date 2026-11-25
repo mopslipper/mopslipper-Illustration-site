@@ -215,6 +215,11 @@ main ブランチへの push（管理ツールの「公開する」）で GitHub
 
 日次更新: 毎日 JST 3:00 に `.github/workflows/update-counts.yml` が `tools/fetch_counts.mjs` を実行し、`data/counts.json` に変化があれば自動 commit → 再デプロイします（手動実行: Actions タブ → update-counts → Run workflow）。管理ツールの「公開する」は、送る前にこの自動更新を取り込みます。
 
+- 日次更新は、Abacus が一部の作品で 500・タイムアウトを返しても止まりません。待ってから送り直し、それでも取れなかった作品は前回の数を残します（Actions に警告が出ます）。全体で 15 分を過ぎたら、残りは前回の数のまま保存して終えます
+- 閲覧数・いいね数は増える一方なので、前回より小さい値では上書きしません
+- 1件も取れなかったとき（Abacus 停止中）だけ失敗になり、`data/counts.json` は前回のまま残ります。翌日の実行で追いつきます
+- 数をまとめる処理は `tools/counts.mjs`（テスト: `site/tests/contract/counts.test.ts`）
+
 - いいねは1作品につき1回まで(取消不可、`localStorage` の `liked-{id}` で判定)
 - Abacus は外部の無料サービスで、ときどき応答しなくなります（タイムアウトや 500 エラー）。その間も、いいねボタンは押した時点で「いいね済み」になり、届かなかった分はブラウザに控えて（`localStorage` の `mopslipper_pending_likes_v1`）、少し待ってから、または次に作品ページを開いたときに送り直します。閲覧数は、応答が無い間の分は数えられません
 - Abacus のキーは最終アクセスから6ヶ月で失効するが、日次取得がアクセスを兼ねるため実質失効しない
