@@ -3262,5 +3262,35 @@
     "nsfw": false,
     "sensitive": true,
     "external_links": {}
+  },
+  {
+    "id": 161,
+    "slug": "161",
+    "title": "「ふーん♡」オレンジドレスの白髪魔女っ娘",
+    "date": "2026-11-25",
+    "image_path": "/static/img/works/161.webp",
+    "thumbnail": "/static/img/works/161.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "ハロウィン",
+      "魔女",
+      "白髪",
+      "オフショルダー",
+      "オレンジ",
+      "手袋",
+      "ブーツ",
+      "チョーカー",
+      "リボン",
+      "ヘアピン",
+      "座りポーズ",
+      "複数",
+      "ハート",
+      "星"
+    ],
+    "description": "リクエストをもとに、「Trick or Treat♡ 白髪魔女っ娘」をオレンジのドレスでアレンジしました。オレンジのリボンとボタン飾りの大きな魔女帽子に、オフショルダーのドレスと白い手袋、編み上げブーツ。手を振るにんまり笑顔、口元に指を当てた「ふーん♡」の表情、ちょこんと座った全身の3カットです。",
+    "nsfw": false,
+    "sensitive": true,
+    "external_links": {}
   }
 ]
