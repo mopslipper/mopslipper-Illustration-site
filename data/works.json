@@ -3292,5 +3292,32 @@
     "nsfw": false,
     "sensitive": true,
     "external_links": {}
+  },
+  {
+    "id": 162,
+    "slug": "162",
+    "title": "お団子をほおばる黒髪巫女ちゃん",
+    "date": "2026-11-28",
+    "image_path": "/static/img/works/162.webp",
+    "thumbnail": "/static/img/works/162.jpg",
+    "category": "Original",
+    "tags": [
+      "オリジナル",
+      "黒髪",
+      "巫女",
+      "赤",
+      "お団子",
+      "青い瞳",
+      "ヘアピン",
+      "リボン",
+      "八重歯",
+      "複数",
+      "かわいい",
+      "ハート",
+      "星"
+    ],
+    "description": "三色団子を手に、もぐもぐとほおばる黒髪の巫女ちゃん。白い巫女装束に赤い袴、X字のヘアピンと青い瞳がポイント。満足そうな顔や八重歯を見せた笑顔など、表情いろいろの4カットです。",
+    "nsfw": false,
+    "external_links": {}
   }
 ]
